@@ -11,5 +11,8 @@
     "url": "github.com/theskid22/Void.git"
   },
   "author": "Theskid22",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
 }
