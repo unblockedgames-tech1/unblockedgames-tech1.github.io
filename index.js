@@ -5,3 +5,5 @@ const server = app.listen(8080, () => {
 });
 app.use(express.static('static'));
 console.log("Static html files loaded");
+app.use(express.static('img'));
+console.log('Static images loaded');
