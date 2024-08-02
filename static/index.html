@@ -3,41 +3,18 @@
 <head>
 <title>Void Network</title>
 <div class="button_redir_div">
-<button class="button_redir" onclick="redirect('/games')">Games</button>
+    <h1 class="h1_title">VOID NETWORK</h1>
+<button class="button_redir" onclick="redirect('/games.html')">Games</button>
 <br><br>
-<button class="button_redir" onclick="redirect('/proxy')">Proxy</button>
+<button class="button_redir" onclick="redirect('/prox.html')">Proxy</button>
+<br><br>
+<button class="button_redir" onclick="redirect('/movies.html')">Movies</button>
 </div>
 </head>
 
 
 <body>
-    <style>
-        body {
-            background-color: rgb(49, 49, 49);
-        }
-        .button_redir_div {
-            text-align: center;
-            max-width: fit-content;
-            margin-left: auto;
-            margin-right: auto;
-            margin-top: auto;
-            margin-bottom: auto;
-            top: 50%;
-
-        }
-        .button_redir {
-            background-color: rgb(37, 37, 37);
-            border: 0.2rem solid;
-            padding: 1rem 1rem;
-            font-size: 2rem;
-            color: white;
-            border-color: rgb(27, 27, 27);
-            border-radius: 5rem;
-            width: 10rem;
-            height: 5rem;
-            text-align: center;
-        }
-    </style>
+<link rel="stylesheet" href="/assets/css/styles.css" type="text/css">   
     <script>
         function redirect(location) {
             window.location.href = location
