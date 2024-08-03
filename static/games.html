@@ -5,9 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
     <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="./uv/uv.bundle.js"></script>
-    <script src="./uv/uv.config.js"></script>
-    <script src="./assets/register-sw.js"></script>
+    <script src="/chemical.js"></script>
     <title>Games</title>
     <style>
     
@@ -73,12 +71,12 @@
 <div class="flex-container" id="gamesList"></div>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener("DOMContentLoaded", async function () {
         const gamesData = [
             {
                 title: "Agar.io",
                 imgSrc: "gameimg/Agario.png",
-                link: "" // to be done.. someday
+                link: 'http://localhost:8080/~/uv/hvtrs8%2F-aeap.ko'
             }, 
             {
                 title: "Amoung us",

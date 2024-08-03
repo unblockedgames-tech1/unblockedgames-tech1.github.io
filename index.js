@@ -3,14 +3,14 @@ import express from "express";
 
 
 const chemical = new ChemicalServer({
-    default: "rammerhead",
+    default: "uv", // uv better
     uv: true,
     scramjet: false,
     rammerhead: false,
 });
 
 
-const port = process.env.PORT || 8080;
+const port = 8080;
 
 chemical.listen(port, () => {
     console.log(`Running on port ${port}`);
