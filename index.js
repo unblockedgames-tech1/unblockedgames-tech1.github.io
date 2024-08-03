@@ -1,9 +1,20 @@
-const express = require('express');
-const app = express();
-const server = app.listen(8080, () => {
-    console.log(`Server running on port ${server.address().port}`);
+import { ChemicalServer } from "chemicaljs";
+import express from "express";
+
+
+const chemical = new ChemicalServer({
+    default: "rammerhead",
+    uv: true,
+    scramjet: false,
+    rammerhead: false,
 });
-app.use(express.static('static'));
-console.log("Static html files loaded");
-app.use(express.static('img'));
-console.log('Static images loaded');
+
+
+const port = process.env.PORT || 8080;
+
+chemical.listen(port, () => {
+    console.log(`Running on port ${port}`);
+});
+
+chemical.use(express.static("static"));
+chemical.use(express.static("img"));

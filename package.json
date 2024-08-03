@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
     "test": "node index.js"
   },
@@ -13,6 +14,7 @@
   "author": "Theskid22",
   "license": "GPL-3.0",
   "dependencies": {
+    "chemicaljs": "^1.6.4",
     "express": "^4.19.2"
   }
 }
