@@ -1,7 +1,24 @@
 <html>
 <script src="uv/uv.bundle.js"></script>
-<script src="uv/uv.config.js"></script>
-<script src="/assets/js/registerSW.js"></script>
+<script src="uv/uv.config.js"></script> 
+<script>
+    const stockSW = "/uv/sw.js";
+const swAllowedHostnames = ["localhost", "127.0.0.1"];
+function registerSW() {
+  if (!navigator.serviceWorker) {
+  if (
+    location.protocol !== "https:" &&
+    !swAllowedHostnames.includes(location.hostname)
+  )
+    throw new Error("Service workers cannot be registered without https.");
+  
+  throw new Error("Your browser doesn't support service workers.");
+  }
+  
+navigator.serviceWorker.register(stockSW);
+}
+registerSW();   
+</script>
 <link href="assets/css/styles.css" rel="stylesheet">
 <div class="centered_div">
 <h1 style="text-align: center; color: white;">Search the web</h1>
