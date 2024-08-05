@@ -1,6 +1,8 @@
 <html>
+<script src="uv/uv.bundle.js"></script>
+<script src="uv/uv.config.js"></script>
+<script src="/assets/js/registerSW.js"></script>
 <link href="assets/css/styles.css" rel="stylesheet">
-<script src="/chemical.js"></script>
 <div class="centered_div">
 <h1 style="text-align: center; color: white;">Search the web</h1>
 <input class="uvsearch" id="search" onkeypress="handleKeyPress(event)"></input>
@@ -28,7 +30,7 @@
 <script>
         function handleKeyPress(event) {
             if (event.key === 'Enter') {
-                alert(event.target.value);
+                window.location.href =  "/uv/service/" +__uv$config.encodeUrl(document.getElementById("search").value)
                 // Prevent default form submission if inside a form
                 event.preventDefault();
             }
