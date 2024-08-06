@@ -14,7 +14,7 @@ app.use(express.static("static"));
 app.use(express.static("img"));
 
 app.get('*', function(req, res) {
-	res.send('404');
+	res.send('404: Not Found');
 });
 
 server.on("request", (req, res) => {
@@ -22,14 +22,6 @@ server.on("request", (req, res) => {
         bare.routeRequest(req, res);
     } else {
         app(req, res);
-    }
-});
-
-server.on("upgrade", (req, socket, head) => {
-    if (bare.shouldRoute(req)) {
-        bare.routeUpgrade(req, socket, head);
-    } else {
-        socket.end();
     }
 });
 
