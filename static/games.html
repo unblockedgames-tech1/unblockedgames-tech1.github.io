@@ -8,7 +8,24 @@
     <!--UV things-->
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
-    <script src="/assets/js/registerSW.js"></script>
+    <script>
+        const stockSW = "/uv/sw.js";
+    const swAllowedHostnames = ["localhost", "127.0.0.1"];
+    function registerSW() {
+      if (!navigator.serviceWorker) {
+      if (
+        location.protocol !== "https:" &&
+        !swAllowedHostnames.includes(location.hostname)
+      )
+        throw new Error("Service workers cannot be registered without https.");
+      
+      throw new Error("Your browser doesn't support service workers.");
+      }
+      
+    navigator.serviceWorker.register(stockSW);
+    }
+    registerSW();   
+    </script>
     <title>Games</title>
     <style>
     
@@ -79,22 +96,22 @@
             {
                 title: "Agar.io",
                 imgSrc: "gameimg/Agario.png",
-                link: __uv$config.encodeUrl("https://agar.io")
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://agar.io")
             }, 
             {
                 title: "Amoung us",
                 imgSrc: "gameimg/Amoungus.png",
-                link: "" // to be done.. someday
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://amongus-online.net/game/amongus") 
             }, 
             {
                 title: "Slow Roads",
                 imgSrc: "gameimg/SlowRoads.png",
-                link: "" // to be done.. someday
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://slowroads.io/") 
             },
             {
                 title: "Swoop",
                 imgSrc: "gameimg/swoop.jpeg",
-                link: "" // to be done.. someday
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://games.cdn.famobi.com/html5games/s/swooop/v1/?fg_domain=play.famobi.com&fg_aid=A-SILVERGAMES&fg_uid=89459199-3905-4687-b993-158f437a0e11&fg_pid=8a24e5f2-94a8-4593-b4e5-81cc68f524c8&fg_beat=881&original_ref=https%3A%2F%2Fwww.silvergames.com%2F")
             },
             {
                 title: "Gun Night",
