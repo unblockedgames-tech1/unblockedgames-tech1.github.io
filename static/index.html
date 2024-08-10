@@ -2,6 +2,13 @@
     
 <head>
 <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">   
+<div id="particles-js" class="bdiv"></div>
+<script src="/assets/js/particles.js"></script>
+<script>
+  particlesJS.load('particles-js', '/assets/json/particles.json', function() {
+  console.log('callback - particles.js config loaded');
+});
+</script>
 <script>
     function redirect(location) {
         window.location.href = location
