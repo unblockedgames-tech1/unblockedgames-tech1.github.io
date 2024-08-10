@@ -1,6 +1,6 @@
 {
   "name": "void",
-  "version": "1.0.0",
+  "version": "3.1.0",
   "description": "",
   "main": "index.js",
   "scripts": {
@@ -8,10 +8,10 @@
   },
   "type": "module",
   "keywords": [],
-  "author": "theskid22",
+  "author": "Void network developers",
   "license": "ISC",
   "dependencies": {
-    "@titaniumnetwork-dev/ultraviolet": "^3.1.2",
+    "@titaniumnetwork-dev/ultraviolet": "^3.1.2", 
     "@tomphttp/bare-client": "^2.2.0-alpha",
     "@tomphttp/bare-server-node": "^2.0.3",
     "chalk": "^5.3.0",
