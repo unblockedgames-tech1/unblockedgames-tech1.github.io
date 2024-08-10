@@ -6,12 +6,14 @@
     function redirect(location) {
         window.location.href = location
     }
+	if (location.protocol == "http:") {
+    if (!window.location.href.includes("localhost"))
+		alert("Proxy only works on https websites. Unless your here for movies... then go ahead")
+	}
 </script>
 <title>Void Network</title>
 
 </head>
-
-
 <body>
     <div class="button_redir_div">
         <h1 class="h1_title">VOID NETWORK</h1>
