@@ -12,7 +12,7 @@ function registerSW() {
     !swAllowedHostnames.includes(location.hostname)
   )
     throw new Error("Service workers cannot be registered without https.");
-  
+    document.write("</p>UV ERROR: Unable to register serviceworker - Serviceworkers cannot be registered without HTTPS</p>")
   throw new Error("Your browser doesn't support service workers.");
   }
   
