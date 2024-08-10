@@ -23,7 +23,7 @@ registerSW();
 <link href="assets/css/styles.css" rel="stylesheet">
 <div class="centered_div">
 <h1 style="text-align: center; color: white;">Search the web</h1>
-<input class="uvsearch" id="search" onkeypress="handleKeyPress(event)"></input>
+<input class="uvsearch" id="search" onkeypress="handleUVSearch(event)"></input>
 </div>
 <style>
     .uvsearch {
@@ -46,9 +46,18 @@ registerSW();
     }
 </style>
 <script>
-        function handleKeyPress(event) {
+        function handleUVSearch(event) {
             if (event.key === 'Enter') {
-                window.location.href =  "/uv/service/" +__uv$config.encodeUrl(document.getElementById("search").value)
+              let searchVal = document.getElementById("search").value 
+              if (searchVal.includes("http") && searchVal.includes(":")) {
+                window.location.href = __uv$config.prefix + __uv$config.encodeUrl(document.getElementById("search").value)
+                return;
+              }
+              if (searchVal.includes(".") && !searchVal.includes(" ")) {
+                window.location.href = __uv$config.prefix + __uv$config.encodeUrl("https://" + searchVal)
+                return;
+              }
+                window.location.href =  "/uv/service/" + __uv$config.encodeUrl("https://google.com/search?q=" + searchVal)
                 // Prevent default form submission if inside a form
                 event.preventDefault();
             }
