@@ -28,3 +28,8 @@ body {
     height: 5rem;
     text-align: center;
 }
+
+.button_redir:hover  {
+  transition: all .5s ease-in;
+  background-color: rgb(99, 99, 99);
+}
