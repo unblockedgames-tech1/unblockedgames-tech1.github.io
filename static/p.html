@@ -24,7 +24,7 @@ registerSW();
 <link href="assets/css/styles.css" rel="stylesheet">
 <div class="centered_div">
 <h1 style="text-align: center; color: white;">Search the web</h1>
-<input class="uvsearch" id="search" onkeypress="handleUVSearch(event)"></input>
+<input class="uvsearch" id="search" onkeypress="redirUVSearch(handleUVSearch(), event)"></input>
 </div>
 <footer class="footer">
 	<a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
@@ -60,20 +60,23 @@ registerSW();
 document.body.style.margin = '0';
 document.body.style.height = '100vh';
 
-function handleUVSearch(event) {
-  if (event.key === 'Enter') {
+function handleUVSearch() {
     let searchVal = document.getElementById("search").value 
     if (searchVal.includes("http") && searchVal.includes(":")) {
-      document.write("<iframe src= '/uv/service/" + __uv$config.encodeUrl(document.getElementById("search").value)+"' height=90% width=100% margin=0 padding=0 overflow='hidden' border='none' ></iframe>")
+       return '/uv/service/' + __uv$config.encodeUrl(document.getElementById("search").value)
       return;
     }
     if (searchVal.includes(".") && !searchVal.includes(" ")) {
-      document.write("<iframe src= '/uv/service/" + __uv$config.encodeUrl("https://" + searchVal)+"' height=90% width=100% margin=0 padding=0 overflow='hidden' border='none' ></iframe>")
+       return '/uv/service/' + __uv$config.encodeUrl("https://" + searchVal)
       return;
     }
-    document.write("<iframe src= '/uv/service/" + __uv$config.encodeUrl("https://google.com/search?q=" + searchVal)+"' height=90% width=100% margin=0 padding=0 overflow='hidden' border='none' ></iframe>")
-      event.preventDefault();
-            }
-        }
+    return '/uv/service/' + __uv$config.encodeUrl("https://google.com/search?q=" + searchVal)
+}
+function redirUVSearch(path, event) {
+  if (event.key === 'Enter') {
+  window.location.href = path
+  event.preventDefault()
+  }
+}
 </script>
 </html>
