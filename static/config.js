@@ -7,3 +7,7 @@ const htmlConfig = {
     searchPath: "/p.html",
     settingsPath: "/settings.html",
 }
+
+const siteConfig = {
+    version: "v3.1.2"
+}

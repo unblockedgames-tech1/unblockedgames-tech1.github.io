@@ -27,7 +27,8 @@ crossorigin="anonymous"></script> <!--ADS-->
 <body>
     <div class="button_redir_div">
         <h1 class="h1_title">VOID NETWORK</h1>
-        <h1 class="subtitle">v 3.1.1c</h1>
+        <h1 class="subtitle" id="ver"></h1>
+
     <button class="button_redir" onclick="redirect(htmlConfig.gamesPath)">Games</button>
     <br><br>
     <button class="button_redir" onclick="redirect(htmlConfig.searchPath)">Prоxy</button>
@@ -35,7 +36,10 @@ crossorigin="anonymous"></script> <!--ADS-->
     <button class="button_redir" onclick="redirect('/movies.html')">Movies</button>
     </div>
 </body>
-
+<script>
+    // this is ugly but it sets the version to version in config so i dont do it manually
+    document.getElementById("ver").innerHTML = siteConfig.version
+</script>
 
 
 </html>
