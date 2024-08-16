@@ -30,17 +30,4 @@ server.on("listening", () => {
     console.log('Listening on 8080');
 });
 
-process.on('SIGTERM', () => {
-    console.log('SIGTERM signal received: closing HTTP server');
-    server.close(() => {    
-        console.log('HTTP server closed');
-    });
-});
-
 server.listen({ port: PORT }, () => {});
-
-
-app.use((req, res, next) => {
-    console.log(`Received request for: ${req.url}`);
-    next();
-});
