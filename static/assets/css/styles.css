@@ -50,6 +50,8 @@ body {
 	background-color: rgb(41, 41, 41);
 	color: white;
     padding: 1rem;
+    z-index: 20; /*Scuffed but makes it render on top basicly ill fix it properly later trust*/
+
 }
 
 .footer_link {
@@ -72,6 +74,7 @@ body {
     left: 0;
     padding: 1rem;
     top: 0;
+    z-index: 20; /*Scuffed but makes it render on top basicly ill fix it properly later trust*/
     }
 
 .header_link {
