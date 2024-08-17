@@ -3,9 +3,34 @@
 <script src="uv/uv.config.js"></script> 
 <script src="/config.js"></script>
 <!--script inserst cus i suck-->
+<style>
+  .div_tab {
+  position: fixed;
+}
+
+</style>
 <script>
-    const stockSW = "/uv/sw.js";
+const stockSW = "/uv/sw.js";
 const swAllowedHostnames = ["localhost", "127.0.0.1"];
+
+function writeIframe(event, src) {
+  if (event.key === 'Enter') {
+  document.getElementById('stag').remove()
+  document.getElementById('uvsearch').remove()
+  var iframe = document.createElement("iframe");
+  iframe.style.border = 'none'
+  iframe.style.width = '100%'
+  iframe.style.height = '100%'
+  iframe.style.margin = '0'
+  iframe.src = src
+  iframe.style.padding = '0.5px'
+  iframe.style.position = 'fixed'
+  iframe.style.display = 'block'
+  document.getElementById('div_uvout').appendChild(iframe);
+  event.preventDefault();
+  }
+}
+
 function registerSW() {
   if (!navigator.serviceWorker) {
   if (
@@ -23,8 +48,8 @@ registerSW();
 </script>
 <link href="assets/css/styles.css" rel="stylesheet">
 <div class="centered_div">
-<h1 style="text-align: center; color: white;">Search the web</h1>
-<input class="uvsearch" id="search" onkeypress="redirUVSearch(handleUVSearch(), event)"></input>
+<h1 style="text-align: center; color: white;" id="stag">Search the web</h1>
+<input class="uvsearch" id="uvsearch" onkeypress="writeIframe(event, handleUVSearch())"></input>
 </div>
 <footer class="footer">
 	<a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
@@ -36,6 +61,12 @@ registerSW();
 <a class="header_link" onclick="location.href=htmlConfig.gamesPath">Games</a>
 <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
 </header>
+<div style="line-height:4vh;">
+  <br>
+</div>
+<div id="div_uvout" class="div_tab">
+  
+</div>
 <style>
     .uvsearch {
         width: 30rem;
@@ -61,7 +92,7 @@ document.body.style.margin = '0';
 document.body.style.height = '100vh';
 
 function handleUVSearch() {
-    let searchVal = document.getElementById("search").value 
+    let searchVal = document.getElementById("uvsearch").value 
     if (searchVal.includes("http") && searchVal.includes(":")) {
        return '/uv/service/' + __uv$config.encodeUrl(document.getElementById("search").value)
       return;
@@ -71,12 +102,5 @@ function handleUVSearch() {
       return;
     }
     return '/uv/service/' + __uv$config.encodeUrl("https://google.com/search?q=" + searchVal)
-}
-function redirUVSearch(path, event) {
-  if (event.key === 'Enter') {
-  window.location.href = path
-  event.preventDefault()
-  }
-}
-</script>
+}</script>
 </html>
