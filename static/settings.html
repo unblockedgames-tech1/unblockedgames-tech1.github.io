@@ -1,1 +1,49 @@
-Coming soon
+<html>
+    <head>
+        <link href="/assets/css/styles.css" rel="stylesheet">
+        <script src="/config.js"></script>
+        <script>
+        function toggleCloaking() {
+            if (localStorage.getItem('cloaking') === null) {
+                localStorage.setItem("cloaking", 'true')
+                return
+            }
+            if (localStorage.getItem('cloaking') == 'true') {
+                localStorage.setItem('cloaking', 'false')
+                return
+            }
+            if (localStorage.getItem('cloaking') == 'false') {
+                localStorage.setItem('cloaking', 'true')
+                return
+            }
+        }
+        </script>
+    </head>
+<body>
+    <footer class="footer">
+        <a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
+        <a class="footer_link" onclick="location.href=htmlConfig.settingsPath">Settings</a>
+        <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Discord</a>
+    </footer>
+    <header class="header">
+        <a class="header_link" href="/">Home</a>
+        <a class="header_link" onclick="location.href=htmlConfig.gamesPath">Games</a>
+        <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
+    </header>
+    <br style="line-height:8vh;">
+    <div>
+        <div class="settingswidget">
+            <h1>About blank cloaking</h1>
+            <label class="switch">
+                <input type="checkbox" id="cbox_cloaking" onclick="toggleCloaking()">
+                <span class="slider round">
+            </label>
+        </div>
+    </div>
+<script>
+if (localStorage.getItem('cloaking') === 'true') {
+    document.getElementById("cbox_cloaking").checked = true
+}
+</script>
+</body>
+</html>

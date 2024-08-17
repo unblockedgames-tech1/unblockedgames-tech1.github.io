@@ -1,6 +1,36 @@
 <html>
     
 <head>
+<script>
+    if (localStorage.getItem('cloaking') === null) {
+        localStorage.setItem('cloaking', false);
+    }
+    if (localStorage.getItem('cloaking') === 'true' && window.location === window.parent.location) {
+
+        const popup = open("about:blank", "_blank");
+        if (!popup || popup.closed) {
+        alert(
+            "Please allow popup and redirects for this site"
+        );
+        } 
+        const name = "My Drive - Google Drive"
+        const doc = popup.document;
+        const link = doc.createElement("link");
+        const icon = "https://ssl.gstatic.com/docs/doclist/images/drive_2022q3_32dp.png"
+        iframe = popup.document.createElement("iframe")
+        const style = iframe.style
+        popup.document.title = name
+        popup.document.createElement("link").href = icon
+        iframe.src = location.href
+        style.position = "fixed";
+        style.top = style.bottom = style.left = style.right = 0;
+        style.border = style.outline = "none";
+        style.width = style.height = "100%";
+        doc.head.appendChild(link);
+        doc.body.appendChild(iframe);
+        location.replace("https://classroom.google.com")
+    }
+</script>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
 <script>
@@ -45,15 +75,16 @@ crossorigin="anonymous"></script> <!--ADS-->
     function redirect(location) {
         window.location.href = location
     }
-	if (location.protocol == "http:") {
-    if (!window.location.href.includes("localhost"))
-		alert("Proxy only works on https websites. Unless your here for movies... then go ahead")
-	}
 </script>
 <title>Void Network</title>
 
 </head>
 <body>
+    <footer class="footer">
+        <a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
+        <a class="footer_link" onclick="location.href=htmlConfig.settingsPath">Settings</a>
+        <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Discord</a>
+    </footer>
     <div class="button_redir_div">
         <h1 class="h1_title">VOID NETWORK</h1>
         <h1 class="subtitle" id="ver"></h1>
