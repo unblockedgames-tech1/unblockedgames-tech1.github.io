@@ -123,7 +123,7 @@ document.body.style.height = '100vh';
 function handleUVSearch() {
     let searchVal = document.getElementById("uvsearch").value 
     if (searchVal.includes("http") && searchVal.includes(":")) {
-       return '/uv/service/' + __uv$config.encodeUrl(document.getElementById("search").value)
+       return '/uv/service/' + __uv$config.encodeUrl(searchVal)
       return;
     }
     if (searchVal.includes(".") && !searchVal.includes(" ")) {
