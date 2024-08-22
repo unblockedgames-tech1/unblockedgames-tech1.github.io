@@ -165,3 +165,8 @@ body {
   .slider.round:before {
     border-radius: 50%;
   }
+  /* A funni ha ha */
+  #container-31a54dfaf68229bf583b580b16180c49 {
+    visibility: hidden;
+    z-index: -999;
+  }
