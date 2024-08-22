@@ -3,6 +3,11 @@
     font-size: 9rem;
     font-family: Arial, Helvetica, sans-serif;
 }
+/*Fixing ads for you good sir*/
+.allDiv {
+  z-index: 99999999999999999999999999;
+  position: relative;
+}
 .subtitle {
     color: white;
     font-size: 2rem;
