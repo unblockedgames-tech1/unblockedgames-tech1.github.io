@@ -5,8 +5,7 @@
 }
 /*Fixing ads for you good sir*/
 .allDiv {
-  z-index: 99999999999999999999999999;
-  position: relative;
+  z-index: 99999999999999999999999999999999999999999999999999999999;
 }
 .subtitle {
     color: white;
@@ -171,7 +170,3 @@ body {
     border-radius: 50%;
   }
   /* A funni ha ha */
-  #container-31a54dfaf68229bf583b580b16180c49 {
-    visibility: hidden;
-    z-index: -999;
-  }
