@@ -6,8 +6,9 @@ const htmlConfig = {
     moviesPath: "/movies.html",
     searchPath: "/p.html",
     settingsPath: "/settings.html",
+    appsPath: "/a.html",
 }
 
 const siteConfig = {
-    version: "v3.1.6"
+    version: "v3.2"
 }

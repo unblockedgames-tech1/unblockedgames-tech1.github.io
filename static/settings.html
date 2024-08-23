@@ -2,6 +2,45 @@
     <head>
         <link href="/assets/css/styles.css" rel="stylesheet">
         <script src="/config.js"></script>
+        <script src="/uv/uv.config.js"></script>
+        <style>
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            background-color: #313131;
+            padding: 0.7vh;
+        }  
+        .dropdown-content button {
+            background-color: #313131;
+            color: white;
+            border: none;
+            font-size: medium;
+        }
+        .button {
+            background-color: #313131;
+            border: none;
+            color: white;
+            font-size: medium;
+        }
+        .dropdown-content button:hover {
+            background-color: #212121;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #313131;
+            color: white;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            padding: 12px 16px;
+            z-index: 1;
+        }
+
+        .dropdown:hover .dropdown-content {
+            display: block;
+        }
+
+        </style>
         <script>
         function toggleCloaking() {
             if (localStorage.getItem('cloaking') === null) {
@@ -17,6 +56,24 @@
                 return
             }
         }
+        function setSearchType(type) {
+            localStorage.setItem('searchBackend', type)
+        } 
+        function addApp() {
+            if (localStorage.getItem('apps') == null) {
+                alert("Please load apps properly first")
+                return
+            }
+            const appsData = JSON.parse(localStorage.getItem("apps"))
+            const newApp = {
+                title: prompt("Title?"),
+                imgSrc: prompt("Image?"),
+                link: prompt("Link?")
+            }
+            newApp.link = __uv$config.prefix + __uv$config.encodeUrl(newApp.link)
+            appsData.push(newApp)
+            localStorage.setItem("apps", JSON.stringify(appsData))
+        }
         </script>
     </head>
 <body>
@@ -29,8 +86,9 @@
         <a class="header_link" href="/">Home</a>
         <a class="header_link" onclick="location.href=htmlConfig.gamesPath">Games</a>
         <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
+        <a class="header_link" onclick="location.href = htmlConfig.appsPath">Apps</a>
     </header>
-    <br style="line-height:8vh;">
+
     <div>
         <div class="settingswidget">
             <h1>About blank cloaking</h1>
@@ -39,6 +97,22 @@
                 <span class="slider round">
             </label>
         </div>
+        <br>
+        <div class="settingswidget">
+            <h1>Add an app</h1>
+            <button class="button" onclick="addApp()">Add an App</button>
+        </div>
+        <br>
+        <div class="settingswidget">
+            <h1>Search type</h1>
+            <div class="dropdown">
+                <span>Select</span>
+                <div class="dropdown-content">
+                    <button onclick="setSearchType('UV')">Ultravoilet</button>
+                    <br>
+                    <button>Coming soon</button>
+                </div>
+        <div>
     </div>
 <script>
 if (localStorage.getItem('cloaking') === 'true') {

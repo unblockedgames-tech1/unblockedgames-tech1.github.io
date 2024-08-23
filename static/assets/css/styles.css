@@ -1,9 +1,13 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+
+}
 .h1_title {
     color: white;
     font-size: 9rem;
     font-family: Arial, Helvetica, sans-serif;
 }
-/*Fixing ads for you good sir*/
+
 .allDiv {
   z-index: 99999999999999999999999999999999999999999999999999999999;
 }
@@ -103,8 +107,6 @@ body {
 
 .settingswidget {
     border: 1px rgb(61, 61, 61);  
-    width: 40vh;
-    height: 30vh;
     background-color: rgb(65, 65, 65);
     border-radius: 4vh;
     color: white;

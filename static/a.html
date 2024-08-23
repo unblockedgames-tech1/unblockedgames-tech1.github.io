@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-VXDP7XC98T');
+</script>
+
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PZXRTFX5');</script>
+<!-- End Google Tag Manager -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/config.js"></script>
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <!--UV things-->
+    <script src="uv/uv.bundle.js"></script>
+    <script src="uv/uv.config.js"></script>
+    <script>
+        const stockSW = "/uv/sw.js";
+    const swAllowedHostnames = ["localhost", "127.0.0.1"];
+    function registerSW() {
+      if (!navigator.serviceWorker) {
+      if (
+        location.protocol !== "https:" &&
+        !swAllowedHostnames.includes(location.hostname)
+      )
+        throw new Error("Service workers cannot be registered without https.");
+      
+      throw new Error("Your browser doesn't support service workers.");
+      }
+      
+    navigator.serviceWorker.register(stockSW);
+    }
+    registerSW();   
+    </script>
+    <title>Games</title>
+    <style>
+    
+	.flex-container {
+           display: flex;
+           flex-wrap: wrap;
+           justify-content: center;
+           gap: 20px;
+           padding: 5rem;
+	}
+
+        .game {
+            border-radius: 30rem;
+            background-color: #555555; 
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+
+        .game:hover {
+            transform: scale(1.05);
+        }
+
+        .game-image {
+            width: 100%;
+            height: auto;
+    	    width: 288px; /* Set the width to 288px */
+    	    height: 288px; /* Set the height to 288px */
+        }
+
+        .game-info {
+            padding: 10px;
+            text-align: center;
+            background-color: #555555; /* Light blue shading color */
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
+
+        .game-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .play-button {
+            background-color: #555555; /* Lighter black color */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .play-button:hover {
+            background-color: #454545; /* Darker shade of black on hover */
+        }
+
+    </style>
+</head>
+<body>
+    <footer class="footer">
+        <a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
+      <a class="footer_link" onclick="location.href=htmlConfig.settingsPath">Settings</a>
+      <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Discord</a>
+    </footer>
+    <header class="header">
+    <a class="header_link" href="/">Home</a>
+    <a class="header_link" onclick="location.href=htmlConfig.gamesPath">Games</a>
+    <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
+    <a class="header_link" onclick="location.href = htmlConfig.appsPath">Apps</a>
+    </header>
+    <div id="div_appout">
+
+<div class="flex-container" id="gamesList">
+    
+</div>
+
+<script>
+    function writeIframe(src) {
+        document.getElementById('stag').remove()
+        document.getElementById('uvsearch').remove()
+        var iframe = document.createElement("iframe");
+        iframe.style.border = 'none'
+        iframe.style.width = '100%'
+        iframe.style.height = '100%'
+        iframe.style.margin = '0'
+        iframe.src = src
+        iframe.style.padding = '0.5px'
+        iframe.style.position = 'fixed'
+        iframe.style.display = 'block'
+        document.getElementById('div_appout').appendChild(iframe);
+        event.preventDefault();
+    }
+    document.addEventListener("DOMContentLoaded", async function () {
+        if (localStorage.getItem("apps") == null) {
+            //default apps
+            localStorage.setItem("apps", JSON.stringify([{
+                title: "Netflix",
+                imgSrc: "https://assets.nflxext.com/us/ffe/siteui/common/icons/nficon2016.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")
+            },
+            {
+                title: "Hulu",
+                imgSrc: "https://assetshuluimcom-a.akamaihd.net/h3o/icons/favicon.ico.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")
+            },
+        ]))
+        }
+         let gamesData = JSON.parse(localStorage.getItem("apps"))
+
+    const gamesList = document.getElementById("gamesList");
+
+    gamesData.forEach(game => { 
+        const gameElement = document.createElement("div");
+        gameElement.className = "game"; 
+
+        const imgElement = document.createElement("img");
+        imgElement.src = game.imgSrc;
+        imgElement.alt = game.title;
+        imgElement.className = "game-image";
+        const titleElement = document.createElement("div");
+        titleElement.className = "game-info";
+        titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
+
+        const linkElement = document.createElement("a");
+        linkElement.href = game.link;
+        linkElement.textContent = "Play";
+        linkElement.className = "play-button";
+
+        gameElement.appendChild(imgElement);
+        gameElement.appendChild(titleElement);
+        titleElement.appendChild(linkElement);
+
+        gamesList.appendChild(gameElement);
+    });
+});
+</script>
+
+</body>
+</html>
