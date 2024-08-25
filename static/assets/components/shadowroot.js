@@ -9,7 +9,7 @@ class ShadowRootSearch extends HTMLElement {
 
         const container = document.createElement('div');
         container.innerHTML = `
-            Proxy
+            Pr<x>o</x>xy
         `;
 
         shadow.appendChild(style);
