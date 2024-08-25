@@ -19,6 +19,7 @@
 }
 body {
     background-color: rgb(49, 49, 49);
+    overflow-y: scroll !important;
 }
 .button_redir_div {
     text-align: center;
