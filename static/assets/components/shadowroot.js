@@ -1,15 +1,20 @@
-class ShadowRoot extends HTMLElement {
-    constructor() {
+class ShadowRootSearch extends HTMLElement {
+    constructor(con) {
         super();
-        this.content = ""
-        this.class = ""
+        this.con = con;
         const shadow = this.attachShadow({ mode: 'open' });
 
-        shadow.innerHTML = `
-                ${shadow.content}
+        const style = document.createElement('style');
+
+
+        const container = document.createElement('div');
+        container.innerHTML = `
+            Proxy
         `;
+
+        shadow.appendChild(style);
+        shadow.appendChild(container);
     }
 }
 
-
-customElements.define("ShadowRoot", ShadowRoot);
+customElements.define('shadow-root-search', ShadowRootSearch);
