@@ -28,7 +28,7 @@ app.get("/settings", function (req, res) {
 })
 app.use(express.static(path.join(__dirname, "static")));
 
-app.get('*', function(req, res) {res.send("404: not found")})
+app.get('*', function(req, res) {res.sendFile(path.join(__dirname, "static/404.html"))})
 
 server.on("request", (req, res) => {
 if (bare.shouldRoute(req)) {bare.routeRequest(req, res)} else {app(req, res)}})
