@@ -174,3 +174,7 @@ body {
   .slider.round:before {
     border-radius: 50%;
   }
+  .div_tab {
+    position: fixed;
+  }
+  

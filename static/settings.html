@@ -3,6 +3,7 @@
         <link href="/assets/css/styles.css" rel="stylesheet">
         <script src="/config.js"></script>
         <script src="/uv/uv.config.js"></script>
+        <script src="/global.js"></script>
         <style>
         .dropdown {
             position: relative;
@@ -81,17 +82,12 @@
         </script>
     </head>
 <body>
-    <footer class="footer">
-        <a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
-        <a class="footer_link" onclick="location.href=htmlConfig.settingsPath">Settings</a>
-        <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Discord</a>
-    </footer>
-    <header class="header">
-        <a class="header_link" href="/">Home</a>
-        <a class="header_link" onclick="location.href=htmlConfig.gamesPath">Ga<x>me</x>s</a>
-        <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
-        <a class="header_link" onclick="location.href = htmlConfig.appsPath">Apps</a>
-    </header>
+    <div id="header"></div>
+    <div id="footer"></div>  
+    <script>
+        loadHTML("/assets/html/header.html", "header")
+        loadHTML("/assets/html/footer.html", "footer")
+    </script>
 
     <div>
         <br><br><br>

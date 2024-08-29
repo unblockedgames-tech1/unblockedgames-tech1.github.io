@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+        <script src="/global.js"></script> <!--Terminal is not meant to actualy be loaded as a standalone page, so it wont have the acompaning funcitions-->
 		<script>
 			function eval_script(script) {
 				let retval = ""
@@ -61,6 +62,9 @@ let commands = {
 var textarea = document.getElementById("terminal");
 textarea.innerHTML = "root@void $ "
 textarea.addEventListener("keydown", function (e) {
+if (e.key == "t" && e.altKey) {
+    window.parent.document.getElementById("terminal").remove()
+}
 let splitlen = document.getElementById("terminal").value.split("\n")
 if (e.key === "Backspace" && splitlen[splitlen.length - 1].slice(0, -1).includes("root@void $ ") == false) {
     e.preventDefault()

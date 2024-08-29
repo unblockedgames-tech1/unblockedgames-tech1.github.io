@@ -3,7 +3,7 @@ const xor = {
       if (!str) return str;
       let result = "";
       for (let i = 0; i < str.length; i++) {
-        result += i % 2 ? String.fromCharCode(str.charCodeAt(i) ^ 2) : str[i];
+        result += i % 4 ? String.fromCharCode(str.charCodeAt(i) ^ 2) : str[i];
       }
       return encodeURIComponent(result);
     },
@@ -14,7 +14,7 @@ const xor = {
       const decoded = decodeURIComponent(input);
       for (let i = 0; i < decoded.length; i++) {
         result +=
-          i % 2 ? String.fromCharCode(decoded.charCodeAt(i) ^ 2) : decoded[i];
+          i % 4 ? String.fromCharCode(decoded.charCodeAt(i) ^ 2) : decoded[i];
       }
       return result + (search.length ? "?" + search.join("?") : "");
     },
@@ -26,8 +26,8 @@ const xor = {
 self.__uv$config = {
     prefix: '/uv/service/',
     bare: '/bare/',
-    encodeUrl: xor.encode,
-    decodeUrl: xor.decode,
+    encodeUrl: Ultraviolet.codec.base64.encode,
+    decodeUrl: Ultraviolet.codec.base64.decode,
     handler: '/uv/uv.handler.js',
     client: '/uv/uv.client.js',
     bundle: '/uv/uv.bundle.js',

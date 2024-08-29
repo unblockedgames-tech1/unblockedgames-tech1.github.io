@@ -3,6 +3,7 @@
 <head>
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -34,6 +35,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!--UV things-->
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
+    <script src="/global.js"></script>
     <script>
         const stockSW = "/uv/sw.js";
     const swAllowedHostnames = ["localhost", "127.0.0.1"];
@@ -112,6 +114,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
     </style>
+        <div id="header"></div>
+        <div id="footer"></div>  
+        <script>
+            loadHTML("/assets/html/header.html", "header")
+            loadHTML("/assets/html/footer.html", "footer")
+        </script>
 </head>
 <body>
     <footer class="footer">

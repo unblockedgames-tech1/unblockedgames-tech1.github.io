@@ -1,17 +1,13 @@
 <html>
 <script src="/config.js"></script>
 <link rel="stylesheet" href="/assets/css/styles.css"></link>
-<footer class="footer">
-	<a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
-  <a class="footer_link" onclick="location.href=htmlConfig.settingsPath">Settings</a>
-  <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Discord</a>
-</footer>
-<header class="header">
-<a class="header_link" href="/">Home</a>
-<a class="header_link" onclick="location.href=htmlConfig.gamesPath">Games</a>
-<a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
-<a class="header_link" onclick="location.href = htmlConfig.appsPath">Apps</a>
-</header>
+<script src="/global.js"></script>
+<div id="header"></div>
+<div id="footer"></div>  
+<script>
+    loadHTML("/assets/html/header.html", "header")
+    loadHTML("/assets/html/footer.html", "footer")
+</script>
 <div style="color: white;">
     <br><br><br></br>
     

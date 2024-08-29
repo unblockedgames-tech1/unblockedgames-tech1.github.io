@@ -31,14 +31,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <script src="uv/uv.bundle.js"></script>
 <script src="uv/uv.config.js"></script> 
 <script src="/config.js"></script>
-<!--script inserst cus i suck-->
-<style>
-  .div_tab {
-  position: fixed;
-}
-
-</style>
+<script src="/global.js"></script>
 <script>
+
+
+loadHTML("/assets/html/header.html", "header")
+loadHTML("/assets/html/footer.html", "footer")
+
 const stockSW = "/uv/sw.js";
 const swAllowedHostnames = ["localhost", "127.0.0.1"];
 
@@ -76,21 +75,12 @@ navigator.serviceWorker.register(stockSW);
 registerSW();   
 </script>
 <link href="assets/css/styles.css" rel="stylesheet">
+<div id="header"></div>
+<div id="footer"></div>
 <div class="centered_div">
 <h1 style="text-align: center; color: white;" id="stag">Search the web</h1>
 <input class="uvsearch" id="uvsearch" onkeypress="writeIframe(event, handleUVSearch())"></input>
 </div>
-<footer class="footer">
-	<a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
-  <a class="footer_link" onclick="location.href=htmlConfig.settingsPath">Settings</a>
-  <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Discord</a>
-</footer>
-<header class="header">
-<a class="header_link" href="/">Home</a>
-<a class="header_link" onclick="location.href=htmlConfig.gamesPath">Gam<x>e</x>s</a>
-<a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
-<a class="header_link" onclick="location.href=htmlConfig.appsPath">Apps</a>
-</header>
 <div style="line-height:4vh;">
   <br>
 </div>
