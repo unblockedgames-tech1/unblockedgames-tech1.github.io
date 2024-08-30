@@ -11,11 +11,9 @@
   "author": "Void network developers",
   "license": "ISC",
   "dependencies": {
-    "@titaniumnetwork-dev/ultraviolet": "^3.1.2",
     "@tomphttp/bare-client": "^2.2.0-alpha",
     "@tomphttp/bare-server-node": "^2.0.3",
     "chalk": "^5.3.0",
-    "chemicaljs": "^1.6.5",
     "cors": "^2.8.5",
     "express": "^4.19.2",
     "http": "^0.0.1-security",
