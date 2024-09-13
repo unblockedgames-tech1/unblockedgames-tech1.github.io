@@ -18,7 +18,10 @@
     <div id="particles-js"></div> <!-- Container for particles -->
 
     <!-- Ensure header is visible -->
-    <div id="header" class="content"></div>
+    <div id="header" class="content">
+      <!-- Temporary content to ensure header visibility -->
+      <p>Loading header...</p>
+    </div>
 
     <div>
       <br><br><br>
@@ -34,9 +37,24 @@
     </div>
 
     <!-- Ensure footer is visible -->
-    <div id="footer" class="content"></div>
+    <div id="footer" class="content">
+      <!-- Temporary content to ensure footer visibility -->
+      <p>Loading footer...</p>
+    </div>
 
     <script>
+      function loadHTML(url, elementId) {
+        var xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        xhr.onreadystatechange = function () {
+          if (xhr.readyState == 4 && xhr.status == 200) {
+            document.getElementById(elementId).innerHTML = xhr.responseText;
+          }
+        };
+        xhr.send();
+      }
+
+      // Load header and footer HTML files
       loadHTML("/assets/html/header.html", "header");
       loadHTML("/assets/html/footer.html", "footer");
     </script>
@@ -107,6 +125,7 @@
       .content {
         position: relative;
         z-index: 1; /* Keep header and footer above particles background */
+        color: white;
       }
     </style>
 
