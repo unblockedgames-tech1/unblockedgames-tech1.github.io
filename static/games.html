@@ -2,24 +2,31 @@
 <html lang="en">
 <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-    <script src="/assets/js/ads.js"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+<script src="/assets/js/ads.js"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-      gtag('config', 'G-VXDP7XC98T');
-    </script>
+  gtag('config', 'G-VXDP7XC98T');
+</script>
 
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PZXRTFX5');</script>
-    <!-- End Google Tag Manager -->
-
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-PZXRTFX5');</script>
+<!-- End Google Tag Manager -->
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/config.js"></script>
@@ -31,227 +38,327 @@
     <script src="uv/uv.config.js"></script>
     <script>
         const stockSW = "/uv/sw.js";
-        const swAllowedHostnames = ["localhost", "127.0.0.1"];
-        function registerSW() {
-          if (!navigator.serviceWorker) {
-            if (
-              location.protocol !== "https:" &&
-              !swAllowedHostnames.includes(location.hostname)
-            )
-              throw new Error("Service workers cannot be registered without https.");
-            
-            throw new Error("Your browser doesn't support service workers.");
-          }
-          
-        navigator.serviceWorker.register(stockSW);
-        }
-        registerSW();   
+    const swAllowedHostnames = ["localhost", "127.0.0.1"];
+    function registerSW() {
+      if (!navigator.serviceWorker) {
+      if (
+        location.protocol !== "https:" &&
+        !swAllowedHostnames.includes(location.hostname)
+      )
+        throw new Error("Service workers cannot be registered without https.");
+      
+      throw new Error("Your browser doesn't support service workers.");
+      }
+      
+    navigator.serviceWorker.register(stockSW);
+    }
+    registerSW();   
 
-        function loadHTML(url, elementId) {
-            var xhr = new XMLHttpRequest();
-            xhr.open('GET', url, true);
-            xhr.onreadystatechange = function () {
-              if (xhr.readyState == 4 && xhr.status == 200) {
-                document.getElementById(elementId).innerHTML = xhr.responseText;
-              }
-            };
-            xhr.send();
-          }
 
-        loadHTML("/assets/html/header.html", "header")
-        loadHTML("/assets/html/footer.html", "footer")
+    loadHTML("/assets/html/header.html", "header")
+    loadHTML("/assets/html/footer.html", "footer")
     </script>
     <title>New Tab</title>
     <style>
-      body {
-        margin: 0;
-        padding: 0;
-        overflow: hidden;
-        font-family: Arial, sans-serif;
-        background-color: rgb(41, 41, 41); /* Background color */
-      }
+    
+	.flex-container {
+        position: relative;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 5rem;
+	}
 
-      /* Ensure the particles container is behind all other content */
-      #particles-js {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-      }
+        .game {
+            border-radius: 30rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
 
-      .flex-container {
-          position: relative;
-          display: flex;
-          flex-wrap: wrap;
-          justify-content: center;
-          gap: 20px;
-          padding: 5rem;
-      }
 
-      .game {
-          border-radius: 30rem;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-          transition: transform 0.3s ease-in-out;
-      }
+        .game:hover {
+            transform: scale(1.05);
+        }
 
-      .game:hover {
-          transform: scale(1.05);
-      }
+        .game-image {
+            width: 100%;
+            height: auto;
+    	    width: 288px; /* Set the width to 288px */
+    	    height: 288px; /* Set the height to 288px */
+        }
 
-      .game-image {
-          width: 100%;
-          height: auto;
-          width: 288px; /* Set the width to 288px */
-          height: 288px; /* Set the height to 288px */
-      }
+        .game-info {
+            padding: 10px;
+            text-align: center;
+            background-color: #555555; /* Light blue shading color */
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+        }
 
-      .game-info {
-          padding: 10px;
-          text-align: center;
-          background-color: #555555; /* Light blue shading color */
-          border-bottom-left-radius: 30px;
-          border-bottom-right-radius: 30px;
-      }
+        .game-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
 
-      .game-title {
-          font-size: 20px;
-          margin-bottom: 10px;
-          color: #fff;
-      }
+        .play-button {
+            background-color: #555555; /* Lighter black color */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+        }
 
-      .play-button {
-          background-color: #555555; /* Lighter black color */
-          color: #fff;
-          padding: 10px 20px;
-          border-radius: 20px;
-          text-decoration: none;
-          transition: background-color 0.3s ease-in-out;
-      }
+        .play-button:hover {
+            background-color: #454545; /* Darker shade of black on hover */
+        }
 
-      .play-button:hover {
-          background-color: #454545; /* Darker shade of black on hover */
-      }
     </style>
-</head>
-<body>
-    <!-- Particles background -->
-    <div id="particles-js"></div>
-
     <div id="header"></div>
     <div id="footer"></div>    
+</head>
+<body>
 
-    <div class="flex-container" id="gamesList"></div>
+<div class="flex-container" id="gamesList"></div>
 
-    <script src="/assets/js/particles.js"></script>
-    <script>
-      particlesJS.load('particles-js', '/assets/json/particles.json'); // Initialize particles effect
+<script>
+    document.addEventListener("DOMContentLoaded", async function () {
+        const gamesData = [
+            {
+                title: "Agar.io",
+                imgSrc: "gameimg/Agario.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/bobydob/JSEngine@ba92ad3b1a5df6a4dae03987b78c5474e2c0d185/build/aio/agio.xml&container=ig")
+            }, 
+            {
+                title: "Amoung us",
+                imgSrc: "gameimg/Amoungus.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://amongus-online.net/game/amongus") 
+            }, 
+            {
+                title: "Slow Roads",
+                imgSrc: "gameimg/SlowRoads.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://slowroads.io/") 
+            },
+            {
+                title: "Swoop",
+                imgSrc: "gameimg/swoop.jpeg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://games.cdn.famobi.com/html5games/s/swooop/v1/?fg_domain=play.famobi.com&fg_aid=A-SILVERGAMES&fg_uid=89459199-3905-4687-b993-158f437a0e11&fg_pid=8a24e5f2-94a8-4593-b4e5-81cc68f524c8&fg_beat=881&original_ref=https%3A%2F%2Fwww.silvergames.com%2F")
+            },
+            {
+                title: "Gun Night",
+                imgSrc: "gameimg/gunnight.jpeg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://html5.gamedistribution.com/91717eef3f1d4dfabc910ea4f3ea9c74/") 
+            },
+            {
+                title: "Suika Game",
+                imgSrc: "gameimg/suikagame.jpeg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://suikagame.com")
+            }, 
+            {
+                title: "Stickman Parkour",
+                imgSrc: "gameimg/stickmanparkour.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://games.crazygames.com/en_US/stickman-parkour-master/index.html?v=1.296")
+            }, 
+            {
+                title: "Shoot 'M",
+                imgSrc: "gameimg/shootm.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.silvergames.com/en/shoot-em") 
+            }, 
+            {
+                title: "Moto X3M 1",
+                imgSrc: "gameimg/motox3m.jpeg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.friv.com/z/games/motox3m/game.html")
+            },
+            {
+                title: "Moto X3M 2",
+                imgSrc: "gameimg/motox3m2.jpeg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.friv.com/z/games/motox3m2origins/game.html")
+            },
+            {
+                title: "Moto X3M 3",
+                imgSrc: "gameimg/motox3m3.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.friv.com/z/games/motox3m3origins/game.html")
+            },
+            {
+                title: "Moto X3M Summer",
+                imgSrc: "gameimg/Motox3msummer.jpeg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://moto-x3m.net/pool-party/")
+            }, 
+            {
+                title: "Moto X3M Halloween",
+                imgSrc: "gameimg/motox3mha.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://moto-x3m.net/spooky-land/")
+            },
+            {
+                title: "Moto X3M Winter", 
+                imgSrc: "gameimg/motox3mwinter.jpeg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://moto-x3m.net/winter/")  
+            },
+            {
+                title: "Balls N Bricks",
+                imgSrc: "gameimg/Ballsnbricks.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.miniplay.com/embed/bricks-and-balls")
+            }, 
+            {
+                title: "Javlien Fighting",
+                imgSrc: "gameimg/image_10.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://kbhgames.com/game/javelin-fighting")
+            }, 
+            {
+                title: "Spacebar Clicker", 
+                imgSrc: "gameimg/spacebarclicker.jpg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.arealme.com/spacebar-clicker/en/")
+            },
+            {
+                title: "Slope Game",
+                imgSrc: "gameimg/slopegame.webp",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://storage.y8.com/y8-studio/unity_webgl/bitlaslt/slope_v_1_2_5/?key=9757549&value=80527")
 
-      document.addEventListener("DOMContentLoaded", async function () {
-          const gamesData = [
-              {
-                  title: "Agar.io",
-                  imgSrc: "gameimg/Agario.png",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://cdn.jsdelivr.net/gh/bobydob/JSEngine@ba92ad3b1a5df6a4dae03987b78c5474e2c0d185/build/aio/agio.xml&container=ig")
-              }, 
-              {
-                  title: "Amoung us",
-                  imgSrc: "gameimg/Amoungus.png",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://amongus-online.net/game/amongus") 
-              }, 
-              {
-                  title: "Slow Roads",
-                  imgSrc: "gameimg/SlowRoads.png",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://slowroads.io/") 
-              },
-              {
-                  title: "Swoop",
-                  imgSrc: "gameimg/swoop.jpeg",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://games.cdn.famobi.com/html5games/s/swooop/v1/?fg_domain=play.famobi.com&fg_aid=A-SILVERGAMES&fg_uid=89459199-3905-4687-b993-158f437a0e11&fg_pid=8a24e5f2-94a8-4593-b4e5-81cc68f524c8&fg_beat=881&original_ref=https%3A%2F%2Fwww.silvergames.com%2F")
-              },
-              {
-                  title: "Gun Night",
-                  imgSrc: "gameimg/gunnight.jpeg",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://html5.gamedistribution.com/91717eef3f1d4dfabc910ea4f3ea9c74/") 
-              },
-              {
-                  title: "Suika Game",
-                  imgSrc: "gameimg/suikagame.jpeg",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://suikagame.com")
-              }, 
-              {
-                  title: "Stickman Parkour",
-                  imgSrc: "gameimg/stickmanparkour.png",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://games.crazygames.com/en_US/stickman-parkour-master/index.html?v=1.296")
-              }, 
-              {
-                  title: "Shoot 'M",
-                  imgSrc: "gameimg/shootm.png",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://www.silvergames.com/en/shoot-em") 
-              }, 
-              {
-                  title: "Moto X3M 1",
-                  imgSrc: "gameimg/motox3m.jpeg",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://www.friv.com/z/games/motox3m/game.html")
-              },
-              {
-                  title: "Moto X3M 2",
-                  imgSrc: "gameimg/motox3m2.jpeg",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://www.friv.com/z/games/motox3m2origins/game.html")
-              },
-              {
-                  title: "Moto X3M 3",
-                  imgSrc: "gameimg/motox3m3.png",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://www.friv.com/z/games/motox3m3origins/game.html")
-              },
-              {
-                  title: "Moto X3M Summer",
-                  imgSrc: "gameimg/Motox3msummer.jpeg",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://www.friv.com/z/games/motox3msummer/game.html")
-              },
-              {
-                  title: "Moto X3M 4",
-                  imgSrc: "gameimg/motox3m4.jpeg",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://www.friv.com/z/games/motox3m4/game.html")
-              },
-              {
-                  title: "Moto X3M Winter",
-                  imgSrc: "gameimg/Motox3mwinter.png",
-                  link: __uv$config.prefix + __uv$config.encodeUrl("https://www.friv.com/z/games/motox3mwinter/game.html")
-              }
-          ];
+            },
+            {
+                title: "1v1.lol",
+                imgSrc: "gameimg/1v1lol.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://1v1.school")
+            },
+            {
+                title: "Happy Wheels",
+                imgSrc: "gameimg/happywheels.jpg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://games-online.io/game/HappyWheels/")
+            },
+            {
+                title: "Digworm.io",
+                imgSrc: "gameimg/digworm.webp",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://digworm.io/")
+            },
+            {
+                title: "Apple worm", 
+                imgSrc: "gameimg/appleworm.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://appleworm.io/")
+            }, 
+            {
+                title: "Angry Birds",
+                imgSrc: "gameimg/angrybirds.webp",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://funhtml5games.com?embed=angrybirds")
+            },
+            {
+                title: "Retro Bowl",
+                imgSrc: "gameimg/retrobowl.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://retrobowlgame.github.io/file/")
+            },
+            {
+                title: "Gun Mayhem", 
+                imgSrc: "gameimg/gunmayhem.jpeg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://gunmayhem.io/game/gun-mayhem/")
+            },
+            {
+                title: "Tiny Fishing",
+                imgSrc: "gameimg/tinyfishing.webp",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://images-opensocial.googleusercontent.com/gadgets/ifr?url=https://72682389-756457502729861133.preview.editmysite.com/uploads/b/11886820-896015480911618794/files/tf.xml&container=ig")
+            },
+            {
+                title: "Snow Rider", 
+                imgSrc: "gameimg/snowrider.webp",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://itsvijaysingh.github.io/Snow-Rider3D/")
+            }, 
+            {
+                title: "Happy Glass",
+                imgSrc: "gameimg/happyglass.avif",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://games.crazygames.com/en_US/happy-glass/index.html")
+            },
+            {
+                title: "Minecraft",
+                imgSrc: "gameimg/minecraft.avif",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://eaglercraft.com/mc/1.8.8/")
+            }, 
+            {
+                title: "Dino Game", 
+                imgSrc: "gameimg/dinogame.avif",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://games.crazygames.com/en_US/chrome-dino/index.html?v=1.298")
+            }, 
+            {
+                title: "BitLife", 
+                imgSrc: "gameimg/bitlife.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://ubg365.github.io/bitlife-life-simulator/play.html")
+            }, 
+	    {
+                title: "Cookie Clicker", 
+                imgSrc: "https://play-lh.googleusercontent.com/7QdF1mILpUj-xtZGzNwECuVHaVKJHobvYh45z9q7hGvCbmjH1oD_ZfRxbEqbB_yb6Dk",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://cookieclicker.ee")
+            }, 
+	    {
+                title: "Idle Breakout", 
+                imgSrc: "https://geometrydash.io/data/image/game/idle-breakout.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/49029/")
+            },
+            {
+                title: "Wordle Unlimited", 
+                imgSrc: "https://sm.ign.com/ign_nordic/cover/w/wordle/wordle_rtdv.jpg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://wordleunlimited.org")
+            },
+	    {
+                title: "Ball Blast", 
+                imgSrc: "https://play-lh.googleusercontent.com/p0_Vxw_LM74HDO43ZFC1X_IoUpBIJmBUIxSnImQxwlNBoJe4gGASpMW4cEkjmOokNOw",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://7495375927555794559.playables.usercontent.goog/v/assets/index.html")
+            },
+	    {
+                title: "Attack Hole", 
+                imgSrc: "https://play-lh.googleusercontent.com/r8TsKF6VY6FC74IDuX8qAe0iOoQpsIY2cPzm-6PIvk3qv7rtpZleZqZ2b7t9N5EYHwjY",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://5419033273760513604.playables.usercontent.goog/v/assets/index.html")
+            },
+	    {
+                title: "Stealth Master", 
+                imgSrc: "https://www.metacritic.com/a/img/catalog/provider/6/12/6-1-762178-52.jpg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://5052011930274534086.playables.usercontent.goog/v/assets/index.html")
+            },
+	    {
+                title: "Cut The Rope", 
+                imgSrc: "https://img.cdn.famobi.com/portal/html5games/images/tmp/CutTheRopeTeaser.jpg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://17440050909322948705.playables.usercontent.goog/v/assets/index.html")
+            },
+	    {
+                title: "Tall Man Run", 
+                imgSrc: "https://m.media-amazon.com/images/I/81pW+JQUauL.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://8413946450207224144.playables.usercontent.goog/v/assets/index.html")
+            },
+	    {
+                title: "Hide N Seek", 
+                imgSrc: "https://play-lh.googleusercontent.com/7VQodLWKe2zr9wW0U3togmnBj5TcPvpXLK5fI0HBeETsxgVNZ68xW6h_bGmgElYyGA",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://11663829181267212807.playables.usercontent.goog/v/assets/index.html")
+            },
+        ];
 
-          const gamesList = document.getElementById("gamesList");
+    const gamesList = document.getElementById("gamesList");
 
-          gamesData.forEach(game => {
-              const gameElement = document.createElement("div");
-              gameElement.className = "game"; 
+    gamesData.forEach(game => {
+        const gameElement = document.createElement("div");
+        gameElement.className = "game"; 
 
-              const imgElement = document.createElement("img");
-              imgElement.src = game.imgSrc;
-              imgElement.alt = game.title;
-              imgElement.className = "game-image";
+        const imgElement = document.createElement("img");
+        imgElement.src = game.imgSrc;
+        imgElement.alt = game.title;
+        imgElement.className = "game-image";
 
-              const titleElement = document.createElement("div");
-              titleElement.className = "game-info";
-              titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
+        const titleElement = document.createElement("div");
+        titleElement.className = "game-info";
+        titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
 
-              const linkElement = document.createElement("a");
-              linkElement.href = game.link;
-              linkElement.textContent = "Play";
-              linkElement.className = "play-button";
+        const linkElement = document.createElement("a");
+        linkElement.href = game.link;
+        linkElement.textContent = "Play";
+        linkElement.className = "play-button";
 
-              gameElement.appendChild(imgElement);
-              gameElement.appendChild(titleElement);
-              titleElement.appendChild(linkElement);
+        gameElement.appendChild(imgElement);
+        gameElement.appendChild(titleElement);
+        titleElement.appendChild(linkElement);
 
-              gamesList.appendChild(gameElement);
-          });
-      });
-    </script>
+        gamesList.appendChild(gameElement);
+    });
+});
+</script>
 </body>
 </html>
