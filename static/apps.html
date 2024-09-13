@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-<script src="/assets/js/ads.js"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+  <script src="/assets/js/ads.js"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-VXDP7XC98T');
-</script>
+    gtag('config', 'G-VXDP7XC98T');
+  </script>
+
+  <!-- Styles for particles background -->
+  <style>
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Ensures particles are behind other content */
+      pointer-events: none; /* Allows clicking through particles */
+    }
+  </style>
+</head>
+<body>
+  <!-- Particles container -->
+  <div id="particles-js"></div>
+
+  <!-- Scripts -->
+  <script src="/assets/js/particles.js"></script>
+  <script>
+    particlesJS.load('particles-js', '/assets/json/particles.json');
+  </script>
 
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
