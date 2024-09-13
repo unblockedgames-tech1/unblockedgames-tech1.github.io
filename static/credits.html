@@ -2,7 +2,6 @@
   <head>
     <script src="/config.js"></script>
     <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">   
-    <div id="particles-js" class="bdiv"></div> <!-- Container for particles -->
     <script src="/assets/js/particles.js"></script> <!-- Load particles.js -->
     <script>
       particlesJS.load('particles-js', '/assets/json/particles.json'); <!-- Initialize particles effect -->
@@ -15,8 +14,28 @@
   </head>
 
   <body>
-    <div id="header"></div>
-    <div id="footer"></div>
+    <!-- Add particles background as a separate element -->
+    <div id="particles-js"></div> <!-- Container for particles -->
+
+    <!-- Ensure header is visible -->
+    <div id="header" class="content"></div>
+
+    <div>
+      <br><br><br>
+
+      <h1>Credits:</h1>
+      <p>
+        Owner - Void network
+        <br><br>
+        Developer (Backend/frontend) - Shrey719 (segfault)
+        <br><br>
+        Also thanks to nobodycares (nobodycares_io) for helping with the VPS
+      </p>
+    </div>
+
+    <!-- Ensure footer is visible -->
+    <div id="footer" class="content"></div>
+
     <script>
       loadHTML("/assets/html/header.html", "header");
       loadHTML("/assets/html/footer.html", "footer");
@@ -83,19 +102,13 @@
         height: 100%;
         z-index: -1; /* Keeps it behind the content */
       }
+
+      /* Ensure content has a higher z-index than particles */
+      .content {
+        position: relative;
+        z-index: 1; /* Keep header and footer above particles background */
+      }
     </style>
 
-    <div>
-      <br><br><br>
-
-      <h1>Credits:</h1>
-      <p>
-        Owner - Void network
-        <br><br>
-        Developer (Backend/frontend) - Shrey719 (segfault)
-        <br><br>
-        Also thanks to nobodycares (nobodycares_io) for helping with the VPS
-      </p>
-    </div>
   </body>
 </html>
