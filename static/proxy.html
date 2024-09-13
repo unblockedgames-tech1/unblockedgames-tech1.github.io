@@ -1,93 +1,35 @@
+<!DOCTYPE html>
 <html>
 <head>
   <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-  gtag('config', 'G-VXDP7XC98T');
-</script>
+    gtag('config', 'G-VXDP7XC98T');
+  </script>
 
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PZXRTFX5');</script>
-<!-- End Google Tag Manager -->
-</head>
-<body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-</body>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PZXRTFX5');</script>
+  <!-- End Google Tag Manager -->
 
-
-<script src="uv/uv.bundle.js"></script>
-<script src="uv/uv.config.js"></script> 
-<script src="/config.js"></script>
-<script src="/global.js"></script>
-<script>
-
-
-loadHTML("/assets/html/header.html", "header")
-loadHTML("/assets/html/footer.html", "footer")
-
-const stockSW = "/uv/sw.js";
-const swAllowedHostnames = ["localhost", "127.0.0.1"];
-
-function writeIframe(event, src) {
-  if (event.key === 'Enter') {
-  document.getElementById('stag').remove()
-  document.getElementById('uvsearch').remove()
-  var iframe = document.createElement("iframe");
-  iframe.style.border = 'none'
-  iframe.style.width = '100%'
-  iframe.style.height = '100%'
-  iframe.style.margin = '0'
-  iframe.src = src
-  iframe.style.padding = '0.5px'
-  iframe.style.position = 'fixed'
-  iframe.style.display = 'block'
-  document.getElementById('div_uvout').appendChild(iframe);
-  event.preventDefault();
-  }
-}
-
-function registerSW() {
-  if (!navigator.serviceWorker) {
-  if (
-    location.protocol !== "https:" &&
-    !swAllowedHostnames.includes(location.hostname)
-  )
-    throw new Error("Service workers cannot be registered without https.");
-    document.write("</p>UV ERROR: Unable to register serviceworker - Serviceworkers cannot be registered without HTTPS</p>")
-  throw new Error("Your browser doesn't support service workers.");
-  }
-  
-navigator.serviceWorker.register(stockSW);
-}
-registerSW();   
-</script>
-<link href="assets/css/styles.css" rel="stylesheet">
-<div id="header"></div>
-<div id="footer"></div>
-<div class="centered_div">
-<h1 style="text-align: center; color: white;" id="stag">Search the web</h1>
-<input class="uvsearch" id="uvsearch" onkeypress="writeIframe(event, handleUVSearch())"></input>
-</div>
-<div style="line-height:4vh;">
-  <br>
-</div>
-<div id="div_uvout" class="div_tab">
-<title>New Tab</title>  
-</div>
-<style>
+  <!-- Styles for particles background -->
+  <style>
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1; /* Ensures particles are behind other content */
+      pointer-events: none; /* Allows clicking through particles */
+    }
     .uvsearch {
         width: 30rem;
         padding: 1rem;
@@ -106,21 +48,95 @@ registerSW();
         left: 50%;
         transform: translate(-50%, -50%);
     }
-</style>
-<script>
-document.body.style.margin = '0';
-document.body.style.height = '100vh';
+  </style>
+</head>
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
 
-function handleUVSearch() {
-    let searchVal = document.getElementById("uvsearch").value 
-    if (searchVal.includes("http") && searchVal.includes(":")) {
-       return '/uv/service/' + __uv$config.encodeUrl(searchVal)
-      return;
+  <!-- Particles container -->
+  <div id="particles-js"></div>
+
+  <!-- Scripts -->
+  <script src="uv/uv.bundle.js"></script>
+  <script src="uv/uv.config.js"></script> 
+  <script src="/config.js"></script>
+  <script src="/global.js"></script>
+  <script src="/assets/js/particles.js"></script>
+  <script>
+    particlesJS.load('particles-js', '/assets/json/particles.json');
+
+    loadHTML("/assets/html/header.html", "header")
+    loadHTML("/assets/html/footer.html", "footer")
+
+    const stockSW = "/uv/sw.js";
+    const swAllowedHostnames = ["localhost", "127.0.0.1"];
+
+    function writeIframe(event, src) {
+      if (event.key === 'Enter') {
+        document.getElementById('stag').remove()
+        document.getElementById('uvsearch').remove()
+        var iframe = document.createElement("iframe");
+        iframe.style.border = 'none'
+        iframe.style.width = '100%'
+        iframe.style.height = '100%'
+        iframe.style.margin = '0'
+        iframe.src = src
+        iframe.style.padding = '0.5px'
+        iframe.style.position = 'fixed'
+        iframe.style.display = 'block'
+        document.getElementById('div_uvout').appendChild(iframe);
+        event.preventDefault();
+      }
     }
-    if (searchVal.includes(".") && !searchVal.includes(" ")) {
-       return '/uv/service/' + __uv$config.encodeUrl("https://" + searchVal)
-      return;
+
+    function registerSW() {
+      if (!navigator.serviceWorker) {
+        if (
+          location.protocol !== "https:" &&
+          !swAllowedHostnames.includes(location.hostname)
+        )
+          throw new Error("Service workers cannot be registered without https.");
+        document.write("</p>UV ERROR: Unable to register serviceworker - Serviceworkers cannot be registered without HTTPS</p>")
+        throw new Error("Your browser doesn't support service workers.");
+      }
+      
+      navigator.serviceWorker.register(stockSW);
     }
-    return '/uv/service/' + __uv$config.encodeUrl("https://google.com/search?q=" + searchVal)
-}</script>
+    registerSW();   
+  </script>
+
+  <link href="assets/css/styles.css" rel="stylesheet">
+
+  <div id="header"></div>
+  <div id="footer"></div>
+  <div class="centered_div">
+    <h1 style="text-align: center; color: white;" id="stag">Search the web</h1>
+    <input class="uvsearch" id="uvsearch" onkeypress="writeIframe(event, handleUVSearch())"></input>
+  </div>
+  <div style="line-height:4vh;">
+    <br>
+  </div>
+  <div id="div_uvout" class="div_tab">
+    <title>New Tab</title>  
+  </div>
+
+  <script>
+    document.body.style.margin = '0';
+    document.body.style.height = '100vh';
+
+    function handleUVSearch() {
+      let searchVal = document.getElementById("uvsearch").value 
+      if (searchVal.includes("http") && searchVal.includes(":")) {
+        return '/uv/service/' + __uv$config.encodeUrl(searchVal)
+      }
+      if (searchVal.includes(".") && !searchVal.includes(" ")) {
+        return '/uv/service/' + __uv$config.encodeUrl("https://" + searchVal)
+      }
+      return '/uv/service/' + __uv$config.encodeUrl("https://google.com/search?q=" + searchVal)
+    }
+  </script>
+</body>
 </html>
