@@ -1,24 +1,103 @@
 <html>
-<script src="/config.js"></script>
-<link rel="stylesheet" href="/assets/css/styles.css"></link>
-<script src="/global.js"></script>
-<div id="header"></div>
-<div id="footer"></div>  
-<script>
-    loadHTML("/assets/html/header.html", "header")
-    loadHTML("/assets/html/footer.html", "footer")
-</script>
-<div style="color: white;">
-    <br><br><br></br>
-    
-<h1>Credits:</h1>
-<p>Owner - Void network
-<br>
-<br>
-Developer (Backend/frontend) - Shrey719 (segfault)
-<br><br>
-Also thanks to nobodycares (nobodycares_io) for helping with the VPS
-</p>
+  <script src="/config.js"></script>
+  <link rel="stylesheet" href="/assets/css/styles.css"></link>
+  <script src="/global.js"></script>
+  <div id="header"></div>
+  <div id="footer"></div>
+  <script>
+    loadHTML("/assets/html/header.html", "header");
+    loadHTML("/assets/html/footer.html", "footer");
+  </script>
 
-</div>
+  <style>
+    /* Apply the Orbitron font for a futuristic style */
+    @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+    body {
+      background-color: #0e0e0e;
+      font-family: 'Orbitron', sans-serif;
+      color: white;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    h1 {
+      font-size: 3em;
+      font-weight: 700;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      position: relative;
+      animation: glow 1.5s infinite alternate;
+    }
+
+    p {
+      font-size: 1.5em;
+      line-height: 1.8;
+      animation: slideIn 2s ease-out;
+    }
+
+    /* Create a futuristic glowing effect for the h1 */
+    @keyframes glow {
+      0% {
+        text-shadow: 0 0 5px #0ff, 0 0 10px #0ff, 0 0 20px #0ff, 0 0 40px #0ff;
+      }
+      100% {
+        text-shadow: 0 0 20px #0ff, 0 0 40px #0ff, 0 0 80px #0ff, 0 0 160px #0ff;
+      }
+    }
+
+    /* Smooth slide-in effect for paragraphs */
+    @keyframes slideIn {
+      0% {
+        opacity: 0;
+        transform: translateX(-100%);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    /* Animated background for a futuristic effect */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(45deg, #00f, #0ff, #00f, #0ff);
+      background-size: 400% 400%;
+      z-index: -1;
+      animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+  </style>
+
+  <div>
+    <br><br><br></br>
+
+    <h1>Credits:</h1>
+    <p>
+      Owner - Void network
+      <br>
+      <br>
+      Developer (Backend/frontend) - Shrey719 (segfault)
+      <br><br>
+      Also thanks to nobodycares (nobodycares_io) for helping with the VPS
+    </p>
+  </div>
 </html>
