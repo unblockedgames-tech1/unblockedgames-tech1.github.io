@@ -1,149 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Forms Side by Side with Particles</title>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
     <script src="/assets/js/ads.js"></script>
     <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-VXDP7XC98T');
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-VXDP7XC98T');
     </script>
-
+    <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+      /* Add CSS for particle background */
+      #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+      }
+      
+      /* Styling for the container */
+      .container {
+        display: flex;
+        justify-content: space-around;
+        align-items: flex-start;
+        padding: 2rem;
+        z-index: 1;
+      }
 
-        body, html {
-            margin: 0;
-            padding: 0;
-            height: 100%;
-            font-family: 'Orbitron', sans-serif;
-            background: #000;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
+      /* Styling for each form section */
+      .form-section {
+        background-color: #f5f5f5;
+        border-radius: 15px;
+        padding: 20px;
+        width: 45%;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
 
-        /* Particles container */
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1; /* Ensures particles are behind other content */
-            pointer-events: none;
-        }
+      .form-section h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
 
-        /* Form container */
-        .container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            height: calc(100vh - 50px); /* Adjust height for footer */
-            position: relative;
-            z-index: 1;
-        }
+      iframe {
+        width: 100%;
+        height: 500px;
+        border-radius: 15px;
+        border: none;
+      }
 
-        .left, .right {
-            padding: 20px;
-        }
-
-        h2 {
-            text-align: center;
-            font-size: 36px;
-            color: #d3d3d3;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            letter-spacing: 3px;
-            position: relative;
-            animation: float 3s ease-in-out infinite, neonGlow 1.5s ease-in-out infinite alternate;
-        }
-
-        @keyframes neonGlow {
-            0% {
-                text-shadow: 0 0 5px #001f3f, 0 0 10px #001f3f, 0 0 15px #001f3f, 0 0 20px #001f3f;
-            }
-            100% {
-                text-shadow: 0 0 10px #001f3f, 0 0 20px #001f3f, 0 0 30px #001f3f, 0 0 40px #001f3f;
-            }
-        }
-
-        @keyframes float {
-            0% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-            100% {
-                transform: translateY(0px);
-            }
-        }
-
-        .left iframe, .right iframe {
-            width: 100%;
-            height: 80%;
-            border: none;
-            border-radius: 20px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Original footer style */
-        .footer {
-            width: 100%;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            background-color: #000; /* Background color to match the overall design */
-        }
-
-        .footer_link {
-            color: #0ff;
-            margin: 0 15px;
-            text-decoration: none;
-            font-size: 16px;
-        }
     </style>
 </head>
 <body>
-
-    <!-- Particles Background -->
+    <!-- Particle Background -->
     <div id="particles-js"></div>
+    <script src="/assets/js/particles.js"></script>
+    <script>
+      particlesJS.load('particles-js', '/assets/json/particles.json');
+    </script>
 
-    <!-- Forms Container -->
+    <!-- Content Section -->
     <div class="container">
-        <div class="left">
-            <h2>Request a Game</h2>
-            <!-- Replace the 'src' URL with your Google Form link -->
-            <iframe src="https://docs.google.com/forms/d/e/your-form-id/viewform?embedded=true" frameborder="0"></iframe>
+        <!-- Request Game Section -->
+        <div class="form-section">
+            <h2>Request Game</h2>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfJzMFZFljmKuP91YZ7N_GmkzvZ2LgAmSuVIZhsWiG_hLaftQ/viewform"></iframe>
         </div>
-        <div class="right">
-            <h2>Request an App</h2>
-            <!-- Replace the 'src' URL with your second Google Form link -->
-            <iframe src="https://docs.google.com/forms/d/e/your-form-id/viewform?embedded=true" frameborder="0"></iframe>
+        
+        <!-- Request App Section -->
+        <div class="form-section">
+            <h2>Request App</h2>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdFz-dgdiUgG3U5UvbrSgVshYmzNlVX2/viewform"></iframe>
         </div>
     </div>
 
-    <!-- Footer with original style -->
-    <footer class="footer">
-        <a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
-        <a class="footer_link" onclick="location.href=htmlConfig.settingsPath">Settings</a>
-        <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Discord</a>
-        <a class="footer_link" href="https://void.radio.am/requestgamesandapp.html">Request Game or App</a>
-    </footer>
-
-    <!-- Use CDN for particles.js -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-    <script>
-        particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
-            console.log('particles.js loaded - callback');
-        });
-    </script>
+    <!-- Google Tag Manager -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
+        height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
 
 </body>
 </html>
