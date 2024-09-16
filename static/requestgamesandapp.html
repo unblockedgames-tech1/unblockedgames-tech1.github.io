@@ -11,39 +11,39 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'Orbitron', sans-serif; /* Futuristic font */
+            font-family: 'Orbitron', sans-serif; 
             overflow: hidden;
             background: #000;
         }
 
-        /* Particles container */
+        
         #particles-js {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -1; /* Send particles to background */
+            z-index: -1; 
         }
 
-        /* Form container */
+        
         .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
             height: 100vh;
             position: relative;
-            z-index: 1; /* Bring form above particles */
+            z-index: 1; 
         }
 
         .left, .right {
             padding: 20px;
         }
 
-        /* Futuristic heading styles */
+        
         h2 {
             text-align: center;
             font-size: 36px;
-            color: #d3d3d3; /* Whitish-gray color for text */
+            color: #d3d3d3; 
             text-transform: uppercase;
             margin-bottom: 20px;
             letter-spacing: 3px;
@@ -51,7 +51,7 @@
             animation: float 3s ease-in-out infinite;
         }
 
-        /* Neon glow animation with dark blue glow */
+        
         @keyframes neonGlow {
             0% {
                 text-shadow: 0 0 5px #001f3f, 0 0 10px #001f3f, 0 0 15px #001f3f, 0 0 20px #001f3f;
@@ -61,12 +61,12 @@
             }
         }
 
-        /* Apply glow effect */
+        
         h2 {
             animation: float 3s ease-in-out infinite, neonGlow 1.5s ease-in-out infinite alternate;
         }
 
-        /* Floating effect for the headings */
+        
         @keyframes float {
             0% {
                 transform: translateY(0px);
@@ -90,24 +90,24 @@
 </head>
 <body>
 
-    <!-- Particles Background -->
+    
     <div id="particles-js"></div>
 
-    <!-- Forms Container -->
+    
     <div class="container">
         <div class="left">
             <h2>Request a Game</h2>
-            <!-- Replace the 'src' URL with your Google Form link -->
+            
             <iframe src="https://docs.google.com/forms/d/e/your-form-id/viewform?embedded=true" frameborder="0"></iframe>
         </div>
         <div class="right">
             <h2>Request an App</h2>
-            <!-- Replace the 'src' URL with your second Google Form link -->
+            
             <iframe src="https://docs.google.com/forms/d/e/your-form-id/viewform?embedded=true" frameborder="0"></iframe>
         </div>
     </div>
 
-    <!-- Particles.js Script -->
+    
     <script src="/assets/js/particles.js"></script>
     <script>
       particlesJS.load('particles-js', '/assets/json/particles.json');
