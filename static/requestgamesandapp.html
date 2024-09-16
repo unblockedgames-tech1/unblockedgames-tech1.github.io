@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>New Tab</title>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
     <script src="/assets/js/ads.js"></script>
@@ -25,13 +24,16 @@
         pointer-events: none;
       }
 
-      /* Styling for the container */
+      /* Centering the container */
       .container {
         display: flex;
-        justify-content: space-around;
-        align-items: flex-start;
-        padding: 2rem;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-wrap: wrap;
+        gap: 50px;
         z-index: 1;
+        position: relative;
       }
 
       /* Styling for each form section */
@@ -43,16 +45,34 @@
         box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       }
 
-      .form-section h2 {
-        text-align: center;
-        margin-bottom: 20px;
-      }
-
       iframe {
         width: 100%;
         height: 500px;
         border-radius: 15px;
         border: none;
+      }
+
+      /* Styling for the animated titles */
+      .title {
+        font-size: 2rem;
+        text-align: center;
+        color: #000;
+        margin-bottom: 10px;
+        position: relative;
+        animation: slideIn 2s ease-in-out forwards;
+        opacity: 0;
+      }
+
+      /* Animation for the title */
+      @keyframes slideIn {
+        0% {
+          transform: translateY(-50px);
+          opacity: 0;
+        }
+        100% {
+          transform: translateY(0);
+          opacity: 1;
+        }
       }
 
     </style>
@@ -71,15 +91,19 @@
     <!-- Content Section -->
     <div class="container">
         <!-- Request Game Section -->
-        <div class="form-section">
-            <h2>Request Game</h2>
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfJzMFZFljmKuP91YZ7N_GmkzvZ2LgAmSuVIZhsWiG_hLaftQ/viewform"></iframe>
+        <div>
+            <h2 class="title">Request Game</h2>
+            <div class="form-section">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSfJzMFZFljmKuP91YZ7N_GmkzvZ2LgAmSuVIZhsWiG_hLaftQ/viewform"></iframe>
+            </div>
         </div>
         
         <!-- Request App Section -->
-        <div class="form-section">
-            <h2>Request App</h2>
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdFz-dgdiUgG3U5UvbrSgVshYmzNlVX2/viewform"></iframe>
+        <div>
+            <h2 class="title">Request App</h2>
+            <div class="form-section">
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdFz-dgdiUgG3U5UvbrSgVshYmzNlVX2/viewform"></iframe>
+            </div>
         </div>
     </div>
 
