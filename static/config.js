@@ -6,7 +6,8 @@ const htmlConfig = {
     searchPath: "/ta",
     settingsPath: "/settings",
     appsPath: "/app",
-    termPath: "/terminal.html"
+    termPath: "/terminal.html",
+    reqPath: "/rga"
 }
 
 const siteConfig = {
