@@ -14,6 +14,9 @@ app.use(express.static("img")) // IMGS GET PROIRITY BI
 app.get("/ga", function (req, res) {
   res.sendFile(path.join(__dirname, "static/games.html"));
 })
+app.get("/rga", function(req, res) {
+res.sendFile(path.join(__dirname, "static/rga.html"))
+})
 app.get("/ta", function (req, res) {
   res.sendFile(path.join(__dirname, "static/proxy.html"));
 })
