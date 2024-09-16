@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Tab</title>
+    <title>Google Forms Side by Side with Particles</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
@@ -11,39 +11,41 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'Orbitron', sans-serif; 
+            font-family: 'Orbitron', sans-serif; /* Futuristic font */
             overflow: hidden;
             background: #000;
+            display: flex;
+            flex-direction: column;
         }
 
-        
+        /* Particles container */
         #particles-js {
             position: absolute;
             width: 100%;
             height: 100%;
             top: 0;
             left: 0;
-            z-index: -1; 
+            z-index: -1; /* Send particles to background */
         }
 
-        
+        /* Form container */
         .container {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            height: 100vh;
+            height: calc(100vh - 50px); /* Adjust height for footer */
             position: relative;
-            z-index: 1; 
+            z-index: 1; /* Bring form above particles */
         }
 
         .left, .right {
             padding: 20px;
         }
 
-        
+        /* Futuristic heading styles */
         h2 {
             text-align: center;
             font-size: 36px;
-            color: #d3d3d3; 
+            color: #d3d3d3; /* Whitish-gray color for text */
             text-transform: uppercase;
             margin-bottom: 20px;
             letter-spacing: 3px;
@@ -51,7 +53,7 @@
             animation: float 3s ease-in-out infinite;
         }
 
-        
+        /* Neon glow animation with dark blue glow */
         @keyframes neonGlow {
             0% {
                 text-shadow: 0 0 5px #001f3f, 0 0 10px #001f3f, 0 0 15px #001f3f, 0 0 20px #001f3f;
@@ -61,12 +63,12 @@
             }
         }
 
-        
+        /* Apply glow effect */
         h2 {
             animation: float 3s ease-in-out infinite, neonGlow 1.5s ease-in-out infinite alternate;
         }
 
-        
+        /* Floating effect for the headings */
         @keyframes float {
             0% {
                 transform: translateY(0px);
@@ -86,31 +88,65 @@
             border-radius: 20px;
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        /* Footer styles */
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #000;
+            text-align: center;
+            padding: 10px 0;
+            z-index: 2;
+        }
+
+        .footer_link {
+            color: #0ff;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 16px;
+            letter-spacing: 2px;
+            transition: color 0.3s;
+        }
+
+        .footer_link:hover {
+            color: #00f;
+        }
     </style>
 </head>
 <body>
 
-    
+    <!-- Particles Background -->
     <div id="particles-js"></div>
 
-    
+    <!-- Forms Container -->
     <div class="container">
         <div class="left">
             <h2>Request a Game</h2>
-            
+            <!-- Replace the 'src' URL with your Google Form link -->
             <iframe src="https://docs.google.com/forms/d/e/your-form-id/viewform?embedded=true" frameborder="0"></iframe>
         </div>
         <div class="right">
             <h2>Request an App</h2>
-            
+            <!-- Replace the 'src' URL with your second Google Form link -->
             <iframe src="https://docs.google.com/forms/d/e/your-form-id/viewform?embedded=true" frameborder="0"></iframe>
         </div>
     </div>
 
-    
-    <script src="/assets/js/particles.js"></script>
+    <!-- Footer -->
+    <footer class="footer">
+        <a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
+        <a class="footer_link" onclick="location.href=htmlConfig.settingsPath">Settings</a>
+        <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Dis<x>co</x>rd</a>
+        <a class="footer_link" href="https://void.radio.am/requestgamesandapp.html">Req<x>uest Ga</x>me O</x>r A</x>pp</a>
+    </footer>
+
+    <!-- Use CDN for particles.js -->
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-      particlesJS.load('particles-js', '/assets/json/particles.json');
+      particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
+        console.log('particles.js loaded - callback');
+      });
     </script>
 
 </body>
