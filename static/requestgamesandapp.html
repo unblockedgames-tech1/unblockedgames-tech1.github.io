@@ -4,6 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Google Forms Side by Side with Particles</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+    <script src="/assets/js/ads.js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VXDP7XC98T');
+    </script>
+
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
 
@@ -11,21 +21,22 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            font-family: 'Orbitron', sans-serif; /* Futuristic font */
-            overflow: hidden;
+            font-family: 'Orbitron', sans-serif;
             background: #000;
+            overflow: hidden;
             display: flex;
             flex-direction: column;
         }
 
         /* Particles container */
         #particles-js {
-            position: absolute;
-            width: 100%;
-            height: 100%;
+            position: fixed;
             top: 0;
             left: 0;
-            z-index: -1; /* Send particles to background */
+            width: 100%;
+            height: 100%;
+            z-index: -1; /* Ensures particles are behind other content */
+            pointer-events: none;
         }
 
         /* Form container */
@@ -34,26 +45,24 @@
             grid-template-columns: 1fr 1fr;
             height: calc(100vh - 50px); /* Adjust height for footer */
             position: relative;
-            z-index: 1; /* Bring form above particles */
+            z-index: 1;
         }
 
         .left, .right {
             padding: 20px;
         }
 
-        /* Futuristic heading styles */
         h2 {
             text-align: center;
             font-size: 36px;
-            color: #d3d3d3; /* Whitish-gray color for text */
+            color: #d3d3d3;
             text-transform: uppercase;
             margin-bottom: 20px;
             letter-spacing: 3px;
             position: relative;
-            animation: float 3s ease-in-out infinite;
+            animation: float 3s ease-in-out infinite, neonGlow 1.5s ease-in-out infinite alternate;
         }
 
-        /* Neon glow animation with dark blue glow */
         @keyframes neonGlow {
             0% {
                 text-shadow: 0 0 5px #001f3f, 0 0 10px #001f3f, 0 0 15px #001f3f, 0 0 20px #001f3f;
@@ -63,12 +72,6 @@
             }
         }
 
-        /* Apply glow effect */
-        h2 {
-            animation: float 3s ease-in-out infinite, neonGlow 1.5s ease-in-out infinite alternate;
-        }
-
-        /* Floating effect for the headings */
         @keyframes float {
             0% {
                 transform: translateY(0px);
@@ -89,14 +92,14 @@
             box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        /* Original footer styles */
+        /* Original footer style */
         .footer {
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            width: 100%;
+            text-align: center;
             padding: 10px;
-            background-color: #000;
-            z-index: 2;
+            position: fixed;
+            bottom: 0;
+            background-color: #000; /* Background color to match the overall design */
         }
 
         .footer_link {
@@ -104,13 +107,6 @@
             margin: 0 15px;
             text-decoration: none;
             font-size: 16px;
-            letter-spacing: 1px;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .footer_link:hover {
-            color: #00f;
         }
     </style>
 </head>
@@ -137,16 +133,16 @@
     <footer class="footer">
         <a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
         <a class="footer_link" onclick="location.href=htmlConfig.settingsPath">Settings</a>
-        <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Dis<x>co</x>rd</a>
-        <a class="footer_link" href="https://void.radio.am/requestgamesandapp.html">Req<x>uest Ga</x>me O</x>r A</x>pp</a>
+        <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Discord</a>
+        <a class="footer_link" href="https://void.radio.am/requestgamesandapp.html">Request Game or App</a>
     </footer>
 
     <!-- Use CDN for particles.js -->
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
-      particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
-        console.log('particles.js loaded - callback');
-      });
+        particlesJS.load('particles-js', 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.json', function() {
+            console.log('particles.js loaded - callback');
+        });
     </script>
 
 </body>
