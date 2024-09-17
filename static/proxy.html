@@ -76,17 +76,20 @@
 
     function writeIframe(event, src) {
       if (event.key === 'Enter') {
-        document.getElementById('stag').remove()
-        document.getElementById('uvsearch').remove()
+        document.getElementById('stag').remove();
+        document.getElementById('uvsearch').remove();
+        // Remove or hide the particle background
+        document.getElementById('particles-js').style.display = 'none'; // Hide particles
+
         var iframe = document.createElement("iframe");
-        iframe.style.border = 'none'
-        iframe.style.width = '100%'
-        iframe.style.height = '100%'
-        iframe.style.margin = '0'
-        iframe.src = src
-        iframe.style.padding = '0.5px'
-        iframe.style.position = 'fixed'
-        iframe.style.display = 'block'
+        iframe.style.border = 'none';
+        iframe.style.width = '100%';
+        iframe.style.height = '100%';
+        iframe.style.margin = '0';
+        iframe.src = src;
+        iframe.style.padding = '0.5px';
+        iframe.style.position = 'fixed';
+        iframe.style.display = 'block';
         document.getElementById('div_uvout').appendChild(iframe);
         event.preventDefault();
       }
