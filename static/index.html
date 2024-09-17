@@ -3,7 +3,7 @@
 <head>
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2266593297009536"
      crossorigin="anonymous"></script>
-<script src="/assets/components/shadowroot.js"></script>
+	<script src="/assets/components/shadowroot.js"></script>
 <script src="/assets/js/ads.js"></script>
 <script>
 
@@ -43,91 +43,16 @@
     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-PZXRTFX5');</script>
 <!-- End Google Tag Manager -->
-
-<!-- Custom Cursor Styles -->
-<style>
-    .curzr {
-  position: fixed;
-  width: 20px;
-  height: 20px;
-  background: url('/appimg/cursorvn.png') no-repeat center center;
-  background-size: contain;
-  pointer-events: none;
-  transform-origin: center;
-  z-index: 10000;
-  transition: transform 100ms ease, opacity 250ms ease;
-}
-
-
-<!-- Custom Cursor Script -->
-<script>
-  class ArrowPointer {
-    constructor() {
-      this.root = document.body;
-      this.cursor = document.createElement('div');
-      this.cursor.classList.add('curzr');
-      document.body.appendChild(this.cursor);
-
-      this.position = {
-        distanceX: 0, 
-        distanceY: 0,
-        pointerX: 0,
-        pointerY: 0,
-      };
-      this.previousPointerX = 0;
-      this.previousPointerY = 0;
-      this.angle = 0;
-      this.degrees = 57.296;
-      this.cursorSize = 20;
-
-      this.cursorStyle = {
-        position: 'fixed',
-        top: '0px',
-        left: `${ -this.cursorSize / 2 }px`,
-        width: `${ this.cursorSize }px`,
-        height: `${ this.cursorSize }px`,
-        userSelect: 'none',
-        pointerEvents: 'none'
-      };
-
-      Object.assign(this.cursor.style, this.cursorStyle);
-      this.init();
-    }
-
-    init() {
-      document.body.style.cursor = 'none';
-      document.body.querySelectorAll("button, label, input, textarea, select, a").forEach((el) => {
-        el.style.cursor = 'inherit';
-      });
-    }
-
-    move(event) {
-      this.previousPointerX = this.position.pointerX;
-      this.previousPointerY = this.position.pointerY;
-      this.position.pointerX = event.pageX;
-      this.position.pointerY = event.pageY;
-
-      this.cursor.style.transform = `translate3d(${this.position.pointerX}px, ${this.position.pointerY}px, 0)`;
-    }
-  }
-
-  (() => {
-    const cursor = new ArrowPointer();
-    document.onmousemove = function(event) {
-      cursor.move(event);
-    };
-  })();
-</script>
-
 </head>
-
 <body>
 <!-- Google Tag Manager (noscript) -->
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
-
 </body>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+
 
 <head>
 <script src="/config.js"></script>
@@ -145,7 +70,6 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <title>Void Network</title>
 
 </head>
-
 <body>
     <div class="allDiv">
     <footer class="footer">
@@ -167,9 +91,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     </div>
 </body>
-
 <script>
-    document.getElementById("ver").innerHTML = siteConfig.version;
+    document.getElementById("ver").innerHTML = siteConfig.version
 </script>
-
 </html>
