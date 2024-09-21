@@ -7,7 +7,7 @@ const htmlConfig = {
     settingsPath: "/settings",
     appsPath: "/app",
     termPath: "/terminal.html",
-    reqPath: "/rga"
+    reqPath: "/rga",
     resPath: "/voidurls"
 }
 
