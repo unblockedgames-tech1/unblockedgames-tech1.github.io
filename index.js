@@ -26,7 +26,7 @@ app.get("/app", function (req, res) {
 app.get("/credits", function (req, res) {
   res.sendFile(path.join(__dirname, "static/credits.html"));
 })
-app.get("/voidurls", function (req, res) {
+app.get("/voidurls", function (url, res) {
   res.sendFile(path.join(__dirname, "static/voidurls.html"));
 })
 app.get("/settings", function (req, res) {
