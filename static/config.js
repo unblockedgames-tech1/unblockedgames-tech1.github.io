@@ -8,7 +8,7 @@ const htmlConfig = {
     appsPath: "/app",
     termPath: "/terminal.html",
     reqPath: "/rga",
-    reqPath: "/voidurls"
+    urlPath: "/voidurls"
 }
 
 const siteConfig = {
