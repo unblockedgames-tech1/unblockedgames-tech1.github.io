@@ -26,9 +26,14 @@
       }
 
 /* Styles for the random game button */
+.button-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
 .random-game-button {
-    display: block;
-    width: 200px; /* Set a fixed width to make the button rounded */
+    display: inline-block;
     padding: 15px;
     font-size: 24px;
     font-weight: bold;
@@ -40,10 +45,6 @@
     transition: background-color 0.3s;
     border: 2px solid white; /* Add a white border */
     border-radius: 20px; /* Make the button rounded */
-    position: absolute;
-    top: 200px; /* Move the button down 200px from the top */
-    left: 50%;
-    transform: translateX(-50%); /* Center the button horizontally */
     z-index: 1; /* Make the button sit on top of the games */
 }
 
