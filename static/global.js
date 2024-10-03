@@ -11,7 +11,7 @@ document.addEventListener("keydown", function(e) {
       }
 })
 
-
+renderFile
 function renderFile(url, width, height, id) { // Renders URL in a centered iframe w/ w&h set
     let fr = document.createElement("iframe")
     fr.src = url 

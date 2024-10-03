@@ -13,29 +13,9 @@
     gtag('config', 'G-VXDP7XC98T');
   </script>
 
-  <!-- Styles for particles background -->
-  <style>
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1; /* Ensures particles are behind other content */
-      pointer-events: none; /* Allows clicking through particles */
-    }
-  </style>
+
 </head>
 <body>
-  <!-- Particles container -->
-  <div id="particles-js"></div>
-
-  <!-- Scripts -->
-  <script src="/assets/js/particles.js"></script>
-  <script>
-    particlesJS.load('particles-js', '/assets/json/particles.json');
-  </script>
-
 <!-- Google Tag Manager -->
 <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -180,17 +160,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </script>
 </head>
 <body>
-    <footer class="footer">
-        <a class="footer_link" onclick="location.href=htmlConfig.creditsPath">Credits</a>
-      <a class="footer_link" onclick="location.href=htmlConfig.settingsPath">Settings</a>
-      <a class="footer_link" href="https://discord.gg/RTPATnD7ke">Discord</a>
-    </footer>
-    <header class="header">
-    <a class="header_link" href="/">Home</a>
-    <a class="header_link" onclick="location.href=htmlConfig.gamesPath">Gam<x>e</x>s</a>
-    <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
-    <a class="header_link" onclick="location.href = htmlConfig.appsPath">Apps</a>
-    </header>
+    <div id="header"></div>
+    <div id="footer"></div>
     <div id="div_appout">
 
 <div class="flex-container" id="gamesList">

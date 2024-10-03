@@ -38,4 +38,4 @@ app.get('*', function(req, res) {res.sendFile(path.join(__dirname, "static/404.h
 
 server.on("request", (req, res) => {
 if (bare.shouldRoute(req)) {bare.routeRequest(req, res)} else {app(req, res)}})
-server.listen({port: PORT}, () => {})
+server.listen({port: PORT}, () => {console.log("listening on port " + PORT)})

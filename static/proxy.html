@@ -18,18 +18,7 @@
   'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,'script','dataLayer','GTM-PZXRTFX5');</script>
   <!-- End Google Tag Manager -->
-
-  <!-- Styles for particles background -->
   <style>
-    #particles-js {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: -1; /* Ensures particles are behind other content */
-      pointer-events: none; /* Allows clicking through particles */
-    }
     .uvsearch {
         width: 30rem;
         padding: 1rem;
@@ -51,14 +40,6 @@
   </style>
 </head>
 <body>
-  <!-- Google Tag Manager (noscript) -->
-  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-  <!-- End Google Tag Manager (noscript) -->
-
-  <!-- Particles container -->
-  <div id="particles-js"></div>
-
   <!-- Scripts -->
   <script src="uv/uv.bundle.js"></script>
   <script src="uv/uv.config.js"></script> 
@@ -66,7 +47,6 @@
   <script src="/global.js"></script>
   <script src="/assets/js/particles.js"></script>
   <script>
-    particlesJS.load('particles-js', '/assets/json/particles.json');
 
     loadHTML("/assets/html/header.html", "header")
     loadHTML("/assets/html/footer.html", "footer")
@@ -79,8 +59,6 @@
         document.getElementById('stag').remove();
         document.getElementById('uvsearch').remove();
         // Remove or hide the particle background
-        document.getElementById('particles-js').style.display = 'none'; // Hide particles
-
         var iframe = document.createElement("iframe");
         iframe.style.border = 'none';
         iframe.style.width = '100%';
