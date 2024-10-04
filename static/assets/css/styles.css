@@ -42,7 +42,7 @@ header {
     position: sticky;
     top: 0; /* Make sure the header stays at the top */
     width: 100%;
-    border-radius: 0 0 40px 40px; /* Rounded bottom corners for header */
+    border-radius: 40px 40px; /* Rounded bottom corners for header */
 }
 
 footer {
@@ -50,7 +50,7 @@ footer {
     position: sticky;
     bottom: 0; /* Make sure the footer sticks to the bottom */
     margin-top: auto; /* Push the footer to the bottom of the page when content is small */
-    border-radius: 40px 40px 0 0; /* Rounded top corners for footer */
+    border-radius: 40px 40px ; /* Rounded top corners for footer */
 }
 
 .button_redir_div {
