@@ -23,6 +23,11 @@
 body {
     background-color: rgb(30, 30, 30); /* Darker gray background */
     overflow-y: scroll !important;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh; /* Ensures full height */
+    display: flex;
+    flex-direction: column; /* Allows the footer to stay at the bottom */
 }
 
 header, footer {
@@ -30,8 +35,21 @@ header, footer {
     color: white;
     padding: 1rem;
     text-align: center;
-    border-radius: 20px; /* Rounded corners for header and footer */
-    margin: 1rem; /* Added margin for better visibility of rounded corners */
+    border-radius: 0; /* Remove rounding for top and bottom edges */
+    margin: 0; /* Remove margins */
+}
+
+header {
+    position: sticky;
+    top: 0; /* Make sure the header stays at the top */
+    width: 100%;
+}
+
+footer {
+    width: 100%;
+    position: sticky;
+    bottom: 0; /* Make sure the footer sticks to the bottom */
+    margin-top: auto; /* Push the footer to the bottom of the page when content is small */
 }
 
 .button_redir_div {
