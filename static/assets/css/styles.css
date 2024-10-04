@@ -35,23 +35,17 @@ header, footer {
     color: white;
     padding: 1rem;
     text-align: center;
-    margin: 0; /* Remove margins */
-    border-radius: 20px; /* Rounded corners on all sides */
+    margin: 10px; /* Add some margin to allow for rounded corners */
+    border-radius: 20px; /* Fully rounded corners */
 }
 
 header {
-    position: sticky;
-    top: 0; /* Make sure the header stays at the top */
-    width: 100%;
-    border-radius: 0 0 20px 20px; /* Rounded bottom corners for header */
+    width: calc(100% - 20px); /* Reduce the width slightly to account for margins */
 }
 
 footer {
-    width: 100%;
-    position: sticky;
-    bottom: 0; /* Make sure the footer sticks to the bottom */
-    margin-top: auto; /* Push the footer to the bottom of the page when content is small */
-    border-radius: 20px 20px 0 0; /* Rounded top corners for footer */
+    width: calc(100% - 20px); /* Reduce the width slightly to account for margins */
+    margin-top: auto; /* Push the footer to the bottom */
 }
 
 .button_redir_div {
