@@ -30,6 +30,8 @@ header, footer {
     color: white;
     padding: 1rem;
     text-align: center;
+    border-radius: 20px; /* Rounded corners for header and footer */
+    margin: 1rem; /* Added margin for better visibility of rounded corners */
 }
 
 .button_redir_div {
