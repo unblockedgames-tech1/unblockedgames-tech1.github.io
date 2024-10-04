@@ -84,22 +84,6 @@
                 opacity: 1;
             }
         }
-
-        .report-problem {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .report-problem a {
-            font-size: 1.2rem;
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .report-problem a:hover {
-            text-decoration: underline;
-        }
-
     </style>
 </head>
 
@@ -116,16 +100,19 @@
         particlesJS.load('particles-js', '/assets/json/particles.json');
     </script>
 
-    <!-- Report a Problem Section -->
-    <div class="report-problem">
-        <a href="https://forms.gle/rH8M3bZu4EgnNLuY6" target="_blank">Report a Problem with this Google Form</a>
-    </div>
-
     <!-- Dynamically Loaded Header -->
     <div id="header"></div>
 
     <!-- Main Content -->
     <div class="container">
+        <!-- Report a Problem Section -->
+        <div>
+            <h2 class="title">Report a Problem</h2>
+            <div class="form-section">
+                <iframe src="https://forms.gle/rH8M3bZu4EgnNLuY6"></iframe>
+            </div>
+        </div>
+
         <!-- Request Game Section -->
         <div>
             <h2 class="title">Request Game</h2>
