@@ -1,5 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap");
+
 * {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family:  "Be Vietnam Pro", sans-serif;;
 }
 
 .h1_title {
@@ -21,13 +23,13 @@
 }
 
 body {
-    background-color: rgb(30, 30, 30); /* Darker gray background */
+    background-color: rgb(30, 30, 30); 
     overflow-y: scroll !important;
     margin: 0;
     padding: 0;
-    min-height: 100vh; /* Ensures full height */
+    min-height: 100vh; 
     display: flex;
-    flex-direction: column; /* Allows the footer to stay at the bottom */
+    flex-direction: column; 
 }
 
 
