@@ -3,21 +3,54 @@
 <script src="https://alwingulla.com/88/tag.min.js" data-zone="105871" async data-cfasync="false"></script>
 <script async="async" data-cfasync="false" src="//thubanoa.com/1?z=8195577"></script>
 <head>
-<link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
-<title>Classes</title>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-    <script src="/assets/js/ads.js"></script>
-    <script src="/assets/js/onload.js"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
+  <style>
+    /* Hide the ad container from thubanoa.com */
+    script[src*="thubanoa.com"] {
+      display: none;
+    }
 
-      gtag('config', 'G-VXDP7XC98T');
-    </script>
-    <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">   
-    <link rel="stylesheet" href="/assets/css/index.css" type="text/css">   
+    /* Hide the ad container from alwingulla.com */
+    script[src*="alwingulla.com"] {
+      display: none;
+    }
+
+    /* Hide the ad container from ads.js */
+    script[src*="/assets/js/ads.js"] {
+      display: none;
+    }
+  </style>
+  <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
+  <title>Classes</title>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-VXDP7XC98T');
+  </script>
+  <script>
+    // Remove the ad script from thubanoa.com
+    const thubanoaScript = document.querySelector('script[src*="thubanoa.com"]');
+    if (thubanoaScript) {
+      thubanoaScript.remove();
+    }
+
+    // Remove the ad script from alwingulla.com
+    const alwingullaScript = document.querySelector('script[src*="alwingulla.com"]');
+    if (alwingullaScript) {
+      alwingullaScript.remove();
+    }
+
+    // Remove the ad script from ads.js
+    const adsScript = document.querySelector('script[src*="/assets/js/ads.js"]');
+    if (adsScript) {
+      adsScript.remove();
+    }
+  </script>
+  <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">   
+  <link rel="stylesheet" href="/assets/css/index.css" type="text/css">   
 </head>
 <body>
     <h1> </h1>
