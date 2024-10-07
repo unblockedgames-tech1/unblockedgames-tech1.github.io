@@ -12,7 +12,7 @@
     font-family: "Be Vietnam Pro", sans-serif;
     font-weight: 700; /* Bold font */
     display: flex;
-    justify-content: center; /* Centers the content horizontally */
+    justify-content: space-between; /* Space between items */
     align-items: center; /* Centers the content vertically */
 }
 
@@ -21,13 +21,18 @@
     border: none;
     height: 3vh;
     width: 3vh;
-    margin-right: 2rem; /* Adjusted for spacing */
+    margin-left: 1rem; /* Adjusted for proper spacing */
+}
+
+.header_links-container {
+    display: flex;
+    justify-content: center; /* Centers the links within this container */
+    flex: 1; /* Takes up the remaining space to push items to center */
 }
 
 .header_link {
     color: white;
-    margin-right: 2rem; /* Adjusted for spacing */
-    margin-left: 2rem; 
+    margin: 0 2rem; /* Even spacing on both sides */
     text-decoration: none;
     padding: 1rem 1rem;
     border-radius: 5rem;
@@ -43,6 +48,8 @@
     <a href="/">
         <img src="/nav/home.png" class="home_bttn"></img>
     </a>
-    <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
-    <a class="header_link" onclick="location.href=htmlConfig.appsPath">Apps</a>
+    <div class="header_links-container">
+        <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
+        <a class="header_link" onclick="location.href=htmlConfig.appsPath">Apps</a>
+    </div>
 </header>
