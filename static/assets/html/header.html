@@ -12,8 +12,8 @@
     font-family: "Be Vietnam Pro", sans-serif;
     font-weight: 700; /* Bold font */
     display: flex;
-    justify-content: flex-start; /* Align items to the left */
-    align-items: center; /* Centers the content vertically */
+    justify-content: center; /* Center all items horizontally */
+    align-items: center; /* Vertically align items */
 }
 
 .home_bttn {
@@ -21,20 +21,8 @@
     border: none;
     height: 3vh;
     width: 3vh;
-    margin-left: 1rem; /* Space on the left for the first button */
-    margin-right: 2rem; /* Consistent spacing between icons */
+    margin: 0 1.5rem; /* Equal spacing on both sides of each icon */
     cursor: pointer; /* Indicates clickability */
-}
-
-.header_links-container {
-    display: flex;
-    justify-content: flex-start; /* Align links slightly to the left */
-    flex: 1; /* Takes up the remaining space to allow left alignment */
-}
-
-.placeholder {
-    width: 3vh; /* Placeholder to match the size of the home button */
-    margin-right: 1rem; /* Ensures centering is consistent */
 }
 </style>
 
@@ -48,7 +36,4 @@
     <a href="/app">
         <img src="/nav/apps.png" class="home_bttn" alt="Apps"></img>
     </a>
-    <div class="header_links-container">
-    </div>
-    <div class="placeholder"></div> <!-- Placeholder element to balance the space -->
 </header>
