@@ -1,9 +1,9 @@
 <style>
 .header {
     position: fixed;
-	width: 100%;
-	background-color: rgb(41, 41, 41); /* Background color for visibility */
-	color: white;
+    width: 100%;
+    background-color: rgb(41, 41, 41); /* Background color for visibility */
+    color: white;
     left: 0;
     padding: 1rem;
     top: 0;
@@ -11,6 +11,9 @@
     font-size: 0.8rem; 
     font-family: "Be Vietnam Pro", sans-serif;
     font-weight: 700; /* Bold font */
+    display: flex;
+    justify-content: center; /* Centers the content horizontally */
+    align-items: center; /* Centers the content vertically */
 }
 
 .home_bttn {
@@ -18,12 +21,13 @@
     border: none;
     height: 3vh;
     width: 3vh;
-    margin-right: 30vw;
+    margin-right: 2rem; /* Adjusted for spacing */
 }
+
 .header_link {
     color: white;
-    margin-right: 5rem;
-    margin-left: 5rem; 
+    margin-right: 2rem; /* Adjusted for spacing */
+    margin-left: 2rem; 
     text-decoration: none;
     padding: 1rem 1rem;
     border-radius: 5rem;
@@ -33,14 +37,11 @@
 .header_link:hover {
     background-color: rgb(65, 65, 65);
 }
-
 </style>
 
 <header class="header">
     <a href="/">
-        <img src="/nav/home.png" 
-           class="home_bttn"
-        ></img>
+        <img src="/nav/home.png" class="home_bttn"></img>
     </a>
     <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
     <a class="header_link" onclick="location.href=htmlConfig.appsPath">Apps</a>
