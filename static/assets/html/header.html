@@ -12,7 +12,7 @@
     font-family: "Be Vietnam Pro", sans-serif;
     font-weight: 700; /* Bold font */
     display: flex;
-    justify-content: space-between; /* Space between home button and links container */
+    justify-content: flex-start; /* Align items to the left */
     align-items: center; /* Centers the content vertically */
 }
 
@@ -21,26 +21,15 @@
     border: none;
     height: 3vh;
     width: 3vh;
-    margin-left: 1rem; /* Adjusted for proper spacing */
+    margin-left: 1rem; /* Space on the left for the first button */
+    margin-right: 2rem; /* Consistent spacing between icons */
+    cursor: pointer; /* Indicates clickability */
 }
 
 .header_links-container {
     display: flex;
-    justify-content: center; /* Centers the links within this container */
-    flex: 1; /* Takes up the remaining space to center the links */
-}
-
-.header_link {
-    color: white;
-    margin: 0 2rem; /* Even spacing on both sides */
-    text-decoration: none;
-    padding: 1rem 1rem;
-    border-radius: 5rem;
-    font-weight: 700; /* Bold font */
-}
-
-.header_link:hover {
-    background-color: rgb(65, 65, 65);
+    justify-content: flex-start; /* Align links slightly to the left */
+    flex: 1; /* Takes up the remaining space to allow left alignment */
 }
 
 .placeholder {
@@ -51,13 +40,13 @@
 
 <header class="header">
     <a href="/">
-        <img src="/nav/home.png" class="home_bttn"></img>
+        <img src="/nav/home.png" class="home_bttn" alt="Home"></img>
     </a>
- <a href="/ta">
-        <img src="/nav/search.png" class="home_bttn"></img>
+    <a href="/ta">
+        <img src="/nav/search.png" class="home_bttn" alt="Search"></img>
     </a>
     <a href="/app">
-        <img src="/nav/apps.png" class="home_bttn"></img>
+        <img src="/nav/apps.png" class="home_bttn" alt="Apps"></img>
     </a>
     <div class="header_links-container">
     </div>
