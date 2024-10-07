@@ -1,43 +1,46 @@
 <style>
-  .footer {
-	position: fixed;
-	width: 100%;
-	left: 0;
-	bottom: 0;
-	background-color: rgb(41, 41, 41);
-	color: white;
-  padding: 1rem;
-  z-index: 20;
-  font-size: 0.8rem; 
-  font-family: "Be Vietnam Pro", sans-serif;
-  font-weight: 700;
-  text-align: center;
+.footer {
+    position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    background-color: rgb(41, 41, 41);
+    color: white;
+    padding: 1rem;
+    z-index: 20;
+    font-size: 0.8rem; 
+    font-family: "Be Vietnam Pro", sans-serif;
+    font-weight: 700;
+    display: flex;
+    justify-content: flex-start; /* Align items to the left */
+    align-items: center; /* Vertically align items */
 }
 
-.footer_link {
-    color: white;
-    text-decoration: none;
-    margin-right: 5rem;
-    margin-left: 5rem;    
-    border-radius: 5rem;
-    padding: 1rem 1rem;
-    font-weight: 700; /* Bold font */
+.footer_icon {
+    background-color: transparent;
+    border: none;
+    height: 3vh;
+    width: 3vh;
+    margin-left: 1rem; /* Add space to the left */
+    margin-right: 2rem; /* Add spacing between icons */
+    cursor: pointer; /* Pointer cursor to indicate clickability */
 }
 
 .footer_link:hover {
     background-color: rgb(65, 65, 65);
 }
 </style>
+
 <footer class="footer">
     <a href="/settings">
-        <img src="/nav/settings.png" class="home_bttn"></img>
+        <img src="/nav/settings.png" class="footer_icon" alt="Settings"></img>
     </a>
 
     <a href="https://discord.com/invite/RTPATnD7ke">
-        <img src="/nav/discord.webp" class="home_bttn"></img>
+        <img src="/nav/discord.webp" class="footer_icon" alt="Discord"></img>
     </a>
 
     <a href="/rga">
-        <img src="/nav/contact.png" class="home_bttn"></img>
+        <img src="/nav/contact.png" class="footer_icon" alt="Contact"></img>
     </a>
 </footer>
