@@ -34,6 +34,14 @@ app.get("/settings", function (req, res) {
 })
 app.use(express.static(path.join(__dirname, "static")));
 
+app.get("/showads.js", function (req, res) {
+  if (new Date(payload.value).toLocaleString("en", { weekday: "long" }) == "Sunday" || new Date(payload.value).toLocaleString("en", { weekday: "long" }) == "Saturday") {
+  res.send("const showads = true")
+  }
+  else {
+  res.send("const showads = false")
+  }
+})
 app.get('*', function(req, res) {res.sendFile(path.join(__dirname, "static/404.html"))})
 
 server.on("request", (req, res) => {
