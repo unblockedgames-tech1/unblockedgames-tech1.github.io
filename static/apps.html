@@ -185,6 +185,18 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         document.getElementById('div_appout').appendChild(iframe);
         event.preventDefault();
     }
+
+<style>
+/* Add this CSS code to your stylesheet or within the <head> of your HTML file */
+.game-image {
+  transition: border-radius 0.3s ease; /* Smooth transition */
+}
+
+.game-image:hover {
+  border-radius: 50%; /* Makes the image round on hover */
+}
+</style>
+
     document.addEventListener("DOMContentLoaded", async function () {
             //default apps
             localStorage.setItem("apps", JSON.stringify([{
