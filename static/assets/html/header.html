@@ -26,13 +26,14 @@
 
 .header_links-container {
     display: flex;
-    justify-content: center; /* Centers the links within this container */
-    flex: 1; /* Takes up the remaining space to center the links */
+    justify-content: flex-start; /* Align links slightly to the left */
+    flex: 1; /* Takes up the remaining space to allow left alignment */
+    margin-left: 5%; /* Moves the links container slightly to the left */
 }
 
 .header_link {
     color: white;
-    margin: 0 2rem; /* Even spacing on both sides */
+    margin: 0 1.5rem; /* Reduced margin for even spacing */
     text-decoration: none;
     padding: 1rem 1rem;
     border-radius: 5rem;
@@ -41,6 +42,12 @@
 
 .header_link:hover {
     background-color: rgb(65, 65, 65);
+}
+
+.search_icon {
+    height: 2.5vh; /* Adjust size to match the header */
+    width: 2.5vh; /* Adjust size to match the header */
+    cursor: pointer; /* Indicates that it's clickable */
 }
 
 .placeholder {
@@ -54,7 +61,9 @@
         <img src="/nav/home.png" class="home_bttn"></img>
     </a>
     <div class="header_links-container">
-        <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
+        <a onclick="location.href=htmlConfig.searchPath">
+            <img src="https://lh7-us.googleusercontent.com/aC2fhnkDbYwh7gqNpwGaAVt9AkSPC_QjjQmSon4hIJXdRju2-u9G0fzfWZsOmk9HJQt6nTS5b6mXDrDmKhhz8v7mK1-UN7fTmk7U2T0y1RG8puXJTxu0jZ2a4sDrqP5hEyVLnOomXyCwFZR7PXabobMCqmAriQ" class="search_icon" alt="Search Icon">
+        </a>
         <a class="header_link" onclick="location.href=htmlConfig.appsPath">Apps</a>
     </div>
     <div class="placeholder"></div> <!-- Placeholder element to balance the space -->
