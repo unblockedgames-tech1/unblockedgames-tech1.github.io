@@ -12,7 +12,7 @@
     font-family: "Be Vietnam Pro", sans-serif;
     font-weight: 700; /* Bold font */
     display: flex;
-    justify-content: space-between; /* Space between items */
+    justify-content: space-between; /* Space between home button and links container */
     align-items: center; /* Centers the content vertically */
 }
 
@@ -27,7 +27,7 @@
 .header_links-container {
     display: flex;
     justify-content: center; /* Centers the links within this container */
-    flex: 1; /* Takes up the remaining space to push items to center */
+    flex: 1; /* Takes up the remaining space to center the links */
 }
 
 .header_link {
@@ -42,6 +42,11 @@
 .header_link:hover {
     background-color: rgb(65, 65, 65);
 }
+
+.placeholder {
+    width: 3vh; /* Placeholder to match the size of the home button */
+    margin-right: 1rem; /* Ensures centering is consistent */
+}
 </style>
 
 <header class="header">
@@ -52,4 +57,5 @@
         <a class="header_link" onclick="location.href=htmlConfig.searchPath">Search</a>
         <a class="header_link" onclick="location.href=htmlConfig.appsPath">Apps</a>
     </div>
+    <div class="placeholder"></div> <!-- Placeholder element to balance the space -->
 </header>
