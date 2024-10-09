@@ -6,3 +6,11 @@
     
 # Run 
     node index.js
+
+# TODO 
+    1. Fix css
+    2. Add more games 
+    3. Make proxy not shit itself (fits under fix css)
+    4. Uv 3 & rammerhead
+    5. Adblock (for proxy) 
+    6. Adblock (paid & for site)
