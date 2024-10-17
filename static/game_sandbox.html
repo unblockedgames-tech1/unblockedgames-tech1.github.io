@@ -1,0 +1,58 @@
+<html>
+    <div>              
+    </div>
+    <head>
+        <title>Classes</title>
+        <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            .container {
+                display: flex;
+                flex-direction: column;
+                height: 100vh;
+            }
+            .game_iframe {
+                width: 100%;
+                flex-grow: 1; 
+                border: none;
+            }
+            .header {
+                width: 100%;
+                background-color: rgb(41, 41, 41); 
+                color: white;
+                left: 0;
+                padding: 1rem;
+                top: 0;
+                font-size: 0.8rem; 
+                font-family: "Be Vietnam Pro", sans-serif;
+                font-weight: 700;          
+            }
+            
+            .home_bttn {
+                background-color: transparent;
+                border: none;
+                height: 3vh;
+                width: 3vh;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="container">
+        <header class="header">
+            <a href="/">
+                <img src="/nav/home.png" class="home_bttn" alt="Home"></img>
+            </a>
+        </header>   
+       <iframe class="game_iframe" id="gframe"></iframe>
+       <script >
+        let loadedG = localStorage.getItem('loadedG');
+        let iframe = document.getElementById('gframe');
+        iframe.src = loadedG;
+        </script>
+    </div>
+    </body>
+</html>

@@ -164,7 +164,7 @@
             loadHTML("/assets/html/header.html", "header")
             loadHTML("/assets/html/footer.html", "footer")
         </script>
-    <title>New Tab</title>
+    <title>Classes</title>
     <div id="header"></div>
     <div id="footer"></div>    
 
@@ -230,7 +230,7 @@
                 titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
 
                 const linkElement = document.createElement("a");
-                linkElement.href = game.link;
+                linkElement.href = `javascript:localStorage.setItem("loadedG", ${'"' + game.link+'"'}); location.href = "/game_sandbox.html"`;
                 linkElement.textContent = "Play";
                 linkElement.className = "play-button";
 
