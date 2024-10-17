@@ -9,5 +9,5 @@ const htmlConfig = {
 }
 
 const siteConfig = {
-    version: "v3.5.2"
+    version: "v3.6"
 }
