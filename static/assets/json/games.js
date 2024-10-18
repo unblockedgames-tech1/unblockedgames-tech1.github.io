@@ -595,6 +595,11 @@ const gamesData = [
     imgSrc: "https://lh7-us.googleusercontent.com/xlAFdWg3NsJ2FnvB2HLNRhdMJayauFsKICNWfBKCv6OFymWJOgaxz8xG25d0BpRmmjNivG7AH__vC9QMM1bxSx3XBVAeLnT_GR6i3l6rUmO6v1fUBUsKZVsFmYlsv3DM-IggICm_m9cxoYKzjo3-y1Lhei1Wqg",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/49726/")
 },
+{
+    title: "Papa's Burgeria", 
+    imgSrc: "https://lh7-us.googleusercontent.com/O0mti-u5aE2j4-qe-9jTyNKAJfCHJCHTR9CziVRmw4woOyoVdLmzVgr6Wae0vK1ryx1JVICCpukRbkVgj5D3_TQUDIvlIhRElz0yysQrFq-rY6nqv_L9G7hch8-IoKsos7t4h_g9xY9HDA4wMWiDPFmnrNZahQ",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/49176/")
+},
 
 
    ];
