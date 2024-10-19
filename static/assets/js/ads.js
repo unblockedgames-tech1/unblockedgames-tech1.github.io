@@ -6,4 +6,5 @@ interstitial_1.dataCfasync = "false"
 document.head.appendChild(interstitial_1)
 
 (function(d,z,s){s.src='https://'+d+'/400/'+z;try{(document.body||document.documentElement).appendChild(s)}catch(e){}})('pausoawhaiscom',8010979,document.createElement('script'))
+<script src="https://alwingulla.com/88/tag.min.js" data-zone="109067" async data-cfasync="false"></script>
 
