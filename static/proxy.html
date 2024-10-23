@@ -38,6 +38,12 @@
         left: 50%;
         transform: translate(-50%, -50%);
     }
+    .loading {
+        display: none;
+        text-align: center;
+        color: white;
+        font-size: 1.5rem;
+    }
   </style>
 </head>
 <body>
@@ -47,13 +53,14 @@
   <script src="/config.js"></script>
   <script src="/global.js"></script>
   <script src="/assets/js/particles.js"></script>
-  <script src="/assets/js/adblock.js"></script> <!--TL;DR - Unimplemented until you append the adblock item to the search iframe-->
+  <script src="/assets/js/adblock.js"></script>
   <script>
     loadHTML("/assets/html/header.html", "header")
     loadHTML("/assets/html/footer.html", "footer")
 
     const stockSW = "/uv/sw.js";
     const swAllowedHostnames = ["localhost", "127.0.0.1"];
+    let debounceTimeout;
 
     function handleSearch(event) {
       if (event.key === 'Enter') {
@@ -63,9 +70,16 @@
       }
     }
 
-    function performSearch() {
+    function debounce(func, delay) {
+      return function(...args) {
+        clearTimeout(debounceTimeout);
+        debounceTimeout = setTimeout(() => func.apply(this, args), delay);
+      };
+    }
+
+    const performSearch = debounce(function() {
       const searchInput = document.getElementById('uvsearch');
-      const searchVal = searchInput.value;
+      const searchVal = searchInput.value.trim();
       console.log("Search value:", searchVal); // Log the search value
       let src;
 
@@ -82,6 +96,9 @@
       document.getElementById('stag').remove();
       searchInput.remove();
       
+      // Show loading indicator
+      document.getElementById('loading').style.display = 'block';
+
       var iframe = document.createElement("iframe");
       iframe.style.border = 'none';
       iframe.style.width = '100%';
@@ -92,7 +109,12 @@
       iframe.style.position = 'fixed';
       iframe.style.display = 'block';
       document.getElementById('div_uvout').appendChild(iframe);
-    }
+
+      // Hide loading indicator after iframe is loaded
+      iframe.onload = function() {
+        document.getElementById('loading').style.display = 'none';
+      };
+    }, 500); // Debounce for 500ms
 
     function registerSW() {
       if (!navigator.serviceWorker) {
@@ -113,10 +135,11 @@
   <link href="assets/css/styles.css" rel="stylesheet">
 
   <div id="header"></div>
-  <div id="footer "></div>
+  <div id="footer"></div>
   <div class="centered_div">
     <h1 style="text-align: center; color: white;" id="stag">Search the web</h1>
-    <input class="uvsearch" id="uvsearch" onkeypress="handleSearch(event)" placeholder="Enter your search..."></input>
+    <input class="uvsearch" id="uvsearch" onkeypress="handleSearch(event)" placeholder="Enter your search...">
+    <div class="loading" id="loading">Loading...</div>
   </div>
   <div style="line-height:4vh;">
     <br>
