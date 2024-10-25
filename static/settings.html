@@ -5,6 +5,7 @@
         <script src="/uv/uv.config.js"></script>
         <script src="/global.js"></script>
         <script src="/assets/js/ads.js"></script>
+        <script src="/assets/js/favicon-handler.js"></script>
         <link id="favicon" rel="icon" href="img/appimg/BLANK_ICON.png">
     <style>
         .dropdown {
@@ -60,21 +61,6 @@
         }
         </style>
         <script>
-        function changeFavicon(iconUrl) {
-            document.getElementById('favicon').href = iconUrl;
-            localStorage.setItem('selectedFavicon', iconUrl);
-        }
-
-        window.onload = function() {
-            const savedFavicon = localStorage.getItem('selectedFavicon');
-            if (savedFavicon) {
-                document.getElementById('favicon').href = savedFavicon;
-            }
-            if (localStorage.getItem('cloaking') === 'true') {
-                document.getElementById("cbox_cloaking").checked = true;
-            }
-        }
-
         function toggleCloaking() {
             if (localStorage.getItem('cloaking') === null) {
                 localStorage.setItem("cloaking", 'true')
@@ -107,6 +93,13 @@
             appsData.push(newApp)
             localStorage.setItem("apps", JSON.stringify(appsData))
         }
+
+        // Load cloaking checkbox state when page loads
+        window.onload = function() {
+            if (localStorage.getItem('cloaking') === 'true') {
+                document.getElementById("cbox_cloaking").checked = true;
+            }
+        }
         </script>
     </head>
 <body>
@@ -123,7 +116,7 @@
             <h1>About blank cloaking</h1>
             <label class="switch">
                 <input type="checkbox" id="cbox_cloaking" onclick="toggleCloaking()">
-                <span class="slider round">
+                <span class="slider round"></span>
             </label>
         </div>
         <br>
@@ -160,7 +153,7 @@
                     <button class="button" onclick="changeFavicon('https://ssl.gstatic.com/classroom/favicon.png')">Google Classroom</button>
                 </div>
                 <div class="icon-option">
-                    <button class="button" onclick="changeFavicon('appimg/BLANK_ICON.png')">Blank</button>
+                    <button class="button" onclick="changeFavicon('img/appimg/BLANK_ICON.png')">Blank</button>
                 </div>
             </div>
         </div>
