@@ -60,78 +60,25 @@
     loadHTML("/assets/html/header.html", "header")
     loadHTML("/assets/html/footer.html", "footer")
 
-    const stockSW = "/uv/sw.js";
-    const swAllowedHostnames = ["localhost", "127.0.0.1"];
-    let debounceTimeout;
-
-    function handleSearch(event) {
-      if (event.key === 'Enter') {
-        event.preventDefault();
-        console.log("Enter key pressed, performing search...");
-        performSearch();
+    function parseSearch(str) {
+      if (str.includes("http") && str.includes(":")) {
+        return str;
       }
-    }
-
-    function debounce(func, delay) {
-      return function(...args) {
-        clearTimeout(debounceTimeout);
-        debounceTimeout = setTimeout(() => func.apply(this, args), delay);
-      };
-    }
-
-    const performSearch = debounce(function() {
-      const searchInput = document.getElementById('uvsearch');
-      const searchVal = searchInput.value.trim();
-      console.log("Search value:", searchVal); // Log the search value
-      let src;
-
-      if (searchVal.includes("http") && searchVal.includes(":")) {
-        src = '/uv/service/' + __uv$config.encodeUrl(searchVal);
-      } else if (searchVal.includes(".") && !searchVal.includes(" ")) {
-        src = '/uv/service/' + __uv$config.encodeUrl("https://" + searchVal);
-      } else {
-        src = '/uv/service/' + __uv$config.encodeUrl("https://google.com/search?q=" + searchVal);
+      if (str.includes(".")) {
+        return "https://" + str;
       }
-
-      console.log("Iframe source URL:", src); // Log the iframe source URL
-
-      document.getElementById('stag').remove();
-      searchInput.remove();
-      
-      // Show loading indicator
-      document.getElementById('loading').style.display = 'block';
-
-      var iframe = document.createElement("iframe");
-      iframe.style.border = 'none';
-      iframe.style.width = '100%';
-      iframe.style.height = '100%';
-      iframe.style.margin = '0';
-      iframe.src = src;
-      iframe.style.padding = '0.5px';
-      iframe.style.position = 'fixed';
-      iframe.style.display = 'block';
-      document.getElementById('div_uvout').appendChild(iframe);
-
-      // Hide loading indicator after iframe is loaded
-      iframe.onload = function() {
-        document.getElementById('loading').style.display = 'none';
-      };
-    }, 500); // Debounce for 500ms
-
-    function registerSW() {
-      if (!navigator.serviceWorker) {
-        if (
-          location.protocol !== "https:" &&
-          !swAllowedHostnames.includes(location.hostname)
-        )
-          throw new Error("Service workers cannot be registered without https.");
-        document.write("</p>UV ERROR: Unable to register serviceworker - Serviceworkers cannot be registered without HTTPS</p>")
-        throw new Error("Your browser doesn't support service workers.");
-      }
-      
-      navigator.serviceWorker.register(stockSW);
+      return "https://duckduckgo.com/?t=h_&q=" + str
     }
-    registerSW();   
+    function handleSearch(e) {
+      if (e.key === 'Enter') {
+        let url = parseSearch(document.getElementById("uvsearch").value)
+        localStorage.setItem("loadedG", __uv$config.prefix + __uv$config.encodeUrl(url))
+        location.href = "/game_sandbox.html";
+        return;      
+        e.preventDefault();
+    } 
+    
+  }
   </script>
 
   <link href="assets/css/styles.css" rel="stylesheet">
@@ -141,18 +88,6 @@
   <div class="centered_div">
     <h1 style="text-align: center; color: white;" id="stag">Search the web</h1>
     <input class="uvsearch" id="uvsearch" onkeypress="handleSearch(event)" placeholder="Enter your search...">
-    <div class="loading" id="loading">Loading...</div>
   </div>
-  <div style="line-height:4vh;">
-    <br>
-  </div>
-  <div id="div_uvout" class="div_tab">
-    <title>New Tab</title>  
-  </div>
-
-  <script>
-    document.body.style.margin = '0';
-    document.body.style.height = '100vh';
-  </script>
 </body>
 </html>
