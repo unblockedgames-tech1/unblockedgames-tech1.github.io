@@ -63,15 +63,6 @@
                 right: 10px;
                 z-index: 1000;
             }
-
-            .game_title {
-                color: white;
-                text-align: center;
-                padding: 1rem;
-                font-size: 1.5rem;
-                font-family: "Be Vietnam Pro", sans-serif;
-                font-weight: 700;
-            }
         </style>
     </head>
     <body>
@@ -82,19 +73,11 @@
                 </a>
             </header>   
             <button class="panic_button" onclick="panicButton()">Panic</button>
-            <div class="game_title" id="gameTitle">Loading...</div>
             <iframe class="game_iframe" id="gframe"></iframe>
             <script>
                 let loadedG = localStorage.getItem('loadedG');
-                let gameName = localStorage.getItem('gameName');
                 let iframe = document.getElementById('gframe');
                 iframe.src = loadedG;
-                
-                if (gameName) {
-                    document.getElementById('gameTitle').textContent = gameName;
-                } else {
-                    document.getElementById('gameTitle').textContent = "Game";
-                }
 
                 function panicButton() {
                     window.location.href = 'https://launchpad.classlink.com/login';
