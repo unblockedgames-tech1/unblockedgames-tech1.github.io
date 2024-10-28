@@ -107,15 +107,15 @@
                     window.location.href = 'https://launchpad.classlink.com/login';
                 }
 
-                // Prevent arrow key scrolling
+                // Prevent arrow key scrolling while allowing other interactions
                 window.addEventListener("keydown", function(e) {
-                    if([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1 && e.target == document.body) {
                         e.preventDefault();
                     }
                 }, false);
 
-                // Prevent spacebar scrolling
-                window.addEventListener('keydown', function(e) {
+                // Prevent default space bar behavior
+                document.addEventListener('keydown', function(e) {
                     if(e.keyCode == 32 && e.target == document.body) {
                         e.preventDefault();
                     }
