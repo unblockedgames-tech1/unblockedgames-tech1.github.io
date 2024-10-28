@@ -22,14 +22,6 @@
                 height: 100vh;
                 align-items: center;
             }
-            .game_iframe {
-                width: 80%;
-                max-width: 1000px;
-                height: 80vh;
-                margin: auto;
-                border: none;
-                flex-grow: 0;
-            }
             .header {
                 width: 100%;
                 background-color: rgb(41, 41, 41); 
@@ -49,13 +41,16 @@
                 width: 3vh;
             }
 
-            .game_title {
+            .panic_button {
+                background-color: red;
                 color: white;
-                text-align: center;
-                padding: 1rem;
-                font-size: 1.5rem;
+                border: none;
+                padding: 10px 20px;
+                font-size: 1rem;
                 font-family: "Be Vietnam Pro", sans-serif;
                 font-weight: 700;
+                cursor: pointer;
+                margin-top: 20px;
             }
         </style>
     </head>
@@ -63,23 +58,15 @@
         <div class="container">
             <header class="header">
                 <a href="/">
-                    <img src="/nav/home.png" class="home_bttn" alt="Home"></img>
+                    <img src="/nav/home.png" class="home_bttn" alt="Home">
                 </a>
             </header>   
-            <div class="game_title" id="gameTitle">Loading...</div>
-            <iframe class="game_iframe" id="gframe"></iframe>
-            <script>
-                let loadedG = localStorage.getItem('loadedG');
-                let gameName = localStorage.getItem('gameName');
-                let iframe = document.getElementById('gframe');
-                iframe.src = loadedG;
-                
-                if (gameName) {
-                    document.getElementById('gameTitle').textContent = gameName;
-                } else {
-                    document.getElementById('gameTitle').textContent = "Game";
-                }
-            </script>
+            <button class="panic_button" onclick="panicButton()">Panic</button>
         </div>
+        <script>
+            function panicButton() {
+                window.location.href = 'https://launchpad.classlink.com/login';
+            }
+        </script>
     </body>
 </html>
