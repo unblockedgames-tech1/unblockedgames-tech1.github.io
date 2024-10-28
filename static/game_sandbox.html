@@ -13,15 +13,22 @@
                 padding: 0;
                 box-sizing: border-box;
             }
+            body {
+                background-color: black;
+            }
             .container {
                 display: flex;
                 flex-direction: column;
                 height: 100vh;
+                align-items: center; /* Center horizontally */
             }
             .game_iframe {
-                width: 100%;
-                flex-grow: 1; 
+                width: 80%; /* Reduce width to 80% */
+                max-width: 1000px; /* Maximum width */
+                height: 80vh; /* Reduce height to 80% of viewport height */
+                margin: auto; /* Center the iframe */
                 border: none;
+                flex-grow: 0; /* Prevent growing beyond specified size */
             }
             .header {
                 width: 100%;
