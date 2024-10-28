@@ -70,16 +70,15 @@
             <iframe class="game_iframe" id="gframe"></iframe>
             <script>
                 let loadedG = localStorage.getItem('loadedG');
+                let gameName = localStorage.getItem('gameName');
                 let iframe = document.getElementById('gframe');
                 iframe.src = loadedG;
                 
-                // Extract and display game name from URL
-                let gameName = loadedG.split('/').pop().split('.')[0];
-                gameName = gameName.replace(/-/g, ' ').replace(/_/g, ' ');
-                gameName = gameName.split(' ').map(word => 
-                    word.charAt(0).toUpperCase() + word.slice(1)
-                ).join(' ');
-                document.getElementById('gameTitle').textContent = gameName;
+                if (gameName) {
+                    document.getElementById('gameTitle').textContent = gameName;
+                } else {
+                    document.getElementById('gameTitle').textContent = "Game";
+                }
             </script>
         </div>
     </body>
