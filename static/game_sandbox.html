@@ -15,12 +15,14 @@
             }
             body {
                 background-color: black;
+                min-height: 110vh; /* Makes page slightly longer */
+                overflow-y: scroll; /* Enables scrolling */
             }
             .container {
                 display: flex;
                 flex-direction: column;
-                height: 100vh;
                 align-items: center;
+                padding-bottom: 50px; /* Adds space at the bottom */
             }
             .game_container {
                 background-color: #2a2a2a;
@@ -104,6 +106,20 @@
                 function panicButton() {
                     window.location.href = 'https://launchpad.classlink.com/login';
                 }
+
+                // Prevent arrow key scrolling
+                window.addEventListener("keydown", function(e) {
+                    if([37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                        e.preventDefault();
+                    }
+                }, false);
+
+                // Prevent spacebar scrolling
+                window.addEventListener('keydown', function(e) {
+                    if(e.keyCode == 32 && e.target == document.body) {
+                        e.preventDefault();
+                    }
+                });
             </script>
         </div>
     </body>
