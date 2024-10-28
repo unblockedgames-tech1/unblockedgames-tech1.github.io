@@ -13,10 +13,18 @@
                 padding: 0;
                 box-sizing: border-box;
             }
+            html {
+                overflow-y: scroll;
+                scrollbar-width: none; /* Firefox */
+                -ms-overflow-style: none; /* IE and Edge */
+            }
+            html::-webkit-scrollbar {
+                display: none; /* Chrome, Safari, Opera */
+            }
             body {
                 background-color: black;
                 min-height: 110vh;
-                overflow-y: scroll;
+                overflow: hidden; /* Prevents scrolling with arrow keys */
             }
             .container {
                 display: flex;
@@ -106,21 +114,6 @@
                 function panicButton() {
                     window.location.href = 'https://launchpad.classlink.com/login';
                 }
-
-                // Only prevent scrolling when not focused on the iframe
-                window.addEventListener("keydown", function(e) {
-                    const iframe = document.getElementById('gframe');
-                    const isIframeFocused = document.activeElement === iframe;
-
-                    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1 && !isIframeFocused) {
-                        e.preventDefault();
-                    }
-                });
-
-                // Ensure iframe gets focus when clicked
-                iframe.addEventListener('click', function() {
-                    this.focus();
-                });
             </script>
         </div>
     </body>
