@@ -108,7 +108,8 @@
       .fullscreen_button img {
           width: 30px;
           height: 30px;
-          filter: invert(1);
+          /* Ensure the fullscreen button is white */
+          filter: none; /* Remove any filter that changes color */
       }
 
       /* Add focus styles for the iframe */
@@ -127,8 +128,9 @@
         <button class="panic_button" onclick="panicButton()">Panic</button>
         <div class="game_container">
             <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
-            <button class="fullscreen_button" onclick="toggleFullScreen()">
-                <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+            <button class="fullscreen_button" onclick="toggleFullScreen ()">
+                <!-- Use a white fullscreen icon -->
+                <img src="/nav/fullscreenbutton_white.png" alt="Fullscreen">
             </button>
         </div>
         <script>
