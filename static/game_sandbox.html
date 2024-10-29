@@ -18,7 +18,7 @@
         body {
             background-color: black;
             height: 100vh;
-            overflow: hidden;
+            overflow: hidden; /* Prevents scrolling */
             display: flex;
             flex-direction: column;
             position: fixed; /* Prevents scrolling */
@@ -30,6 +30,7 @@
             align-items: center;
             flex: 1;
             height: 100%;
+            justify-content: center; /* Centers content vertically */
         }
         .game_container {
             background-color: #2a2a2a;
@@ -37,13 +38,13 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             width: 85%;
             max-width: 1100px;
-            margin: 20px auto 40px auto;
+            margin: 20px auto 40px auto; /* Adds margin at the bottom */
             transition: all 0.3s ease;
-            flex: 1;
+            flex: 0; /* Prevents flex-grow */
         }
         .game_iframe {
             width: 100%;
-            height: calc(100vh - 150px); /* Adjusts height to prevent scrolling */
+            height: 80vh; /* Adjusts height as needed */
             border: none;
             border-radius: 10px;
             background-color: #1a1a1a;
@@ -120,7 +121,7 @@
                     e.preventDefault();
                 }
             }, false);
-        </script>
+ </script>
     </div>
 </body>
 </html>
