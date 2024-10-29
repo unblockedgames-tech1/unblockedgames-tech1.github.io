@@ -6,192 +6,146 @@
   <title>Classes</title>
   <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
   <style>
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-      }
-      html {
-          overflow: hidden;
-          height: 100%;
-      }
-      body {
-          background-color: #121212;
-          height: 100vh;
-          overflow: hidden;
-          display: flex;
-          flex-direction: column;
-          position: fixed;
-          width: 100%;
-      }
-      .container {
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          flex: 1;
-          height: 100%;
-          justify-content: center;
-      }
-      .game_container {
-          background-color: #2a2a2a;
-          border-radius: 15px;
-          box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-          width: 85%;
-          max-width: 1100px;
-          margin: 20px auto 40px auto;
-          transition: all 0.3s ease;
-          flex: 0;
-          position: relative;
-      }
-      .game_iframe {
-          width: 100%;
-          height: 80vh;
-          border: none;
-          border-radius: 10px;
-          background-color: #1a1a1a;
-      }
-      .header {
-          width: 100%;
-          background-color: rgb(41, 41, 41); 
-          color: white;
-          left: 0;
-          padding: 1rem;
-          top: 0;
-          font-size: 0.8rem; 
-          font-family: "Be Vietnam Pro", sans-serif;
-          font-weight: 700;          
-      }
+      /* Keep all previous styles and add these new ones */
       
-      .home_bttn {
-          background-color: transparent;
-          border: none;
-          height: 3vh;
-          width: 3vh;
+      .loading-screen {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: #121212;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+          font-family: 'Be Vietnam Pro', sans-serif;
       }
 
-      .panic_button {
-          background-color: #ff3333;
+      .loading-title {
           color: white;
-          border: none;
-          padding: 12px 30px;
-          font-size: 1rem;
-          font-family: "Be Vietnam Pro", sans-serif;
-          font-weight: 700;
-          cursor: pointer;
-          margin: 1rem 0;
-          border-radius: 25px;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 8px rgba(255,51,51,0.2);
+          font-size: 2.5em;
+          margin-bottom: 20px;
+          font-weight: bold;
       }
 
-      .panic_button:hover {
-          background-color: #ff0000;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 12px rgba(255,51,51,0.3);
+      .loading-text {
+          color: white;
+          font-size: 1.5em;
       }
 
-      .panic_button:active {
-          transform: translateY(1px);
-          box-shadow: 0 2px 4px rgba(255,51,51,0.2);
-      }
-
-      .fullscreen_button {
-          position: absolute;
-          bottom: 10px;
-          right: 10px;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          z-index: 10;
-      }
-
-      .fullscreen_button img {
-          width: 30px;
-          height: 30px;
-          /* Ensure the fullscreen button is white */
-          filter: none; /* Remove any filter that changes color */
-      }
-
-      /* Add focus styles for the iframe */
-      .game_iframe:focus {
-          outline: none;
-      }
+      /* Keep all your previous styles here */
+      /* ... (previous styles) ... */
   </style>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <a href="/">
-                <img src="/nav/home.png" class="home_bttn" alt="Home">
-            </a>
-        </header>   
-        <button class="panic_button" onclick="panicButton()">Panic</button>
-        <div class="game_container">
-            <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
-            <button class="fullscreen_button" onclick="toggleFullScreen ()">
-                <!-- Use a white fullscreen icon -->
-                <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
-            </button>
-        </div>
-        <script>
-            let loadedG = localStorage.getItem('loadedG');
-            let iframe = document.getElementById('gframe');
-            iframe.src = loadedG;
-
-            // Focus the iframe when it loads
-            iframe.onload = function() {
-                this.focus();
-            };
-
-            function panicButton() {
-                window.location.href = 'https://launchpad.classlink.com/login';
-            }
-
-            function toggleFullScreen() {
-                if (!document.fullscreenElement) {
-                    if (iframe.requestFullscreen) {
-                        iframe.requestFullscreen();
-                    } else if (iframe.mozRequestFullScreen) {
-                        iframe.mozRequestFullScreen();
-                    } else if (iframe.webkitRequestFullscreen) {
-                        iframe.webkitRequestFullscreen();
-                    } else if (iframe.msRequestFullscreen) {
-                        iframe.msRequestFullscreen();
-                    }
-                } else {
-                    if (document.exitFullscreen) {
-                        document.exitFullscreen();
-                    } else if (document.mozCancelFullScreen) {
-                        document.mozCancelFullScreen();
-                    } else if (document.webkitExitFullscreen) {
-                        document.webkitExitFullscreen();
-                    } else if (document.msExitFullscreen) {
-                        document.msExitFullscreen();
-                    }
-                }
-            }
-
-            // Ensure the iframe gets focus when clicked
-            iframe.addEventListener('click', function() {
-                this.focus();
-            });
-
-            // Handle keyboard events only when iframe is not focused
-            window.addEventListener("keydown", function(e) {
-                if (!document.activeElement.classList.contains('game_iframe')) {
-                    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-                        e.preventDefault();
-                    }
-                }
-            }, false);
-
-            // Additional handler for fullscreen changes
-            document.addEventListener('fullscreenchange', function() {
-                if (document.fullscreenElement) {
-                    iframe.focus();
-                }
-            });
-        </script>
+    <!-- Add the loading screen div -->
+    <div id="loadingScreen" class="loading-screen">
+        <div class="loading-title">Void Network</div>
+        <div class="loading-text">Loading<span id="dots">...</span></div>
     </div>
+
+    <!-- Keep your existing container div and content -->
+    <div class="container">
+        <!-- ... (previous content) ... -->
+    </div>
+
+    <script>
+        // Loading screen animation
+        let dotsElement = document.getElementById('dots');
+        let loadingScreen = document.getElementById('loadingScreen');
+        let dotCount = 3;
+        let increasing = false;
+
+        function animateDots() {
+            if (increasing) {
+                dotCount++;
+                if (dotCount > 3) {
+                    dotCount = 3;
+                    increasing = false;
+                }
+            } else {
+                dotCount--;
+                if (dotCount < 0) {
+                    dotCount = 0;
+                    increasing = true;
+                }
+            }
+            dotsElement.textContent = '.'.repeat(dotCount);
+        }
+
+        // Start dots animation
+        let dotsInterval = setInterval(animateDots, 300);
+
+        // Remove loading screen after 3 seconds
+        setTimeout(() => {
+            loadingScreen.style.opacity = '0';
+            loadingScreen.style.transition = 'opacity 0.5s';
+            setTimeout(() => {
+                loadingScreen.style.display = 'none';
+                clearInterval(dotsInterval);
+            }, 500);
+        }, 3000);
+
+        // Keep your existing script
+        let loadedG = localStorage.getItem('loadedG');
+        let iframe = document.getElementById('gframe');
+        iframe.src = loadedG;
+
+        // Focus the iframe when it loads
+        iframe.onload = function() {
+            this.focus();
+        };
+
+        function panicButton() {
+            window.location.href = 'https://launchpad.classlink.com/login';
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen();
+                } else if (iframe.mozRequestFullScreen) {
+                    iframe.mozRequestFullScreen();
+                } else if (iframe.webkitRequestFullscreen) {
+                    iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) {
+                    iframe.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
+        // Ensure the iframe gets focus when clicked
+        iframe.addEventListener('click', function() {
+            this.focus();
+        });
+
+        // Handle keyboard events only when iframe is not focused
+        window.addEventListener("keydown", function(e) {
+            if (!document.activeElement.classList.contains('game_iframe')) {
+                if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                    e.preventDefault();
+                }
+            }
+        }, false);
+
+        // Additional handler for fullscreen changes
+        document.addEventListener('fullscreenchange', function() {
+            if (document.fullscreenElement) {
+                iframe.focus();
+            }
+        });
+    </script>
 </body>
 </html>
