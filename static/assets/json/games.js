@@ -610,6 +610,11 @@ const gamesData = [
     imgSrc: "https://lh7-us.googleusercontent.com/ur4VB3U3kGEVoFAiha3Ay_h9rubAOXsSUJvXVxywP63P5TMrBrB6jauVFTwxlarQG9Vyv-ApDxsyYBPcA5f2BJAXddsz49fYeJZuoh3Q4EQDe2BcOqb2MkxB5o5TZiJi4TxFE2wvjFG2OU5mvYfUfwnKaCKPug",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://now.gg/apps/a/10020/b.html")
 },
+{
+    title: "Opposite Day", 
+    imgSrc: "https://lh7-us.googleusercontent.com/3MEZuozpQz1-FCmISS10dsb71FRtbq7-MFLJzXAdOIrj55BeyX7gv5jhLCx9SsWOnKP0e_kEsXp7YQgB8jOXvP6CAEs-ixviwzbJl___b1iQ0dyTejQZPODm_1SoHF-Vgve9uK1dk9le0WKuWPrma2DUmA-8XA",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/opposite-day/game.html?nocheckorient=1")
+},
 
 
    ];
