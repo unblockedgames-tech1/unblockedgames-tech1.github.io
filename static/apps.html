@@ -305,7 +305,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
 
         const linkElement = document.createElement("a");
-        linkElement.href = game.link;
+        linkElement.href = `javascript:localStorage.setItem("loadedG", ${'"' + game.link+'"'}); location.href = "/Classes.html"`;
         linkElement.textContent = "Use";
         linkElement.className = "play-button";
 
