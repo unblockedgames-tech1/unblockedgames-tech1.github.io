@@ -615,6 +615,11 @@ const gamesData = [
     imgSrc: "https://lh7-us.googleusercontent.com/3MEZuozpQz1-FCmISS10dsb71FRtbq7-MFLJzXAdOIrj55BeyX7gv5jhLCx9SsWOnKP0e_kEsXp7YQgB8jOXvP6CAEs-ixviwzbJl___b1iQ0dyTejQZPODm_1SoHF-Vgve9uK1dk9le0WKuWPrma2DUmA-8XA",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/opposite-day/game.html?nocheckorient=1")
 },
+{
+    title: "Thorn and Balloons", 
+    imgSrc: "https://lh7-us.googleusercontent.com/5I0KOL3myXa4r6uiePAO0Y0oVlxcH-X0s-7uiRVKyha9tRjFaiyzOI5Ln0QAmFSr1oBl9pMw-WwJQPEQZt3ifjSfIi-uOTD2DzvMBH-2npORWQtiaK7XLrni-SUka0nWB2yNRFZ85rE3r4sigfKeJ5cP3tLTgw",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/thorn-and-balloons/game.html?nocheckorient=1")
+},
 
 
    ];
