@@ -556,11 +556,6 @@ const gamesData = [
     link: __uv$config.prefix + __uv$config.encodeUrl("https://play.famobi.com/lawn-mower")
 },
 {
-    title: "Burrito Bison", 
-    imgSrc: "https://lh7-us.googleusercontent.com/fZ114mFQEF3ZJ6aD2SRpHphyEopfkpKUCr8YZuweAqL4pHVk7NoVyILkdhSCWi2Ly63WBcX9fsFf_WyX7a5h_MwPDw5lnlgQjj6lY25GKZXQb2q953qFh9Dxy4v83dDJrBhWerOjY8SzULrnsh8C2Wug-MXvwQ",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://educationgg-23704.firebaseapp.com/games/burritobison/burrito-bison-ll.html")
-},
-{
     title: "House of Hazards", 
     imgSrc: "https://lh7-us.googleusercontent.com/6fQmRC7Le6oqmBNIPFBW5QKyRvKE4qubVXlPU1s1lhM3vR32I75hUcCwSs32NpHdHq4YafutCj2KXAXGluJLzPgzdD1Adbsz8-UF27_ymBCMgLwuSQWI6q-0ETJL28B_KaEbsKeoLdQZ6h-akidcb2GSv09xgw",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://houseof-hazards.github.io/file/")
