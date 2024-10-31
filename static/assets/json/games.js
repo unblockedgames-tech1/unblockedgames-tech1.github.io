@@ -630,6 +630,11 @@ const gamesData = [
     imgSrc: "https://lh7-us.googleusercontent.com/OIeUt1vNqld6fK6oVByterHRUNV9bz0OFKWmkJSdJUFPshHS6J-NhhnvtzZifb3xfd4SFLgcSSFoATPV-3Uc3F1V4xPHn8iUWOdxqD58vv0qTHFOlCOLW2h3xvJJSPdwTeByKhF-FHN9sb6AdOIeF24oPgcjTQ",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/level-devil-trap-path/game.html?nocheckorient=1")
 },
+{
+    title: "Sky Speedster", 
+    imgSrc: "https://lh7-us.googleusercontent.com/7_FVjApqxdMfgkGF_HqJXtD4HTGPc942CBXffhTrIksPbmwADD-CrsJLzsWENejcsoQP1ewlReo4Z9GFqhMju-Xm1sADiSbQNzlhx2PtR5_1eux-ASnTt4L6oSCBD3Z2B0MyrJK5gaN-OpCC7tUnuL2DthJ-eQ",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/sky-speedster/game.html?nocheckorient=1")
+},
 
 
    ];
