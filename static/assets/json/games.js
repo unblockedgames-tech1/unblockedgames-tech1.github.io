@@ -625,6 +625,11 @@ const gamesData = [
     imgSrc: "https://lh7-us.googleusercontent.com/GzeRPIVD-t7QLRuxTzU9Z5FgA5i865PMFpk7zCjeCAvMcXeJ8u9ldbYhRvrFNDoIKutdpam9gerqE9FeL66KgU9AHTywG2EgTu618J263vorM2Zfhqo3oh8gDf9dLxh0nZICbvPwCH0mQO1asF9nn7JWnBsI9A",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/glitch/game.html?nocheckorient=1")
 },
+{
+    title: "Devil Trap Path", 
+    imgSrc: "https://lh7-us.googleusercontent.com/OIeUt1vNqld6fK6oVByterHRUNV9bz0OFKWmkJSdJUFPshHS6J-NhhnvtzZifb3xfd4SFLgcSSFoATPV-3Uc3F1V4xPHn8iUWOdxqD58vv0qTHFOlCOLW2h3xvJJSPdwTeByKhF-FHN9sb6AdOIeF24oPgcjTQ",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/level-devil-trap-path/game.html?nocheckorient=1")
+},
 
 
    ];
