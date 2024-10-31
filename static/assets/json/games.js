@@ -453,7 +453,7 @@ const gamesData = [
 {
     title: "Google Snake", 
     imgSrc: "gameimg/google-snake-icon-filled-256.png",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://snake-google.github.io/file/")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://googlesnakemods.com/v/4/")
 },
 {
     title: "Drift Hunters", 
