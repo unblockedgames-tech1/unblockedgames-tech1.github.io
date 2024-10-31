@@ -616,9 +616,9 @@ const gamesData = [
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/opposite-day/game.html?nocheckorient=1")
 },
 {
-    title: "Thorn and Balloons", 
-    imgSrc: "https://lh7-us.googleusercontent.com/5I0KOL3myXa4r6uiePAO0Y0oVlxcH-X0s-7uiRVKyha9tRjFaiyzOI5Ln0QAmFSr1oBl9pMw-WwJQPEQZt3ifjSfIi-uOTD2DzvMBH-2npORWQtiaK7XLrni-SUka0nWB2yNRFZ85rE3r4sigfKeJ5cP3tLTgw",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/thorn-and-balloons/game.html?nocheckorient=1")
+    title: "Slope Run", 
+    imgSrc: "https://lh7-us.googleusercontent.com/Gb8hdT5a8UzWV0lU4WZx7LWViY8SqULyzwwjQcfBA43vo-pMKOcveBSuk0_633Rb9pkR-UHxF9ItMsdLYdLs1qrDlw0vGK-1YJrEaqExpcIDhLz-XQdAs87JnT4bop6cvD-DJ9VPiUihOi8t_pBsXIXztj5bxw",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/slope-run/game.html?nocheckorient=1")
 },
 
 
