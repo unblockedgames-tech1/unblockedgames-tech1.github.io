@@ -7,7 +7,7 @@ const gamesData = [
 {
     title: "Among us",
     imgSrc: "gameimg/Amoungus.png",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://amongus-online.net/game/amongus") 
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://classroom.lol/_games/amongus/") 
 }, 
 {
     title: "Slow Roads",
