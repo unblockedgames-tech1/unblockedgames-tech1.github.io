@@ -22,7 +22,7 @@ const gamesData = [
 {
     title: "Gun Night",
     imgSrc: "gameimg/gunnight.jpeg",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://html5.gamedistribution.com/91717eef3f1d4dfabc910ea4f3ea9c74/") 
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://html5.gamedistribution.com/rvvASMiM/91717eef3f1d4dfabc910ea4f3ea9c74/index.html?gd_sdk_referrer_url=https%3A%2F%2Fkevin.games%2Fgunnight-io&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL2tldmluLmdhbWVzL2d1bm5pZ2h0LWlvIiwicGFyZW50RG9tYWluIjoia2V2aW4uZ2FtZXMiLCJ0b3BEb21haW4iOiJrZXZpbi5nYW1lcyIsImhhc0ltcHJlc3Npb24iOnRydWUsImxvYWRlckVuYWJsZWQiOnRydWUsImhvc3QiOiJodG1sNS5nYW1lZGlzdHJpYnV0aW9uLmNvbSIsInZlcnNpb24iOiIxLjUuMTcifQ%253D%253D") 
 },
 {
     title: "Suika Game",
@@ -111,24 +111,9 @@ const gamesData = [
     link: __uv$config.prefix + __uv$config.encodeUrl("https://apple-worm.github.io/apple-worm/")
 }, 
 {
-    title: "Angry Birds",
-    imgSrc: "gameimg/angrybirds.webp",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.gameflare.com/embed/angry-birds/")
-},
-{
-    title: "Retro Bowl",
-    imgSrc: "gameimg/retrobowl.png",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://retrobowlgame.github.io/file/")
-},
-{
     title: "G</x>un Mayhem", 
     imgSrc: "gameimg/gunmayhem.jpeg",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://gunmayhem.io/game/gun-mayhem/")
-},
-{
-    title: "Tiny Fishing",
-    imgSrc: "gameimg/tinyfishing.webp",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://void-network.radiodelsur.cl/cdn/game/static/tiny-fishing/index.html")
 },
 {
     title: "Snow Rider", 
@@ -173,7 +158,7 @@ const gamesData = [
 {
     title: "Ba</x>ll Bla</x>st", 
     imgSrc: "https://play-lh.googleusercontent.com/p0_Vxw_LM74HDO43ZFC1X_IoUpBIJmBUIxSnImQxwlNBoJe4gGASpMW4cEkjmOokNOw",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://7495375927555794559.playables.usercontent.goog/v/assets/index.html")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://scratch.mit.edu/projects/472077983/embed")
 },
 {
     title: "A</x>tt</x>ack Ho</x>le", 
