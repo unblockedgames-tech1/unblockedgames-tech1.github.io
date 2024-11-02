@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>New Tab</title>
+
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
     <script src="/assets/js/ads.js"></script>
@@ -14,86 +16,90 @@
         gtag('js', new Date());
         gtag('config', 'G-VXDP7XC98T');
     </script>
+
     <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">
     <script src="/global.js"></script>
     <script src="/config.js"></script>
+
     <!-- UV things -->
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
-<style>
-    /* Add CSS for particle background */
-    #particles-js {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-    }
 
-    /* Flex container for aligning the widget */
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        gap: 30px;
-        z-index: 1;
-        padding: 0;
-        margin: 0;
-    }
+    <style>
+        /* Add CSS for particle background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-    .widget-section {
-        width: 90vw; /* Responsive width */
-        height: 90vh; /* Responsive height */
-        max-width: 800px; /* Optional: max width */
-        max-height: 600px; /* Optional: max height */
-        position: relative; /* Position relative for absolute child */
-    }
+        /* Flex container for aligning the widget */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            gap: 30px;
+            z-index: 1;
+            padding: 0;
+            margin: 0;
+        }
 
-    widgetbot {
-        position: absolute; /* Position absolutely within the parent */
-        top: 0;
-        left: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        border: none; /* Remove border */
-        border-radius: 15px; /* Optional: rounded corners */
-    }
-
-    /* Media query for smaller screens */
-    @media (max-width: 800px) {
         .widget-section {
-            padding-bottom: 75%; /* Maintain aspect ratio */
+            width: 800px; /* Fixed width */
+            height: 600px; /* Fixed height */
+            position: relative; /* Position relative for absolute child */
         }
 
         widgetbot {
+            position: absolute; /* Position absolutely within the parent */
+            top: 0;
+            left: 0;
+            width: 100%; /* Full width */
             height: 100%; /* Full height */
+            border: none; /* Remove border */
+            border-radius: 15px; /* Optional: rounded corners */
         }
-    }
 
-    .title {
-        font-size: 1.5rem;
-        text-align: center;
-        color: #fff;
-        margin-bottom: 10px;
-        position: relative;
-        animation: slideIn 2s ease-in-out forwards;
-        opacity: 0;
-    }
+        /* Media query for smaller screens */
+        @media (max-width: 800px) {
+            .widget-section {
+                width: 100%; /* Full width on smaller screens */
+                height: auto; /* Auto height to maintain aspect ratio */
+                padding-bottom: 75%; /* Maintain aspect ratio */
+            }
 
-    @keyframes slideIn {
-        0% {
-            transform: translateY(-50px);
+            widgetbot {
+                height: 100%; /* Full height */
+            }
+        }
+
+        .title {
+            font-size: 1.5rem;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            position: relative;
+            animation: slideIn 2s ease-in-out forwards;
             opacity: 0;
         }
-        100% {
-            transform: translateY(0);
-            opacity: 1;
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
-    }
-</style>
+    </style>
 </head>
 
 <body>
@@ -110,23 +116,41 @@
     </script>
 
     <!-- Dynamically Loaded Header -->
-    <div class="header" id="header">Header Content</div>
+    <div id="header"></div>
 
     <!-- Main Content -->
     <div class="container">
         <div class="widget-section">
-            <widgetbot
-                server="1205329363394887722"
-                channel="1205332504220012584"
-            ></widgetbot>
-            <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html -embed@1.0.0/dist/index.js"></script>
+            <widgetbot server="1205329363394887722" channel="1205332504220012584"></widgetbot>
+            <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
         </div>
     </div>
 
     <!-- Dynamically Loaded Footer -->
-    <div class="footer" id="footer">Footer Content</div>
+    <div id="footer"></div>
 
-    <!-- Scripts -->
-    <script src="/assets/js/script.js"></script>
+    <script>
+        function loadHTML(url, elementId) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error loading HTML:', error);
+                    document.getElementById(elementId).innerHTML = `<p>Error loading content: ${error.message}</p>`;
+                });
+        }
+
+        // Load header and footer
+        loadHTML("/assets/html/header.html", "header");
+        loadHTML("/assets/html/footer.html", "footer");
+    </script>
 </body>
+
 </html>
