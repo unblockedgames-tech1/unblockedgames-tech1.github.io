@@ -6,7 +6,7 @@ const htmlConfig = {
     appsPath: "/app",
     termPath: "/terminal.html",
     reqPath: "/rga",
-    chatPath: "/chat",
+    reqPath: "/chat",
 }
 
 const siteConfig = {
