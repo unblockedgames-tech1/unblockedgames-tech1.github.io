@@ -176,6 +176,10 @@
     </a>
 
     <script>
+        let loadedG = localStorage.getItem('loadedG');
+        let iframe = document.getElementById('gframe');
+        iframe.src = loadedG;
+
         function getBrightness(color) {
             color = color.replace(/[^0-9a-f]/gi, '');
             if (color.length === 3) {
@@ -209,10 +213,6 @@
             }
         }
 
-        let loadedG = localStorage.getItem('loadedG');
-        let iframe = document.getElementById('gframe');
-        iframe.src = loadedG;
-
         iframe.onload = function() {
             this.focus();
             updateFullscreenButtonColor();
@@ -237,11 +237,11 @@
                 if (document.exitFullscreen) {
                     document.exitFullscreen();
                 } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.webkitEx iFullscreen) {
-                    document.webkitExitFullscreen();
+                    document. **moz**CancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.**webkit**ExitFullscreen();
                 } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
+                    document.**ms**ExitFullscreen();
                 }
             }
         }
