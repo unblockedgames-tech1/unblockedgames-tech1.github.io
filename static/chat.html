@@ -2,119 +2,104 @@
 <html lang="en">
 <head>
     <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
-    <title>New Tab</title>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-    <script src="/assets/js/ads.js"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-VXDP7XC98T');
-    </script>
-    <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">
-    <script src="/global.js"></script>
-    <script src="/config.js"></script>
-    <!-- UV things -->
-    <script src="uv/uv.bundle.js"></script>
-    <script src="uv/uv.config.js"></script>
+    <title>Widget Display</title>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732" crossorigin="anonymous"></script>
+
     <style>
-        /* Add CSS for particle background */
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        /* Flex container for aligning the widget */
-        .container {
+        html, body {
+            height: 100%;
+            overflow: hidden;
+            background-color: #121212;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            gap: 30px;
-            z-index: 1;
-            padding: 0;
-            margin: 0;
         }
 
-        .widget-section {
-            width: 800px; /* Fixed width */
-            height: 600px; /* Fixed height */
-            position: relative; /* Position relative for absolute child */
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+
+        .widget_container {
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 95%;
+            max-width: 1100px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            min-height: 400px; /* Set a minimum height for the widget container */
         }
 
         widgetbot {
-            position: absolute; /* Position absolutely within the parent */
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            border: none;
+            background-color: #1a1a1a;
+        }
+
+        .header {
+            width: 100%;
+            background-color: rgb(41, 41, 41);
+            color: white;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            font-family: "Be Vietnam Pro", sans-serif;
+            font-weight: 700;
+            position: absolute;
             top: 0;
             left: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            border: none; /* Remove border */
-            border-radius: 15px; /* Optional: rounded corners */
         }
 
-        /* Media query for smaller screens */
-        @media (max-width: 800px) {
-            .widget-section {
-                width: 100%; /* Full width on smaller screens */
-                height: auto; /* Auto height to maintain aspect ratio */
-                padding-bottom: 75%; /* Maintain aspect ratio */
-            }
-
-            widgetbot {
-                height: 100%; /* Full height */
-            }
+        .panic_button {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-family: "Be Vietnam Pro", sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 10px 0;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(255,51,51,0.2);
         }
 
-        .title {
-            font-size: 1.5rem;
-            text-align: center;
-            color: #fff;
-            margin-bottom: 10px;
-            position: relative;
-            animation: slideIn 2s ease-in-out forwards;
-            opacity: 0;
+        .panic_button:hover {
+            background-color: #ff0000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255,51,51,0.3);
         }
 
-        @keyframes slideIn {
-            0% {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
+        .panic_button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(255,51,51,0.2);
         }
     </style>
 </head>
-
 <body>
-    <!-- Google Tag Manager -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-
-    <!-- Particle Background -->
-    <div id="particles-js"></div>
-    <script src="/assets/js/particles.js"></script>
-    <script>
-        particlesJS.load('particles-js', '/assets/json/particles.json');
-    </script>
-
-    <!-- Dynamically Loaded Header -->
-    <div id="header"></div>
-
-    <!-- Main Content -->
     <div class="container">
-        <div class="widget-section">
+        <header class="header">
+            Widget Display
+        </header>
+
+        <button class="panic_button" onclick="panicButton()">Panic</button>
+        
+        <div class="widget_container">
             <widgetbot
                 server="1205329363394887722"
                 channel="1205332504220012584"
@@ -123,30 +108,10 @@
         </div>
     </div>
 
-    <!-- Dynamically Loaded Footer -->
-    <div id="footer"></div>
-
     <script>
-        function loadHTML(url, elementId) {
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById(elementId).innerHTML = data;
- })
-                .catch(error => {
-                    console.error('Error loading HTML:', error);
-                    document.getElementById(elementId).innerHTML = `<p>Error loading content: ${error.message}</p>`;
-                });
+        function panicButton() {
+            window.location.href = 'https://launchpad.classlink.com/login';
         }
-
-        // Load header and footer
-        loadHTML("/assets/html/header.html", "header");
-        loadHTML("/assets/html/footer.html", "footer");
     </script>
 </body>
 </html>
