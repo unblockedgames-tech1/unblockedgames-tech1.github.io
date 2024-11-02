@@ -32,6 +32,9 @@ app.get("/voidurls", function (req, res) {
 app.get("/settings", function (req, res) {
   res.sendFile(path.join(__dirname, "static/settings.html"));
 })
+app.get("/chat", function (req, res) {
+  res.sendFile(path.join(__dirname, "static/chat.html"));
+})
 
 app.use(express.static(path.join(__dirname, "static")));
 
