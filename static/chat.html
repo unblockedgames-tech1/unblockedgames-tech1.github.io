@@ -50,10 +50,8 @@
         }
 
         .widget-section {
-            width: 100%; /* Full width */
-            max-width: 800px; /* Max width */
-            height: 100%; /* Full height */
-            max-height: 600px; /* Max height */
+            width: 800px; /* Fixed width */
+            height: 600px; /* Fixed height */
             position: relative; /* Position relative for absolute child */
         }
 
@@ -70,6 +68,7 @@
         /* Media query for smaller screens */
         @media (max-width: 800px) {
             .widget-section {
+                width: 100%; /* Full width on smaller screens */
                 height: auto; /* Auto height to maintain aspect ratio */
                 padding-bottom: 75%; /* Maintain aspect ratio */
             }
@@ -140,7 +139,7 @@
                     return response.text();
                 })
                 .then(data => {
-                    document.getElementById(elementId). innerHTML = data;
+                    document.getElementById(elementId).innerHTML = data;
                 })
                 .catch(error => {
                     console.error('Error loading HTML:', error);
