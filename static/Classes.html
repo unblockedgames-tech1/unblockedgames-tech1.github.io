@@ -1,5 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/assets/js/favicon-handler.js"></script>
     <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>Classes</title>
@@ -113,25 +116,20 @@
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 120px; /* Keep the original width */
-            height: 600px; /* Keep the original height */
+            width: 300px; /* Adjust as needed */
+            height: auto; /* Let the height adjust automatically */
             display: none; /* This will be controlled by media query */
             z-index: 1000;
-            border-radius: 15px; /* Added to round corners */
+            border-radius: 15px;
+            overflow: hidden; /* This will ensure the ad content doesn't overflow the rounded corners */
         }
 
         .banner.left {
-            left: 65px; /* Keep the original left position */
+            left: 10px;
         }
 
         .banner.right {
-            right: 65px; /* Adjust this value to ensure it does not overflow */
-        }
-
-        .banner img {
-            width: 100%; /* Changed to 100% to fit the banner */
-            height: 100%;
-            object-fit: cover;
+            right: 10px;
         }
 
         @media (min-width: 1340px) {
@@ -144,33 +142,34 @@
             display: none;
         }
     </style>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
+     crossorigin="anonymous"></script>
 </head>
 <body>
     <!-- Left Banner -->
-    <a href="https://discord.gg/M5vcveZbGx" class="banner left" target="_blank">
-        <img src="/nav/Your ad.png" alt="Advertisement">
-    </a>
-
-    <div class="container">
-        <header class="header">
-            <a href="/">
-                <img src="/nav/home.png" class="home_bttn" alt="Home">
-            </a>
-        </header>
-        <button class="panic_button" onclick="panicButton()">Panic</button>
-        <div class="game_container">
-            <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
-            <button class="fullscreen_button" onclick="toggleFullScreen()">
-                <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
-            </button>
-        </div>
+    <div class="banner left ">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-format="fluid"
+             data-ad-layout-key="+26+s7-3-5e+9w"
+             data-ad-client="ca-pub-4845994519357732"
+             data-ad-slot="5490786434"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
     <!-- Right Banner -->
-    <a href="https://discord.gg/M5vcveZbGx" class="banner right" target="_blank">
-        <img src="/nav/Your ad.png" alt="Advertisement">
-    </a>
-
+    <div class="banner right">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-format="fluid"
+             data-ad-layout-key="+26+s7-3-5e+9w"
+             data-ad-client="ca-pub-4845994519357732"
+             data-ad-slot="5490786434"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     <script>
         let loadedG = localStorage.getItem('loadedG');
         let iframe = document.getElementById('gframe');
