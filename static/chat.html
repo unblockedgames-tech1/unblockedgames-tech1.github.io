@@ -45,10 +45,8 @@
         }
 
         .widget-section {
-            width: 100%; /* Full width */
-            max-width: 800px; /* Maximum width */
-            height: 0; /* Set height to 0 for aspect ratio */
-            padding-bottom: 75%; /* Maintain 4:3 aspect ratio */
+            width: 800px; /* Fixed width */
+            height: 600px; /* Fixed height */
             position: relative; /* Position relative for absolute child */
         }
 
@@ -60,6 +58,19 @@
             height: 100%; /* Full height */
             border: none; /* Remove border */
             border-radius: 15px; /* Optional: rounded corners */
+        }
+
+        /* Media query for smaller screens */
+        @media (max-width: 800px) {
+            .widget-section {
+                width: 100%; /* Full width on smaller screens */
+                height: auto; /* Auto height to maintain aspect ratio */
+                padding-bottom: 75%; /* Maintain aspect ratio */
+            }
+
+            widgetbot {
+                height: 100%; /* Full height */
+            }
         }
 
         .title {
@@ -107,8 +118,6 @@
             <widgetbot
                 server="1205329363394887722"
                 channel="1205332504220012584"
-                width="800"
-                height="600"
             ></widgetbot>
             <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
         </div>
@@ -127,7 +136,7 @@
         }
 
         // Load header and footer
-        loadHTML("/assets/html/header.html", "header");
+        loadHTML("/assets/html /header.html", "header");
         loadHTML("/assets/html/footer.html", "footer");
 
         // Register Service Worker
