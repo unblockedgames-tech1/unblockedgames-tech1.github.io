@@ -1,123 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="/assets/js/favicon-handler.js"></script>
-    <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-    <title>Classes</title>
-    <script src="/assets/js/ads.js"></script>
-    <script src="/assets/js/onload.js"></script>
-    <script src="/assets/json/games.js"></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-VXDP7XC98T');
-    </script>
-    <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">   
-    <link rel="stylesheet" href="/assets/css/index.css" type="text/css">   
-    <style>
-        .page-container {
-            display: flex;
-            width: 100%;
-        }
-        
-        .content-container {
-            flex: 1;
-        }
-        
-        .ad-container {
-            width: 300px;
-            padding: 10px;
-            position: fixed;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 1000;
-        }
-        
-        .flex-container {
-            display: flex;
-            position: relative;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 5rem;
-        }
+	<script src="/assets/js/favicon-handler.js"></script>
+  <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+  <title>Classes</title>
+  <script src="/assets/js/ads.js"></script>
+  <script src="/assets/js/onload.js"></script>
+  <script src="/assets/json/games.js"></script>
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
 
-        .game {
-            border-radius: 30rem;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-
-        .game:hover {
-            transform: scale(1.05);
-        }
-
-        .game-image {
-            width: 100%;
-            height: auto;
-            width: 16vw; 
-            height: 16vw; 
-            border-radius: 2rem;
-            object-fit: cover; 
-            transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out; 
-            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); 
-        }
-
-        .game:hover .game-image {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .game-image {
-            animation: subtle-pulse 4s infinite;
-            animation-delay: 1s;
-        }
-
-        @keyframes subtle-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.01); }
-            100% { transform: scale(1); }
-        }
-
-        .game:hover .game-image {
-            animation: none;
-        }
-
-        .game-info {
-            padding: 10px;
-            text-align: center;
-            background-color: #555555;
-            border-radius: 30px;
-        }
-
-        .game-title {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .play-button {
-            background-color: #555555;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: background-color 0.3s ease-in-out;
-        }
-
-        .play-button:hover {
-            background-color: #454545;
-        }
-    </style>
+    gtag('config', 'G-VXDP7XC98T');
+  </script>
+  </script>
+  <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">   
+  <link rel="stylesheet" href="/assets/css/index.css" type="text/css">   
 </head>
 <body>
+    <h1> </h1>
+    <h1> </h1>
+    <div style="text-align: center;">
+        <input class="random-game-button" placeholder="Search for a game!" id="searchGames"></input>
+    </div>
+</body>
+
+
+
+
     <!-- Google Tag Manager -->
     <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -131,99 +44,203 @@
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <div class="page-container">
-        <div class="content-container">
-            <h1> </h1>
-            <h1> </h1>
-            <div style="text-align: center;">
-                <input class="random-game-button" placeholder="Search for a game!" id="searchGames"></input>
-            </div>
-            
-            <div class="flex-container" id="gamesList"></div>
-        </div>
-        
-        <div class="ad-container">
-            <!-- Google Ad Code -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
-                 crossorigin="anonymous"></script>
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-format="fluid"
-                 data-ad-layout-key="+26+s7-3-5e+9w"
-                 data-ad-client="ca-pub-4845994519357732"
-                 data-ad-slot="5490786434"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
-    </div>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/config.js"></script>
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/styles.css">
     <script src="/global.js"></script>
+    <!--UV things-->
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
     <script>
         const stockSW = "/uv/sw.js";
         const swAllowedHostnames = ["localhost", "127.0.0.1"];
         function registerSW() {
-            if (!navigator.serviceWorker) {
-                if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
-                    throw new Error("Service workers cannot be registered without https.");
-                throw new Error("Your browser doesn't support service workers.");
-            }
-            navigator.serviceWorker.register(stockSW);
+          if (!navigator.serviceWorker) {
+            if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
+              throw new Error("Service workers cannot be registered without https.");
+            throw new Error("Your browser doesn't support service workers.");
+          }
+          navigator.serviceWorker.register(stockSW);
         }
         registerSW();   
     </script>
+    <title>New Tab</title>
+    <style>
+    
+	.flex-container {
+           display: flex;
+           position: relative;
+           flex-wrap: wrap;
+           justify-content: center;
+           gap: 20px;
+           padding: 5rem;
+           
+	}
+
+        .game {
+            border-radius: 30rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+        }
+
+
+        .game:hover {
+            transform: scale(1.05);
+        }
+
+.game-image {
+    width: 100%;
+    height: auto;
+    width: 16vw; 
+    height: 16vw; 
+    border-radius: 2rem;
+    object-fit: cover; 
+    transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out; 
+    box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); 
+}
+
+.game:hover .game-image {
+    transform: scale(1.05); /* Scale the image up on hover */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Increase the shadow effect on hover */
+}
+
+.game-image {
+    animation: subtle-pulse 4s infinite; /* Add a subtle pulse animation */
+    animation-delay: 1s; /* Delay the animation by 1 second */
+}
+
+@keyframes subtle-pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.01);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.game:hover .game-image {
+    animation: none; /* Stop the pulse animation on hover */
+}
+
+        .game-info {
+            padding: 10px;
+            text-align: center;
+            background-color: #555555; /* Light blue shading color */
+            border-bottom-left-radius: 30px;
+            border-bottom-right-radius: 30px;
+            border-top-left-radius: 30px;
+            border-top-right-radius: 30px;
+        }
+
+        .game-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .play-button {
+            background-color: #555555; /* Lighter black color */
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+        }
+
+        .play-button:hover {
+            background-color: #454545; /* Darker shade of black on hover */
+        }
+        </style>
+        <div id="header"></div>
+        <div id="footer"></div>  
+        <script>
+            loadHTML("/assets/html/header.html", "header")
+            loadHTML("/assets/html/footer.html", "footer")
+        </script>
+    <title>Classes</title>
+    <div id="header"></div>
+    <div id="footer"></div>    
+
+    <div class="flex-container" id="gamesList"></div>
 
     <script type="module">
-        import gamesData from "/assets/json/games.js";
-
+     
+        import gamesData from "/assets/json/games.js" // this is where the games are defined now
         function loadGame(game) {
-            const gameElement = document.createElement("div");
-            gameElement.className = "game";
+                const gameElement = document.createElement("div");
+                gameElement.className = "game";
 
-            const imgElement = document.createElement("img");
-            imgElement.src = game.imgSrc;
-            imgElement.alt = game.title;
-            imgElement.className = "game-image";
+                const imgElement = document.createElement("img");
+                imgElement.src = game.imgSrc;
+                imgElement.alt = game.title;
+                imgElement.className = "game-image";
 
-            const titleElement = document.createElement("div");
-            titleElement.className = "game-info";
-            titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
+                const titleElement = document.createElement("div");
+                titleElement.className = "game-info";
+                titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
 
-            const linkElement = document.createElement("a");
-            linkElement.href = `javascript:localStorage.setItem("loadedG", ${'"' + game .link + '"'})`;
-            linkElement.textContent = "Play";
-            linkElement.className = "play-button";
+                const linkElement = document.createElement("a");
+                linkElement.href = game.link;
+                linkElement.textContent = "Play";
+                linkElement.className = "play-button";
 
-            gameElement.appendChild(imgElement);
-            gameElement.appendChild(titleElement);
-            titleElement.appendChild(linkElement);
+                gameElement.appendChild(imgElement);
+                gameElement.appendChild(titleElement);
+                titleElement.appendChild(linkElement);
 
-            gamesList.appendChild(gameElement);
-        }
+                gamesList.appendChild(gameElement);
+            }
 
         document.getElementById("searchGames").addEventListener("keydown", function (e) {
             gamesList.innerHTML = '';
             if (e.code === "Enter") { 
-                e.preventDefault();
+                e.preventDefault()
             }
-            gamesList.innerHTML = "";
-            for (let i = 0; i < gamesData.length; i++) {
+            gamesList.innerHTML=""
+            for (let i=0; i < gamesData.length; i++) {
                 if (gamesData[i].title.toLowerCase().includes(document.getElementById("searchGames").value.toLowerCase())) {
-                    loadGame(gamesData[i]);
+                    loadGame(gamesData[i])
                 }
             }
+
         });
 
         document.addEventListener("DOMContentLoaded", async function () {
             const gamesList = document.getElementById("gamesList");
 
             // Initial load of all games
-            for (let i = 0; i < gamesData.length; i++) {
-                loadGame(gamesData[i]);
-            }
+            gamesData.forEach(game => {
+                const gameElement = document.createElement("div");
+                gameElement.className = "game"; 
+
+                const imgElement = document.createElement("img");
+                imgElement.src = game.imgSrc;
+                imgElement.alt = game.title;
+                imgElement.className = "game-image";
+
+                const titleElement = document.createElement("div");
+                titleElement.className = "game-info";
+                titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
+
+                const linkElement = document.createElement("a");
+                linkElement.href = `javascript:localStorage.setItem("loadedG", ${'"' + game.link+'"'}); location.href = "/Classes.html"`;
+                linkElement.textContent = "Play";
+                linkElement.className = "play-button";
+
+                gameElement.appendChild(imgElement);
+                gameElement.appendChild(titleElement);
+                titleElement.appendChild(linkElement);
+
+                gamesList.appendChild(gameElement);
+            });
         });
     </script>
 </body>
