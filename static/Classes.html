@@ -33,7 +33,7 @@
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: 80%; /* Adjusted width to fit with banners */
+            width: 95%;
             max-width: 1100px;
             margin: 10px auto;
             flex: 1;
@@ -121,62 +121,110 @@
         }
 
         .banner.left {
-            left: 1%; /* Adjusted for alignment */
+            left: 65px; /* Keep the original left position */
         }
 
         .banner.right {
-            right: 1%; /* Adjusted for alignment */
+            right: 20px; /* Adjust this value to ensure it does not overflow */
         }
 
         .banner img {
             width: 100%; /* Changed to 100% to fit the banner */
             height: 100%;
             object-fit: cover;
-            border-radius: 15px;
         }
 
-        /* Media query for larger screens */
         @media (min-width: 1340px) {
             .banner {
                 display: block; /* Ensures banners are displayed on larger screens */
             }
         }
 
-        /* Media query for extra large screens */
-        @media (min-width: 1600px) {
-            .banner.left {
-                left: 5%; /* Adjusted for larger screens */
-            }
-            .banner.right {
-                right: 5%; /* Adjusted for larger screens */
-            }
-        }
-
         :fullscreen .banner {
-            display: none; /* Hides banners when in full screen */
+            display: none;
         }
     </style>
 </head>
 <body>
+    <!-- Left Banner -->
+    <a href="https://discord.gg/M5vcveZbGx" class="banner left" target="_blank">
+        <img src="/nav/Your ad.png" alt="Advertisement">
+    </a>
+
     <div class="container">
-        <div class="header">
-            <button class="home_bttn">
-                <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Home Button">
-            </button>
-            <button class="panic_button">Panic Button</button>
-        </div>
+        <header class="header">
+            <a href="/">
+                <img src="/nav/home.png" class="home_bttn" alt="Home">
+            </a>
+        </header>
+        <button class="panic_button" onclick="panicButton()">Panic</button>
         <div class="game_container">
-            <iframe class="game_iframe" src="https://example.com" frameborder="0"></iframe>
-            <button class="fullscreen_button">
-                <img src="https://ssl.gstatic.com/classroom/favicon.png" alt="Fullscreen Button">
+            <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
+            <button class="fullscreen_button" onclick="toggleFullScreen()">
+                <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
             </button>
-        </div>
-        <div class="banner left">
-            <img src="https://example.com/banner-left.jpg" alt="Left Banner">
-        </div>
-        <div class="banner right">
-            <img src="https://example.com/banner-right.jpg" alt="Right Banner">
         </div>
     </div>
+
+    <!-- Right Banner -->
+    <a href="https://discord.gg/M5vcveZbGx" class="banner right" target="_blank">
+        <img src="/nav/Your ad.png" alt="Advertisement">
+    </a>
+
+    <script>
+        let loadedG = localStorage.getItem('loadedG');
+        let iframe = document.getElementById('gframe');
+        iframe.src = loadedG;
+
+        iframe.onload = function() {
+            this.focus();
+        };
+
+        function panicButton() {
+            window.location.href = 'https://launchpad.classlink.com/login';
+        }
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                if (iframe.requestFullscreen) {
+                    iframe.requestFullscreen();
+                } else if (iframe.mozRequestFullScreen) {
+                    iframe.mozRequestFullScreen();
+                } else if (iframe.webkitRequestFullscreen) {
+                    iframe.webkitRequestFullscreen();
+                } else if (iframe.msRequestFullscreen) {
+                    iframe.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
+        iframe.addEventListener('click', function() {
+            this.focus();
+        });
+
+        window.addEventListener("keydown", function(e) {
+            if (!document.activeElement.classList.contains('game_iframe')) {
+                if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                    e.preventDefault();
+                }
+            }
+        }, false);
+
+        document.addEventListener('fullscreenchange', function() {
+            if (document.fullscreenElement) {
+                iframe.focus();
+            }
+        });
+    </script>
 </body>
 </html>
