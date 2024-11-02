@@ -5,10 +5,10 @@
     background-color: rgb(41, 41, 41); /* Background color for visibility */
     color: white;
     left: 0;
-    padding: 1rem;
+    padding: 0.5rem; /* Reduced padding for a smaller header */
     top: 0;
     z-index: 1000; /* Higher z-index to make sure it stays on top */
-    font-size: 0.8rem; 
+    font-size: 0.7rem; /* Reduced font size for a smaller header */
     font-family: "Be Vietnam Pro", sans-serif;
     font-weight: 700; /* Bold font */
     display: flex;
@@ -19,20 +19,8 @@
 .home_bttn {
     background-color: transparent;
     border: none;
-    height: 3vh;
-    width: 3vh;
-    margin: 0 1.5rem; /* Equal spacing on both sides of each icon */
+    height: 2.5vh; /* Adjusted height for buttons */
+    width: 2.5vh; /* Adjusted width for buttons */
+    margin: 0 1rem; /* Reduced margin for buttons */
 }
 </style>
-
-<header class="header">
-    <a href="/">
-        <img src="/nav/home.png" class="home_bttn" alt="Home"></img>
-    </a>
-    <a href="/ta">
-        <img src="/nav/search.png" class="home_bttn" alt="Search"></img>
-    </a>
-    <a href="/app">
-        <img src="/nav/apps.png" class="home_bttn" alt="Apps"></img>
-    </a>
-</header>
