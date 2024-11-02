@@ -20,89 +20,88 @@
     <!-- UV things -->
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
-<style>
-    /* Add CSS for particle background */
-    #particles-js {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-    }
+    <style>
+        /* Add CSS for particle background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-    /* Flex container for aligning the widget */
-    .container {
-        display: flex;
-        flex-direction: column; /* Stack header, widget, and footer vertically */
-        height: 100vh; /* Full viewport height */
-        z-index: 1;
-        padding: 0;
-        margin: 0;
-    }
+        /* Flex container for aligning the widget */
+        .container {
+            display: flex;
+            flex-direction: column; /* Stack header, widget, and footer vertically */
+            height: 100vh; /* Full viewport height */
+            z-index: 1;
+            padding: 0;
+            margin: 0;
+        }
 
-    .header, .footer {
-        width: 100%;
-        height: 60px; /* Fixed height for header and footer */
-        background-color: rgba(255, 255, 255, 0.8); /* Optional: background color */
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        z-index: 1;
-    }
+        .header, .footer {
+            width: 100%;
+            height: 60px; /* Fixed height for header and footer */
+            background-color: rgba(255, 255, 255, 0.8); /* Optional: background color */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1;
+        }
 
-    .widget-section {
-        flex: 1; /* Allow the widget section to grow and fill the remaining space */
-        width: 90vw; /* Responsive width */
-        max-width: 800px; /* Optional: max width */
-        max-height: calc(100vh - 120px); /* Optional: max height, accounting for header and footer */
-        margin: 0 auto; /* Center the widget section */
-        position: relative; /* Position relative for absolute child */
-    }
-
-    widgetbot {
-        position: absolute; /* Position absolutely within the parent */
-        top: 0;
-        left: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        border: none; /* Remove border */
-        border-radius: 15px; /* Optional: rounded corners */
-    }
-
-    /* Media query for smaller screens */
-    @media (max-width: 800px) {
         .widget-section {
-            padding-bottom: 75%; /* Maintain aspect ratio */
+            flex: 1; /* Allow the widget section to grow and fill the remaining space */
+            width: 90vw; /* Responsive width */
+            max-width: 800px; /* Optional: max width */
+            margin: 0 auto; /* Center the widget section */
+            position: relative; /* Position relative for absolute child */
         }
 
         widgetbot {
+            position: absolute; /* Position absolutely within the parent */
+            top: 0;
+            left: 0;
+            width: 100%; /* Full width */
             height: 100%; /* Full height */
+            border: none; /* Remove border */
+            border-radius: 15px; /* Optional: rounded corners */
         }
-    }
 
-    .title {
-        font-size: 1.5rem;
-        text-align: center;
-        color: #fff;
-        margin-bottom: 10px;
-        position: relative;
-        animation: slideIn 2s ease-in-out forwards;
-        opacity: 0;
-    }
+        /* Media query for smaller screens */
+        @media (max-width: 800px) {
+            .widget-section {
+                padding-bottom: 75%; /* Maintain aspect ratio */
+            }
 
-    @keyframes slideIn {
-        0% {
-            transform: translateY(-50px);
+            widgetbot {
+                height: 100%; /* Full height */
+            }
+        }
+
+        .title {
+            font-size: 1.5rem;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            position: relative;
+            animation: slideIn 2s ease-in-out forwards;
             opacity: 0;
         }
-        100% {
-            transform: translateY(0);
-            opacity: 1;
+
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
-    }
-</style>
+    </style>
 </head>
 
 <body>
@@ -119,7 +118,7 @@
     </script>
 
     <!-- Dynamically Loaded Header -->
-    <div id="header"></div>
+    <div class="header" id="header">Header Content</div>
 
     <!-- Main Content -->
     <div class="container">
@@ -128,34 +127,14 @@
                 server="1205329363394887722"
                 channel="1205332504220012584"
             ></widgetbot>
-            <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+            <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html -embed@1.0.0/dist/index.js"></script>
         </div>
     </div>
 
     <!-- Dynamically Loaded Footer -->
-    <div id="footer"></div>
+    <div class="footer" id="footer">Footer Content</div>
 
-    <script>
-        function loadHTML(url, elementId) {
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById(elementId).innerHTML = data;
- })
-                .catch(error => {
-                    console.error('Error loading HTML:', error);
-                    document.getElementById(elementId).innerHTML = `<p>Error loading content: ${error.message}</p>`;
-                });
-        }
-
-        // Load header and footer
-        loadHTML("/assets/html/header.html", "header");
-        loadHTML("/assets/html/footer.html", "footer");
-    </script>
+    <!-- Scripts -->
+    <script src="/assets/js/script.js"></script>
 </body>
 </html>
