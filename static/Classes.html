@@ -98,7 +98,7 @@
             bottom: 10px;
             right: 10px;
             background: transparent;
-            border: none;
+ border: none;
             cursor: pointer;
             z-index: 10;
         }
@@ -113,23 +113,24 @@
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 120px; /* Original width */
-            height: 600px; /* Original height */
-            display: none ; /* This will be controlled by media query */
+            width: 120px; /* Keep the original width */
+            height: 600px; /* Keep the original height */
+            display: none; /* This will be controlled by media query */
             z-index: 1000;
             border-radius: 15px; /* Added to round corners */
         }
 
         .banner.left {
-            left: 65px;
+            left: 65px; /* Keep the original left position */
         }
 
         .banner.right {
-            right: 65px;
+            right: 65px; /* Adjust this value if necessary */
+            max-width: calc(100% - 130px); /* Ensure it does not overflow */
         }
 
         .banner img {
-            width: 175%; /* Original width */
+            width: 100%; /* Changed to 100% to fit the banner */
             height: 100%;
             object-fit: cover;
         }
