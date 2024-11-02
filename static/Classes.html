@@ -1,144 +1,153 @@
 <html>
 <head>
-  <script src="/assets/js/favicon-handler.js"></script>
-  <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-  <title>Classes</title>
-  <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
-  <style>
-      * {
-          margin: 0;
-          padding: 0;
-          box-sizing: border-box;
-      }
-      html, body {
-          height: 100%;
-          overflow: hidden;
-      }
-      body {
-          background-color: #121212;
-          display: flex;
-          flex-direction: column;
-          width: 100%;
-      }
-      .container {
-          display: flex;
-          flex-direction: column;
-          height: 100%;
-      }
-      .game_container {
-          background-color: #2a2a2a;
-          border-radius: 15px;
-          box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-          width: 95%;
-          max-width: 1100px;
-          margin: 10px auto;
-          flex: 1;
-          display: flex;
-          flex-direction: column;
-          position: relative;
-      }
-      .game_iframe {
-          width: 100%;
-          flex: 1;
-          border: none;
-          border-radius: 10px;
-          background-color: #1a1a1a;
-      }
-      .header {
-          width: 100%;
-          background-color: rgb(41, 41, 41); 
-          color: white;
-          padding: 0.5rem;
-          font-size: 0.8rem; 
-          font-family: "Be Vietnam Pro", sans-serif;
-          font-weight: 700;          
-      }
-      
-      .home_bttn {
-          background-color: transparent;
-          border: none;
-          height: 3vh;
-          width: 3vh;
-      }
+    <script src="/assets/js/favicon-handler.js"></script>
+    <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+    <title>Classes</title>
+    <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-      .panic_button {
-          background-color: #ff3333;
-          color: white;
-          border: none;
-          padding: 8px 20px;
-          font-size: 0.9rem;
-          font-family: "Be Vietnam Pro", sans-serif;
-          font-weight: 700;
-          cursor: pointer;
-          margin: 0.5rem auto;
-          border-radius: 25px;
-          transition: all 0.3s ease;
-          box-shadow: 0 4px 8px rgba(255,51,51,0.2);
-      }
+        html, body {
+            height: 100%;
+            overflow: hidden;
+        }
 
-      .panic_button:hover {
-          background-color: #ff0000;
-          transform: translateY(-2px);
-          box-shadow: 0 6px 12px rgba(255,51,51,0.3);
-      }
+        body {
+            background-color: #121212;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
 
-      .panic_button:active {
-          transform: translateY(1px);
-          box-shadow: 0 2px 4px rgba(255,51,51,0.2);
-      }
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
 
-      .fullscreen_button {
-          position: absolute;
-          bottom: 10px;
-          right: 10px;
-          background: transparent;
-          border: none;
-          cursor: pointer;
-          z-index: 10;
-      }
+        .game_container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            padding: 10px;
+        }
 
-      .fullscreen_button img {
-          width: 40px;
-          height: 40px;
-      }
+        .game_wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 1600px;
+            margin: 0 auto;
+            position: relative;
+        }
 
-      .game_iframe:focus {
-          outline: none;
-      }
+        .game_frame_container {
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: 95%;
+            max-width: 1100px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
 
-      /* New styles for banners */
-      .game_wrapper {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          width: 100%;
-          height: 100%;
-      }
+        .game_iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+            background-color: #1a1a1a;
+        }
 
-      .banner {
-          height: 600px;
-          width: 120px;
-          margin: 0 10px;
-          display: none;
-          cursor: pointer;
-      }
+        .header {
+            width: 100%;
+            background-color: rgb(41, 41, 41);
+            color: white;
+            padding: 0.5rem;
+            font-size: 0.8rem;
+            font-family: "Be Vietnam Pro", sans-serif;
+            font-weight: 700;
+        }
 
-      .banner img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-      }
+        .home_bttn {
+            background-color: transparent;
+            border: none;
+            height: 3vh;
+            width: 3vh;
+        }
 
-      @media (min-width: 1340px) {
-          .banner {
-              display: block;
-          }
-      }
+        .panic_button {
+            background-color: #ff3333;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            font-size: 0.9rem;
+            font-family: "Be Vietnam Pro", sans-serif;
+            font-weight: 700;
+            cursor: pointer;
+            margin: 0.5rem auto;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 8px rgba(255,51,51,0.2);
+        }
 
-      :fullscreen .banner {
-          display: none;
-      }
-  </style>
+        .panic_button:hover {
+            background-color: #ff0000;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(255,51,51,0.3);
+        }
+
+        .panic_button:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 4px rgba(255,51,51,0.2);
+        }
+
+        .fullscreen_button {
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        .fullscreen_button img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .banner {
+            height: 600px;
+            width: 120px;
+            margin: 0 10px;
+            display: none;
+        }
+
+        .banner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        @media (min-width: 1340px) {
+            .banner {
+                display: block;
+            }
+        }
+
+        :fullscreen .banner {
+            display: none;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -146,29 +155,31 @@
             <a href="/">
                 <img src="/nav/home.png" class="home_bttn" alt="Home">
             </a>
-        </header>   
+        </header>
         <button class="panic_button" onclick="panicButton()">Panic</button>
         <div class="game_container">
             <div class="game_wrapper">
                 <a href="https://discord.gg/M5vcveZbGx" class="banner" target="_blank">
                     <img src="img/nav/Your ad.png" alt="Advertisement">
                 </a>
-                <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
+                <div class="game_frame_container">
+                    <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
+                    <button class="fullscreen_button" onclick="toggleFullScreen()">
+                        <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+                    </button>
+                </div>
                 <a href="https://discord.gg/M5vcveZbGx" class="banner" target="_blank">
                     <img src="/nav/Your ad.png" alt="Advertisement">
                 </a>
-                <button class="fullscreen_button" onclick="toggleFullScreen()">
-                    <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
-                </button>
             </div>
         </div>
     </div>
+
     <script>
         let loadedG = localStorage.getItem('loadedG');
         let iframe = document.getElementById('gframe');
         iframe.src = loadedG;
 
-        // Focus the iframe when it loads
         iframe.onload = function() {
             this.focus();
         };
@@ -201,12 +212,10 @@
             }
         }
 
-        // Ensure the iframe gets focus when clicked
         iframe.addEventListener('click', function() {
             this.focus();
         });
 
-        // Handle keyboard events only when iframe is not focused
         window.addEventListener("keydown", function(e) {
             if (!document.activeElement.classList.contains('game_iframe')) {
                 if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
@@ -215,7 +224,6 @@
             }
         }, false);
 
-        // Additional handler for fullscreen changes
         document.addEventListener('fullscreenchange', function() {
             if (document.fullscreenElement) {
                 iframe.focus();
