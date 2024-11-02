@@ -113,11 +113,11 @@
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 120px;
-            height: 600px;
-            display: none;
+            width: 120px; /* Original width */
+            height: 600px; /* Original height */
+            display: none ; /* This will be controlled by media query */
             z-index: 1000;
-            border-radius: 15px;
+            border-radius: 15px; /* Added to round corners */
         }
 
         .banner.left {
@@ -129,14 +129,14 @@
         }
 
         .banner img {
-            width: 155%;
+            width: 175%; /* Original width */
             height: 100%;
             object-fit: cover;
         }
 
         @media (min-width: 1340px) {
             .banner {
-                display: block;
+                display: block; /* Ensures banners are displayed on larger screens */
             }
         }
 
