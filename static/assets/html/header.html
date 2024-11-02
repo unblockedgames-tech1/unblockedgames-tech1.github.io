@@ -2,9 +2,10 @@
     .header {
         position: fixed;
         width: 100%;
-        height: 60px; /* Set a fixed height */
+        background: linear-gradient(90deg, rgba(41,41,41,0.9) 0%, rgba(61,61,61,0.9) 50%, rgba(41,41,41,0.9) 100%);
         color: white;
         left: 0;
+        padding: 1rem;
         top: 0;
         z-index: 1000;
         font-size: 0.8rem;
@@ -13,33 +14,13 @@
         display: flex;
         justify-content: center;
         align-items: center;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
         transition: all 0.3s ease;
     }
 
-    .header::before {
-        content: "";
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(to bottom, 
-            rgba(41,41,41,0.9) 0%, 
-            rgba(61,61,61,0.9) 50%, 
-            rgba(41,41,41,0.9) 80%, 
-            rgba(41,41,41,0) 100%
-        );
-        backdrop-filter: blur(10px);
-        z-index: -1;
-    }
-
-    .header:hover::before {
-        background: linear-gradient(to bottom, 
-            rgba(51,51,51,0.95) 0%, 
-            rgba(71,71,71,0.95) 50%, 
-            rgba(51,51,51,0.95) 80%, 
-            rgba(51,51,51,0) 100%
-        );
+    .header:hover {
+        background: linear-gradient(90deg, rgba(51,51,51,0.95) 0%, rgba(71,71,71,0.95) 50%, rgba(51,51,51,0.95) 100%);
     }
 
     .home_bttn {
@@ -50,8 +31,6 @@
         margin: 0 1.5rem;
         transition: all 0.3s ease;
         filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
-        position: relative; /* Add this */
-        z-index: 1; /* Add this */
     }
 
     .home_bttn:hover {
