@@ -4,6 +4,8 @@
     <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>Classes</title>
     <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
+     crossorigin="anonymous"></script>
     <style>
         * {
             margin: 0;
@@ -143,6 +145,14 @@
         :fullscreen .banner {
             display: none;
         }
+
+        /* New styles for ads */
+        .ad-container {
+            width: 100%;
+            max-width: 1100px;
+            margin: 10px auto;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -158,11 +168,38 @@
             </a>
         </header>
         <button class="panic_button" onclick="panicButton()">Panic</button>
+        
+        <!-- Google Ad before the game container -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="fluid"
+                 data-ad-layout-key="+26+s7-3-5e+9w"
+                 data-ad-client="ca-pub-4845994519357732"
+                 data-ad-slot="5490786434"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
         <div class="game_container">
             <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
             <button class="fullscreen_button" onclick="toggleFullScreen()">
                 <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
             </button>
+        </div>
+        
+        <!-- Google Ad after the game container -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="fluid"
+                 data-ad-layout-key="+26+s7-3-5e+9w"
+                 data-ad-client="ca-pub-4845994519357732"
+                 data-ad-slot="5490786434"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
 
