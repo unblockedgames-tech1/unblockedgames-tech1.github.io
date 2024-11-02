@@ -45,8 +45,21 @@
         }
 
         .widget-section {
-            width: 800px; /* Set width for the widget */
-            height: 600px; /* Set height for the widget */
+            width: 100%; /* Full width */
+            max-width: 800px; /* Maximum width */
+            height: 0; /* Set height to 0 for aspect ratio */
+            padding-bottom: 75%; /* Maintain 4:3 aspect ratio */
+            position: relative; /* Position relative for absolute child */
+        }
+
+        widgetbot {
+            position: absolute; /* Position absolutely within the parent */
+            top: 0;
+            left: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            border: none; /* Remove border */
+            border-radius: 15px; /* Optional: rounded corners */
         }
 
         .title {
@@ -119,7 +132,7 @@
 
         // Register Service Worker
         const stockSW = "/uv/sw.js";
-        const swAllowedHostnames = ["localhost", "127.0.0.1"];
+        const swAllowedHostnames = ["localhost", "127 .0.0.1"];
 
         function registerSW() {
             if (!navigator.serviceWorker) {
