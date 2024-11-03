@@ -26,7 +26,7 @@
     <script src="uv/uv.config.js"></script>
 
 <style>
-    /* Add CSS for particle background */
+    /* Styles remain the same as in the previous version */
     #particles-js {
         position: fixed;
         top: 0;
@@ -37,7 +37,6 @@
         pointer-events: none;
     }
 
-    /* Flex container for aligning the iframe */
     .container {
         display: flex;
         justify-content: center;
@@ -62,7 +61,6 @@
         border-radius: 15px;
     }
 
-    /* Media query for smaller screens */
     @media (max-width: 800px) {
         .iframe-section {
             height: auto;
@@ -117,7 +115,7 @@
     <!-- Main Content -->
     <div class="container">
         <div class="iframe-section">
-            <iframe src="https://e.widgetbot.io/channels/1205329363394887722/1205332504220012584?api=f5bd5f97-abb9-4bcb-82de-f9ed3fed5ed7" width="100%" height="100%" allowtransparency="true" frameborder="0"></iframe>
+            <iframe id="proxyFrame" width="100%" height="100%" allowtransparency="true" frameborder="0"></iframe>
         </div>
     </div>
 
@@ -145,6 +143,18 @@
         // Load header and footer
         loadHTML("/assets/html/header.html", "header");
         loadHTML("/assets/html/footer.html", "footer");
+
+        // Function to encode URL for UV proxy
+        function encodeUrl(url) {
+            return __uv$config.prefix + __uv$config.encodeUrl(url);
+        }
+
+        // Set the iframe src to the proxied URL
+        window.onload = function() {
+            const originalUrl = "https://e.widgetbot.io/channels/1205329363394887722/1205332504220012584?api=f5bd5f97-abb9-4bcb-82de-f9ed3fed5ed7";
+            const proxyUrl = encodeUrl(originalUrl);
+            document.getElementById('proxyFrame').src = proxyUrl;
+        };
     </script>
 </body>
 
