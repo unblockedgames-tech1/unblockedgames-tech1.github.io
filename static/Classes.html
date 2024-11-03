@@ -99,20 +99,27 @@
 
         .footer {
             background-color: #2a2a2a;
-            padding: 5px;
-            text-align: right;
+            padding: 8px; /* Increased padding */
+            text-align: center; /* Center align the content */
             border-radius: 0 0 15px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .fullscreen_button {
             background: transparent;
             border: none;
             cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .fullscreen_button img {
-            width: 24px;
-            height: 24px;
+            width: 32px; /* Increased size */
+            height: 32px; /* Increased size */
         }
 
         .banner {
@@ -151,39 +158,34 @@
         }
 
         .ad-container {
-            width: 100%;
-            max-width: 1100px;
-            margin: 10px auto;
-            text-align: center;
+            width: 100 %;
             height: 100px;
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            margin: 10px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ad-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
         }
     </style>
 </head>
 <body>
-    <a href="https://discord.com/users/764413972513685504" class="banner left" target="_blank">
-        <img src="/nav/Your ad.png" alt="Advertisement">
-    </a>
-
     <div class="container">
-        <header class="header">
-            <a href="/">
-                <img src="/nav/home.png" class="home_bttn" alt="Home">
-            </a>
-        </header>
-        <button class="panic_button" onclick="panicButton()">Panic</button>
-        
-        <div class="ad-container" width="100%">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-format="fluid"
-                 data-ad-layout-key="+26+s7-3-5e+9w"
-                 data-ad-client="ca-pub-4845994519357732"
-                 data-ad-slot="5490786434"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+        <div class="header">
+            <button class="home_bttn" onclick="location.href='/'">
+                <img src="/nav/home.png" alt="Home">
+            </button>
+            <button class="panic_button" onclick="location.href='/panic'">
+                Panic
+            </button>
         </div>
-        
+
         <div class="game_container">
             <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
             <div class="footer">
@@ -192,78 +194,41 @@
                 </button>
             </div>
         </div>
-        
-        <div class="ad-container" width="100%">
+
+        <div class="ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
+             crossorigin="anonymous"></script>
             <ins class="adsbygoogle"
                  style="display:block"
-                 data-ad-format="fluid"
-                 data-ad-layout-key="+26+s7-3-5e+9w"
                  data-ad-client="ca-pub-4845994519357732"
-                 data-ad-slot="5490786434"></ins>
+                 data-ad-slot="1234567890"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
             <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
+                (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
+        </div>
+
+        <div class="banner left">
+            <img src="/nav/banner.png" alt="Banner">
+        </div>
+
+        <div class="banner right">
+            <img src="/nav/banner.png" alt="Banner">
         </div>
     </div>
 
-    <a href="https://discord.com/users/764413972513685504" class="banner right" target="_blank">
-        <img src="/nav/Your ad.png" alt="Advertisement">
-    </a>
-
     <script>
-        let loadedG = localStorage.getItem('loadedG');
-        let iframe = document.getElementById('gframe');
-        iframe.src = loadedG;
-
-        iframe.onload = function() {
-            this.focus();
-        };
-
-        function panicButton() {
-            window.location.href = 'https://launchpad.classlink.com/login';
-        }
-
         function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                if (iframe.requestFullscreen) {
-                    iframe.requestFullscreen();
-                } else if (iframe.mozRequestFullScreen) {
-                    iframe.mozRequestFullScreen();
-                } else if (iframe.webkitRequestFullscreen) {
-                    iframe.webkitRequestFullscreen();
-                } else if (iframe.msRequestFullscreen) {
-                    iframe.msRequestFullscreen();
-                }
-            } else {
-                if (document.exitFullscreen) {
-                 document.exitFullscreen();
-                } else if (document.mozCancelFullScreen) {
-                    document.mozCancelFullScreen();
-                } else if (document.webkitExitFullscreen) {
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) {
-                    document.msExitFullscreen();
-                }
+            var iframe = document.getElementById("gframe");
+            if (iframe.requestFullscreen) {
+                iframe.requestFullscreen();
+            } else if (iframe.mozRequestFullScreen) {
+                iframe.mozRequestFullScreen();
+            } else if (iframe.webkitRequestFullscreen) {
+                iframe.webkitRequestFullscreen();
             }
         }
-
-        iframe.addEventListener('click', function() {
-            this.focus();
-        });
-
-        window.addEventListener("keydown", function(e) {
-            if (!document.activeElement.classList.contains('game_iframe')) {
-                if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-                    e.preventDefault();
-                }
-            }
-        }, false);
-
-        document.addEventListener('fullscreenchange', function() {
-            if (document.fullscreenElement) {
-                iframe.focus();
-            }
-        });
     </script>
 </body>
 </html>
