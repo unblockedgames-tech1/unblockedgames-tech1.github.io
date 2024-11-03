@@ -197,11 +197,8 @@
                 })
                 .then(data => {
                     document.getElementById(elementId).innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error loading HTML:', error);
-                    document.getElementById(elementId).innerHTML = `<p>Error loading content: ${error.message}</p>`;
                 });
+
         }
 
         // Load header and footer
