@@ -26,7 +26,7 @@
     <script src="uv/uv.config.js"></script>
 
     <style>
-        /* Add CSS for particle background */
+        /* Your existing styles here */
         #particles-js {
             position: fixed;
             top: 0;
@@ -37,7 +37,6 @@
             pointer-events: none;
         }
 
-        /* Flex container for aligning the widget */
         .container {
             display: flex;
             justify-content: center;
@@ -60,11 +59,8 @@
             flex: 1;
             border: none;
             border-radius: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            overflow: hidden;
         }
 
-        /* Media query for smaller screens */
         @media (max-width: 800px) {
             .widget-section {
                 height: auto;
@@ -128,58 +124,6 @@
     <div id="footer"></div>
 
     <script>
-        // Function to create a proxied version of WidgetBot
-        async function createProxiedWidgetBot() {
-            try {
-                // Use Ultraviolet proxy configuration
-                const uv = new Ultraviolet({
-                    prefix: '/service/',
-                    bare: '/bare/',
-                    encodeUrl: Ultraviolet.codec.xor.encode,
-                    decodeUrl: Ultraviolet.codec.xor.decode,
-                    handler: '/uv/uv.handler.js',
-                    bundle: '/uv/uv.bundle.js',
-                    config: '/uv/uv.config.js',
-                    sw: '/uv/uv.sw.js',
-                });
-
-                // Load WidgetBot script through UV proxy
-                const script = document.createElement('script');
-                const proxiedUrl = uv.encodeUrl('https://cdn.jsdelivr.net/npm/@widgetbot/html-embed');
-                script.src = proxiedUrl;
-
-                script.onload = () => {
-                    // Initialize WidgetBot with proxy configuration
-                    const container = document.getElementById('widgetbot-container');
-                    const widget = new window.WidgetBot.default({
-                        server: '1205329363394887722',
-                        channel: '1205332504220012584',
-                        proxy: {
-                            url: '/service/',
-                            options: {
-                                credentials: 'include',
-                                headers: {
-                                    'X-Requested-With': 'XMLHttpRequest'
-                                }
-                            }
-                        }
-                    });
-
-                    // Mount the widget to the container
-                    widget.mount(container);
-                };
-
-                document.body.appendChild(script);
-            } catch (error) {
-                console.error('Error creating proxied WidgetBot:', error);
-                document.getElementById('widgetbot-container').innerHTML = 
-                    `<div style="color: white; text-align: center; padding: 20px;">
-                        Error loading Discord widget. Please try again later.
-                    </div>`;
-            }
-        }
-
-        // Function to load HTML content
         function loadHTML(url, elementId) {
             fetch(url)
                 .then(response => {
@@ -193,20 +137,32 @@
                 })
                 .catch(error => {
                     console.error('Error loading HTML:', error);
-                    document.getElementById(elementId).innerHTML = 
-                        `<p>Error loading content: ${error.message}</p>`;
+                    document.getElementById(elementId).innerHTML = `<p>Error loading content: ${error.message}</p>`;
                 });
         }
 
-        // Initialize everything when the page loads
-        window.addEventListener('load', () => {
-            // Load header and footer
-            loadHTML("/assets/html/header.html", "header");
-            loadHTML("/assets/html/footer.html", "footer");
+        // Load header and footer
+        loadHTML("/assets/html/header.html", "header");
+        loadHTML("/assets/html/footer.html", "footer");
 
-            // Initialize the proxied WidgetBot
-            createProxiedWidgetBot();
-        });
+        // Function to load WidgetBot through proxy
+        function loadProxiedWidgetBot() {
+            const widgetBotUrl = 'https://cdn.jsdelivr.net/npm/@widgetbot/html-embed';
+            const proxiedUrl = __uv$config.prefix + __uv$config.encodeUrl(widgetBotUrl);
+
+            const script = document.createElement('script');
+            script.src = proxiedUrl;
+            script.onload = () => {
+                new window.WidgetBot.default({
+                    server: '1205329363394887722',
+                    channel: '1205332504220012584'
+                }).mount(document.getElementById('widgetbot-container'));
+            };
+            document.body.appendChild(script);
+        }
+
+        // Load WidgetBot when the page is ready
+        window.addEventListener('load', loadProxiedWidgetBot);
     </script>
 </body>
 
