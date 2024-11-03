@@ -219,13 +219,6 @@
             const proxyUrl = encodeUrl(originalUrl);
             const iframe = document.getElementById('proxyFrame');
             iframe.src = proxyUrl;
-        }
-
-        // Set initial iframe src and start refresh interval
-        window.onload = function() {
-            refreshIframe(); // Initial load
-            // Refresh every 30 seconds (30000 milliseconds)
-            setInterval(refreshIframe, 60000);
         };
     </script>
 </body>
