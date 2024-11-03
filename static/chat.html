@@ -5,7 +5,7 @@
     <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>New Tab</title>
 
-        <!-- Snowfall Effect Styles -->
+    <!-- Snowfall Effect Styles -->
     <style>
         #snowflakes-container {
             position: fixed;
@@ -89,75 +89,75 @@
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
 
-<style>
-    /* Styles remain the same as in the previous version */
-    #particles-js {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-    }
+    <style>
+        /* Styles remain the same as in the previous version */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        padding: 0;
-        margin: 0;
-    }
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
 
-    .iframe-section {
-        width: 95%;
-        max-width: 1200px;
-        height: 80%;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-    }
-
-    iframe {
-        flex: 1;
-        border: none;
-        border-radius: 15px;
-    }
-
-    @media (max-width: 800px) {
         .iframe-section {
-            height: auto;
-            padding-bottom: 75%;
+            width: 95%;
+            max-width: 1200px;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
 
         iframe {
-            height: 100%;
+            flex: 1;
+            border: none;
+            border-radius: 15px;
         }
-    }
 
-    .title {
-        font-size: 1.5rem;
-        text-align: center;
-        color: #fff;
-        margin-bottom: 10px;
-        position: relative;
-        animation: slideIn 2s ease-in-out forwards;
-        opacity: 0;
-    }
+        @media (max-width: 800px) {
+            .iframe-section {
+                height: auto;
+                padding-bottom: 75%;
+            }
 
-    @keyframes slideIn {
-        0% {
-            transform: translateY(-50px);
+            iframe {
+                height: 100%;
+            }
+        }
+
+        .title {
+            font-size: 1.5rem;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            position: relative;
+            animation: slideIn 2s ease-in-out forwards;
             opacity: 0;
         }
 
-        100% {
-            transform: translateY(0);
-            opacity: 1;
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
-    }
-</style>
+    </style>
 </head>
 
 <body>
@@ -197,8 +197,11 @@
                 })
                 .then(data => {
                     document.getElementById(elementId).innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error loading HTML:', error);
+                    document.getElementById(elementId).innerHTML = `<p>Error loading content: ${error.message}</p>`;
                 });
-
         }
 
         // Load header and footer
@@ -210,11 +213,19 @@
             return __uv$config.prefix + __uv$config.encodeUrl(url);
         }
 
-        // Set the iframe src to the proxied URL
-        window.onload = function() {
+        // Function to refresh iframe URL
+        function refreshIframe() {
             const originalUrl = "https://e.widgetbot.io/channels/1205329363394887722/1205332504220012584?api=f5bd5f97-abb9-4bcb-82de-f9ed3fed5ed7";
             const proxyUrl = encodeUrl(originalUrl);
-            document.getElementById('proxyFrame').src = proxyUrl;
+            const iframe = document.getElementById('proxyFrame');
+            iframe.src = proxyUrl;
+        }
+
+        // Set initial iframe src and start refresh interval
+        window.onload = function() {
+            refreshIframe(); // Initial load
+            // Refresh every 30 seconds (30000 milliseconds)
+            setInterval(refreshIframe, 30000);
         };
     </script>
 </body>
