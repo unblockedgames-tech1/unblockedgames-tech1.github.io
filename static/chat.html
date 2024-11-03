@@ -25,83 +25,86 @@
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
 
-<style>
-    /* Add CSS for particle background */
-    #particles-js {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-    }
+    <style>
+        /* Add CSS for particle background */
+        #particles-js {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
 
-    /* Flex container for aligning the widget */
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        padding: 0;
-        margin: 0;
-    }
+        /* Flex container for aligning the widget */
+        .container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
 
-    .widget-section {
-        width: 95%; /* Use a larger percentage for responsive width */
-        max-width: 1200px; /* Set a larger maximum width */
-        height: 80%; /* Set a height for the widget section */
-        display: flex; /* Flexbox for child elements */
-        flex-direction: column; /* Stack children vertically */
-        position: relative; /* Position relative for absolute child */
-    }
-
-    widgetbot {
-        flex: 1; /* Allow the widget to grow and fill the space */
-        border: none; /* Remove border */
-        border-radius: 15px; /* Optional: rounded corners */
-    }
-
-    /* Media query for smaller screens */
-    @media (max-width: 800px) {
         .widget-section {
-            height: auto; /* Auto height to maintain aspect ratio */
-            padding-bottom: 75%; /* Maintain aspect ratio */
+            width: 95%;
+            max-width: 1200px;
+            height: 80%;
+            display: flex;
+            flex-direction: column;
+            position: relative;
         }
 
-        widgetbot {
-            height: 100%; /* Full height */
+        #widgetbot-container {
+            flex: 1;
+            border: none;
+            border-radius: 15px;
+            background: rgba(0, 0, 0, 0.3);
+            overflow: hidden;
         }
-    }
 
-    .title {
-        font-size: 1.5rem;
-        text-align: center;
-        color: #fff;
-        margin-bottom: 10px;
-        position: relative;
-        animation: slideIn 2s ease-in-out forwards;
-        opacity: 0;
-    }
+        /* Media query for smaller screens */
+        @media (max-width: 800px) {
+            .widget-section {
+                height: auto;
+                padding-bottom: 75%;
+            }
 
-    @keyframes slideIn {
-        0% {
-            transform: translateY(-50px);
+            #widgetbot-container {
+                height: 100%;
+            }
+        }
+
+        .title {
+            font-size: 1.5rem;
+            text-align: center;
+            color: #fff;
+            margin-bottom: 10px;
+            position: relative;
+            animation: slideIn 2s ease-in-out forwards;
             opacity: 0;
         }
 
-        100% {
-            transform: translateY(0);
-            opacity: 1;
+        @keyframes slideIn {
+            0% {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+
+            100% {
+                transform: translateY(0);
+                opacity: 1;
+            }
         }
-    }
-</style>
+    </style>
 </head>
 
 <body>
     <!-- Google Tag Manager -->
     <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
     </noscript>
 
     <!-- Particle Background -->
@@ -117,8 +120,7 @@
     <!-- Main Content -->
     <div class="container">
         <div class="widget-section">
-            <widgetbot server="1205329363394887722" channel="1205332504220012584"></widgetbot>
-            <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+            <div id="widgetbot-container"></div>
         </div>
     </div>
 
@@ -126,6 +128,58 @@
     <div id="footer"></div>
 
     <script>
+        // Function to create a proxied version of WidgetBot
+        async function createProxiedWidgetBot() {
+            try {
+                // Use Ultraviolet proxy configuration
+                const uv = new Ultraviolet({
+                    prefix: '/service/',
+                    bare: '/bare/',
+                    encodeUrl: Ultraviolet.codec.xor.encode,
+                    decodeUrl: Ultraviolet.codec.xor.decode,
+                    handler: '/uv/uv.handler.js',
+                    bundle: '/uv/uv.bundle.js',
+                    config: '/uv/uv.config.js',
+                    sw: '/uv/uv.sw.js',
+                });
+
+                // Load WidgetBot script through UV proxy
+                const script = document.createElement('script');
+                const proxiedUrl = uv.encodeUrl('https://cdn.jsdelivr.net/npm/@widgetbot/html-embed');
+                script.src = proxiedUrl;
+
+                script.onload = () => {
+                    // Initialize WidgetBot with proxy configuration
+                    const container = document.getElementById('widgetbot-container');
+                    const widget = new window.WidgetBot.default({
+                        server: '1205329363394887722',
+                        channel: '1205332504220012584',
+                        proxy: {
+                            url: '/service/',
+                            options: {
+                                credentials: 'include',
+                                headers: {
+                                    'X-Requested-With': 'XMLHttpRequest'
+                                }
+                            }
+                        }
+                    });
+
+                    // Mount the widget to the container
+                    widget.mount(container);
+                };
+
+                document.body.appendChild(script);
+            } catch (error) {
+                console.error('Error creating proxied WidgetBot:', error);
+                document.getElementById('widgetbot-container').innerHTML = 
+                    `<div style="color: white; text-align: center; padding: 20px;">
+                        Error loading Discord widget. Please try again later.
+                    </div>`;
+            }
+        }
+
+        // Function to load HTML content
         function loadHTML(url, elementId) {
             fetch(url)
                 .then(response => {
@@ -139,13 +193,20 @@
                 })
                 .catch(error => {
                     console.error('Error loading HTML:', error);
-                    document.getElementById(elementId).innerHTML = `<p>Error loading content: ${error.message}</p>`;
+                    document.getElementById(elementId).innerHTML = 
+                        `<p>Error loading content: ${error.message}</p>`;
                 });
         }
 
-        // Load header and footer
-        loadHTML("/assets/html/header.html", "header");
-        loadHTML("/assets/html/footer.html", "footer");
+        // Initialize everything when the page loads
+        window.addEventListener('load', () => {
+            // Load header and footer
+            loadHTML("/assets/html/header.html", "header");
+            loadHTML("/assets/html/footer.html", "footer");
+
+            // Initialize the proxied WidgetBot
+            createProxiedWidgetBot();
+        });
     </script>
 </body>
 
