@@ -1,15 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <script src="/assets/js/favicon-handler.js"></script>
-    <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classes</title>
-    <script src="/assets/js/ads.js"></script>
-    <script src="/assets/js/onload.js"></script>
-    <script src="/assets/json/games.js"></script>
 
     <!-- Snowfall Effect Styles -->
     <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            min-height: 100vh;
+        }
+
+        /* Snowfall container */
         #snowflakes-container {
             position: fixed;
             top: 0;
@@ -17,25 +28,169 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -11; /* Put behind content */
+            z-index: -11;
         }
+
         .snowflake {
             position: absolute;
             background-color: white;
             border-radius: 50%;
             pointer-events: none;
         }
-    </style>
 
-    <!-- Snowfall Effect Script -->
+        /* Games grid layout */
+        .flex-container {
+            display: flex;
+            position: relative;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 5rem;
+        }
+
+        /* Game card styles */
+        .game {
+            border-radius: 30rem;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out;
+            display: flex;
+            margin-bottom: 20px;
+        }
+
+        .game:hover {
+            transform: scale(1.05);
+        }
+
+        .game-image {
+            width: 16vw;
+            height: 16vw;
+            border-radius: 2rem;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
+            animation: subtle-pulse 4s infinite;
+            animation-delay: 1s;
+        }
+
+        .game:hover .game-image {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            animation: none;
+        }
+
+        .game-info {
+            padding: 10px;
+            text-align: center;
+            background-color: #555555;
+            border-radius: 30px;
+            margin-top: 10px;
+            width: 100%;
+        }
+
+        .game-title {
+            font-size: 20px;
+            margin-bottom: 10px;
+            color: #fff;
+        }
+
+        .play-button {
+            background-color: #555555;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 20px;
+            text-decoration: none;
+            transition: background-color 0.3s ease-in-out;
+            display: inline-block;
+            border: 1px solid #ffffff;
+        }
+
+        .play-button:hover {
+            background-color: #454545;
+        }
+
+        /* Search input styles */
+        .search-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        #searchGames {
+            padding: 15px 25px;
+            border-radius: 25px;
+            border: 2px solid #555;
+            font-size: 16px;
+            width: 300px;
+            max-width: 90%;
+            margin: 20px auto;
+            transition: all 0.3s ease;
+        }
+
+        #searchGames:focus {
+            outline: none;
+            border-color: #454545;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Animations */
+        @keyframes subtle-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes fall {
+            0% { transform: translateY(-100vh); }
+            100% { transform: translateY(100vh); }
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .game-image {
+                width: 40vw;
+                height: 40vw;
+            }
+            
+            .flex-container {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game-image {
+                width: 60vw;
+                height: 60vw;
+            }
+            
+            #searchGames {
+                width: 90%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Search input -->
+    <div class="search-container">
+        <input type="text" id="searchGames" placeholder="Search for a game!" autocomplete="off">
+    </div>
+
+    <!-- Games container -->
+    <div class="flex-container" id="gamesList"></div>
+
+    <!-- Snowfall container will be created by JS -->
+
+    <!-- Scripts -->
     <script>
+        // Snowfall effect
         document.addEventListener('DOMContentLoaded', function() {
-            // Create container
+            // Create snowflakes container
             const snowflakesContainer = document.createElement('div');
             snowflakesContainer.id = 'snowflakes-container';
             document.body.appendChild(snowflakesContainer);
 
-            // Snowfall logic
+            // Snowfall configuration
             const snowflakesCount = 200;
 
             function createSnowflake() {
@@ -46,263 +201,121 @@
                 snowflake.style.left = `${Math.random() * 100}vw`;
                 snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
                 snowflake.style.opacity = Math.random();
+                
+                // Add fall animation
+                snowflake.style.animation = `fall ${Math.random() * 3 + 2}s linear infinite`;
                 return snowflake;
             }
 
-            // Create animation style
-            const styleSheet = document.createElement('style');
-            styleSheet.textContent = `
-                @keyframes fall {
-                    0% {
-                        transform: translateY(-100vh);
-                    }
-                    100% {
-                        transform: translateY(100vh);
-                    }
-                }
-            `;
-            document.head.appendChild(styleSheet);
-
             // Create snowflakes
             for (let i = 0; i < snowflakesCount; i++) {
-                const snowflake = createSnowflake();
-                snowflake.style.animation = `fall ${snowflake.style.animationDuration} linear infinite`;
-                snowflakesContainer.appendChild(snowflake);
+                snowflakesContainer.appendChild(createSnowflake());
             }
         });
-    </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'G-VXDP7XC98T');
-    </script>
-    <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">   
-    <link rel="stylesheet" href="/assets/css/index.css" type="text/css">   
-</head>
-<body>
-    <h1> </h1>
-    <h1> </h1>
-    <div style="text-align: center;">
-        <input class="random-game-button" placeholder="Search for a game!" id="searchGames"></input>
-    </div>
-
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-PZXRTFX5');</script>
-    <!-- End Google Tag Manager -->
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
-    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-    <!-- End Google Tag Manager (noscript) -->
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/config.js"></script>
-    <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="/global.js"></script>
-    <!--UV things-->
-    <script src="uv/uv.bundle.js"></script>
-    <script src="uv/uv.config.js"></script>
-    <script>
-        const stockSW = "/uv/sw.js";
-        const swAllowedHostnames = ["localhost", "127.0.0.1"];
-        function registerSW() {
-          if (!navigator.serviceWorker) {
-            if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
-              throw new Error("Service workers cannot be registered without https.");
-            throw new Error("Your browser doesn't support service workers.");
-          }
-          navigator.serviceWorker.register(stockSW);
-        }
-        registerSW();   
-    </script>
-    <title>New Tab</title>
-    <style>
-    .flex-container {
-           display: flex;
-           position: relative;
-           flex-wrap: wrap;
-           justify-content: center;
-           gap: 20px;
-           padding: 5rem;
-    }
-
-    .game {
-        border-radius: 30rem;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .game:hover {
-        transform: scale(1.05);
-    }
-
-    .game-image {
-        width: 100%;
-        height: auto;
-        width: 16vw; 
-        height: 16vw; 
-        border-radius: 2rem;
-        object-fit: cover; 
-        transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out; 
-        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1); 
-    }
-
-    .game:hover .game-image {
-        transform: scale(1.05);
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .game-image {
-        animation: subtle-pulse 4s infinite;
-        animation-delay: 1s;
-    }
-
-    @keyframes subtle-pulse {
-        0% {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.01);
-        }
-        100% {
-            transform: scale(1);
-        }
-    }
-
-    .game:hover .game-image {
-        animation: none;
-    }
-
-    .game-info {
-        padding: 10px;
-        text-align: center;
-        background-color: #555555;
-        border-bottom-left-radius: 30px;
-        border-bottom-right-radius: 30px;
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
-    }
-
-    .game-title {
-        font-size: 20px;
-        margin-bottom: 10px;
-        color: #fff;
-    }
-
-    .play-button {
-        background-color: #555555;
-        color: #fff;
-        padding: 10px 20px;
-        border-radius: 20px;
-        text-decoration: none;
-        transition: background-color 0.3s ease-in-out;
-    }
-
-    .play-button:hover {
-        background-color: #454545;
-    }
-    </style>
-    <div id="header"></div>
-    <div id="footer"></div>  
-    <script>
-        loadHTML("/assets/html/header.html", "header")
-        loadHTML("/assets/html/footer.html", "footer")
-    </script>
-    <title>Classes</title>
-    <div id="header"></div>
-    <div id="footer"></div>    
-
-    <div class="flex-container" id="gamesList"></div>
-
-    <script type="module">
-        import gamesData from "/assets/json/games.js"
-        function loadGame(game) {
-                const gameElement = document.createElement("div");
-                gameElement.className = "game";
-
-                const imgElement = document.createElement("img");
-                imgElement.src = game.imgSrc;
-                imgElement.alt = game.title;
-                imgElement.className = "game-image";
-
-                const titleElement = document.createElement("div");
-                titleElement.className = "game-info";
-                titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
-
-                const linkElement = document.createElement("a");
-                linkElement.href = game.link;
-                linkElement.textContent = "Play";
-                linkElement.className = "play-button";
-
-                gameElement.appendChild(imgElement);
-                gameElement.appendChild(titleElement);
-                titleElement.appendChild(linkElement);
-
-                gamesList.appendChild(gameElement);
+        // Games functionality
+        class GamesManager {
+            constructor() {
+                this.gamesList = document.getElementById('gamesList');
+                this.searchInput = document.getElementById('searchGames');
+                this.games = []; // Will be populated from games.js
+                this.init();
             }
 
-        document.getElementById("searchGames").addEventListener("keydown", function (e) {
-            gamesList.innerHTML = '';
-            if (e.code === "Enter") { 
-                e.preventDefault()
-            }
-            gamesList.innerHTML=""
-            for (let i=0; i < gamesData.length; i++) {
-                if (gamesData[i].title.toLowerCase().includes(document.getElementById("searchGames").value.toLowerCase())) {
-                    loadGame(gamesData[i])
+            async init() {
+                try {
+                    // Import games data
+                    const gamesModule = await import('/assets/json/games.js');
+                    this.games = gamesModule.default;
+                    
+                    // Set up event listeners
+                    this.setupEventListeners();
+                    
+                    // Initial load
+                    this.loadAllGames();
+                } catch (error) {
+                    console.error('Error loading games:', error);
+                    this.gamesList.innerHTML = '<p style="color: red;">Error loading games. Please try refreshing the page.</p>';
                 }
             }
-        });
 
-        document.addEventListener("DOMContentLoaded", async function () {
-            const gamesList = document.getElementById("gamesList");
+            setupEventListeners() {
+                // Search functionality
+                this.searchInput.addEventListener('input', () => {
+                    this.handleSearch();
+                });
 
-            // Initial load of all games
-            gamesData.forEach(game => {
-                const gameElement = document.createElement("div");
-                gameElement.className = "game"; 
+                // Clear search on 'Escape' key
+                this.searchInput.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.searchInput.value = '';
+                        this.handleSearch();
+                    }
+                });
+            }
 
-                const imgElement = document.createElement("img");
+            createGameElement(game) {
+                const gameElement = document.createElement('div');
+                gameElement.className = 'game';
+
+                const imgElement = document.createElement('img');
                 imgElement.src = game.imgSrc;
                 imgElement.alt = game.title;
-                imgElement.className = "game-image";
+                imgElement.className = 'game-image';
+                
+                // Add error handling for images
+                imgElement.onerror = () => {
+                    imgElement.src = '/assets/placeholder.png'; // Fallback image
+                };
 
-                const titleElement = document.createElement("div");
-                titleElement.className = "game-info";
+                const titleElement = document.createElement('div');
+                titleElement.className = 'game-info';
                 titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
 
-                const linkElement = document.createElement("a");
-                linkElement.href = `javascript:localStorage.setItem("loadedG", ${'"' + game.link+'"'}); location.href = "/Classes.html"`;
-                linkElement.textContent = "Play";
-                linkElement.className = "play-button";
+                const linkElement = document.createElement('a');
+                linkElement.href = 'javascript:void(0)';
+                linkElement.textContent = 'Play';
+                linkElement.className = 'play-button';
+                linkElement.onclick = () => {
+                    localStorage.setItem('loadedG', game.link);
+                    location.href = '/Classes.html';
+                };
 
                 gameElement.appendChild(imgElement);
                 gameElement.appendChild(titleElement);
                 titleElement.appendChild(linkElement);
 
-                gamesList.appendChild(gameElement);
-            });
-        });
+                return gameElement;
+            }
+
+            loadAllGames() {
+                this.gamesList.innerHTML = '';
+                this.games.forEach(game => {
+                    this.gamesList.appendChild(this.createGameElement(game));
+                });
+            }
+
+            handleSearch() {
+                const searchTerm = this.searchInput.value.toLowerCase();
+                this.gamesList.innerHTML = '';
+                
+                const filteredGames = this.games.filter(game => 
+                    game.title.toLowerCase().includes(searchTerm)
+                );
+
+                if (filteredGames.length === 0) {
+                    this.gamesList.innerHTML = '<p style="text-align: center; width: 100%; color: #555;">No games found matching your search.</p>';
+                    return;
+                }
+
+                filteredGames.forEach(game => {
+                    this.gamesList.appendChild(this.createGameElement(game));
+                });
+            }
+        }
+
+        // Initialize the games manager
+        new GamesManager();
     </script>
 </body>
-<script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
-    new Crate({
-        server: '1205329363394887722', // Void Network
-        channel: '1205332504220012584' // #📌・voidnetwork-chattin
-    })
-</script>
 </html>
