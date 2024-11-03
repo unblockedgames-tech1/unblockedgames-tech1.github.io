@@ -2,12 +2,8 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>New Tab</title>
-
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: *;">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
@@ -29,67 +25,83 @@
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
 
-    <style>
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
+<style>
+    /* Add CSS for particle background */
+    #particles-js {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        pointer-events: none;
+    }
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 0;
-            margin: 0;
-        }
+    /* Flex container for aligning the widget */
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        padding: 0;
+        margin: 0;
+    }
 
+    .widget-section {
+        width: 95%; /* Use a larger percentage for responsive width */
+        max-width: 1200px; /* Set a larger maximum width */
+        height: 80%; /* Set a height for the widget section */
+        display: flex; /* Flexbox for child elements */
+        flex-direction: column; /* Stack children vertically */
+        position: relative; /* Position relative for absolute child */
+    }
+
+    widgetbot {
+        flex: 1; /* Allow the widget to grow and fill the space */
+        border: none; /* Remove border */
+        border-radius: 15px; /* Optional: rounded corners */
+    }
+
+    /* Media query for smaller screens */
+    @media (max-width: 800px) {
         .widget-section {
-            width: 95%;
-            max-width: 1200px;
-            height: 80%;
-            display: flex;
-            flex-direction: column;
-            position: relative;
+            height: auto; /* Auto height to maintain aspect ratio */
+            padding-bottom: 75%; /* Maintain aspect ratio */
         }
 
-        #widgetbot-container {
-            flex: 1;
-            border: none;
-            border-radius: 15px;
-            background: rgba(0, 0, 0, 0.3);
-            overflow: hidden;
+        widgetbot {
+            height: 100%; /* Full height */
+        }
+    }
+
+    .title {
+        font-size: 1.5rem;
+        text-align: center;
+        color: #fff;
+        margin-bottom: 10px;
+        position: relative;
+        animation: slideIn 2s ease-in-out forwards;
+        opacity: 0;
+    }
+
+    @keyframes slideIn {
+        0% {
+            transform: translateY(-50px);
+            opacity: 0;
         }
 
-        #error-message {
-            color: white;
-            text-align: center;
-            padding: 20px;
+        100% {
+            transform: translateY(0);
+            opacity: 1;
         }
-
-        @media (max-width: 800px) {
-            .widget-section {
-                height: auto;
-                padding-bottom: 75%;
-            }
-
-            #widgetbot-container {
-                height: 100%;
-            }
-        }
-    </style>
+    }
+</style>
 </head>
 
 <body>
     <!-- Google Tag Manager -->
     <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5" height="0" width="0"
-            style="display:none;visibility:hidden"></iframe>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
 
     <!-- Particle Background -->
@@ -105,9 +117,8 @@
     <!-- Main Content -->
     <div class="container">
         <div class="widget-section">
-            <div id="widgetbot-container">
-                <div id="error-message"></div>
-            </div>
+            <widgetbot server="1205329363394887722" channel="1205332504220012584"></widgetbot>
+            <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
         </div>
     </div>
 
@@ -135,73 +146,6 @@
         // Load header and footer
         loadHTML("/assets/html/header.html", "header");
         loadHTML("/assets/html/footer.html", "footer");
-
-        function testProxy() {
-            const testUrl = 'https://example.com';
-            const proxiedTestUrl = __uv$config.prefix + __uv$config.encodeUrl(testUrl);
-            
-            fetch(proxiedTestUrl)
-                .then(response => response.text())
-                .then(data => {
-                    console.log("Proxy test successful:", data.slice(0, 100));
-                })
-                .catch(error => {
-                    console.error("Proxy test failed:", error);
-                });
-        }
-
-        function loadProxiedWidgetBot() {
-            console.log("Attempting to load WidgetBot...");
-            const widgetBotUrl = 'https://cdn.jsdelivr.net/npm/@widgetbot/html-embed';
-            
-            if (typeof __uv$config === 'undefined' || typeof __uv$config.prefix === 'undefined' || typeof __uv$config.encodeUrl === 'undefined') {
-                console.error("UV config not found. Make sure uv.config.js is loaded correctly.");
-                document.getElementById('error-message').innerText = "Error: UV config not found. Please refresh the page or contact support.";
-                return;
-            }
-
-            const proxiedUrl = __uv$config.prefix + __uv$config.encodeUrl(widgetBotUrl);
-            console.log("Proxied URL:", proxiedUrl);
-
-            fetch(proxiedUrl)
-                .then(response => response.text())
-                .then(scriptContent => {
-                    // Create a blob with the script content
-                    const blob = new Blob([scriptContent], { type: 'application/javascript' });
-                    const scriptUrl = URL.createObjectURL(blob);
-
-                    // Create and append the script element
-                    const script = document.createElement('script');
-                    script.src = scriptUrl;
-                    script.onload = () => {
-                        console.log("WidgetBot script loaded successfully.");
-                        if (typeof window.WidgetBot === 'undefined' || typeof window.WidgetBot.default === 'undefined') {
-                            console.error("WidgetBot not found in window object.");
-                            document.getElementById('error-message').innerText = "Error: WidgetBot failed to load. Please refresh the page or try again later.";
-                            return;
-                        }
-                        new window.WidgetBot.default({
-                            server: '1205329363394887722',
-                            channel: '1205332504220012584'
-                        }).mount(document.getElementById('widgetbot-container'));
-                    };
-                    script.onerror = (error) => {
-                        console.error("Error loading WidgetBot script:", error);
-                        document.getElementById('error-message').innerText = "Error loading WidgetBot. Please refresh the page or try again later.";
-                    };
-                    document.body.appendChild(script);
-                })
-                .catch(error => {
-                    console.error("Error fetching WidgetBot script:", error);
-                    document.getElementById('error-message').innerText = "Error fetching WidgetBot. Please refresh the page or try again later.";
-                });
-        }
-
-        // Load WidgetBot when the page is ready
-        window.addEventListener('load', () => {
-            testProxy();
-            loadProxiedWidgetBot();
-        });
     </script>
 </body>
 
