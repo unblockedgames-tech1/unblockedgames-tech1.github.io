@@ -43,14 +43,14 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            min-height: 400px; /* Set a minimum height for the game container */
+            min-height: 400px;
         }
 
         .game_iframe {
             width: 100%;
             flex: 1;
             border: none;
-            border-radius: 10px;
+            border-radius: 10px 10px 0 0;
             background-color: #1a1a1a;
         }
 
@@ -97,50 +97,52 @@
             box-shadow: 0 2px 4px rgba(255,51,51,0.2);
         }
 
+        .footer {
+            background-color: #2a2a2a;
+            padding: 5px;
+            text-align: right;
+            border-radius: 0 0 15px 15px;
+        }
+
         .fullscreen_button {
-            position: absolute;
-            bottom: 10px;
-            right: 10px;
             background: transparent;
             border: none;
             cursor: pointer;
-            z-index: 10;
         }
 
         .fullscreen_button img {
-            width: 40px;
-            height: 40px;
+            width: 24px;
+            height: 24px;
         }
 
-        /* Banner styles */
         .banner {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 120px; /* Keep the original width */
-            height: 600px; /* Keep the original height */
-            display: none; /* This will be controlled by media query */
+            width: 120px;
+            height: 600px;
+            display: none;
             z-index: 1000;
-            border-radius: 15px; /* Added to round corners */
+            border-radius: 15px;
         }
 
         .banner.left {
-            left: 65px; /* Keep the original left position */
+            left: 65px;
         }
 
         .banner.right {
-            right: 65px; /* Adjust this value to ensure it does not overflow */
+            right: 65px;
         }
 
         .banner img {
-            width: 100%; /* Changed to 100% to fit the banner */
+            width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
         @media (min-width: 1340px) {
             .banner {
-                display: block; /* Ensures banners are displayed on larger screens */
+                display: block;
             }
         }
 
@@ -148,18 +150,16 @@
             display: none;
         }
 
-        /* New styles for ads */
         .ad-container {
             width: 100%;
             max-width: 1100px;
             margin: 10px auto;
             text-align: center;
-            height: 100px; /* Set a fixed height for the ad container */
+            height: 100px;
         }
     </style>
 </head>
 <body>
-    <!-- Left Banner -->
     <a href="https://discord.com/users/764413972513685504" class="banner left" target="_blank">
         <img src="/nav/Your ad.png" alt="Advertisement">
     </a>
@@ -172,7 +172,6 @@
         </header>
         <button class="panic_button" onclick="panicButton()">Panic</button>
         
-        <!-- Google Ad before the game container -->
         <div class="ad-container" width="100%">
             <ins class="adsbygoogle"
                  style="display:block"
@@ -187,12 +186,13 @@
         
         <div class="game_container">
             <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
-            <button class="fullscreen_button" onclick="toggleFullScreen()">
-                <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
-            </button>
+            <div class="footer">
+                <button class="fullscreen_button" onclick="toggleFullScreen()">
+                    <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+                </button>
+            </div>
         </div>
         
-        <!-- Google Ad after the game container -->
         <div class="ad-container" width="100%">
             <ins class="adsbygoogle"
                  style="display:block"
@@ -206,7 +206,6 @@
         </div>
     </div>
 
-    <!-- Right Banner -->
     <a href="https://discord.com/users/764413972513685504" class="banner right" target="_blank">
         <img src="/nav/Your ad.png" alt="Advertisement">
     </a>
@@ -237,7 +236,7 @@
                 }
             } else {
                 if (document.exitFullscreen) {
-                    document.exitFullscreen();
+                 document.exitFullscreen();
                 } else if (document.mozCancelFullScreen) {
                     document.mozCancelFullScreen();
                 } else if (document.webkitExitFullscreen) {
