@@ -99,20 +99,24 @@
 
         .footer {
             background-color: #2a2a2a;
-            padding: 5px;
-            text-align: right;
+            padding: 10px;
+            text-align: center;
             border-radius: 0 0 15px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .fullscreen_button {
             background: transparent;
             border: none;
             cursor: pointer;
+            padding: 5px;
         }
 
         .fullscreen_button img {
-            width: 24px;
-            height: 24px;
+            width: 32px;
+            height: 32px;
         }
 
         .banner {
@@ -232,8 +236,7 @@
                 } else if (iframe.webkitRequestFullscreen) {
                     iframe.webkitRequestFullscreen();
                 } else if (iframe.msRequestFullscreen) {
-                    iframe.msRequestFullscreen();
-                }
+                    iframe.msRequestFullscreen(); }
             } else {
                 if (document.exitFullscreen) {
                  document.exitFullscreen();
