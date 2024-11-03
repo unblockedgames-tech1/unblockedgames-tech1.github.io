@@ -14,7 +14,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -11;
+            z-index: -11; /* Put behind content */
         }
         .snowflake {
             position: absolute;
@@ -22,32 +22,75 @@
             border-radius: 50%;
             pointer-events: none;
         }
+    </style>
 
-        /* Notification Style */
-        .notification {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
-            z-index: 1000;
+    <!-- Snowfall Effect Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create container
+            const snowflakesContainer = document.createElement('div');
+            snowflakesContainer.id = 'snowflakes-container';
+            document.body.appendChild(snowflakesContainer);
+
+            // Snowfall logic
+            const snowflakesCount = 200;
+
+            function createSnowflake() {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.width = `${Math.random() * 5 + 2}px`;
+                snowflake.style.height = snowflake.style.width;
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                snowflake.style.opacity = Math.random();
+                return snowflake;
+            }
+
+            // Create animation style
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = `
+                @keyframes fall {
+                    0% {
+                        transform: translateY(-100vh);
+                    }
+                    100% {
+                        transform: translateY(100vh);
+                    }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+
+            // Create snowflakes
+            for (let i = 0; i < snowflakesCount; i++) {
+                const snowflake = createSnowflake();
+                snowflake.style.animation = `fall ${snowflake.style.animationDuration} linear infinite`;
+                snowflakesContainer.appendChild(snowflake);
+            }
+        });
+    </script>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+    <script src="/assets/js/ads.js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() {
+            dataLayer.push(arguments);
         }
+        gtag('js', new Date());
+        gtag('config', 'G-VXDP7XC98T');
+    </script>
 
-        .loading-notification {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 10px;
-            border-radius: 5px;
-            display: none;
-            z-index: 1000;
-        }
+    <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">
+    <script src="/global.js"></script>
+    <script src="/config.js"></script>
 
+    <!-- UV things -->
+    <script src="uv/uv.bundle.js"></script>
+    <script src="uv/uv.config.js"></script>
+
+    <style>
+        /* Styles remain the same as in the previous version */
         #particles-js {
             position: fixed;
             top: 0;
@@ -108,73 +151,13 @@
                 transform: translateY(-50px);
                 opacity: 0;
             }
+
             100% {
                 transform: translateY(0);
                 opacity: 1;
             }
         }
     </style>
-
-    <!-- Snowfall Effect Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const snowflakesContainer = document.createElement('div');
-            snowflakesContainer.id = 'snowflakes-container';
-            document.body.appendChild(snowflakesContainer);
-
-            const snowflakesCount = 200;
-
-            function createSnowflake() {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.style.width = `${Math.random() * 5 + 2}px`;
-                snowflake.style.height = snowflake.style.width;
-                snowflake.style.left = `${Math.random() * 100}vw`;
-                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                snowflake.style.opacity = Math.random();
-                return snowflake;
-            }
-
-            const styleSheet = document.createElement('style');
-            styleSheet.textContent = `
-                @keyframes fall {
-                    0% {
-                        transform: translateY(-100vh);
-                    }
-                    100% {
-                        transform: translateY(100vh);
-                    }
-                }
-            `;
-            document.head.appendChild(styleSheet);
-
-            for (let i = 0; i < snowflakesCount; i++) {
-                const snowflake = createSnowflake();
-                snowflake.style.animation = `fall ${snowflake.style.animationDuration} linear infinite`;
-                snowflakesContainer.appendChild(snowflake);
-            }
-        });
-    </script>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-    <script src="/assets/js/ads.js"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-VXDP7XC98T');
-    </script>
-
-    <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">
-    <script src="/global.js"></script>
-    <script src="/config.js"></script>
-
-    <!-- UV things -->
-    <script src="uv/uv.bundle.js"></script>
-    <script src="uv/uv.config.js"></script>
 </head>
 
 <body>
@@ -182,10 +165,6 @@
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5" height="0" width="0" style="display:none;visibility:hidden"></iframe>
     </noscript>
-
-    <!-- Notification Divs -->
-    <div id="loadingNotification" class="loading-notification">Reloading in 1 second...</div>
-    <div id="refreshNotification" class="notification">Page Refreshed!</div>
 
     <!-- Particle Background -->
     <div id="particles-js"></div>
@@ -234,98 +213,19 @@
             return __uv$config.prefix + __uv$config.encodeUrl(url);
         }
 
-        // Function to show loading notification
-        function showLoadingNotification() {
-            const notification = document.getElementById('loadingNotification');
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 1000);
-        }
-
-        // Function to show refresh notification
-        function showRefreshNotification() {
-            const notification = document.getElementById('refreshNotification');
-            notification.style.display = 'block';
-            setTimeout(() => {
-                notification.style.display = 'none';
-            }, 1000);
-        }
-
-        let refreshTimeout = null;
-        let autoRefreshInterval = null;
-
-        // Function to perform the actual refresh
-        function performRefresh() {
+        // Function to refresh iframe URL
+        function refreshIframe() {
             const originalUrl = "https://e.widgetbot.io/channels/1205329363394887722/1205332504220012584?api=f5bd5f97-abb9-4bcb-82de-f9ed3fed5ed7";
             const proxyUrl = encodeUrl(originalUrl);
             const iframe = document.getElementById('proxyFrame');
             iframe.src = proxyUrl;
-            showRefreshNotification();
         }
 
-        // Function to refresh iframe URL with delay
-        function refreshIframe() {
-            // Clear any existing timeout
-            if (refreshTimeout) {
-                clearTimeout(refreshTimeout);
-            }
-
-            // Show loading notification
-            showLoadingNotification();
-
-            // Reset auto-refresh interval
-            if (autoRefreshInterval) {
-                clearInterval(autoRefreshInterval);
-            }
-            
-            // Set new timeout for manual refresh
-            refreshTimeout = setTimeout(() => {
-                performRefresh();
-                // Restart auto-refresh interval
-                autoRefreshInterval = setInterval(performRefresh, 30000);
-            }, 1000);
-        }
-
-        // Set initial iframe src and add event listeners
+        // Set initial iframe src and start refresh interval
         window.onload = function() {
-            // Initial load
-            performRefresh();
-            
-            // Start auto-refresh interval
-            autoRefreshInterval = setInterval(performRefresh, 30000);
-
-                }
-            });
-
-            // Get the iframe element
-            const iframe = document.getElementById('proxyFrame');
-
-            // Add event listener for when iframe loads
-            iframe.addEventListener('load', function() {
-                try {
-                    // Try to add event listener to iframe content
-                    iframe.contentWindow.document.addEventListener('keydown', function(event) {
-                        if (event.key === 'Enter') {
-                            refreshIframe();
-                        }
-                    });
-                } catch (e) {
-                    // If we can't access iframe content due to same-origin policy,
-                    // we'll still catch Enter events through event bubbling
-                    console.log('Unable to directly access iframe content - using bubble capture');
-                }
-            });
-
-            // Add event listener to capture bubbled events from iframe
-            window.addEventListener('keydown', function(event) {
-                // Check if the event target is the iframe or its contents
-                if (event.target === iframe || event.target.closest('iframe')) {
-                    if (event.key === 'Enter') {
-                        refreshIframe();
-                    }
-                }
-            }, true); // Use capture phase to ensure we get the event
+            refreshIframe(); // Initial load
+            // Refresh every 30 seconds (30000 milliseconds)
+            setInterval(refreshIframe, 30000);
         };
     </script>
 </body>
