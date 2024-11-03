@@ -34,7 +34,7 @@ app.get("/settings", function (req, res) {
 })
 app.get("/chat", function (req, res) {
   res.sendFile(path.join(__dirname, "static/chat.html"));
-
+})
 app.use(express.static(path.join(__dirname, "static")));
 
 app.get('*', function(req, res) {res.sendFile(path.join(__dirname, "static/404.html"))})
