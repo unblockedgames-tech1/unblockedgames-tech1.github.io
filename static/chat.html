@@ -2,8 +2,12 @@
 <html lang="en">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>New Tab</title>
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' 'unsafe-inline' 'unsafe-eval' data: blob: *;">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
@@ -26,7 +30,6 @@
     <script src="uv/uv.config.js"></script>
 
     <style>
-        /* Your existing styles here */
         #particles-js {
             position: fixed;
             top: 0;
@@ -133,7 +136,20 @@
         loadHTML("/assets/html/header.html", "header");
         loadHTML("/assets/html/footer.html", "footer");
 
-        // Function to load WidgetBot through proxy
+        function testProxy() {
+            const testUrl = 'https://example.com';
+            const proxiedTestUrl = __uv$config.prefix + __uv$config.encodeUrl(testUrl);
+            
+            fetch(proxiedTestUrl)
+                .then(response => response.text())
+                .then(data => {
+                    console.log("Proxy test successful:", data.slice(0, 100));
+                })
+                .catch(error => {
+                    console.error("Proxy test failed:", error);
+                });
+        }
+
         function loadProxiedWidgetBot() {
             console.log("Attempting to load WidgetBot...");
             const widgetBotUrl = 'https://cdn.jsdelivr.net/npm/@widgetbot/html-embed';
@@ -147,29 +163,45 @@
             const proxiedUrl = __uv$config.prefix + __uv$config.encodeUrl(widgetBotUrl);
             console.log("Proxied URL:", proxiedUrl);
 
-            const script = document.createElement('script');
-            script.src = proxiedUrl;
-            script.onload = () => {
-                console.log("WidgetBot script loaded successfully.");
-                if (typeof window.WidgetBot === 'undefined' || typeof window.WidgetBot.default === 'undefined') {
-                    console.error("WidgetBot not found in window object.");
-                    document.getElementById('error-message').innerText = "Error: WidgetBot failed to load. Please refresh the page or try again later.";
-                    return;
-                }
-                new window.WidgetBot.default({
-                    server: '1205329363394887722',
-                    channel: '1205332504220012584'
-                }).mount(document.getElementById('widgetbot-container'));
-            };
-            script.onerror = (error) => {
-                console.error("Error loading WidgetBot script:", error);
-                document.getElementById('error-message').innerText = "Error loading WidgetBot. Please refresh the page or try again later.";
-            };
-            document.body.appendChild(script);
+            fetch(proxiedUrl)
+                .then(response => response.text())
+                .then(scriptContent => {
+                    // Create a blob with the script content
+                    const blob = new Blob([scriptContent], { type: 'application/javascript' });
+                    const scriptUrl = URL.createObjectURL(blob);
+
+                    // Create and append the script element
+                    const script = document.createElement('script');
+                    script.src = scriptUrl;
+                    script.onload = () => {
+                        console.log("WidgetBot script loaded successfully.");
+                        if (typeof window.WidgetBot === 'undefined' || typeof window.WidgetBot.default === 'undefined') {
+                            console.error("WidgetBot not found in window object.");
+                            document.getElementById('error-message').innerText = "Error: WidgetBot failed to load. Please refresh the page or try again later.";
+                            return;
+                        }
+                        new window.WidgetBot.default({
+                            server: '1205329363394887722',
+                            channel: '1205332504220012584'
+                        }).mount(document.getElementById('widgetbot-container'));
+                    };
+                    script.onerror = (error) => {
+                        console.error("Error loading WidgetBot script:", error);
+                        document.getElementById('error-message').innerText = "Error loading WidgetBot. Please refresh the page or try again later.";
+                    };
+                    document.body.appendChild(script);
+                })
+                .catch(error => {
+                    console.error("Error fetching WidgetBot script:", error);
+                    document.getElementById('error-message').innerText = "Error fetching WidgetBot. Please refresh the page or try again later.";
+                });
         }
 
         // Load WidgetBot when the page is ready
-        window.addEventListener('load', loadProxiedWidgetBot);
+        window.addEventListener('load', () => {
+            testProxy();
+            loadProxiedWidgetBot();
+        });
     </script>
 </body>
 
