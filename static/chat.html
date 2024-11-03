@@ -239,16 +239,45 @@
             showNotification();
         }
 
-        // Set initial iframe src and add event listener for Enter key
+        // Set initial iframe src and add event listeners
         window.onload = function() {
             refreshIframe(); // Initial load
             
-            // Add event listener for Enter key
+            // Add event listener for Enter key on main document
             document.addEventListener('keydown', function(event) {
                 if (event.key === 'Enter') {
                     refreshIframe();
                 }
             });
+
+            // Get the iframe element
+            const iframe = document.getElementById('proxyFrame');
+
+            // Add event listener for when iframe loads
+            iframe.addEventListener('load', function() {
+                try {
+                    // Try to add event listener to iframe content
+                    iframe.contentWindow.document.addEventListener('keydown', function(event) {
+                        if (event.key === 'Enter') {
+                            refreshIframe();
+                        }
+                    });
+                } catch (e) {
+                    // If we can't access iframe content due to same-origin policy,
+                    // we'll still catch Enter events through event bubbling
+                    console.log('Unable to directly access iframe content - using bubble capture');
+                }
+            });
+
+            // Add event listener to capture bubbled events from iframe
+            window.addEventListener('keydown', function(event) {
+                // Check if the event target is the iframe or its contents
+                if (event.target === iframe || event.target.closest('iframe')) {
+                    if (event.key === 'Enter') {
+                        refreshIframe();
+                    }
+                }
+            }, true); // Use capture phase to ensure we get the event
         };
     </script>
 </body>
