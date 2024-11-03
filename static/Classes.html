@@ -119,6 +119,19 @@
             height: 24px;
         }
 
+        .reload_button {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 3px;
+            margin-left: 10px;
+        }
+
+        .reload_button img {
+            width: 24px;
+            height: 24px;
+        }
+
         .banner {
             position: fixed;
             top: 50%;
@@ -194,6 +207,9 @@
                 <button class="fullscreen_button" onclick="toggleFullScreen()">
                     <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
                 </button>
+                <button class="reload_button" onclick="reloadGame()">
+                    <img src="/nav/reload.png" alt="Reload">
+                </button>
             </div>
         </div>
         
@@ -227,7 +243,7 @@
             window.location.href = 'https://launchpad.classlink.com/login';
         }
 
-        function toggleFullScreen() {
+        function toggleFullScreen () {
             if (!document.fullscreenElement) {
                 if (iframe.requestFullscreen) {
                     iframe.requestFullscreen();
@@ -248,6 +264,11 @@
                     document.msExitFullscreen();
                 }
             }
+        }
+
+        function reloadGame() {
+            let iframe = document.getElementById('gframe');
+            iframe.src = iframe.src;
         }
 
         iframe.addEventListener('click', function() {
