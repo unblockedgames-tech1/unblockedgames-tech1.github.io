@@ -1,113 +1,113 @@
+/* Christmas-themed styles */
+:root {
+    --christmas-red: #D42426;
+    --christmas-green: #0F8A5F;
+    --snow-white: #F0F0F0;
+    --gold: #FFD700;
+}
+
+body {
+    background-color: var(--christmas-green);
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><circle cx="1" cy="1" r="1" fill="white" opacity="0.3"/></svg>');
+    background-size: 20px 20px;
+}
 
 /* Styles for the random game button */
 .random-game-button {
     display: block;
     width: 30%; 
-    padding: 1px;
+    padding: 10px;
     font-size: 1.5rem;
     font-weight: bold;
     text-align: center;
-    background-color: transparent; 
-    color: white; 
+    background-color: var(--christmas-red); 
+    color: var(--snow-white); 
     border: none;
     cursor: pointer;
-    transition: background-color 0.3s;
-    border: 2px solid white; 
+    transition: all 0.3s;
+    border: 2px solid var(--gold); 
     margin: 3vh auto;
     border-radius: 15px;
+    box-shadow: 0 0 10px var(--gold);
 }
+
 .random-game-button:hover {
-    background-color: #45a049; 
+    background-color: var(--gold);
+    color: var(--christmas-red);
+    transform: scale(1.05);
 }
 
-
-
-	.flex-container {
-           display: flex;
-           position: relative;
-           flex-wrap: wrap;
-           justify-content: center;
-           gap: 20px;
-           padding: 5rem;
-           
-	}
-
-        .game {
-            border-radius: 30rem;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-        }
-
-
-        .game:hover {
-            transform: scale(1.05);
-        }
-
-.game-image {
-    width: 100%;
-    height: auto;
-    width: 288px; /* Set the width to 288px */
-    height: 288px; /* Set the height to 288px */
-    border-top-left-radius: 2rem;
-    border-top-right-radius: 2rem;
-    object-fit: cover; /* Ensure the image is scaled correctly */
-    transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out; /* Add a transition effect with a slower zoom */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
+.flex-container {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 5rem;
 }
 
-.game:hover .game-image {
-    transform: scale(1.05); /* Scale the image up on hover */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Increase the shadow effect on hover */
+.game {
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+    background-color: var(--snow-white);
+    overflow: hidden;
+}
+
+.game:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px var(--gold);
 }
 
 .game-image {
-    animation: subtle-pulse 4s infinite; /* Add a subtle pulse animation */
-    animation-delay: 1s; /* Delay the animation by 1 second */
-}
-
-@keyframes subtle-pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.01);
-    }
-    100% {
-        transform: scale(1);
-    }
+    width: 288px;
+    height: 288px;
+    object-fit: cover;
+    transition: transform 0.5s ease-in-out;
 }
 
 .game:hover .game-image {
-    animation: none; /* Stop the pulse animation on hover */
+    transform: scale(1.05);
 }
 
-        .game-info {
-            padding: 10px;
-            text-align: center;
-            background-color: #555555; /* Light blue shading color */
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
+.game-image {
+    animation: snow-fall 10s linear infinite;
+}
 
-        }
+@keyframes snow-fall {
+    0% { transform: translateY(-10px); }
+    100% { transform: translateY(10px); }
+}
 
-        .game-title {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #fff;
-        }
+.game-info {
+    padding: 10px;
+    text-align: center;
+    background-color: var(--christmas-red);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+}
 
-        .play-button {
-            background-color: #555555; /* Lighter black color */
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: background-color 0.3s ease-in-out;
-        }
+.game-title {
+    font-size: 20px;
+    margin-bottom: 10px;
+    color: var(--snow-white);
+}
 
-        .play-button:hover {
-            background-color: #454545; /* Darker shade of black on hover */
-        }
+.play-button {
+    background-color: var(--gold);
+    color: var(--christmas-red);
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.3s ease-in-out;
+    font-weight: bold;
+}
+
+.play-button:hover {
+    background-color: var(--snow-white);
+    color: var(--christmas-red);
+    box-shadow: 0 0 10px var(--gold);
+}
