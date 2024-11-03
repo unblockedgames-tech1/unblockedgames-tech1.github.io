@@ -1,39 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Container for snowflakes -->
-    <style>
-        #snowflakes-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 9999;
-        }
-        .snowflake {
-            position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            pointer-events: none;
-        }
-    </style>
-
-    <!-- Add the container div -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            if (!document.getElementById('snowflakes-container')) {
-                const container = document.createElement('div');
-                container.id = 'snowflakes-container';
-                document.body.appendChild(container);
-            }
-        });
-    </script>
-
-    <!-- Load the snowflake script -->
-    <script src="/assets/components/snowflake.js"></script>
-</head>
 	<script src="/assets/js/favicon-handler.js"></script>
   <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
   <title>Classes</title>
