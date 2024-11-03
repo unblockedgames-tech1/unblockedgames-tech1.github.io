@@ -101,11 +101,6 @@ const gamesData = [
     link: __uv$config.prefix + __uv$config.encodeUrl("https://games-online.io/game/HappyWheels/")
 },
 {
-    title: "Digworm.io",
-    imgSrc: "gameimg/digworm.webp",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://digworm.io/")
-},
-{
     title: "Apple worm", 
     imgSrc: "gameimg/appleworm.png",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://apple-worm.github.io/apple-worm/")
@@ -344,11 +339,6 @@ const gamesData = [
     title: "CoreBall", 
     imgSrc: "gameimg/coreball.jpg",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.monkey-type.org/games/coreballiframe")
-},
-{
-    title: "BuckShot Roulette", 
-    imgSrc: "gameimg/buckshot.webp",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://buckshotroulette.online/steam/")
 },
 {
     title: "Pixel Shooter", 
