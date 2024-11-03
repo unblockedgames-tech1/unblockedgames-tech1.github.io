@@ -37,7 +37,7 @@
         pointer-events: none;
     }
 
-    /* Flex container for aligning the widget */
+    /* Flex container for aligning the iframe */
     .container {
         display: flex;
         justify-content: center;
@@ -47,30 +47,30 @@
         margin: 0;
     }
 
-    .widget-section {
-        width: 95%; /* Use a larger percentage for responsive width */
-        max-width: 1200px; /* Set a larger maximum width */
-        height: 80%; /* Set a height for the widget section */
-        display: flex; /* Flexbox for child elements */
-        flex-direction: column; /* Stack children vertically */
-        position: relative; /* Position relative for absolute child */
+    .iframe-section {
+        width: 95%;
+        max-width: 1200px;
+        height: 80%;
+        display: flex;
+        flex-direction: column;
+        position: relative;
     }
 
-    widgetbot {
-        flex: 1; /* Allow the widget to grow and fill the space */
-        border: none; /* Remove border */
-        border-radius: 15px; /* Optional: rounded corners */
+    iframe {
+        flex: 1;
+        border: none;
+        border-radius: 15px;
     }
 
     /* Media query for smaller screens */
     @media (max-width: 800px) {
-        .widget-section {
-            height: auto; /* Auto height to maintain aspect ratio */
-            padding-bottom: 75%; /* Maintain aspect ratio */
+        .iframe-section {
+            height: auto;
+            padding-bottom: 75%;
         }
 
-        widgetbot {
-            height: 100%; /* Full height */
+        iframe {
+            height: 100%;
         }
     }
 
@@ -116,9 +116,8 @@
 
     <!-- Main Content -->
     <div class="container">
-        <div class="widget-section">
-            <widgetbot server="1205329363394887722" channel="1205332504220012584"></widgetbot>
-            <script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+        <div class="iframe-section">
+            <iframe src="https://e.widgetbot.io/channels/1205329363394887722/1205332504220012584?api=f5bd5f97-abb9-4bcb-82de-f9ed3fed5ed7" width="100%" height="100%" allowtransparency="true" frameborder="0"></iframe>
         </div>
     </div>
 
