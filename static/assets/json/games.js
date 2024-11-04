@@ -603,12 +603,5 @@ const gamesData = [
     link: __uv$config.prefix + __uv$config.encodeUrl("https://storage.y8.com/y8-studio/html5/Gani/level-devil-trap-path/?key=y8&value=default")
 },
 
-{
-	title: "Candy Crush",
-	imgSrc: "https://play-lh.googleusercontent.com/TLUeelx8wcpEzf3hoqeLxPs3ai1tdGtAZTIFkNqy3gbDp1NPpNFTOzSFJDvZ9narFS0=s48-rw",
-	link: __uv$config.prefix + __uv$config.encodeUrl("https://poki.to/candy-crush-saga-king/play")
-}
-
-
    ];
 export default gamesData;
