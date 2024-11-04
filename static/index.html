@@ -273,8 +273,8 @@
     </script>
 
     <script>
-        loadHTML("/assets/html/header.html", "header")
-        loadHTML("/assets/html/footer.html", "footer")
+        loadHTML("/assets/html/header.html", "header");
+        loadHTML("/assets/html/footer.html", "footer");
     </script>
 
     <script type="module">
@@ -282,72 +282,93 @@
             const gamesList = document.getElementById("gamesList");
             console.log("Found games list element:", gamesList);
 
-            import("/assets/json/gamesManager.js")
-                .then(module => {
-                    console.log("Successfully imported games:", module.default);
-                    const games = module.default;
-
-                    function loadGame(game) {
-                        console.log("Loading game:", game);
-                        const gameElement = document.createElement("div");
-                        gameElement.className = "game";
-
-                        const imgElement = document.createElement("img");
-                        imgElement.src = game.imgSrc;
-                        imgElement.alt = game.title;
-                        imgElement.className = "game-image";
-
-                        const titleElement = document.createElement("div");
-                        titleElement.className = "game-info";
-                        titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
-
-                        const linkElement = document.createElement("a");
-                        linkElement.href = `javascript:localStorage.setItem("loadedG", ${'"' + game.link+'"'}); location.href = "/Classes.html"`;
-                        linkElement.textContent = "Play";
-                        linkElement.className = "play-button";
-
-                        gameElement.appendChild(imgElement);
-                        gameElement.appendChild(titleElement);
-                        titleElement.appendChild(linkElement);
-
-                        gamesList.appendChild(gameElement);
-                    }
-
-                    // Load all games initially
-                    console.log("Starting to load games...");
-                    games.forEach(game => {
-                        loadGame(game);
-                    });
-
-                    // Setup search functionality
-                    document.getElementById("searchGames").addEventListener("keydown", function (e) {
-                        gamesList.innerHTML = '';
-                        if (e.code === "Enter") { 
-                            e.preventDefault();
+            // Wait for UV config
+            await new Promise(resolve => {
+                if (window.__uv$config) {
+                    resolve();
+                } else {
+                    const checkUV = setInterval(() => {
+                        if (window.__uv$config) {
+                            clearInterval(checkUV);
+                            resolve();
                         }
-                        gamesList.innerHTML = "";
-                        for (const game of games) {
-                            if (game.title.toLowerCase().includes(this.value.toLowerCase())) {
-                                loadGame(game);
-                            }
-                        }
-                    });
-                })
-                .catch(error => {
-                    console.error("Error loading games:", error);
-                    gamesList.innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
+                    }, 100);
+                }
+            });
+
+            console.log("UV config loaded:", window.__uv$config);
+
+            // Import games
+            const { gamesData } = await import("/assets/json/games.js");
+            const { games2Data } = await import("/assets/json/games2.js");
+            
+            console.log("Loaded games1:", gamesData);
+            console.log("Loaded games2:", games2Data);
+
+            const games = [...gamesData, ...games2Data];
+            console.log("Combined games:", games);
+
+            function loadGame(game) {
+                console.log("Loading game:", game);
+                const gameElement = document.createElement("div");
+                gameElement.className = "game";
+
+                const imgElement = document.createElement("img");
+                imgElement.src = game.imgSrc;
+                imgElement.alt = game.title;
+                imgElement.className = "game-image";
+
+                const titleElement = document.createElement("div");
+                titleElement.className = "game-info";
+                titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
+
+                const linkElement = document.createElement("a");
+                linkElement.href = `javascript:localStorage.setItem("loadedG", ${'"' + game.link+'"'}); location.href = "/Classes.html"`;
+                linkElement.textContent = "Play";
+                linkElement.className = "play-button";
+
+                gameElement.appendChild(imgElement);
+                gameElement.appendChild(titleElement);
+                titleElement.appendChild(linkElement);
+
+                gamesList.appendChild(gameElement);
+            }
+
+            // Load all games initially
+            console.log("Starting to load games...");
+            if (Array.isArray(games)) {
+                games.forEach(game => {
+                    loadGame(game);
                 });
+            } else {
+                console.error("Games is not an array:", games);
+                gamesList.innerHTML = '<div style="color: white;">Error: Games data is not in the correct format</div>';
+            }
+
+            // Setup search functionality
+            document.getElementById("searchGames").addEventListener("keydown", function (e) {
+                gamesList.innerHTML = '';
+                if (e.code === "Enter") { 
+                    e.preventDefault();
+                }
+                gamesList.innerHTML = "";
+                for (const game of games) {
+                    if (game.title.toLowerCase().includes(this.value.toLowerCase())) {
+                        loadGame(game);
+                    }
+                }
+            });
 
         } catch (error) {
-            console.error("Critical error:", error);
-            document.getElementById("gamesList").innerHTML = `<div style="color: white;">Critical error: ${error.message}</div>`;
+            console.error("Error loading games:", error);
+            document.getElementById("gamesList").innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
         }
     </script>
 
     <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
         new Crate({
-            server: '1205329363394887722', // Void Network
-            channel: '1205332504220012584' // #📌・voidnetwork-chattin
+            server: '1205329363394887722',
+            channel: '1205332504220012584'
         })
     </script>
 </body>
