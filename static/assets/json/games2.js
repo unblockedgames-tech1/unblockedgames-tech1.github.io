@@ -1,5 +1,4 @@
-// games2.js
-const games2Data = [
+const gamesData = [
     {
         title: "Example Game",
         imgSrc: "gameimg/example.png",
