@@ -7,6 +7,5 @@ const games2Data = [
 {
 
 
-];
-
-export default games2Data;
+   ];
+export default gamesData;
