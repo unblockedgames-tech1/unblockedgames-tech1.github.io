@@ -44,19 +44,15 @@
             display: flex;
             flex-direction: column;
             width: 100%;
-            min-height: 100vh;
         }
 
         .container {
             display: flex;
             flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 60px 20px;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 1600px;
-            height: calc(100vh - 120px); /* Accounting for header and footer */
+            height: 100%;
+            margin-top: 60px;
+            margin-bottom: 60px;
+            padding: 0 20px;
         }
 
         .header {
@@ -102,7 +98,7 @@
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: 100%;
+            width: 98%;
             max-width: 1400px;
             margin: 10px auto;
             flex: 1;
@@ -118,7 +114,6 @@
             border: none;
             border-radius: 10px 10px 0 0;
             background-color: #1a1a1a;
-            height: calc(100vh - 200px); /* Adjust the height to fit the viewport */
         }
 
         .panic_button {
@@ -134,7 +129,6 @@
             border-radius: 25px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 8px rgba(255,51,51,0.2);
-            z-index: 10;
         }
 
         .panic_button:hover {
@@ -263,7 +257,6 @@
             margin: 10px auto;
             text-align: center;
             height: 100px;
-            z-index: 10;
         }
     </style>
 </head>
@@ -287,7 +280,7 @@
     <div class="container">
         <button class="panic_button" onclick="panicButton()">Panic</button>
         
-        <div class="ad-container">
+        <div class="ad-container" width="100%">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-format="fluid"
@@ -311,7 +304,7 @@
             </div>
         </div>
         
-        <div class="ad-container">
+        <div class="ad-container" width="100%">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-format="fluid"
