@@ -606,6 +606,11 @@ const gamesData = [
 	imgSrc: "https://play-lh.googleusercontent.com/TLUeelx8wcpEzf3hoqeLxPs3ai1tdGtAZTIFkNqy3gbDp1NPpNFTOzSFJDvZ9narFS0=s48-rw",
 	link: __uv$config.prefix + __uv$config.encodeUrl("https://poki.to/candy-crush-saga-king/play")
 }
+{
+	title: "Candy Crush",
+	imgSrc: "https://play-lh.googleusercontent.com/TLUeelx8wcpEzf3hoqeLxPs3ai1tdGtAZTIFkNqy3gbDp1NPpNFTOzSFJDvZ9narFS0=s48-rw",
+	link: __uv$config.prefix + __uv$config.encodeUrl("https://poki.to/candy-crush-saga-king/play")
+}
 
 
    ];
