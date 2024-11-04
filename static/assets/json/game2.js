@@ -1,11 +1,9 @@
 const additionalGames = [
-    // Add your additional games here in the same format
-    // Example:
-    // {
-    //     title: "Game Name",
-    //     imgSrc: "image-url",
-    //     link: uv$config.prefix + uv$config.encodeUrl("game-url")
-    // }
+{
+    title: "Among us",
+    imgSrc: "gameimg/Amoungus.png",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://classroom.lol/_games/amongus/") 
+},
 ];
 
 export default additionalGames;
