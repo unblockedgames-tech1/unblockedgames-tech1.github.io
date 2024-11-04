@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html>
 <head>
     <script src="/assets/js/favicon-handler.js"></script>
@@ -7,7 +8,7 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
      crossorigin="anonymous"></script>
 
-        <!-- Snowfall Effect Styles -->
+    <!-- Snowfall Effect Styles -->
     <style>
         #snowflakes-container {
             position: fixed;
@@ -16,7 +17,7 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -11; /* Put behind content */
+            z-index: -11;
         }
         .snowflake {
             position: absolute;
@@ -25,51 +26,6 @@
             pointer-events: none;
         }
     </style>
-
-    <!-- Snowfall Effect Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create container
-            const snowflakesContainer = document.createElement('div');
-            snowflakesContainer.id = 'snowflakes-container';
-            document.body.appendChild(snowflakesContainer);
-
-            // Snowfall logic
-            const snowflakesCount = 200;
-
-            function createSnowflake() {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.style.width = `${Math.random() * 5 + 2}px`;
-                snowflake.style.height = snowflake.style.width;
-                snowflake.style.left = `${Math.random() * 100}vw`;
-                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                snowflake.style.opacity = Math.random();
-                return snowflake;
-            }
-
-            // Create animation style
-            const styleSheet = document.createElement('style');
-            styleSheet.textContent = `
-                @keyframes fall {
-                    0% {
-                        transform: translateY(-100vh);
-                    }
-                    100% {
-                        transform: translateY(100vh);
-                    }
-                }
-            `;
-            document.head.appendChild(styleSheet);
-
-            // Create snowflakes
-            for (let i = 0; i < snowflakesCount; i++) {
-                const snowflake = createSnowflake();
-                snowflake.style.animation = `fall ${snowflake.style.animationDuration} linear infinite`;
-                snowflakesContainer.appendChild(snowflake);
-            }
-        });
-    </script>
 
     <style>
         * {
@@ -94,6 +50,52 @@
             display: flex;
             flex-direction: column;
             height: 100%;
+            margin-top: 60px; /* Added to account for fixed header */
+        }
+
+        .header {
+            position: fixed;
+            width: 100%;
+            background: linear-gradient(90deg, rgba(41,41,41,0.9) 0%, rgba(61,61,61,0.9) 50%, rgba(41,41,41,0.9) 100%);
+            color: white;
+            left: 0;
+            padding: 1rem;
+            top: 0;
+            z-index: 1000;
+            font-size: 0.8rem;
+            font-family: "Be Vietnam Pro", sans-serif;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .header:hover {
+            background: linear-gradient(90deg, rgba(51,51,51,0.95) 0%, rgba(71,71,71,0.95) 50%, rgba(51,51,51,0.95) 100%);
+        }
+
+        .home_bttn {
+            background-color: transparent;
+            border: none;
+            height: 3vh;
+            width: 3vh;
+            margin: 0 1.5rem;
+            transition: all 0.3s ease;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+        }
+
+        .home_bttn:hover {
+            transform: scale(1.2);
+            filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
         }
 
         .game_container {
@@ -116,23 +118,6 @@
             border: none;
             border-radius: 10px 10px 0 0;
             background-color: #1a1a1a;
-        }
-
-        .header {
-            width: 100%;
-            background-color: rgb(41, 41, 41);
-            color: white;
-            padding: 0.5rem;
-            font-size: 0.8rem;
-            font-family: "Be Vietnam Pro", sans-serif;
-            font-weight: 700;
-        }
-
-        .home_bttn {
-            background-color: transparent;
-            border: none;
-            height: 3vh;
-            width: 3vh;
         }
 
         .panic_button {
@@ -245,12 +230,19 @@
         <img src="/nav/Your ad.png" alt="Advertisement">
     </a>
 
+    <header class="header">
+        <a href="/">
+            <img src="/nav/home.png" class="home_bttn" alt="Home">
+        </a>
+        <a href="/ta">
+            <img src="/nav/search.png" class="home_bttn" alt="Search">
+        </a>
+        <a href="/app">
+            <img src="/nav/apps.png" class="home_bttn" alt="Apps">
+        </a>
+    </header>
+
     <div class="container">
-        <header class="header">
-            <a href="/">
-                <img src="/nav/home.png" class="home_bttn" alt="Home">
-            </a>
-        </header>
         <button class="panic_button" onclick="panicButton()">Panic</button>
         
         <div class="ad-container" width="100%">
@@ -294,7 +286,60 @@
         <img src="/nav/Your ad.png" alt="Advertisement">
     </a>
 
+    <!-- Snowfall Effect Script -->
     <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create container
+            const snowflakesContainer = document.createElement('div');
+            snowflakesContainer.id = 'snowflakes-container';
+            document.body.appendChild(snowflakesContainer);
+
+            // Snowfall logic
+            const snowflakesCount = 200;
+
+            function createSnowflake() {
+                const snowflake = document.createElement('div');
+                snowflake.className = 'snowflake';
+                snowflake.style.width = `${Math.random() * 5 + 2}px`;
+                snowflake.style.height = snowflake.style.width;
+                snowflake.style.left = `${Math.random() * 100}vw`;
+                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
+                snowflake.style.opacity = Math.random();
+                return snowflake;
+            }
+
+            // Create animation style
+            const styleSheet = document.createElement('style');
+            styleSheet.textContent = `
+                @keyframes fall {
+                    0% {
+                        transform: translateY(-100vh);
+                    }
+                    100% {
+                        transform: translateY(100vh);
+                    }
+                }
+            `;
+            document.head.appendChild(styleSheet);
+
+            // Create snowflakes
+            for (let i = 0; i < snowflakesCount; i++) {
+                const snowflake = createSnowflake();
+                snowflake.style.animation = `fall ${snowflake.style.animationDuration} linear infinite`;
+                snowflakesContainer.appendChild(snowflake);
+            }
+        });
+
+        // Add pulse animation to header buttons
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const buttons = document.querySelectorAll('.home_bttn');
+            buttons.forEach((button, index) => {
+                setTimeout(() => {
+                    button.style.animation = 'pulse 2s infinite';
+                }, index * 200);
+            });
+        });
+
         let loadedG = localStorage.getItem('loadedG');
         let iframe = document.getElementById('gframe');
         iframe.src = loadedG;
@@ -307,7 +352,7 @@
             window.location.href = 'https://launchpad.classlink.com/login';
         }
 
-        function toggleFullScreen () {
+        function toggleFullScreen() {
             if (!document.fullscreenElement) {
                 if (iframe.requestFullscreen) {
                     iframe.requestFullscreen();
@@ -316,10 +361,11 @@
                 } else if (iframe.webkitRequestFullscreen) {
                     iframe.webkitRequestFullscreen();
                 } else if (iframe.msRequestFullscreen) {
-                    iframe.msRequestFullscreen(); }
+                    iframe.msRequestFullscreen();
+                }
             } else {
                 if (document.exitFullscreen) {
-                 document.exitFullscreen();
+                    document.exitFullscreen();
                 } else if (document.mozCancelFullScreen) {
                     document.mozCancelFullScreen();
                 } else if (document.webkitExitFullscreen) {
