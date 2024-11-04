@@ -112,22 +112,43 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            gap: 10px;
         }
 
-        .fullscreen_button, .reload_button {
+        .fullscreen_button, .reload_button, .flash_button {
             background: transparent;
             border: none;
             cursor: pointer;
             padding: 3px;
         }
 
-        .fullscreen_button img, .reload_button img {
+        .fullscreen_button img, .reload_button img, .flash_button img {
             width: 24px;
             height: 24px;
+            transition: filter 0.3s ease;
         }
 
-        .reload_button {
-            margin-left: 10px;
+        .flash_button.active img {
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+        }
+
+        .flash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, 
+                rgba(255, 255, 255, 0.15) 0%, 
+                rgba(255, 255, 255, 0) 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: 999;
+        }
+
+        .flash-active {
+            opacity: 1;
         }
 
         .banner {
@@ -202,6 +223,8 @@
     </style>
 </head>
 <body>
+    <div class="flash-overlay" id="flashOverlay"></div>
+
     <a href="https://discord.com/users/764413972513685504" class="banner left" target="_blank">
         <img src="/nav/Your ad.png" alt="Advertisement">
     </a>
@@ -240,6 +263,9 @@
                 <button class="reload_button" onclick="reloadGame()">
                     <img src="/nav/reload.png" alt="Reload">
                 </button>
+                <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
+                    <img src="/nav/flash.png" alt="Flashlight">
+                </button>
             </div>
         </div>
         
@@ -269,6 +295,7 @@
             this.focus();
         };
 
+        // Existing fullscreen functionality
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
                 if (iframe.requestFullscreen) {
@@ -297,6 +324,27 @@
             let iframe = document.getElementById('gframe');
             iframe.src = iframe.src;
         }
+
+        // New flashlight functionality
+        let isFlashlightOn = false;
+        const flashOverlay = document.getElementById('flashOverlay');
+        const flashButton = document.getElementById('flashButton');
+
+        function toggleFlashlight() {
+            isFlashlightOn = !isFlashlightOn;
+            flashButton.classList.toggle('active', isFlashlightOn);
+            flashOverlay.classList.toggle('flash-active', isFlashlightOn);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if (isFlashlightOn) {
+                const x = e.clientX;
+                const y = e.clientY;
+                flashOverlay.style.background = `radial-gradient(circle at ${x}px ${y}px, 
+                    rgba(255, 255, 255, 0.15) 0%, 
+                    rgba(255, 255, 255, 0) 70%)`;
+            }
+        });
 
         iframe.addEventListener('click', function() {
             this.focus();
