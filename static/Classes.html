@@ -44,15 +44,20 @@
             display: flex;
             flex-direction: column;
             width: 100%;
+            min-height: 100vh;
         }
 
         .container {
             display: flex;
             flex-direction: column;
-            height: 100%;
-            margin-top: 60px;
-            margin-bottom: 60px;
-            padding: 0 20px;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            width: 100%;
+            padding: 60px 20px;
+            margin: 0 auto;
+            max-width: 1600px;
+            gap: 10px;
         }
 
         .header {
@@ -98,19 +103,18 @@
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: 98%;
+            width: 100%;
             max-width: 1400px;
-            margin: 10px auto;
-            flex: 1;
+            aspect-ratio: 16/9;
+            margin: 0 auto;
             display: flex;
             flex-direction: column;
             position: relative;
-            min-height: 600px;
         }
 
         .game_iframe {
             width: 100%;
-            flex: 1;
+            height: calc(100% - 40px);
             border: none;
             border-radius: 10px 10px 0 0;
             background-color: #1a1a1a;
@@ -125,10 +129,10 @@
             font-family: "Be Vietnam Pro", sans-serif;
             font-weight: 700;
             cursor: pointer;
-            margin: 0.5rem auto;
             border-radius: 25px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 8px rgba(255,51,51,0.2);
+            margin: 0;
         }
 
         .panic_button:hover {
@@ -150,6 +154,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            height: 40px;
         }
 
         .fullscreen_button {
@@ -254,7 +259,7 @@
         .ad-container {
             width: 100%;
             max-width: 1100px;
-            margin: 10px auto;
+            margin: 0 auto;
             text-align: center;
             height: 100px;
         }
