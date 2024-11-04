@@ -610,5 +610,10 @@ const gamesData = [
     imgSrc: "https://lh7-us.googleusercontent.com/y7FZT_XunMUl5bQaUk6W00FjVx5xaoGaPM2XtjNMI6xGO-8Qqasu0Ba2BASWlxadGLqAXkJlmTT5XSZ90EmtywFjsvlpOW5ksVMeP2aZlhgLT0feBQm0rNisa3VvsYAIMw94sVPWjGJD2-R6X3MsMqA-RvT3WQ",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://f.kbhgames.com/emujs/play.php?c=gba&f=PokemonQuetzalAlpha6v9.gba")
 }
+{
+    title: "Geomatry Dash", 
+    imgSrc: "https://lh7-us.googleusercontent.com/xzhOGM4wjIJKEp5B80TXpg4LArOEXtTVosOj98RMbNdzdtQBMitXKakY6kzTuaHJQoJa2TI--LQseSXSaGecSUUYRbACHQ3-M0R87sXCC_nWy0q0ovn8sXna5ZbHDSZKQBccX1w95MT5KwGdjoMm5wuTIKHiOw",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://geometrygame.org/game/geometry-dash-lite/")
+}
    ];
 export { gamesData }; // Changed to named export
