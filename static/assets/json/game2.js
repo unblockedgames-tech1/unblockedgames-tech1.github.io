@@ -1,5 +1,11 @@
-{
-    title: "Moto X3M 3",
-    imgSrc: "gameimg/motox3m3.png",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.friv.com/z/games/motox3m3origins/game.html")
-},
+const additionalGames = [
+    // Add your additional games here in the same format
+    // Example:
+    // {
+    //     title: "Game Name",
+    //     imgSrc: "image-url",
+    //     link: uv$config.prefix + uv$config.encodeUrl("game-url")
+    // }
+];
+
+export default additionalGames;
