@@ -1,6 +1,6 @@
 // Original file (gamesData.js)
 import gamesFromFile2 from '/game2.js';
-const gamesData = [
+const mainGames = [
     {
         title: "Agar.io",
         imgSrc: "gameimg/Agario.png",
@@ -604,4 +604,7 @@ const gamesData = [
 },
 
    ];
+// Combine both game lists
+const gamesData = [...mainGames, ...gamesFromFile2];
+
 export default gamesData;
