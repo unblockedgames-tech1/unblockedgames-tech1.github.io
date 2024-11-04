@@ -1,6 +1,5 @@
 // games2.js
 const games2Data = [
-
     {
         title: "Example Game",
         imgSrc: "gameimg/example.png",
