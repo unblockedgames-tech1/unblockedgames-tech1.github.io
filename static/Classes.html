@@ -44,13 +44,19 @@
             display: flex;
             flex-direction: column;
             width: 100%;
+            align-items: center;
+            justify-content: center;
         }
 
         .container {
             display: flex;
             flex-direction: column;
             height: 100%;
-            margin-top: 60px; /* Added to account for fixed header */
+            width: 100%;
+            margin-top: 40px; /* Reduced from 60px */
+            align-items: center;
+            justify-content: center;
+            padding: 0 20px;
         }
 
         .header {
@@ -98,18 +104,19 @@
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             width: 95%;
             max-width: 1100px;
-            margin: 10px auto;
+            margin: 0 auto;
             flex: 1;
             display: flex;
             flex-direction: column;
             position: relative;
-            min-height: 600px; /* Increased from 400px */
-            height: 85vh; /* Added to make it take up more vertical space */
+            min-height: 600px;
+            height: 85vh;
+            top: -20px; /* Added to move up slightly */
         }
 
         .game_iframe {
             width: 100%;
-            flex: 1;
+            height: 100%; /* Changed from flex: 1 to ensure proper sizing */
             border: none;
             border-radius: 10px 10px 0 0;
             background-color: #1a1a1a;
@@ -128,6 +135,8 @@
             border-radius: 25px;
             transition: all 0.3s ease;
             box-shadow: 0 4px 8px rgba(255,51,51,0.2);
+            position: relative;
+            z-index: 1;
         }
 
         .panic_button:hover {
@@ -217,6 +226,29 @@
             margin: 10px auto;
             text-align: center;
             height: 100px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Added responsive adjustments */
+        @media (max-height: 800px) {
+            .game_container {
+                height: 80vh;
+                min-height: 500px;
+            }
+            .container {
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .game_container {
+                height: 75vh;
+                min-height: 400px;
+            }
+            .container {
+                margin-top: 20px;
+            }
         }
     </style>
 </head>
