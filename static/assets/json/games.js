@@ -1,4 +1,4 @@
-import gamesFromFile2 from '/game2.js';
+import gamesFromFile2 from '/assets/json/games.js';
 
 const mainGames = [
     {
