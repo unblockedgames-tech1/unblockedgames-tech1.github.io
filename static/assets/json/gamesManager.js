@@ -1,4 +1,4 @@
-import games2Data from './games2.js';
+import games2Data from './games.js';
 
 // Combine all game lists
 const allGames = [...gamesData, ...games2Data];
