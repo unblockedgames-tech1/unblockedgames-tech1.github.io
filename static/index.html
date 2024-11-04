@@ -278,55 +278,70 @@
     </script>
 
     <script type="module">
-        import allGames from "/assets/json/gamesManager.js";
-        
-        function loadGame(game) {
-            const gameElement = document.createElement("div");
-            gameElement.className = "game";
+        try {
+            const gamesList = document.getElementById("gamesList");
+            console.log("Found games list element:", gamesList);
 
-            const imgElement = document.createElement("img");
-            imgElement.src = game.imgSrc;
-            imgElement.alt = game.title;
-            imgElement.className = "game-image";
+            import("/assets/json/gamesManager.js")
+                .then(module => {
+                    console.log("Successfully imported games:", module.default);
+                    const games = module.default;
 
-            const titleElement = document.createElement("div");
-            titleElement.className = "game-info";
-            titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
+                    function loadGame(game) {
+                        console.log("Loading game:", game);
+                        const gameElement = document.createElement("div");
+                        gameElement.className = "game";
 
-            const linkElement = document.createElement("a");
-            linkElement.href = `javascript:localStorage.setItem("loadedG", ${'"' + game.link+'"'}); location.href = "/Classes.html"`;
-            linkElement.textContent = "Play";
-            linkElement.className = "play-button";
+                        const imgElement = document.createElement("img");
+                        imgElement.src = game.imgSrc;
+                        imgElement.alt = game.title;
+                        imgElement.className = "game-image";
 
-            gameElement.appendChild(imgElement);
-            gameElement.appendChild(titleElement);
-            titleElement.appendChild(linkElement);
+                        const titleElement = document.createElement("div");
+                        titleElement.className = "game-info";
+                        titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
 
-            gamesList.appendChild(gameElement);
+                        const linkElement = document.createElement("a");
+                        linkElement.href = `javascript:localStorage.setItem("loadedG", ${'"' + game.link+'"'}); location.href = "/Classes.html"`;
+                        linkElement.textContent = "Play";
+                        linkElement.className = "play-button";
+
+                        gameElement.appendChild(imgElement);
+                        gameElement.appendChild(titleElement);
+                        titleElement.appendChild(linkElement);
+
+                        gamesList.appendChild(gameElement);
+                    }
+
+                    // Load all games initially
+                    console.log("Starting to load games...");
+                    games.forEach(game => {
+                        loadGame(game);
+                    });
+
+                    // Setup search functionality
+                    document.getElementById("searchGames").addEventListener("keydown", function (e) {
+                        gamesList.innerHTML = '';
+                        if (e.code === "Enter") { 
+                            e.preventDefault();
+                        }
+                        gamesList.innerHTML = "";
+                        for (const game of games) {
+                            if (game.title.toLowerCase().includes(this.value.toLowerCase())) {
+                                loadGame(game);
+                            }
+                        }
+                    });
+                })
+                .catch(error => {
+                    console.error("Error loading games:", error);
+                    gamesList.innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
+                });
+
+        } catch (error) {
+            console.error("Critical error:", error);
+            document.getElementById("gamesList").innerHTML = `<div style="color: white;">Critical error: ${error.message}</div>`;
         }
-
-        document.getElementById("searchGames").addEventListener("keydown", function (e) {
-            const gamesList = document.getElementById("gamesList");
-            gamesList.innerHTML = '';
-            if (e.code === "Enter") { 
-                e.preventDefault();
-            }
-            gamesList.innerHTML = "";
-            for (const game of allGames) {
-                if (game.title.toLowerCase().includes(document.getElementById("searchGames").value.toLowerCase())) {
-                    loadGame(game);
-                }
-            }
-        });
-
-        document.addEventListener("DOMContentLoaded", async function () {
-            const gamesList = document.getElementById("gamesList");
-            
-            // Initial load of all games
-            allGames.forEach(game => {
-                loadGame(game);
-            });
-        });
     </script>
 
     <script src='https://cdn.jsdelivr.net/npm/@widgetbot/crate@3' async defer>
