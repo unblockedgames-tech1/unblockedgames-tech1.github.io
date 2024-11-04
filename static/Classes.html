@@ -16,13 +16,21 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: -11;
+            z-index: -1;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
         .snowflake {
             position: absolute;
             background-color: white;
             border-radius: 50%;
             pointer-events: none;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
         }
 
         * {
@@ -55,6 +63,7 @@
             justify-content: center;
             padding: 0 20px;
             position: relative;
+            z-index: 1;
         }
 
         .header {
@@ -109,7 +118,8 @@
             position: relative;
             min-height: 600px;
             height: 88vh;
-            top: -20px;
+            top: 0;
+            z-index: 2;
         }
 
         .game_iframe {
@@ -118,34 +128,8 @@
             border: none;
             border-radius: 10px 10px 0 0;
             background-color: #1a1a1a;
-        }
-
-        .panic_button {
-            background-color: #ff3333;
-            color: white;
-            border: none;
-            padding: 8px 20px;
-            font-size: 0.9rem;
-            font-family: "Be Vietnam Pro", sans-serif;
-            font-weight: 700;
-            cursor: pointer;
-            margin: 0.5rem auto;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 8px rgba(255,51,51,0.2);
             position: relative;
-            z-index: 1;
-        }
-
-        .panic_button:hover {
-            background-color: #ff0000;
-            transform: translateY(-2px);
-            box-shadow: 0 6px 12px rgba(255,51,51,0.3);
-        }
-
-        .panic_button:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 4px rgba(255,51,51,0.2);
+            z-index: 2;
         }
 
         .footer {
@@ -156,6 +140,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+            z-index: 2;
         }
 
         .fullscreen_button, .reload_button {
@@ -163,6 +149,7 @@
             border: none;
             cursor: pointer;
             padding: 3px;
+            z-index: 2;
         }
 
         .fullscreen_button img, .reload_button img {
@@ -216,7 +203,7 @@
             text-align: center;
             height: 100px;
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         @media (max-height: 800px) {
@@ -264,8 +251,6 @@
     </header>
 
     <div class="container">
-        <button class="panic_button" onclick="panicButton()">Panic</button>
-        
         <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
@@ -294,7 +279,7 @@
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-format="fluid"
-                 data-ad-layout-key="+26+s7-3-5e+9w"
+                 data-ad-layout-key="+26+s7-3-5e+w"
                  data-ad-client="ca-pub-4845994519357732"
                  data-ad-slot="5490786434"></ins>
             <script>
@@ -353,10 +338,6 @@
         iframe.onload = function() {
             this.focus();
         };
-
-        function panicButton() {
-            window.location.href = 'https://launchpad.classlink.com/login';
-        }
 
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
