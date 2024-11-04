@@ -8,7 +8,6 @@
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
      crossorigin="anonymous"></script>
 
-    <!-- Snowfall Effect Styles -->
     <style>
         #snowflakes-container {
             position: fixed;
@@ -25,9 +24,7 @@
             border-radius: 50%;
             pointer-events: none;
         }
-    </style>
 
-    <style>
         * {
             margin: 0;
             padding: 0;
@@ -53,10 +50,11 @@
             flex-direction: column;
             height: 100%;
             width: 100%;
-            margin-top: 40px; /* Reduced from 60px */
+            margin-top: 40px;
             align-items: center;
             justify-content: center;
             padding: 0 20px;
+            position: relative;
         }
 
         .header {
@@ -102,21 +100,21 @@
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: 95%;
-            max-width: 1100px;
+            width: calc(100% - 240px);
+            max-width: 1200px; /* Reduced from 1400px */
             margin: 0 auto;
             flex: 1;
             display: flex;
             flex-direction: column;
             position: relative;
-            min-height: 600px;
-            height: 85vh;
-            top: -20px; /* Added to move up slightly */
+            min-height: 500px; /* Reduced from 600px */
+            height: 80vh; /* Reduced from 90vh */
+            top: -20px;
         }
 
         .game_iframe {
             width: 100%;
-            height: 100%; /* Changed from flex: 1 to ensure proper sizing */
+            height: 100%;
             border: none;
             border-radius: 10px 10px 0 0;
             background-color: #1a1a1a;
@@ -160,29 +158,20 @@
             align-items: center;
         }
 
-        .fullscreen_button {
+        .fullscreen_button, .reload_button {
             background: transparent;
             border: none;
             cursor: pointer;
             padding: 3px;
         }
 
-        .fullscreen_button img {
+        .fullscreen_button img, .reload_button img {
             width: 24px;
             height: 24px;
         }
 
         .reload_button {
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            padding: 3px;
             margin-left: 10px;
-        }
-
-        .reload_button img {
-            width: 24px;
-            height: 24px;
         }
 
         .banner {
@@ -192,16 +181,16 @@
             width: 120px;
             height: 600px;
             display: none;
-            z-index: -1;
+            z-index: 1;
             border-radius: 15px;
         }
 
         .banner.left {
-            left: 65px;
+            left: 0;
         }
 
         .banner.right {
-            right: 65px;
+            right: 0;
         }
 
         .banner img {
@@ -221,8 +210,8 @@
         }
 
         .ad-container {
-            width: 100%;
-            max-width: 1100px;
+            width: calc(100% - 240px);
+            max-width: 1200px;
             margin: 10px auto;
             text-align: center;
             height: 100px;
@@ -230,11 +219,10 @@
             z-index: 1;
         }
 
-        /* Added responsive adjustments */
         @media (max-height: 800px) {
             .game_container {
-                height: 80vh;
-                min-height: 500px;
+                height: 75vh;
+                min-height: 400px;
             }
             .container {
                 margin-top: 30px;
@@ -243,11 +231,17 @@
 
         @media (max-height: 600px) {
             .game_container {
-                height: 75vh;
-                min-height: 400px;
+                height: 70vh;
+                min-height: 350px;
             }
             .container {
                 margin-top: 20px;
+            }
+        }
+
+        @media (max-width: 1339px) {
+            .game_container, .ad-container {
+                width: 95%;
             }
         }
     </style>
@@ -272,7 +266,7 @@
     <div class="container">
         <button class="panic_button" onclick="panicButton()">Panic</button>
         
-        <div class="ad-container" width="100%">
+        <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-format="fluid"
@@ -296,7 +290,7 @@
             </div>
         </div>
         
-        <div class="ad-container" width="100%">
+        <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-format="fluid"
@@ -313,15 +307,12 @@
         <img src="/nav/Your ad.png" alt="Advertisement">
     </a>
 
-    <!-- Snowfall Effect Script -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Create container
             const snowflakesContainer = document.createElement('div');
             snowflakesContainer.id = 'snowflakes-container';
             document.body.appendChild(snowflakesContainer);
 
-            // Snowfall logic
             const snowflakesCount = 200;
 
             function createSnowflake() {
@@ -335,7 +326,6 @@
                 return snowflake;
             }
 
-            // Create animation style
             const styleSheet = document.createElement('style');
             styleSheet.textContent = `
                 @keyframes fall {
@@ -349,7 +339,6 @@
             `;
             document.head.appendChild(styleSheet);
 
-            // Create snowflakes
             for (let i = 0; i < snowflakesCount; i++) {
                 const snowflake = createSnowflake();
                 snowflake.style.animation = `fall ${snowflake.style.animationDuration} linear infinite`;
