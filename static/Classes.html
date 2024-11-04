@@ -92,12 +92,6 @@
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
         }
 
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
-
         .game_container {
             background-color: #2a2a2a;
             border-radius: 15px;
@@ -328,16 +322,6 @@
                 snowflake.style.animation = `fall ${snowflake.style.animationDuration} linear infinite`;
                 snowflakesContainer.appendChild(snowflake);
             }
-        });
-
-        // Add pulse animation to header buttons
-        document.addEventListener('DOMContentLoaded', (event) => {
-            const buttons = document.querySelectorAll('.home_bttn');
-            buttons.forEach((button, index) => {
-                setTimeout(() => {
-                    button.style.animation = 'pulse 2s infinite';
-                }, index * 200);
-            });
         });
 
         let loadedG = localStorage.getItem('loadedG');
