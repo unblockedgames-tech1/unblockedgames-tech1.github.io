@@ -601,4 +601,4 @@ const gamesData = [
     link: __uv$config.prefix + __uv$config.encodeUrl("https://storage.y8.com/y8-studio/html5/Gani/level-devil-trap-path/?key=y8&value=default")
 },
    ];
-export default gamesData;
+export { gamesData }; // Changed to named export
