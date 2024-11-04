@@ -6,4 +6,4 @@ const games2Data = [
 },
 
    ];
-export default gamesData;
+export { games2Data }; // Named export
