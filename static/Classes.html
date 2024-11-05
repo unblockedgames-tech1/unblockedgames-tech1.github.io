@@ -104,7 +104,7 @@
             border-radius: 10px 10px 0 0;
             background-color: #1a1a1a;
             position: relative;
-            z-index: 2;
+            z-index: 1;
         }
 
         .footer {
@@ -117,7 +117,7 @@
             align-items: center;
             gap: 10px;
             position: relative;
-            z-index: 2;
+            z-index: 9999;
         }
 
         .fullscreen_button, .reload_button, .flash_button {
@@ -125,12 +125,29 @@
             border: none;
             cursor: pointer;
             padding: 3px;
+            position: relative;
+            z-index: 10000;
+            pointer-events: all;
         }
 
         .fullscreen_button img, .reload_button img, .flash_button img {
             width: 24px;
             height: 24px;
-            transition: filter 0.3s ease;
+            transition: all 0.3s ease;
+            pointer-events: all;
+        }
+
+        .fullscreen_button:hover img, 
+        .reload_button:hover img, 
+        .flash_button:hover img {
+            filter: brightness(1.2);
+            transform: scale(1.1);
+        }
+
+        .fullscreen_button:active img, 
+        .reload_button:active img, 
+        .flash_button:active img {
+            transform: scale(0.95);
         }
 
         .flash_button.active img {
@@ -149,7 +166,7 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: -1;
+            z-index: 2;
         }
 
         .game-glow {
@@ -166,7 +183,7 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: -1;
+            z-index: 3;
         }
 
         .flash-active {
@@ -198,6 +215,16 @@
             object-fit: cover;
         }
 
+        .ad-container {
+            width: calc(100% - 240px);
+            max-width: 1200px;
+            margin: 10px auto;
+            text-align: center;
+            height: 100px;
+            position: relative;
+            z-index: 2;
+        }
+
         @media (min-width: 1340px) {
             .banner {
                 display: block;
@@ -208,14 +235,14 @@
             display: none;
         }
 
-        .ad-container {
-            width: calc(100% - 240px);
-            max-width: 1200px;
-            margin: 10px auto;
-            text-align: center;
-            height: 100px;
-            position: relative;
-            z-index: 2;
+        :fullscreen .footer {
+            z-index: 9999;
+        }
+
+        :fullscreen .fullscreen_button,
+        :fullscreen .reload_button,
+        :fullscreen .flash_button {
+            z-index: 10000;
         }
 
         @media (max-height: 800px) {
@@ -319,16 +346,23 @@
             this.focus();
         };
 
+        document.querySelectorAll('.fullscreen_button, .reload_button, .flash_button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+            });
+        });
+
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
-                if (iframe.requestFullscreen) {
-                    iframe.requestFullscreen();
-                } else if (iframe.mozRequestFullScreen) {
-                    iframe.mozRequestFullScreen();
-                } else if (iframe.webkitRequestFullscreen) {
-                    iframe.webkitRequestFullscreen();
-                } else if (iframe.msRequestFullscreen) {
-                    iframe.msRequestFullscreen();
+                const container = document.querySelector('.game_container');
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.mozRequestFullScreen) {
+                    container.mozRequestFullScreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
                 }
             } else {
                 if (document.exitFullscreen) {
@@ -344,7 +378,6 @@
         }
 
         function reloadGame() {
-            let iframe = document.getElementById('gframe');
             iframe.src = iframe.src;
         }
 
@@ -376,6 +409,9 @@
             if (document.fullscreenElement) {
                 iframe.focus();
             }
+            document.querySelectorAll('.fullscreen_button, .reload_button, .flash_button').forEach(button => {
+                button.style.zIndex = '10000';
+            });
         });
     </script>
 </body>
