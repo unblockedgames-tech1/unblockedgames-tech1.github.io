@@ -49,7 +49,6 @@
             left: 0;
             padding: 1rem;
             top: 0;
-            z-index: 1000;
             font-size: 0.8rem;
             font-family: "Be Vietnam Pro", sans-serif;
             font-weight: 700;
@@ -94,24 +93,21 @@
             min-height: 600px;
             height: 88vh;
             top: 0;
-            z-index: 1;
         }
 
         .game_iframe {
             width: 100%;
-            height: calc(100% - 40px);
+            height: calc(100% - 36px);
             border: none;
             border-radius: 10px 10px 0 0;
             background-color: #1a1a1a;
             position: relative;
-            z-index: 1;
-            pointer-events: auto;
         }
 
         .footer {
+            height: 36px;
             background-color: #2a2a2a;
-            padding: 6px;
-            height: 40px;
+            padding: 0;
             text-align: center;
             border-radius: 0 0 15px 15px;
             display: flex;
@@ -119,40 +115,38 @@
             align-items: center;
             gap: 10px;
             position: relative;
-            z-index: 2;
-            pointer-events: auto;
+            bottom: 0;
         }
 
         .fullscreen_button, .reload_button, .flash_button {
-            background: transparent;
-            border: none;
-            cursor: pointer !important;
-            padding: 3px;
-            position: relative;
-            z-index: 3;
-            pointer-events: auto !important;
-            width: 30px;
-            height: 30px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 5px;
-            transition: transform 0.2s ease;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+            transition: all 0.2s ease;
         }
 
         .fullscreen_button img, .reload_button img, .flash_button img {
             width: 24px;
             height: 24px;
-            transition: all 0.3s ease;
-            pointer-events: none;
+            transition: transform 0.2s ease;
         }
 
-        .fullscreen_button:hover, .reload_button:hover, .flash_button:hover {
+        .fullscreen_button:hover img, 
+        .reload_button:hover img, 
+        .flash_button:hover img {
             transform: scale(1.1);
         }
 
-        .fullscreen_button:active, .reload_button:active, .flash_button:active {
-            transform: scale(0.95);
+        .fullscreen_button:active img, 
+        .reload_button:active img, 
+        .flash_button:active img {
+            transform: scale(0.9);
         }
 
         .flash_button.active img {
@@ -171,7 +165,6 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: 0;
         }
 
         .game-glow {
@@ -188,7 +181,6 @@
             pointer-events: none;
             opacity: 0;
             transition: opacity 0.5s ease;
-            z-index: 0;
         }
 
         .flash-active {
@@ -202,7 +194,6 @@
             width: 120px;
             height: 600px;
             display: none;
-            z-index: 1;
             border-radius: 15px;
         }
 
@@ -227,7 +218,6 @@
             text-align: center;
             height: 100px;
             position: relative;
-            z-index: 2;
         }
 
         @media (min-width: 1340px) {
@@ -299,13 +289,13 @@
             <div class="game-glow" id="gameGlow"></div>
             <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
             <div class="footer">
-                <button class="fullscreen_button" onclick="toggleFullScreen()" type="button">
+                <button class="fullscreen_button" onclick="toggleFullScreen()">
                     <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
                 </button>
-                <button class="reload_button" onclick="reloadGame()" type="button">
+                <button class="reload_button" onclick="reloadGame()">
                     <img src="/nav/reload.png" alt="Reload">
                 </button>
-                <button class="flash_button" onclick="toggleFlashlight()" type="button" id="flashButton">
+                <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
                     <img src="/nav/flash.png" alt="Flashlight">
                 </button>
             </div>
@@ -335,17 +325,7 @@
 
         iframe.onload = function() {
             this.focus();
-            this.style.pointerEvents = 'auto';
         };
-
-        // Button click handlers
-        document.querySelectorAll('.fullscreen_button, .reload_button, .flash_button').forEach(button => {
-            button.addEventListener('click', (e) => {
-                e.stopPropagation();
-                e.preventDefault();
-                console.log('Button clicked:', button.className);
-            });
-        });
 
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
@@ -373,10 +353,7 @@
         }
 
         function reloadGame() {
-            console.log("Reloading game...");
-            if (iframe) {
-                iframe.src = iframe.src;
-            }
+            iframe.src = iframe.src;
         }
 
         let isFlashlightOn = false;
@@ -385,7 +362,6 @@
         const flashButton = document.getElementById('flashButton');
 
         function toggleFlashlight() {
-            console.log("Toggling flashlight...");
             isFlashlightOn = !isFlashlightOn;
             flashButton.classList.toggle('active', isFlashlightOn);
             flashOverlay.classList.toggle('flash-active', isFlashlightOn);
