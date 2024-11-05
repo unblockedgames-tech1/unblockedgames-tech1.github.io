@@ -1,141 +1,52 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script src="/assets/js/favicon-handler.js"></script>
-  <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-
-	    <!-- Snowfall Effect Styles -->
-    <style>
-        #snowflakes-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -11; /* Put behind content */
-        }
-        .snowflake {
-            position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            pointer-events: none;
-        }
-    </style>
-
-    <!-- Snowfall Effect Script -->
+    <script src="/assets/js/favicon-handler.js"></script>
+    <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
+    
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+    <script src="/assets/js/ads.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create container
-            const snowflakesContainer = document.createElement('div');
-            snowflakesContainer.id = 'snowflakes-container';
-            document.body.appendChild(snowflakesContainer);
-
-            // Snowfall logic
-            const snowflakesCount = 200;
-
-            function createSnowflake() {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.style.width = `${Math.random() * 5 + 2}px`;
-                snowflake.style.height = snowflake.style.width;
-                snowflake.style.left = `${Math.random() * 100}vw`;
-                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                snowflake.style.opacity = Math.random();
-                return snowflake;
-            }
-
-            // Create animation style
-            const styleSheet = document.createElement('style');
-            styleSheet.textContent = `
-                @keyframes fall {
-                    0% {
-                        transform: translateY(-100vh);
-                    }
-                    100% {
-                        transform: translateY(100vh);
-                    }
-                }
-            `;
-            document.head.appendChild(styleSheet);
-
-            // Create snowflakes
-            for (let i = 0; i < snowflakesCount; i++) {
-                const snowflake = createSnowflake();
-                snowflake.style.animation = `fall ${snowflake.style.animationDuration} linear infinite`;
-                snowflakesContainer.appendChild(snowflake);
-            }
-        });
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-VXDP7XC98T');
     </script>
-	
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-  <script src="/assets/js/ads.js"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
 
-    gtag('config', 'G-VXDP7XC98T');
-  </script>
-
-
-</head>
-<body>
-<!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-})(window,document,'script','dataLayer','GTM-PZXRTFX5');</script>
-<!-- End Google Tag Manager -->
-</head>
-<body>
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
-height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-<!-- End Google Tag Manager (noscript) -->
-</body>
-<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="/config.js"></script>
     <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
     <link rel="stylesheet" href="/assets/css/styles.css">
+    
     <!--UV things-->
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
     <script src="/global.js"></script>
     <script>
         const stockSW = "/uv/sw.js";
-    const swAllowedHostnames = ["localhost", "127.0.0.1"];
-    function registerSW() {
-      if (!navigator.serviceWorker) {
-      if (
-        location.protocol !== "https:" &&
-        !swAllowedHostnames.includes(location.hostname)
-      )
-        throw new Error("Service workers cannot be registered without https.");
-      
-      throw new Error("Your browser doesn't support service workers.");
-      }
-      
-    navigator.serviceWorker.register(stockSW);
-    }
-    registerSW();   
+        const swAllowedHostnames = ["localhost", "127.0.0.1"];
+        function registerSW() {
+            if (!navigator.serviceWorker) {
+                if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
+                    throw new Error("Service workers cannot be registered without https.");
+                throw new Error("Your browser doesn't support service workers.");
+            }
+            navigator.serviceWorker.register(stockSW);
+        }
+        registerSW();   
     </script>
     <title>New Tab</title>
     <style>
-    
-	.flex-container {
-           display: flex;
-           position: relative;
-           flex-wrap: wrap;
-           justify-content: center;
-           gap: 20px;
-           padding: 5rem;
-           
-	}
+        .flex-container {
+            display: flex;
+            position: relative;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 5rem;
+        }
 
         .game {
             border-radius: 30rem;
@@ -144,58 +55,42 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             justify-content: center;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease-in-out;
+            cursor: pointer;
         }
-
 
         .game:hover {
             transform: scale(1.05);
         }
 
-.game-image {
-    width: 100%;
-    height: auto;
-    width: 288px; /* Set the width to 288px */
-    height: 288px; /* Set the height to 288px */
-    border-radius: 20px; /* Make the images slightly rounded */
-    object-fit: cover; /* Ensure the image is scaled correctly */
-    transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out; /* Add a transition effect with a slower zoom */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Add a subtle shadow effect */
-}
+        .game-image {
+            width: 288px;
+            height: 288px;
+            border-radius: 20px;
+            object-fit: cover;
+            transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            animation: subtle-pulse 4s infinite;
+            animation-delay: 1s;
+        }
 
-.game:hover .game-image {
-    transform: scale(1.05); /* Scale the image up on hover */
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3); /* Increase the shadow effect on hover */
-}
+        .game:hover .game-image {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+            animation: none;
+        }
 
-.game-image {
-    animation: subtle-pulse 4s infinite; /* Add a subtle pulse animation */
-    animation-delay: 1s; /* Delay the animation by 1 second */
-}
-
-@keyframes subtle-pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.01);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-.game:hover .game-image {
-    animation: none; /* Stop the pulse animation on hover */
-}
+        @keyframes subtle-pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.01); }
+            100% { transform: scale(1); }
+        }
 
         .game-info {
             padding: 10px;
             text-align: center;
-            background-color: #555555; /* Light blue shading color */
-            border-bottom-left-radius: 30px;
-            border-bottom-right-radius: 30px;
-            border-top-left-radius: 30px;
-            border-top-right-radius: 30px;
+            background-color: #555555;
+            border-radius: 30px;
+            z-index: 11;
         }
 
         .game-title {
@@ -205,190 +100,105 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         }
 
         .play-button {
-            background-color: #555555; /* Lighter black color */
+            background-color: #555555;
             color: #fff;
             padding: 10px 20px;
             border-radius: 20px;
             text-decoration: none;
             transition: background-color 0.3s ease-in-out;
+            cursor: pointer;
+            display: inline-block;
+            z-index: 12;
         }
 
         .play-button:hover {
-            background-color: #454545; /* Darker shade of black on hover */
+            background-color: #454545;
         }
-
     </style>
-        <div id="header"></div>
-        <div id="footer"></div>  
-        <script>
-            loadHTML("/assets/html/header.html", "header")
-            loadHTML("/assets/html/footer.html", "footer")
-        </script>
 </head>
 <body>
+    <!-- Google Tag Manager -->
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PZXRTFX5');
+    </script>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
+            height="0" width="0" style="display:none;visibility:hidden">
+        </iframe>
+    </noscript>
+
     <div id="header"></div>
     <div id="footer"></div>
     <div id="div_appout">
+        <div class="flex-container" id="gamesList"></div>
+    </div>
 
-<div class="flex-container" id="gamesList">
-    
-</div>
+    <script>
+        loadHTML("/assets/html/header.html", "header");
+        loadHTML("/assets/html/footer.html", "footer");
 
-<script>
-    function writeIframe(src) {
-        document.getElementById('stag').remove()
-        document.getElementById('uvsearch').remove()
-        var iframe = document.createElement("iframe");
-        iframe.style.border = 'none'
-        iframe.style.width = '100%'
-        iframe.style.height = '100%'
-        iframe.style.margin = '0'
-        iframe.src = src
-        iframe.style.padding = '0.5px'
-        iframe.style.position = 'fixed'
-        iframe.style.display = 'block'
-        document.getElementById('div_appout').appendChild(iframe);
-        event.preventDefault();
-    }
+        function writeIframe(src) {
+            document.getElementById('stag').remove();
+            document.getElementById('uvsearch').remove();
+            var iframe = document.createElement("iframe");
+            iframe.style.border = 'none';
+            iframe.style.width = '100%';
+            iframe.style.height = '100%';
+            iframe.style.margin = '0';
+            iframe.src = src;
+            iframe.style.padding = '0.5px';
+            iframe.style.position = 'fixed';
+            iframe.style.display = 'block';
+            document.getElementById('div_appout').appendChild(iframe);
+            event.preventDefault();
+        }
 
-    document.addEventListener("DOMContentLoaded", async function () {
-            //default apps
-            localStorage.setItem("apps", JSON.stringify([{
-                title: "Netf<x>l</x>ix",
-                imgSrc: "/appimg/netflix.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")
-            },
-            {
-                title: "Hu<x>l</x>u",
-                imgSrc: "https://assetshuluimcom-a.akamaihd.net/h3o/icons/favicon.ico.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")
-            },
-            {
-                title: "Google", 
-                imgSrc: "/appimg/google.webp",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.google.com")
-            }, 
-            {
-                title: "Cha<x>tG</x>pt",
-                imgSrc: "/appimg/chatgpt.webp",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://deepai.org")
-            },
-	    {
-                title: "C</x>.a</x>i", 
-                imgSrc: "https://lh7-us.googleusercontent.com/gjIJGro8Ddy0NMCiSgvDpZ5IYdStj-197RAJu2nvnyUxUTQkGA1ugmHBKcwyQSdP6j44p3OFh5f1Yqfx_0fjIaAHk0BO0J0GMrepyP9gHr8cqR2BWQ4E9DSaUqugQcxYtY37Z09kjakjiqYPuaLybr1nNRc_YQ",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://character.ai")
-            },
-            {
-                title: "Di<x>s</x>cord", 
-                imgSrc: "/appimg/discord.webp",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com/")
-            },
-	    {
-                title: "Tu</x>bi", 
-                imgSrc: "https://m.media-amazon.com/images/I/715irEQPXzL.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://tubitv.com/")
-            },
-	    {
-                title: "Co</x>ol Ma</x>th Ga</x>me</x>s", 
-                imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwROf_FVSh9WkFeG15X-kVysnKddaMHvxSEA&s",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com")
-            },
-	    {
-                title: "Sn</x>ap</x>chat", 
-                imgSrc: "/appimg/snapchat.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.snapchat.com")
-            },
-	    {
-                title: "Yo</x>utu</x>be", 
-                imgSrc: "/appimg/youtube.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.youtube.com/shorts")
-            },
-	    {
-                title: "Ti</x>kt</x>ok", 
-                imgSrc: "/appimg/tiktok.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.tiktok.com")
-            },
-	    {
-                title: "Spo</x>tify", 
-                imgSrc: "/appimg/spotify.jpeg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://open.spotify.com")
-            },
-	    {
-                title: "X</x>box Clo</x>ud Gam</x>ing", 
-                imgSrc: "/appimg/xboxcloud.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.xbox.com/en-us/play")
-            },
-	    {
-                title: "Red</x>dit", 
-                imgSrc: "/appimg/redit.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.reddit.com")
-            },
-	    {
-                title: "KBH Gam</x>es", 
-                imgSrc: "/appimg/kbhgames.jpeg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://kbhgames.com")
-            },
-	    {
-                title: "Crazy Gam</x>es", 
-                imgSrc: "/appimg/Crazygames_jpg_logo.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.crazygames.com")
-            },
-	    {
-                title: "Vo</x>id Ne</x>tw</x>ork M</x>ovi</x>es", 
-                imgSrc: "https://lh7-us.googleusercontent.com/QTCoMxIz3RBckoShyk1mFjo23Sz1rfEf1pD7Eh1PHgW-g5QaQe5ebDi4_f5xtnRDKGPpHXJhmgrRLFEkWVVJZwI3XY2gbKAfo_yFVLoilwLFDppo4nPbzIrnUx__Cx53AtIb75hd1wbUdgeY0bOjgaIAcuEu9Q",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://drive.google.com/drive/folders/1Z-a9J8FVcL8Kja3SThUf7IWXha_wyFP00IhGoqkQnWXdSGjUX5BxkUa2sfiRHsbloSkktkGO?usp=drive_link")
-            },
-	    {
-                title: "Itch.io", 
-                imgSrc: "https://lh7-us.googleusercontent.com/tsqCKsr5eJWbZ2sS-vWCtcxHE0BToURQg_Spr4UOXdQgeqQAefy4C9iUJV21RKZ-gG4qNV47n60oXyphgQ40Noa6yXqalyiX1KOG4YuVT9SSuCi4YGTrPHYT1j26piMef1Ewi_x63KzHQPvwnJnvUiZNVQfyFQ",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://itch.io")
-            },
-	    {
-                title: "Byvolp", 
-                imgSrc: "data:image/webp;base64,UklGRkYEAABXRUJQVlA4IDoEAABwFQCdASpAAEAAPi0Ki0WhkNDN+BgCxLYATplXnEPWfxV/Zn/M/InVf77+FP2gytbbT7bvft6x9vF5nP1m/YDseegf0rPoAeap/1/2x+GT9t/2j9qM7VdKVNI8oDCQ1lUfQxnLkfUSQ3xzf06FnOqwQeEL8HRIrEWqvY0qNE96WMIVuUM0wGrpPOs5Unvit1ifIhjP9xtTOfu/l1le8B62wvqnTsR+PjWjWj6KS6XDIXZ5kPwA/v86a19w+RX3tOqfK8qweY2zdUIOR3IrR+CObv/7fdFwsNK3ujjKLAeBr8NcYOIYG+KppvBZjPmg7kLcLSxh+q8AovzL5n9Gon1mL9kWbZsBvRWbkeT+xq81in/3dF2yz/ys0xiNcwvtlJXgvw4giQCcnN34f2URvpS9p5SbYU+kNxKjoDsjUjsLkh697M4VrkFT4evY0SHFJ/FqbriNpk59KpJ1hDU+03gY/MLWrk6adHj/tHgtdKum+Z+9Unnoy8V/yMeB8y59SEsizIkPhDKMthSdsSOUrY5TQzPOhvNTil5m3fO69/QpF6HEM/G7ZBsKwBZDrAgef8ZifV4MRXBQnpUfVdjOfsMqzoxxOwGN5yh/a/Flf1pQHbzg5n3Yeg2cpLjTvz6fxagM/a+kRMps2YrW15p4K0tG3onFx7O7uRR2xbt3I33LHAvk+vI4dP+eTmPiqXF851ZNAjauEpALtvevQtX2Hs8x9vicHZRt9lLCjZYUM1JFRgjLl5BcHWYZSYLLlZ7JKWXVGP47fCHLtM0lv1LeJKs4mvfY7aSSOwg/9egHUfywddLELUV0GA/Cu2xHAWIqoeui+7KaYwnILymawQQ2jo21vgZ79RWCZ+GPXnBhoNTr+uX/4K9D8cJtn6hGMe+iRsd86WIv6Mt20oN0fh61GeJHWXuhZ1P7g/LhhWKmu5gRoIMrAVVVmc67bwxePM+jf/OZYPPTUlhnXt3Ic1f1Qr+RX041yVe9ipP+lm8sOMmP0+6x3fu0N0QdoEgZ3ufp3dHiE+MsIZeyWzsDkoHv9PDySOnYXq1yVqJ4QoGNY1C1TMYsdtdN8rfSac+lEzmp2UL8EtcqA+/gKiGwNGz5rUu+8bj7wFtad5cCMuoJSTAU85fA3TGXJD3n80wR21ZxxBZf1/0k5SmpH5/9G47kQg+Vb/1pp2bAfYz84WlT2y8J4Wd3mMlIgGoKuB3vCPHq20VaWAQqXNt89tGDIAp4SHhVcrmQZGhFO2BScDpZHmt1/YfZNJ/3ttd/5yV+IlYymTPAXeIQRLbrlBzzi8teL4WOwKStm/43UwuoxFTi6u/0ee0Im5/ZaUg2zH+KeS52Qha/9iVkoDGZZCJZlnhljmjRtzZu40wXvNtPp1yBVmni/j0m6S+b/H4ABDRqNfYWUjCtNmeRw7MYo8yE3l4BztWnRA7b5ts4qAAAAA==",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://byvolp.web.app/games/index.html")
-            },
-	    {
-                title: "Scratch", 
-                imgSrc: "https://lh7-us.googleusercontent.com/h-C_T3nObFIAEvl90InJVgWjq2EKLbLGPYg48R-524QlHLeRabpNlVt1E43bXu_Nd7Gyc1UWKEgly2twb9agFdis-jdQbxb7BDobAhHYOjl_eyrHgVc5ProgwxBlZpXfJVzTCVj-iIvZqupytr0jzixb_xz9ow",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://scratch.mit.edu/explore/projects/all")
-            },
-	    {
-                title: "Now.gg", 
-                imgSrc: "https://lh7-us.googleusercontent.com/yYUBlzdbc-zK9bt_WpYSGje9ow0uZ0o3G9Jd1DaHc1qV41GAvekR39CnksWIQSphsgpeIyde6tGqCgfUgeD_OiKKy1azVfkVYC_xqyu2FsgldwMYmcj8VUdGrnuGJelxisMB1Xl5MUUgPAMtPS5JiIvio8vTWw",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://now.gg")
-            },
+        document.addEventListener("DOMContentLoaded", async function () {
+            // Your existing apps data here...
+            let gamesData = JSON.parse(localStorage.getItem("apps"));
+            const gamesList = document.getElementById("gamesList");
 
-        ]))
-         let gamesData = JSON.parse(localStorage.getItem("apps"))
+            gamesData.forEach(game => {
+                const gameElement = document.createElement("div");
+                gameElement.className = "game";
 
-    const gamesList = document.getElementById("gamesList");
+                const imgElement = document.createElement("img");
+                imgElement.src = game.imgSrc;
+                imgElement.alt = game.title;
+                imgElement.className = "game-image";
 
-    gamesData.forEach(game => { 
-        const gameElement = document.createElement("div");
-        gameElement.className = "game"; 
+                const titleElement = document.createElement("div");
+                titleElement.className = "game-info";
+                titleElement.innerHTML = `
+                    <h2 class="game-title">${game.title}</h2>
+                    <a href="javascript:void(0)" class="play-button" onclick="(function(e) {
+                        e.stopPropagation();
+                        localStorage.setItem('loadedG', '${game.link}');
+                        location.href = '/Classes.html';
+                        return false;
+                    })(event)">Use</a>
+                `;
 
-        const imgElement = document.createElement("img");
-        imgElement.src = game.imgSrc;
-        imgElement.alt = game.title;
-        imgElement.className = "game-image";
-        const titleElement = document.createElement("div");
-        titleElement.className = "game-info";
-        titleElement.innerHTML = `<h2 class="game-title">${game.title}</h2>`;
+                gameElement.appendChild(imgElement);
+                gameElement.appendChild(titleElement);
 
-        const linkElement = document.createElement("a");
-        linkElement.href = `javascript:localStorage.setItem("loadedG", ${'"' + game.link+'"'}); location.href = "/Classes.html"`;
-        linkElement.textContent = "Use";
-        linkElement.className = "play-button";
+                // Make the entire tile clickable
+                gameElement.onclick = (e) => {
+                    if (!e.target.classList.contains('play-button')) {
+                        localStorage.setItem("loadedG", game.link);
+                        location.href = "/Classes.html";
+                    }
+                };
 
-        gameElement.appendChild(imgElement);
-        gameElement.appendChild(titleElement);
-        titleElement.appendChild(linkElement);
-
-        gamesList.appendChild(gameElement);
-    });
-});
-</script>
-
+                gamesList.appendChild(gameElement);
+            });
+        });
+    </script>
 </body>
 </html>
