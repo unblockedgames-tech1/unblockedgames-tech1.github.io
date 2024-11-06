@@ -197,6 +197,7 @@
     <h1> </h1>
     <div style="text-align: center;">
         <input class="random-game-button" placeholder="Search for a game!" id="searchGames">
+        <button class="random-game-button" id="randomGameBtn">Random Game</button>
     </div>
 
     <!-- Google Tag Manager -->
@@ -307,6 +308,13 @@
                         loadGame(game);
                     }
                 }
+            });
+
+            // Add Random Game functionality
+            document.getElementById("randomGameBtn").addEventListener("click", function() {
+                const randomGame = games[Math.floor(Math.random() * games.length)];
+                localStorage.setItem("loadedG", randomGame.link);
+                location.href = "/Classes.html";
             });
 
         } catch (error) {
