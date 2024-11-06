@@ -39,6 +39,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/z8atGY8NONZpEpxoOyyHo94FjI4bu8dekjNFrbBPAE1UBlhbd51FUzu2tMCcXSWYc99E1OEFsAYVHLbQXgPgQoxGPkbcCutGRwLRSnxA58YJh679uJgaFYT1jyJWY4fGWA-c76f5jSPzKfJ8giZGvHk-ILvLxw",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/48920/")
 },
+{
+    title: "Duck Life Space", 
+    imgSrc: "https://lh7-us.googleusercontent.com/PH_XPFbty-8F-XCtG5H6tu39RBP-ga9Izjem7Fj6dmSqcCaCKLXhgSQmpSb2VOcHc5AGnlFHfNRM2rycwHSDDNwp-SQPq8SZj4lLWsITVTUo-W-Cat6mlAggu6lV3IOJMkvhZ3eYOiDUe_w24qxmRGOlJjWTNA",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.mathplayground.com/duck5/index.html")
+},
 
    ];
 export { games2Data }; // Named export
