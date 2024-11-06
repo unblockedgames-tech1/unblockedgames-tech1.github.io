@@ -8,6 +8,6 @@ const games2Data = [
     title: "Real Flight Sim", 
     imgSrc: "https://lh7-us.googleusercontent.com/UIiQ-6cWcHvKszc2Cjf66S4VhUgRjnA8nBcd717nC1E02Jx0cUhcnpBfk3CQilbg8WWGOdcl0dJsfYiDKEbXMbpLKZMH0rTlwSwG8rw-qwaLeUEeVXzy2cizsbIqQ0uxjXAwuTOOJ3VSbCUvNyBvtYcfSNO2Tg",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.onlinegames.io/games/2023/unity/real-flight-simulator/index.html")
-}
+},
    ];
 export { games2Data }; // Named export
