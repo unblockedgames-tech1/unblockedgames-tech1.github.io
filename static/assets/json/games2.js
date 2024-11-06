@@ -13,7 +13,7 @@ const games2Data = [
     title: "BeamNG.Drive", 
     imgSrc: "https://lh7-us.googleusercontent.com/9vqbywLNDkMjHo-Ner61tKa4ma-FHHgsDIJndIBrr-u4vAORC8eTSgxwy0JOrwGIdHZaOPukgezsi8uHlCyF5iUvaRSpZrdZ5ebi7dHRw2Potr_Pq-sy-GBAEB7kSxwjfs9l3gJOeo391ohW2tGicz-HJJrIIw",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.gamearter.com/game/car-crash-test/")
-}
+},
 {
     title: "Brawl Stars", 
     imgSrc: "https://lh7-us.googleusercontent.com/-dRY2l1fsCn90KR8MzgCxRpuQTsWvf-KBLXGLPAYH-rhVxIk70bGryGL-1X7qLAB7PClAuWyjs2z_e8SpRBnjH1iE7nORVC3eIdNOBKezaKOspU4whO01gqFEY5Bhcrt6ffZlmcyIIanL1s6pUSuyAqNXYdm0g",
