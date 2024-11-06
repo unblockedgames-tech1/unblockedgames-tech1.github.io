@@ -19,5 +19,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/-dRY2l1fsCn90KR8MzgCxRpuQTsWvf-KBLXGLPAYH-rhVxIk70bGryGL-1X7qLAB7PClAuWyjs2z_e8SpRBnjH1iE7nORVC3eIdNOBKezaKOspU4whO01gqFEY5Bhcrt6ffZlmcyIIanL1s6pUSuyAqNXYdm0g",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://app-253517.games.s3.yandex.net/253517/9hp1grekl1t1ryv0jw8jyhm1ftagk69g/index.html?sdk=%2Fsdk%2F_%2Fv2.6397cd80c6de66c0367d.js#origin=https%3A%2F%2Fyandex.com&app-id=253517&device-type=desktop")
 },
+{
+    title: "Duck Life", 
+    imgSrc: "https://lh7-us.googleusercontent.com/MT7Kp6m_Bbb-HHM29S7ow2cl1YvC6LKI0OSg3nLEVXTg0YffNRsRPeU41O-mqz-bn8Cg84yDtrrJXSUGVj2JeMp10Ddslxs9TX5z3mu_qNrF1uKb2BTL5bN3B9bLf7EMunzY3cJQOg9z09gDSZahVTlUk3g5UQ",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/48914/")
+},
+
    ];
 export { games2Data }; // Named export
