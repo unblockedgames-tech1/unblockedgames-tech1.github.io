@@ -231,11 +231,6 @@ const gamesData = [
     link: __uv$config.prefix + __uv$config.encodeUrl("https://watchdocumentaries.com/wp-content/uploads/games/time-shooter-2/")
 },
 {
-    title: "Deadshot.io", 
-    imgSrc: "gameimg/deadshotio.jpg",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://games.crazygames.com/en_US/deadshot-io/index.html?v=1.301")
-},
-{
     title: "Gu</x>n Str</x>ike Runner", 
     imgSrc: "gameimg/gunstrikerunner.png",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://games.crazygames.com/en_US/gun-strike-runner/index.html?v=1.301")
