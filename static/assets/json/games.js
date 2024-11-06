@@ -488,7 +488,7 @@ const gamesData = [
 {
     title: "Plants VS Zombies", 
     imgSrc: "https://lh7-us.googleusercontent.com/R9y7QmVMLl3g-_BHLhGMjHs82fxuwvNogfkjXJB9I8UGU-6ZTpWWzJvC2Yw2BbkPdg-w6q_0qJNnxBXDLK7gQ2vqjefHIvxAdQBd_i9Gapv0572DExY27VkTjvK8iFXbRK7BtlzJqnZwyBwNLd92E9zdhZpNaQ",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://plantsvszombiesgame.github.io/file/")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://en.gameslol.net/data/pvz/en/index.php")
 },
 {
     title: "Getaway Sho</x>otout", 
