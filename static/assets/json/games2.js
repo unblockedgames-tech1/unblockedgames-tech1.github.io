@@ -34,6 +34,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/_gukVbtO_PMcPUQxNna1jxlHOn2IfCfiB4_oyJoDbXUJWGryKzEq-5P6rXlgVLqXoTYEBPL93KEWIBO7TUJS_UpD7enbDJ5JhMJeJyRDZT2R7UWuYjYNv_fb891qsi2NEprHpFKgpYnr14MsJKsBbLsi2AY3Vw",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/48918/")
 },
+{
+    title: "Duck Life 4", 
+    imgSrc: "https://lh7-us.googleusercontent.com/z8atGY8NONZpEpxoOyyHo94FjI4bu8dekjNFrbBPAE1UBlhbd51FUzu2tMCcXSWYc99E1OEFsAYVHLbQXgPgQoxGPkbcCutGRwLRSnxA58YJh679uJgaFYT1jyJWY4fGWA-c76f5jSPzKfJ8giZGvHk-ILvLxw",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/48920/")
+},
 
    ];
 export { games2Data }; // Named export
