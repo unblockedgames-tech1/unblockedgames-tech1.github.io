@@ -44,6 +44,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/PH_XPFbty-8F-XCtG5H6tu39RBP-ga9Izjem7Fj6dmSqcCaCKLXhgSQmpSb2VOcHc5AGnlFHfNRM2rycwHSDDNwp-SQPq8SZj4lLWsITVTUo-W-Cat6mlAggu6lV3IOJMkvhZ3eYOiDUe_w24qxmRGOlJjWTNA",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.mathplayground.com/duck5/index.html")
 },
+{
+    title: "Gladihoppers", 
+    imgSrc: "https://lh7-us.googleusercontent.com/DBHR_BJ45z_j2rshMggVz_uGCz4ZzfzDJNCdtetUdaCXWR7ITxJfq7wNES9sLqAFkxCz67Cd_HN1j8jJzZJAefj_JwvOJRXDZDy51faxFRiVIznXm09HJuO9GgLN9JFThlRtSfSqIhEAoJRdnszgyDsSybrguA",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://classroomjq.github.io/gladihoppers/")
+},
 
    ];
 export { games2Data }; // Named export
