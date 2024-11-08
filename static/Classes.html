@@ -6,6 +6,9 @@
     <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>Classes</title>
     <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
+     crossorigin="anonymous"></script>
+
     <style>
         * {
             margin: 0;
@@ -94,7 +97,7 @@
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: calc(100% - 40px);
+            width: 70vw;
             max-width: 1200px;
             margin: 0 auto;
             flex: 1;
@@ -202,22 +205,25 @@
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 160px;
             height: 600px;
             z-index: 999;
-            display: none;
+            display: block;
         }
 
         .left-ad {
-            left: max(0px, calc((100vw - 1520px) / 2));
+            left: 0;
+            width: 15vw;
+            max-width: 160px;
         }
 
         .right-ad {
-            right: max(0px, calc((100vw - 1520px) / 2));
+            right: 0;
+            width: 15vw;
+            max-width: 160px;
         }
 
         .ad-container {
-            width: calc(100% - 40px);
+            width: 70vw;
             max-width: 1200px;
             margin: 10px auto;
             text-align: center;
@@ -225,31 +231,59 @@
             position: relative;
         }
 
-        @media (min-width: 1520px) {
+        @media (max-width: 1400px) {
             .side-ad {
-                display: block;
+                height: 500px;
+            }
+            
+            .left-ad, .right-ad {
+                width: 12vw;
+            }
+            
+            .game_container,
+            .ad-container {
+                width: 76vw;
             }
         }
 
-        @media (min-width: 1340px) and (max-width: 1519px) {
+        @media (max-width: 1200px) {
             .side-ad {
-                display: block;
-                width: calc((100vw - 1200px - 40px) / 2);
+                height: 400px;
             }
-            .left-ad {
-                left: 0;
+            
+            .left-ad, .right-ad {
+                width: 10vw;
             }
-            .right-ad {
-                right: 0;
+            
+            .game_container,
+            .ad-container {
+                width: 80vw;
             }
         }
 
-        @media (max-width: 1339px) {
-            .game_container, .ad-container {
-                width: 95%;
+        @media (max-width: 1000px) {
+            .side-ad {
+                height: 300px;
             }
+            
+            .left-ad, .right-ad {
+                width: 8vw;
+            }
+            
+            .game_container,
+            .ad-container {
+                width: 84vw;
+            }
+        }
+
+        @media (max-width: 800px) {
             .side-ad {
                 display: none;
+            }
+            
+            .game_container,
+            .ad-container {
+                width: 95vw;
             }
         }
 
@@ -277,6 +311,14 @@
 <body>
     <div class="flash-overlay" id="flashOverlay"></div>
 
+    <div class="side-ad left-ad">
+        <script type="text/javascript">
+            aclib.runBanner({
+                zoneId: '8984110',
+            });
+        </script>
+    </div>
+
     <header class="header">
         <a href="/">
             <img src="/nav/home.png" class="home_bttn" alt="Home">
@@ -288,6 +330,19 @@
             <img src="/nav/apps.png" class="home_bttn" alt="Apps">
         </a>
     </header>
+
+    <div class="container">
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="fluid"
+                 data-ad-layout-key="+26+s7-3-5e+9w"
+                 data-ad-client="ca-pub-4845994519357732"
+                 data-ad-slot="5490786434"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
         
         <div class="game_container">
             <div class="game-glow" id="gameGlow"></div>
@@ -305,6 +360,16 @@
             </div>
         </div>
         
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="fluid"
+                 data-ad-layout-key="+26+s7-3-5e+w"
+                 data-ad-client="ca-pub-4845994519357732"
+                 data-ad-slot="5490786434"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
     </div>
 
