@@ -49,6 +49,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/DBHR_BJ45z_j2rshMggVz_uGCz4ZzfzDJNCdtetUdaCXWR7ITxJfq7wNES9sLqAFkxCz67Cd_HN1j8jJzZJAefj_JwvOJRXDZDy51faxFRiVIznXm09HJuO9GgLN9JFThlRtSfSqIhEAoJRdnszgyDsSybrguA",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://classroomjq.github.io/gladihoppers/")
 },
+{
+    title: "Ragdoll Archers", 
+    imgSrc: "https://lh7-us.googleusercontent.com/V0oeuxrpTGrOAdC0HMtztXnG6v-W0AMSC4ozjjK5-GbmylDDfismz5ylhEkKsHG7vJCc4WxQ2OLcHY8QEZCQftc0adJDjw_Ia2KvpNeonq2RzXTgz6x6DAroDVp-M-i5c8FQwPmnzQizzxIs0yVVBZzxrRzhlQ",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://bitlifeonline.github.io/ragdoll-archers/")
+},
 
    ];
 export { games2Data }; // Named export
