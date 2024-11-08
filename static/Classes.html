@@ -97,7 +97,7 @@
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: calc(100% - 240px);
+            width: calc(100% - 40px);
             max-width: 1200px;
             margin: 0 auto;
             flex: 1;
@@ -209,20 +209,18 @@
             height: 600px;
             z-index: 999;
             display: none;
-            margin: 0;
-            padding: 0;
         }
 
         .left-ad {
-            left: 0;
+            left: max(0px, calc((100vw - 1520px) / 2));
         }
 
         .right-ad {
-            right: 0;
+            right: max(0px, calc((100vw - 1520px) / 2));
         }
 
         .ad-container {
-            width: calc(100% - 240px);
+            width: calc(100% - 40px);
             max-width: 1200px;
             margin: 10px auto;
             text-align: center;
@@ -230,13 +228,31 @@
             position: relative;
         }
 
-        @media (min-width: 1340px) {
+        @media (min-width: 1520px) {
             .side-ad {
                 display: block;
             }
-            
-            .game_container {
-                margin: 0 auto;
+        }
+
+        @media (min-width: 1340px) and (max-width: 1519px) {
+            .side-ad {
+                display: block;
+                width: calc((100vw - 1200px - 40px) / 2);
+            }
+            .left-ad {
+                left: 0;
+            }
+            .right-ad {
+                right: 0;
+            }
+        }
+
+        @media (max-width: 1339px) {
+            .game_container, .ad-container {
+                width: 95%;
+            }
+            .side-ad {
+                display: none;
             }
         }
 
@@ -257,15 +273,6 @@
             }
             .container {
                 margin-top: 20px;
-            }
-        }
-
-        @media (max-width: 1339px) {
-            .game_container, .ad-container {
-                width: 95%;
-            }
-            .side-ad {
-                display: none;
             }
         }
     </style>
