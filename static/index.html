@@ -263,14 +263,9 @@
             const { gamesData } = await import("/assets/json/games.js");
             const { games2Data } = await import("/assets/json/games2.js");
             
-            console.log("Loaded games1:", gamesData);
-            console.log("Loaded games2:", games2Data);
-
             const games = [...gamesData, ...games2Data];
-            console.log("Combined games:", games);
 
             function loadGame(game) {
-                console.log("Loading game:", game);
                 const gameElement = document.createElement("div");
                 gameElement.className = "game";
 
@@ -322,8 +317,6 @@
                     }
                 }
             });
-
-            // Add Random Game functionality
             document.getElementById("randomGameBtn").addEventListener("click", function() {
                 const randomGame = games[Math.floor(Math.random() * games.length)];
                 localStorage.setItem("loadedG", randomGame.link);
