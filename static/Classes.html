@@ -42,7 +42,6 @@
             position: relative;
         }
 
-        /* Enhanced Header Only */
         .header {
             position: fixed;
             width: 100%;
@@ -94,7 +93,6 @@
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
         }
 
-        /* Rest of the existing styles */
         .game_container {
             background-color: #2a2a2a;
             border-radius: 15px;
@@ -207,9 +205,12 @@
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            width: 120px;
+            width: 160px;
             height: 600px;
             z-index: 999;
+            display: none;
+            margin: 0;
+            padding: 0;
         }
 
         .left-ad {
@@ -227,6 +228,16 @@
             text-align: center;
             height: 100px;
             position: relative;
+        }
+
+        @media (min-width: 1340px) {
+            .side-ad {
+                display: block;
+            }
+            
+            .game_container {
+                margin: 0 auto;
+            }
         }
 
         @media (max-height: 800px) {
