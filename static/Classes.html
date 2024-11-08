@@ -42,6 +42,7 @@
             position: relative;
         }
 
+        /* Enhanced Header Only */
         .header {
             position: fixed;
             width: 100%;
@@ -93,6 +94,7 @@
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
         }
 
+        /* Rest of the existing styles */
         .game_container {
             background-color: #2a2a2a;
             border-radius: 15px;
@@ -201,21 +203,20 @@
             opacity: 1;
         }
 
-        .banner {
+        .side-ad {
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
             width: 120px;
             height: 600px;
-            display: none;
-            border-radius: 15px;
+            z-index: 999;
         }
 
-        .banner.left {
+        .left-ad {
             left: 0;
         }
 
-        .banner.right {
+        .right-ad {
             right: 0;
         }
 
@@ -226,12 +227,6 @@
             text-align: center;
             height: 100px;
             position: relative;
-        }
-
-        @media (min-width: 1340px) {
-            .banner {
-                display: block;
-            }
         }
 
         @media (max-height: 800px) {
@@ -258,13 +253,16 @@
             .game_container, .ad-container {
                 width: 95%;
             }
+            .side-ad {
+                display: none;
+            }
         }
     </style>
 </head>
 <body>
     <div class="flash-overlay" id="flashOverlay"></div>
 
-    <div class="banner left">
+    <div class="side-ad left-ad">
         <script type="text/javascript">
             aclib.runBanner({
                 zoneId: '8984110',
@@ -326,7 +324,7 @@
         </div>
     </div>
 
-    <div class="banner right">
+    <div class="side-ad right-ad">
         <script type="text/javascript">
             aclib.runBanner({
                 zoneId: '8984110',
