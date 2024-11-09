@@ -60,6 +60,78 @@
             padding: 5px;
             cursor: pointer;
         }
+
+        /* Add any missing styles for the switch */
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 34px;
+        }
+
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 26px;
+            width: 26px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            -webkit-transition: .4s;
+            transition: .4s;
+        }
+
+        input:checked + .slider {
+            background-color: #2196F3;
+        }
+
+        input:focus + .slider {
+            box-shadow: 0 0 1px #2196F3;
+        }
+
+        input:checked + .slider:before {
+            -webkit-transform: translateX(26px);
+            -ms-transform: translateX(26px);
+            transform: translateX(26px);
+        }
+
+        .slider.round {
+            border-radius: 34px;
+        }
+
+        .slider.round:before {
+            border-radius: 50%;
+        }
+
+        .settingswidget {
+            background-color: #1a1a1a;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 10px;
+        }
+
+        .settingswidget h1 {
+            color: white;
+            margin-bottom: 15px;
+        }
         </style>
         <script>
         function toggleCloaking() {
@@ -76,9 +148,43 @@
                 return
             }
         }
+
+        function toggleAntiClose() {
+            if (localStorage.getItem('anticlose') === null) {
+                localStorage.setItem("anticlose", 'true')
+                setupAntiClose()
+                return
+            }
+            if (localStorage.getItem('anticlose') == 'true') {
+                localStorage.setItem('anticlose', 'false')
+                removeAntiClose()
+                return
+            }
+            if (localStorage.getItem('anticlose') == 'false') {
+                localStorage.setItem('anticlose', 'true')
+                setupAntiClose()
+                return
+            }
+        }
+
+        function setupAntiClose() {
+            window.addEventListener('beforeunload', showWarning);
+        }
+
+        function removeAntiClose() {
+            window.removeEventListener('beforeunload', showWarning);
+        }
+
+        function showWarning(e) {
+            e.preventDefault();
+            e.returnValue = 'Leave site? Changes you made may not be saved.';
+            return e.returnValue;
+        }
+
         function setSearchType(type) {
             localStorage.setItem('searchBackend', type)
         } 
+
         function addApp() {
             if (localStorage.getItem('apps') == null) {
                 alert("Please load apps properly first")
@@ -99,6 +205,10 @@
             if (localStorage.getItem('cloaking') === 'true') {
                 document.getElementById("cbox_cloaking").checked = true;
             }
+            if (localStorage.getItem('anticlose') === 'true') {
+                document.getElementById("cbox_anticlose").checked = true;
+                setupAntiClose();
+            }
         }
         </script>
     </head>
@@ -116,6 +226,13 @@
             <h1>About blank cloaking</h1>
             <label class="switch">
                 <input type="checkbox" id="cbox_cloaking" onclick="toggleCloaking()">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <div class="settingswidget">
+            <h1>Anti Close</h1>
+            <label class="switch">
+                <input type="checkbox" id="cbox_anticlose" onclick="toggleAntiClose()">
                 <span class="slider round"></span>
             </label>
         </div>
