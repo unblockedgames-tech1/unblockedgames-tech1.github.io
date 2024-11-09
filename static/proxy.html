@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<script>(function(){function setupAntiClose(){window.addEventListener('beforeunload',showWarning);updateActiveState(true)}function removeAntiClose(){window.removeEventListener('beforeunload',showWarning);updateActiveState(false)}function showWarning(e){if(!e.target.location.href.includes("redirect")&&localStorage.getItem('anticlose')==='true'){e.preventDefault();e.returnValue='Leave site? Changes you made may not be saved.';return e.returnValue}}function updateActiveState(isActive){const checkbox=document.getElementById('cbox_anticlose');if(checkbox){checkbox.checked=isActive}}function initAntiClose(){const isEnabled=localStorage.getItem('anticlose')==='true';if(isEnabled){setupAntiClose()}else if(localStorage.getItem('anticlose')===null){localStorage.setItem('anticlose','false')}updateActiveState(isEnabled)}window.addEventListener('storage',function(e){if(e.key==='anticlose'){if(e.newValue==='true'){setupAntiClose()}else{removeAntiClose()}}});if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initAntiClose)}else{initAntiClose()}})();</script>
 <head>
   <script src="/assets/js/favicon-handler.js"></script>
   <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
