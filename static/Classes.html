@@ -228,16 +228,24 @@
             max-width: 160px;
         }
 
-        .ad-container {
+        .ad-container-top, .ad-container-bottom {
             width: 100%;
             max-width: 1200px;
-            margin: 10px auto;
+            margin: 0 auto;
             text-align: center;
-            height: 100px;
+            height: 36px;
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        .ad-container-top {
+            margin-bottom: -36px;
+        }
+
+        .ad-container-bottom {
+            margin-top: -36px;
         }
 
         @media (max-width: 1400px) {
@@ -250,7 +258,7 @@
             }
             
             .game_container,
-            .ad-container {
+            .ad-container-top, .ad-container-bottom {
                 width: 76vw;
             }
         }
@@ -265,7 +273,7 @@
             }
             
             .game_container,
-            .ad-container {
+            .ad-container-top, .ad-container-bottom {
                 width: 80vw;
             }
         }
@@ -280,7 +288,7 @@
             }
             
             .game_container,
-            .ad-container {
+            .ad-container-top, .ad-container-bottom {
                 width: 84vw;
             }
         }
@@ -291,7 +299,7 @@
             }
             
             .game_container,
-            .ad-container {
+            .ad-container-top, .ad-container-bottom {
                 width: 95vw;
             }
         }
@@ -341,7 +349,7 @@
     </header>
 
     <div class="container">
-        <div class="ad-container">
+        <div class="ad-container-top">
             <script type="text/javascript">
                 aclib.runBanner({
                     zoneId: '8987498',
@@ -365,7 +373,7 @@
             </div>
         </div>
         
-        <div class="ad-container">
+        <div class="ad-container-bottom">
             <script type="text/javascript">
                 aclib.runBanner({
                     zoneId: '8987498',
