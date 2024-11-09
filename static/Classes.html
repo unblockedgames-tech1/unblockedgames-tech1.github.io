@@ -110,8 +110,8 @@
             display: flex;
             flex-direction: column;
             position: relative;
-            min-height: 600px;
-            height: 88vh;
+            min-height: 40vh;
+            height: 70vh;
             top: 0;
         }
 
@@ -211,21 +211,18 @@
             position: fixed;
             top: 50%;
             transform: translateY(-50%);
-            height: 600px;
+            height: 30vh;
+            width: 10vw;
             z-index: 999;
             display: block;
         }
 
         .left-ad {
             left: 0;
-            width: 15vw;
-            max-width: 160px;
         }
 
         .right-ad {
             right: 0;
-            width: 15vw;
-            max-width: 160px;
         }
 
         .ad-container {
@@ -233,7 +230,7 @@
             max-width: 1200px;
             margin: 10px auto;
             text-align: center;
-            height: 100px;
+            height: 10vh;
             position: relative;
             display: flex;
             justify-content: center;
@@ -242,13 +239,9 @@
 
         @media (max-width: 1400px) {
             .side-ad {
-                height: 500px;
+                height: 25vh;
+                width: 8vw;
             }
-            
-            .left-ad, .right-ad {
-                width: 12vw;
-            }
-            
             .game_container,
             .ad-container {
                 width: 76vw;
@@ -257,13 +250,9 @@
 
         @media (max-width: 1200px) {
             .side-ad {
-                height: 400px;
+                height: 20vh;
+                width: 7vw;
             }
-            
-            .left-ad, .right-ad {
-                width: 10vw;
-            }
-            
             .game_container,
             .ad-container {
                 width: 80vw;
@@ -272,13 +261,9 @@
 
         @media (max-width: 1000px) {
             .side-ad {
-                height: 300px;
+                height: 15vh;
+                width: 6vw;
             }
-            
-            .left-ad, .right-ad {
-                width: 8vw;
-            }
-            
             .game_container,
             .ad-container {
                 width: 84vw;
@@ -289,7 +274,6 @@
             .side-ad {
                 display: none;
             }
-            
             .game_container,
             .ad-container {
                 width: 95vw;
@@ -298,8 +282,8 @@
 
         @media (max-height: 800px) {
             .game_container {
-                height: 85vh;
-                min-height: 500px;
+                height: 60vh;
+                min-height: 300px;
             }
             .container {
                 margin-top: 30px;
@@ -308,8 +292,8 @@
 
         @media (max-height: 600px) {
             .game_container {
-                height: 80vh;
-                min-height: 450px;
+                height: 55vh;
+                min-height: 250px;
             }
             .container {
                 margin-top: 20px;
