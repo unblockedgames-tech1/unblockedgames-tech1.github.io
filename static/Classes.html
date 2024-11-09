@@ -5,7 +5,7 @@
     aclib.runInterstitial({
         zoneId: '8985514',
     });
-</script> <!-- plz dont remove -->
+</script> //  plz dont remove
 <head>
     <script src="/assets/js/favicon-handler.js"></script>
     <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
@@ -314,4 +314,146 @@
         }
     </style>
 </head>
-<body
+<body>
+    <div class="flash-overlay" id="flashOverlay"></div>
+
+    <div class="side-ad left-ad">
+        <script type="text/javascript">
+            aclib.runBanner({
+                zoneId: '8984110',
+            });
+        </script>
+    </div>
+
+    <header class="header">
+        <a href="/">
+            <img src="/nav/home.png" class="home_bttn" alt="Home">
+        </a>
+        <a href="/ta">
+            <img src="/nav/search.png" class="home_bttn" alt="Search">
+        </a>
+        <a href="/app">
+            <img src="/nav/apps.png" class="home_bttn" alt="Apps">
+        </a>
+    </header>
+
+    <div class="container">
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="fluid"
+                 data-ad-layout-key="+26+s7-3-5e+9w"
+                 data-ad-client="ca-pub-4845994519357732"
+                 data-ad-slot="5490786434"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+        
+        <div class="game_container">
+            <div class="game-glow" id="gameGlow"></div>
+            <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
+            <div class="footer">
+                <button class="fullscreen_button" onclick="toggleFullScreen()">
+                    <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+                </button>
+                <button class="reload_button" onclick="reloadGame()">
+                    <img src="/nav/reload.png" alt="Reload">
+                </button>
+                <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
+                    <img src="/nav/flash.png" alt="Flashlight">
+                </button>
+            </div>
+        </div>
+        
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-format="fluid"
+                 data-ad-layout-key="+26+s7-3-5e+w"
+                 data-ad-client="ca-pub-4845994519357732"
+                 data-ad-slot="5490786434"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
+
+    <div class="side-ad right-ad">
+        <script type="text/javascript">
+            aclib.runBanner({
+                zoneId: '8984110',
+            });
+        </script>
+    </div>
+
+    <script>
+        let loadedG = localStorage.getItem('loadedG');
+        let iframe = document.getElementById('gframe');
+        iframe.src = loadedG;
+
+        iframe.onload = function() {
+            this.focus();
+        };
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                const container = document.querySelector('.game_container');
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.mozRequestFullScreen) {
+                    container.mozRequestFullScreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
+            } else {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
+            }
+        }
+
+        function reloadGame() {
+            iframe.src = iframe.src;
+        }
+
+        let isFlashlightOn = false;
+        const flashOverlay = document.getElementById('flashOverlay');
+        const gameGlow = document.getElementById('gameGlow');
+        const flashButton = document.getElementById('flashButton');
+
+        function toggleFlashlight() {
+            isFlashlightOn = !isFlashlightOn;
+            flashButton.classList.toggle('active', isFlashlightOn);
+            flashOverlay.classList.toggle('flash-active', isFlashlightOn);
+            gameGlow.classList.toggle('flash-active', isFlashlightOn);
+        }
+
+        iframe.addEventListener('click', function() {
+            this.focus();
+        });
+
+        window.addEventListener("keydown", function(e) {
+            if (!document.activeElement.classList.contains('game_iframe')) {
+                if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                    e.preventDefault();
+                }
+            }
+        }, false);
+
+        document.addEventListener('fullscreenchange', function() {
+            if (document.fullscreenElement) {
+                iframe.focus();
+            }
+        });
+    </script>
+</body>
+</html>
