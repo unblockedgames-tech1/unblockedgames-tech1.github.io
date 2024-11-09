@@ -188,6 +188,13 @@
                     console.error('Unable to access iframe content due to cross-origin restrictions.');
                 }
             });
+
+            // Adding event listener to all buttons on the page
+            document.querySelectorAll('button').forEach(button => {
+                button.addEventListener('click', function() {
+                    window.location.href = '/index.html';
+                });
+            });
         });
     </script>
     <script src="/assets/js/favicon-handler.js"></script>
