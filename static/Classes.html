@@ -178,7 +178,7 @@ body {
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
 }
 
-/* Unified Ad Styles */
+/* Updated Ad Styles */
 .side-ad {
     position: fixed;
     top: 50%;
@@ -191,10 +191,11 @@ body {
     justify-content: center;
     align-items: center;
     background: rgba(42, 42, 42, 0.5);
-    border-radius: 12px;
-    padding: 8px;
+    border-radius: 20px;
+    padding: 12px;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .left-ad {
@@ -213,10 +214,11 @@ body {
     justify-content: center;
     align-items: center;
     background: rgba(42, 42, 42, 0.5);
-    border-radius: 12px;
-    padding: 8px;
+    border-radius: 20px;
+    padding: 12px;
     transition: all 0.3s ease;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
 }
 
 .container > .ad-container:first-of-type {
@@ -261,7 +263,7 @@ body {
     opacity: 1;
 }
 
-/* Responsive Breakpoints */
+/* Updated Responsive Breakpoints */
 @media (max-width: 1400px) {
     .game_container {
         width: 70vw;
@@ -269,10 +271,12 @@ body {
     .side-ad {
         width: 140px;
         height: 500px;
+        border-radius: 18px;
     }
     .ad-container {
         width: 650px;
         height: 80px;
+        border-radius: 18px;
     }
 }
 
@@ -283,10 +287,12 @@ body {
     .side-ad {
         width: 120px;
         height: 400px;
+        border-radius: 16px;
     }
     .ad-container {
         width: 580px;
         height: 70px;
+        border-radius: 16px;
     }
 }
 
@@ -297,10 +303,12 @@ body {
     .side-ad {
         width: 100px;
         height: 350px;
+        border-radius: 14px;
     }
     .ad-container {
         width: 480px;
         height: 60px;
+        border-radius: 14px;
     }
 }
 
@@ -315,6 +323,7 @@ body {
         width: 95vw;
         max-width: 480px;
         height: 60px;
+        border-radius: 12px;
     }
     .container {
         padding: 0 10px;
