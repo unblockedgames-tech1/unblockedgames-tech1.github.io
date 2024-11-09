@@ -112,6 +112,7 @@
             height: 100%;
             top: 0;
             transition: all 0.3s ease;
+            transform-origin: top left;
         }
 
         .game_iframe {
@@ -174,14 +175,14 @@
         }
 
         @media (max-width: 768px) {
-            .game_container {
-                width: 90%;
+            body {
+                transform: scale(0.9);
             }
         }
 
         @media (max-width: 480px) {
-            .game_container {
-                width: 95%;
+            body {
+                transform: scale(0.8);
             }
         }
     </style>
