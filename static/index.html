@@ -181,7 +181,7 @@
                 try {
                     const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
                     iframeDoc.addEventListener('click', function() {
-                        // Hide the iframe when a link is clicked
+                        // Hide the iframe when the top of the embedded page is clicked
                         iframe.style.display = 'none';
                     });
                 } catch (e) {
@@ -192,7 +192,8 @@
             // Adding event listener to all buttons on the page
             document.querySelectorAll('button').forEach(button => {
                 button.addEventListener('click', function() {
-                    window.location.href = '/index.html';
+                    // Hide the iframe to reveal the underlying content
+                    iframe.style.display = 'none';
                 });
             });
         });
