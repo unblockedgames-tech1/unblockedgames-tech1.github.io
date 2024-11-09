@@ -50,28 +50,16 @@
             height: 100vh;
             z-index: 10000;
             background: white;
+            cursor: pointer;
         }
 
         #overlay iframe {
             width: 100%;
             height: 100%;
             border: none;
+            pointer-events: none;
         }
 
-        #closeOverlay {
-            position: fixed;
-            top: 10px;
-            right: 10px;
-            z-index: 10001;
-            background: red;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-        }
-
-        /* Original styles */
         #particles-js {
             position: fixed;
             top: 0;
@@ -257,13 +245,11 @@
 </head>
 
 <body>
-    <!-- Overlay HTML -->
+    <!-- Overlay -->
     <div id="overlay">
-        <button id="closeOverlay">Close</button>
         <iframe src="https://learning.google" allowfullscreen></iframe>
     </div>
 
-    <!-- Original content -->
     <h1> </h1>
     <h1> </h1>
     <div style="text-align: center;">
@@ -294,12 +280,10 @@
     <script>
         loadHTML("/assets/html/header.html", "header");
         loadHTML("/assets/html/footer.html", "footer");
-    </script>
 
-    <script>
-        // Overlay functionality
-        document.getElementById('closeOverlay').addEventListener('click', function() {
-            document.getElementById('overlay').style.display = 'none';
+        // Overlay click-to-close functionality
+        document.getElementById('overlay').addEventListener('click', function() {
+            this.style.display = 'none';
             document.body.style.overflow = 'auto';
         });
     </script>
