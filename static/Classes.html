@@ -38,8 +38,9 @@
         .container {
             display: flex;
             flex-direction: column;
-            height: calc(100% - 80px); /* Account for header and footer */
+            height: 100%;
             width: 100%;
+            margin-top: 40px;
             align-items: center;
             justify-content: center;
             padding: 0 20px;
@@ -64,6 +65,7 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
             z-index: 1000;
+            margin-bottom: 3vh;
         }
 
         .header:hover {
@@ -101,18 +103,16 @@
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: 70%;
+            width: 70vw;
             max-width: 1200px;
             margin: 0 auto;
             flex: 1;
             display: flex;
             flex-direction: column;
             position: relative;
-            min-height: 500px;
-            height: 100%;
+            min-height: 600px;
+            height: 88vh;
             top: 0;
-            transition: all 0.3s ease;
-            transform-origin: top left;
         }
 
         .game_iframe {
@@ -134,9 +134,8 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
-            position: fixed;
+            position: relative;
             bottom: 0;
-            width: 100%;
         }
 
         .fullscreen_button, .reload_button, .flash_button {
@@ -174,21 +173,160 @@
             filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
         }
 
-        @media (max-width: 768px) {
-            body {
-                transform: scale(0.9);
+        .flash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, 
+                rgba(0, 0, 0, 0.8) 0%, 
+                rgba(0, 0, 0, 1) 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .game-glow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 150%;
+            height: 150%;
+            background: radial-gradient(ellipse at center,
+                rgba(255, 255, 255, 0.15) 0%,
+                rgba(255, 255, 255, 0.1) 30%,
+                rgba(255, 255, 255, 0) 70%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .flash-active {
+            opacity: 1;
+        }
+
+        .side-ad {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            height: 600px;
+            z-index: 999;
+            display: block;
+        }
+
+        .left-ad {
+            left: 0;
+            width: 15vw;
+            max-width: 160px;
+        }
+
+        .right-ad {
+            right: 0;
+            width: 15vw;
+            max-width: 160px;
+        }
+
+        .ad-container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 10px auto;
+            text-align: center;
+            height: 100px;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @media (max-width: 1400px) {
+            .side-ad {
+                height: 500px;
+            }
+            
+            .left-ad, .right-ad {
+                width: 12vw;
+            }
+            
+            .game_container,
+            .ad-container {
+                width: 76vw;
             }
         }
 
-        @media (max-width: 480px) {
-            body {
-                transform: scale(0.8);
+        @media (max-width: 1200px) {
+            .side-ad {
+                height: 400px;
+            }
+            
+            .left-ad, .right-ad {
+                width: 10vw;
+            }
+            
+            .game_container,
+            .ad-container {
+                width: 80vw;
+            }
+        }
+
+        @media (max-width: 1000px) {
+            .side-ad {
+                height: 300px;
+            }
+            
+            .left-ad, .right-ad {
+                width: 8vw;
+            }
+            
+            .game_container,
+            .ad-container {
+                width: 84vw;
+            }
+        }
+
+        @media (max-width: 800px) {
+            .side-ad {
+                display: none;
+            }
+            
+            .game_container,
+            .ad-container {
+                width: 95vw;
+            }
+        }
+
+        @media (max-height: 800px) {
+            .game_container {
+                height: 85vh;
+                min-height: 500px;
+            }
+            .container {
+                margin-top: 30px;
+            }
+        }
+
+        @media (max-height: 600px) {
+            .game_container {
+                height: 80vh;
+                min-height: 450px;
+            }
+            .container {
+                margin-top: 20px;
             }
         }
     </style>
 </head>
 <body>
     <div class="flash-overlay" id="flashOverlay"></div>
+
+    <div class="side-ad left-ad">
+        <script type="text/javascript">
+            aclib.runBanner({
+                zoneId: '8984110',
+            });
+        </script>
+    </div>
 
     <header class="header">
         <a href="/">
@@ -234,6 +372,14 @@
                 });
             </script>
         </div>
+    </div>
+
+    <div class="side-ad right-ad">
+        <script type="text/javascript">
+            aclib.runBanner({
+                zoneId: '8984110',
+            });
+        </script>
     </div>
 
     <script>
