@@ -42,10 +42,10 @@ body {
     width: 100%;
     margin-top: 40px;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     padding: 0 20px;
     position: relative;
-    gap: 10px;
+    gap: 15px;
 }
 
 .header {
@@ -178,6 +178,7 @@ body {
     filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
 }
 
+/* Unified Ad Styles */
 .side-ad {
     position: fixed;
     top: 50%;
@@ -189,10 +190,11 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(42, 42, 42, 0.3);
-    border-radius: 10px;
-    padding: 5px;
+    background: rgba(42, 42, 42, 0.5);
+    border-radius: 12px;
+    padding: 8px;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .left-ad {
@@ -204,17 +206,25 @@ body {
 }
 
 .ad-container {
-    width: 100%;
-    max-width: 728px;
+    width: 728px;
     height: 90px;
-    margin: 5px auto;
+    margin: 10px auto;
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgba(42, 42, 42, 0.3);
-    border-radius: 10px;
-    padding: 5px;
+    background: rgba(42, 42, 42, 0.5);
+    border-radius: 12px;
+    padding: 8px;
     transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.container > .ad-container:first-of-type {
+    margin-bottom: 0;
+}
+
+.container > .ad-container:last-of-type {
+    margin-top: 0;
 }
 
 .flash-overlay {
@@ -257,8 +267,12 @@ body {
         width: 70vw;
     }
     .side-ad {
-        width: 120px;
+        width: 140px;
         height: 500px;
+    }
+    .ad-container {
+        width: 650px;
+        height: 80px;
     }
 }
 
@@ -267,8 +281,12 @@ body {
         width: 75vw;
     }
     .side-ad {
-        width: 100px;
+        width: 120px;
         height: 400px;
+    }
+    .ad-container {
+        width: 580px;
+        height: 70px;
     }
 }
 
@@ -277,8 +295,12 @@ body {
         width: 80vw;
     }
     .side-ad {
-        width: 80px;
-        height: 300px;
+        width: 100px;
+        height: 350px;
+    }
+    .ad-container {
+        width: 480px;
+        height: 60px;
     }
 }
 
@@ -290,11 +312,13 @@ body {
         display: none;
     }
     .ad-container {
-        max-width: 95vw;
+        width: 95vw;
+        max-width: 480px;
         height: 60px;
     }
     .container {
         padding: 0 10px;
+        gap: 10px;
     }
 }
 
@@ -306,10 +330,11 @@ body {
         height: 65vh;
     }
     .ad-container {
-        height: 60px;
+        height: 50px;
     }
     .container {
         margin-top: 30px;
+        gap: 10px;
     }
 }
 
@@ -322,10 +347,11 @@ body {
         min-height: 250px;
     }
     .ad-container {
-        height: 50px;
+        height: 40px;
     }
     .container {
         margin-top: 20px;
+        gap: 8px;
     }
 }
     </style>
