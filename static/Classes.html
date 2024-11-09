@@ -212,8 +212,8 @@
             top: 50%;
             transform: translateY(-50%);
             height: 30vh;
-            width: 10vw;
-            max-width: 150px;
+            width: 15vw;
+            max-width: 300px;
             z-index: 999;
             display: block;
             overflow: hidden;
@@ -237,12 +237,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            overflow: hidden;
         }
 
         @media (max-width: 1400px) {
             .side-ad {
                 height: 25vh;
-                width: 8vw;
+                width: 12vw;
+                max-width: 250px;
             }
             .game_container,
             .ad-container {
@@ -253,7 +255,8 @@
         @media (max-width: 1200px) {
             .side-ad {
                 height: 20vh;
-                width: 7vw;
+                width: 10vw;
+                max-width: 200px;
             }
             .game_container,
             .ad-container {
@@ -264,7 +267,8 @@
         @media (max-width: 1000px) {
             .side-ad {
                 height: 15vh;
-                width: 6vw;
+                width: 8vw;
+                max-width: 150px;
             }
             .game_container,
             .ad-container {
