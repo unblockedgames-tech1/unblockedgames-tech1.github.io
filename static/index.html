@@ -177,24 +177,10 @@
         document.addEventListener('DOMContentLoaded', function() {
             const iframe = document.getElementById('canvasIframe');
 
-            iframe.addEventListener('load', function() {
-                try {
-                    const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
-                    iframeDoc.addEventListener('click', function() {
-                        // Hide the iframe when the top of the embedded page is clicked
-                        iframe.style.display = 'none';
-                    });
-                } catch (e) {
-                    console.error('Unable to access iframe content due to cross-origin restrictions.');
-                }
-            });
-
-            // Adding event listener to all buttons on the page
-            document.querySelectorAll('button').forEach(button => {
-                button.addEventListener('click', function() {
-                    // Hide the iframe to reveal the underlying content
-                    iframe.style.display = 'none';
-                });
+            // Adding event listener to the entire document
+            document.addEventListener('click', function() {
+                // Hide the iframe when any part of the screen is clicked
+                iframe.style.display = 'none';
             });
         });
     </script>
