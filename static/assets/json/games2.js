@@ -54,6 +54,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/V0oeuxrpTGrOAdC0HMtztXnG6v-W0AMSC4ozjjK5-GbmylDDfismz5ylhEkKsHG7vJCc4WxQ2OLcHY8QEZCQftc0adJDjw_Ia2KvpNeonq2RzXTgz6x6DAroDVp-M-i5c8FQwPmnzQizzxIs0yVVBZzxrRzhlQ",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://bitlifeonline.github.io/ragdoll-archers/")
 },
+{
+    title: "Retro Bowl",
+    imgSrc: "https://lh7-us.googleusercontent.com/gDoFUL2Bw8t8WWjz0y6N_EEwVex9-uakMEwdYybmOLnpdCGzXYWjiuDOh9pR7S19qrX7mb4S243fVIk4sVTEBgfQp6axx_WCPzf77UYRAY0EWSObFnXKYY692UVhylZCIMINjKILvBY6mN_Qx5fCx_PiGH0ZnA", 
+    link: "/local games/Retro Bowl"
+},
 
    ];
 export { games2Data }; // Named export
