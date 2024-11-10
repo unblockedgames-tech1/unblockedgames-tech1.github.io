@@ -392,6 +392,53 @@ body {
         gap: 8px;
     }
 }
+            .chat_button {
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 6px;
+        transition: all 0.2s ease;
+    }
+
+    .chat_button img {
+        width: 24px;
+        height: 24px;
+        transition: transform 0.2s ease;
+    }
+
+    .chat_button:hover img {
+        transform: scale(1.1);
+    }
+
+    .chat_button:active img {
+        transform: scale(0.9);
+    }
+
+    .chat_button.active img {
+        filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
+    }
+
+    #widgetbot-container {
+        display: none;
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        width: 350px;
+        height: 500px;
+        z-index: 1000;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease;
+    }
+
+    #widgetbot-container.visible {
+        display: block;
+    }
     </style>
 </head>
 <body>
@@ -426,22 +473,21 @@ body {
             </script>
         </div>
         
-        <div class="game_container">
-            <div class="game-glow" id="gameGlow"></div>
-            <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
-            <div class="footer">
-                <button class="fullscreen_button" onclick="toggleFullScreen()">
-                    <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
-                </button>
-                <button class="reload_button" onclick="reloadGame()">
-                    <img src="/nav/reload.png" alt="Reload">
-                </button>
-                <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
-                    <img src="/nav/flash.png" alt="Flashlight">
-                </button>
-            </div>
-        </div>
-        
+    <div class="footer">
+        <button class="fullscreen_button" onclick="toggleFullScreen()">
+            <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+        </button>
+        <button class="reload_button" onclick="reloadGame()">
+            <img src="/nav/reload.png" alt="Reload">
+        </button>
+        <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
+            <img src="/nav/flash.png" alt="Flashlight">
+        </button>
+        <button class="chat_button" onclick="toggleChat()" id="chatButton">
+            <img src="/nav/chat_icon.png" alt="Chat">
+        </button>
+    </div>
+        <div id="widgetbot-container"></div>
         <div class="ad-container">
             <script type="text/javascript">
                 aclib.runBanner({
@@ -456,9 +502,37 @@ body {
             aclib.runBanner({
                 zoneId: '8984110',
             });
+        
         </script>
     </div>
+       let isChatVisible = false;
+        const chatButton = document.getElementById('chatButton');
+        const widgetbotContainer = document.getElementById('widgetbot-container');
+        let widgetbotInitialized = false;
 
+        function toggleChat() {
+            isChatVisible = !isChatVisible;
+            chatButton.classList.toggle('active', isChatVisible);
+            widgetbotContainer.classList.toggle('visible', isChatVisible);
+            
+            if (isChatVisible && !widgetbotInitialized) {
+                // Initialize WidgetBot only when chat is first opened
+                const script = document.createElement('script');
+                script.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
+                script.async = true;
+                script.defer = true;
+                script.onload = function() {
+                    new Crate({
+                        server: '1205329363394887722', // Void Network
+                        channel: '1205332504220012584', // #📌・voidnetwork-chattin
+                        location: ['#widgetbot-container', 'inline'],
+                        guestControls: true
+                    });
+                };
+                document.body.appendChild(script);
+                widgetbotInitialized = true;
+            }
+        }
     <script>
         let loadedG = localStorage.getItem('loadedG');
         let iframe = document.getElementById('gframe');
