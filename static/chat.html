@@ -206,13 +206,7 @@
 
         // Set initial iframe src
         window.onload = function() {
-            <widgetbot
-    server="1205329363394887722"
-    channel="1205332504220012584"
-    width="800"
-    height="600"
-></widgetbot>
-<script src="https://cdn.jsdelivr.net/npm/@widgetbot/html-embed"></script>
+            const originalUrl = "https://e.widgetbot.io/channels/1205329363394887722/1205332504220012584/?preset=crate&api=ba2a3d62-8ee6-452c-b891-539bb690f86d"; //  back 
             const proxyUrl = encodeUrl(originalUrl);
             document.getElementById('proxyFrame').src = proxyUrl;
         };
