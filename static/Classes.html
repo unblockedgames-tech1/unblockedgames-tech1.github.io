@@ -501,13 +501,24 @@ body {
             }
         });
 
-        let isChatEnabled = false;
-        let chatScript = null;
+        let isChatVisible = false;
+        let chatContainer = document.createElement('div');
+        chatContainer.id = 'chatContainer';
+        chatContainer.style.position = 'fixed';
+        chatContainer.style.bottom = '50px';
+        chatContainer.style.right = '50px';
+        chatContainer.style.width = '400px';
+        chatContainer.style.height = '600px';
+        chatContainer.style.zIndex = '1000';
+        chatContainer.style.display = 'none';
+        document.body.appendChild(chatContainer);
 
         function toggleChat() {
-            if (!isChatEnabled) {
-                if (!chatScript) {
-                    chatScript = document.createElement('script');
+            if (!isChatVisible) {
+                chatContainer.style.display = 'block';
+                if (!document.getElementById('chatScript')) {
+                    let chatScript = document.createElement('script');
+                    chatScript.id = 'chatScript';
                     chatScript.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
                     chatScript.async = true;
                     chatScript.defer = true;
@@ -515,27 +526,14 @@ body {
                         new Crate({
                             server: '1205329363394887722', // Void Network
                             channel: '1205332504220012584' // #📍・voidnetwork-chattin
-                        });
+                        }).mount('#chatContainer');
                     };
                     document.body.appendChild(chatScript);
                 }
             } else {
-                if (chatScript) {
-                    document.body.removeChild(chatScript);
-                    chatScript = null;
-                }
+                chatContainer.style.display = 'none';
             }
-            isChatEnabled = !isChatEnabled;
-        });
-                };
-                document.body.appendChild(chatScript);
-            } else {
-                if (chatScript) {
-                    document.body.removeChild(chatScript);
-                    chatScript = null;
-                }
-            }
-            isChatEnabled = !isChatEnabled;
+            isChatVisible = !isChatVisible;
         }
     </script>
 </body>
