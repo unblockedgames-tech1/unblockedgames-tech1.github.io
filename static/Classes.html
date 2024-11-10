@@ -532,6 +532,10 @@ body {
                 }
             } else {
                 chatContainer.style.display = 'none';
+                let chatScript = document.getElementById('chatScript');
+                if (chatScript) {
+                    document.body.removeChild(chatScript);
+                }
             }
             isChatVisible = !isChatVisible;
         }
