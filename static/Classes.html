@@ -503,37 +503,6 @@ body {
                 zoneId: '8984110',
             });
         
-        </script>
-    </div>
-       let isChatVisible = false;
-        const chatButton = document.getElementById('chatButton');
-        const widgetbotContainer = document.getElementById('widgetbot-container');
-        let widgetbotInitialized = false;
-
-        function toggleChat() {
-            isChatVisible = !isChatVisible;
-            chatButton.classList.toggle('active', isChatVisible);
-            widgetbotContainer.classList.toggle('visible', isChatVisible);
-            
-            if (isChatVisible && !widgetbotInitialized) {
-                // Initialize WidgetBot only when chat is first opened
-                const script = document.createElement('script');
-                script.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
-                script.async = true;
-                script.defer = true;
-                script.onload = function() {
-                    new Crate({
-                        server: '1205329363394887722', // Void Network
-                        channel: '1205332504220012584', // #📌・voidnetwork-chattin
-                        location: ['#widgetbot-container', 'inline'],
-                        guestControls: true
-                    });
-                };
-                document.body.appendChild(script);
-                widgetbotInitialized = true;
-            }
-        }
-    <script>
         let loadedG = localStorage.getItem('loadedG');
         let iframe = document.getElementById('gframe');
         iframe.src = loadedG;
