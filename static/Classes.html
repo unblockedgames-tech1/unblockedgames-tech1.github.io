@@ -137,7 +137,8 @@ body {
 
 .fullscreen_button, 
 .reload_button, 
-.flash_button {
+.flash_button, 
+.chat_button {
     width: 36px;
     height: 36px;
     display: flex;
@@ -152,7 +153,8 @@ body {
 
 .fullscreen_button img, 
 .reload_button img, 
-.flash_button img {
+.flash_button img, 
+.chat_button img {
     width: 24px;
     height: 24px;
     transition: transform 0.2s ease;
@@ -160,13 +162,15 @@ body {
 
 .fullscreen_button:hover img, 
 .reload_button:hover img, 
-.flash_button:hover img {
+.flash_button:hover img, 
+.chat_button:hover img {
     transform: scale(1.1);
 }
 
 .fullscreen_button:active img, 
 .reload_button:active img, 
-.flash_button:active img {
+.flash_button:active img, 
+.chat_button:active img {
     transform: scale(0.9);
 }
 
@@ -406,6 +410,9 @@ body {
                 <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
                     <img src="/nav/flash.png" alt="Flashlight">
                 </button>
+                <button class="chat_button" onclick="toggleChat()">
+                    <img src="/nav/chat_icon.png" alt="Chat">
+                </button>
             </div>
         </div>
         
@@ -493,6 +500,31 @@ body {
                 iframe.focus();
             }
         });
+
+        let isChatEnabled = false;
+        let chatScript;
+
+        function toggleChat() {
+            if (!isChatEnabled) {
+                chatScript = document.createElement('script');
+                chatScript.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
+                chatScript.async = true;
+                chatScript.defer = true;
+                chatScript.onload = function() {
+                    new Crate({
+                        server: '1205329363394887722', // Void Network
+                        channel: '1205332504220012584' // #📍・voidnetwork-chattin
+                    });
+                };
+                document.body.appendChild(chatScript);
+            } else {
+                if (chatScript) {
+                    document.body.removeChild(chatScript);
+                    chatScript = null;
+                }
+            }
+            isChatEnabled = !isChatEnabled;
+        }
     </script>
 </body>
 </html>
