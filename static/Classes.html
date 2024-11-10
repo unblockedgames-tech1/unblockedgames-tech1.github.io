@@ -502,19 +502,31 @@ body {
         });
 
         let isChatEnabled = false;
-        let chatScript;
+        let chatScript = null;
 
         function toggleChat() {
             if (!isChatEnabled) {
-                chatScript = document.createElement('script');
-                chatScript.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
-                chatScript.async = true;
-                chatScript.defer = true;
-                chatScript.onload = function() {
-                    new Crate({
-                        server: '1205329363394887722', // Void Network
-                        channel: '1205332504220012584' // #📍・voidnetwork-chattin
-                    });
+                if (!chatScript) {
+                    chatScript = document.createElement('script');
+                    chatScript.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
+                    chatScript.async = true;
+                    chatScript.defer = true;
+                    chatScript.onload = function() {
+                        new Crate({
+                            server: '1205329363394887722', // Void Network
+                            channel: '1205332504220012584' // #📍・voidnetwork-chattin
+                        });
+                    };
+                    document.body.appendChild(chatScript);
+                }
+            } else {
+                if (chatScript) {
+                    document.body.removeChild(chatScript);
+                    chatScript = null;
+                }
+            }
+            isChatEnabled = !isChatEnabled;
+        });
                 };
                 document.body.appendChild(chatScript);
             } else {
