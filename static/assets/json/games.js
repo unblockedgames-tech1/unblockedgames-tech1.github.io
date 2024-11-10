@@ -123,7 +123,7 @@ const gamesData = [
 {
     title: "M</x>inec</x>raft",
     imgSrc: "gameimg/minecraft.avif",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://steady-agreeable-science.glitch.me")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://meadow-coconut-buttercup.glitch.me")
 }, 
 {
     title: "Dino Game", 
