@@ -57,7 +57,7 @@ const games2Data = [
 {
     title: "Retro Bowl",
     imgSrc: "https://lh7-us.googleusercontent.com/gDoFUL2Bw8t8WWjz0y6N_EEwVex9-uakMEwdYybmOLnpdCGzXYWjiuDOh9pR7S19qrX7mb4S243fVIk4sVTEBgfQp6axx_WCPzf77UYRAY0EWSObFnXKYY692UVhylZCIMINjKILvBY6mN_Qx5fCx_PiGH0ZnA",
-    link: __uv$config.prefix + __uv$config.encodeUrl("/local games/Retro Bowl")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://void.radio.am/local%20games/Retro%20Bowl/RetroBowlV2T2.html")
 },
 {
     title: "Funny Shooter 2",
