@@ -56,8 +56,8 @@ const games2Data = [
 },
 {
     title: "Retro Bowl",
-    imgSrc: "https://lh7-us.googleusercontent.com/gDoFUL2Bw8t8WWjz0y6N_EEwVex9-uakMEwdYybmOLnpdCGzXYWjiuDOh9pR7S19qrX7mb4S243fVIk4sVTEBgfQp6axx_WCPzf77UYRAY0EWSObFnXKYY692UVhylZCIMINjKILvBY6mN_Qx5fCx_PiGH0ZnA", 
-    link: "/local games/Retro Bowl/RetroBowlV2T2.html"
+    imgSrc: "https://lh7-us.googleusercontent.com/gDoFUL2Bw8t8WWjz0y6N_EEwVex9-uakMEwdYybmOLnpdCGzXYWjiuDOh9pR7S19qrX7mb4S243fVIk4sVTEBgfQp6axx_WCPzf77UYRAY0EWSObFnXKYY692UVhylZCIMINjKILvBY6mN_Qx5fCx_PiGH0ZnA",
+    link: uv$config.prefix + uv$config.encodeUrl("/local games/Retro Bowl")
 },
 {
     title: "Funny Shooter 2",
