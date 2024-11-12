@@ -62,7 +62,7 @@ const games2Data = [
 {
     title: "Retro Bowl",
     imgSrc: "https://lh7-us.googleusercontent.com/4E55AJwZrKouLKIWNiY4An-bf9UjmuR_b68Bz3v34iyyioUqD8Zp2MzqQzp_xCNkYw8ND1A368P1ntd0vBERkWVKszzM6MkgUst1b4dqTehf3USQkRC4hMqBM0cfm29Mi1r5UkpTDdkSxhsRYTyyhJn9SGnNEw", 
-    link: "https://void.radio.am/local%20games/Retro%20Bowl/"
+    link: "/local games/Retro Bowl"
 },
 
    ];
