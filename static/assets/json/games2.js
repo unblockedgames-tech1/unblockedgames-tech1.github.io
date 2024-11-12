@@ -64,11 +64,6 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/dq2aK3zpCUYV5yS3aWxZpFEMij7wCEv_ZRJXM-_IHSF6pHn4iDYxf8O1wmov9Lp8VHre1rWV8y3nQo9-CdFxzws3WmB6h2hUdmy3krN-O-IUxTnXb1RDYXJoFDeMEVaimuYvvJU9X3KZLSueF4SFr2DyUFtjCA", 
     link: "/local games/Retro Bowl"
 },
-{
-    title: "Retro Bowl",
-    imgSrc: "https://lh7-us.googleusercontent.com/dq2aK3zpCUYV5yS3aWxZpFEMij7wCEv_ZRJXM-_IHSF6pHn4iDYxf8O1wmov9Lp8VHre1rWV8y3nQo9-CdFxzws3WmB6h2hUdmy3krN-O-IUxTnXb1RDYXJoFDeMEVaimuYvvJU9X3KZLSueF4SFr2DyUFtjCA", 
-    link: "/local games/buckshot"
-},
 
 
    ];
