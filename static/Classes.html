@@ -98,13 +98,27 @@
             filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
         }
 
+        .ads_container {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1280px;
+            margin: 0 auto;
+            gap: 10px;
+        }
+
+        .ad_left, .ad_right {
+            flex: 1;
+            max-width: 120px;
+        }
+
         .game_container {
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             width: min(90vw, 1280px);
             margin: 0 auto;
-            flex: 1;
+            flex: 3;
             display: flex;
             flex-direction: column;
             position: relative;
@@ -185,21 +199,43 @@
     </header>
 
     <div class="container">
-        <div class="game_container">
-            <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
-            <div class="footer">
-                <button class="fullscreen_button" onclick="toggleFullScreen()">
-                    <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
-                </button>
-                <button class="reload_button" onclick="reloadGame()">
-                    <img src="/nav/reload.png" alt="Reload">
-                </button>
-                <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
-                    <img src="/nav/flash.png" alt="Flashlight">
-                </button>
-                <button class="chat_button" onclick="toggleChat()">
-                    <img src="/nav/chat_icon.png" alt="Chat">
-                </button>
+        <div class="ads_container">
+            <div class="ad_left">
+                <div>
+                    <script type="text/javascript">
+                        aclib.runBanner({
+                            zoneId: '9014298',
+                        });
+                    </script>
+                </div>
+            </div>
+
+            <div class="game_container">
+                <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
+                <div class="footer">
+                    <button class="fullscreen_button" onclick="toggleFullScreen()">
+                        <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+                    </button>
+                    <button class="reload_button" onclick="reloadGame()">
+                        <img src="/nav/reload.png" alt="Reload">
+                    </button>
+                    <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
+                        <img src="/nav/flash.png" alt="Flashlight">
+                    </button>
+                    <button class="chat_button" onclick="toggleChat()">
+                        <img src="/nav/chat_icon.png" alt="Chat">
+                    </button>
+                </div>
+            </div>
+
+            <div class="ad_right">
+                <div>
+                    <script type="text/javascript">
+                        aclib.runBanner({
+                            zoneId: '9014298',
+                        });
+                    </script>
+                </div>
             </div>
         </div>
     </div>
