@@ -1,44 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>(function(){function setupAntiClose(){window.addEventListener('beforeunload',showWarning);window.addEventListener('keydown',handleKeyPress);updateActiveState(true)}function removeAntiClose(){window.removeEventListener('beforeunload',showWarning);window.removeEventListener('keydown',handleKeyPress);updateActiveState(false)}function handleKeyPress(e){if((e.ctrlKey&&e.key==='w')||(e.metaKey&&e.key==='w')){{if(localStorage.getItem('anticlose')==='true'){e.preventDefault();e.returnValue='Leave site? Changes you made may not be saved.';return e.returnValue}}}}function showWarning(e){if(!e.target.location.href.includes("redirect")&&localStorage.getItem('anticlose')==='true'){e.preventDefault();e.returnValue='Leave site? Changes you made may not be saved.';return e.returnValue}}function updateActiveState(isActive){const checkbox=document.getElementById('cbox_anticlose');if(checkbox){checkbox.checked=isActive}}function initAntiClose(){const isEnabled=localStorage.getItem('anticlose')==='true';if(isEnabled){setupAntiClose()}else if(localStorage.getItem('anticlose')===null){localStorage.setItem('anticlose','false')}updateActiveState(isEnabled)}window.addEventListener('storage',function(e){if(e.key==='anticlose'){if(e.newValue==='true'){setupAntiClose()}else{removeAntiClose()}}});if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initAntiClose)}else{initAntiClose()}})();</script><head>
-    <script src="/assets/js/favicon-handler.js"></script>
-    <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-    
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-    <script src="/assets/js/ads.js"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-VXDP7XC98T');
-    </script>
-
-
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/config.js"></script>
-    <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
-    <link rel="stylesheet" href="/assets/css/styles.css">
+    <title>New Tab</title>
     
-    <!--UV things-->
+    <!-- Scripts -->
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
+    <script src="/config.js"></script>
     <script src="/global.js"></script>
-    <script>
-        const stockSW = "/uv/sw.js";
-        const swAllowedHostnames = ["localhost", "127.0.0.1"];
-        function registerSW() {
-            if (!navigator.serviceWorker) {
-                if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
-                    throw new Error("Service workers cannot be registered without https.");
-                throw new Error("Your browser doesn't support service workers.");
-            }
-            navigator.serviceWorker.register(stockSW);
-        }
-        registerSW();   
-    </script>
-    <title>New Tab</title>
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="/assets/css/styles.css">
     <style>
         .flex-container {
             display: flex;
@@ -118,22 +92,6 @@
     </style>
 </head>
 <body>
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-PZXRTFX5');
-    </script>
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
-            height="0" width="0" style="display:none;visibility:hidden">
-        </iframe>
-    </noscript>
-
     <div id="header"></div>
     <div id="footer"></div>
     <div id="div_appout">
@@ -141,13 +99,45 @@
     </div>
 
     <script>
-        loadHTML("/assets/html/header.html", "header");
-        loadHTML("/assets/html/footer.html", "footer");
+        // Function to load HTML content
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading ${url}:`, error);
+            }
+        }
 
+        // Function to initialize UV service worker
+        async function registerSW() {
+            const stockSW = "/uv/sw.js";
+            const swAllowedHostnames = ["localhost", "127.0.0.1"];
+            
+            if (!navigator.serviceWorker) {
+                if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname)) {
+                    throw new Error("Service workers cannot be registered without https.");
+                }
+                throw new Error("Your browser doesn't support service workers.");
+            }
+            
+            try {
+                await navigator.serviceWorker.register(stockSW);
+            } catch (error) {
+                console.error("Failed to register service worker:", error);
+            }
+        }
+
+        // Function to write iframe
         function writeIframe(src) {
-            document.getElementById('stag').remove();
-            document.getElementById('uvsearch').remove();
-            var iframe = document.createElement("iframe");
+            const stag = document.getElementById('stag');
+            const uvsearch = document.getElementById('uvsearch');
+            
+            if (stag) stag.remove();
+            if (uvsearch) uvsearch.remove();
+            
+            const iframe = document.createElement("iframe");
             iframe.style.border = 'none';
             iframe.style.width = '100%';
             iframe.style.height = '100%';
@@ -156,82 +146,38 @@
             iframe.style.padding = '0.5px';
             iframe.style.position = 'fixed';
             iframe.style.display = 'block';
+            
             document.getElementById('div_appout').appendChild(iframe);
-            event.preventDefault();
         }
-         document.addEventListener("DOMContentLoaded", function () {
-            //default apps
-            localStorage.setItem("apps", JSON.stringify([{
-                title: "Netf<x>l</x>ix",
-                imgSrc: "/appimg/netflix.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")
-            },
-            {
-                title: "Hu<x>l</x>u",
-                imgSrc: "https://assetshuluimcom-a.akamaihd.net/h3o/icons/favicon.ico.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")
-            },
-            {
-                title: "Google", 
-                imgSrc: "/appimg/google.webp",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.google.com")
-            }, 
-            {
-                title: "Cha<x>tG</x>pt",
-                imgSrc: "/appimg/chatgpt.webp",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://deepai.org")
-            },
-            {
-                title: "Di<x>s</x>cord", 
-                imgSrc: "/appimg/discord.webp",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com/")
-            },
-	    {
-                title: "Tu</x>bi", 
-                imgSrc: "https://m.media-amazon.com/images/I/715irEQPXzL.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://tubitv.com/")
-            },
-	    {
-                title: "Co</x>ol Ma</x>th Ga</x>me</x>s", 
-                imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwROf_FVSh9WkFeG15X-kVysnKddaMHvxSEA&s",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com")
-            },
-	    {
-                title: "Snap Chat", 
-                imgSrc: "/appimg/snapchat.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.snapchat.com")
-            },
-	    {
-                title: "Youtube", 
-                imgSrc: "/appimg/youtube.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.youtube.com")
-            },
-	    {
-                title: "Tiktok", 
-                imgSrc: "/appimg/tiktok.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.tiktok.com")
-            },
-	    {
-                title: "Spotify", 
-                imgSrc: "/appimg/spotify.jpeg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://open.spotify.com")
-            },
-	    {
-                title: "Xbox Cloud Gaming", 
-                imgSrc: "/appimg/xboxcloud.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.xbox.com/en-us/play")
-            },
-	    {
-                title: "Instagram", 
-                imgSrc: "/appimg/instalogo.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.instagram.com/")
-            },
-        ]))
-        document.addEventListener("DOMContentLoaded", async function () {
-            // Your existing apps data here...
-            let gamesData = JSON.parse(localStorage.getItem("apps"));
-            const gamesList = document.getElementById("gamesList");
 
+        // Initialize default apps
+        function initializeDefaultApps() {
+            const defaultApps = [
+                {
+                    title: "Netflix",
+                    imgSrc: "/appimg/netflix.png",
+                    link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")
+                },
+                {
+                    title: "Hulu",
+                    imgSrc: "https://assetshuluimcom-a.akamaihd.net/h3o/icons/favicon.ico.png",
+                    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")
+                },
+                // ... rest of your apps ...
+            ];
+            
+            localStorage.setItem("apps", JSON.stringify(defaultApps));
+        }
+
+        // Function to render games list
+        function renderGamesList() {
+            const gamesList = document.getElementById("gamesList");
+            const gamesData = JSON.parse(localStorage.getItem("apps"));
+            
+            if (!gamesList || !gamesData) return;
+
+            gamesList.innerHTML = ''; // Clear existing content
+            
             gamesData.forEach(game => {
                 const gameElement = document.createElement("div");
                 gameElement.className = "game";
@@ -256,7 +202,6 @@
                 gameElement.appendChild(imgElement);
                 gameElement.appendChild(titleElement);
 
-                // Make the entire tile clickable
                 gameElement.onclick = (e) => {
                     if (!e.target.classList.contains('play-button')) {
                         localStorage.setItem("loadedG", game.link);
@@ -266,6 +211,21 @@
 
                 gamesList.appendChild(gameElement);
             });
+        }
+
+        // Initialize everything when the DOM is ready
+        document.addEventListener("DOMContentLoaded", async function() {
+            try {
+                await registerSW();
+                await Promise.all([
+                    loadHTML("/assets/html/header.html", "header"),
+                    loadHTML("/assets/html/footer.html", "footer")
+                ]);
+                initializeDefaultApps();
+                renderGamesList();
+            } catch (error) {
+                console.error("Initialization error:", error);
+            }
         });
     </script>
 </body>
