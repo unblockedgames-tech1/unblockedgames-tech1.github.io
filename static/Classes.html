@@ -12,8 +12,8 @@
     <link rel="preload" href="/nav/flash.png" as="image">
     <link rel="preload" href="/nav/chat_icon.png" as="image">
 
-    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732" crossorigin="anonymous"></script>
+    <script defer id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+    <script defer src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732" crossorigin="anonymous"></script>
 
     <style>
         * {
@@ -94,6 +94,7 @@
             width: 3vh;
             transition: all 0.3s ease;
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+            loading: lazy;
         }
 
         .header a:hover .home_bttn {
@@ -104,7 +105,7 @@
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: min(90vw, 1280px);
+            width: min(80vw, 1024px); /* Reduced size */
             margin: 0 auto;
             flex: 1;
             display: flex;
@@ -112,7 +113,7 @@
             position: relative;
             aspect-ratio: 16/9;
             height: auto;
-            max-height: 80vh;
+            max-height: 70vh; /* Reduced max height */
             z-index: 1;
         }
 
@@ -204,15 +205,15 @@
         }
 
         .left-ad {
-            left: max(10px, calc((100vw - 1320px) / 2));
+            left: max(10px, calc((100vw - 1124px) / 2)); /* Adjusted width */
         }
 
         .right-ad {
-            right: max(10px, calc((100vw - 1320px) / 2));
+            right: max(10px, calc((100vw - 1124px) / 2)); /* Adjusted width */
         }
 
         .ad-container {
-            width: min(90vw, 728px);
+            width: min(80vw, 728px); /* Adjusted width */
             height: 90px;
             margin: 10px auto;
             display: flex;
@@ -239,7 +240,7 @@
     <div class="flash-overlay" id="flashOverlay"></div>
 
     <div class="side-ad left-ad">
-        <script type="text/javascript">
+        <script defer type="text/javascript">
             aclib.runBanner({
                 zoneId: '9007002'
             });
@@ -248,13 +249,13 @@
 
     <header class="header">
         <a href="/">
-            <img src="/nav/home.png" class="home_bttn" alt="Home">
+            <img src="/nav/home.png" class="home_bttn" alt="Home" loading="lazy">
         </a>
         <a href="/ta">
-            <img src="/nav/search.png" class="home_bttn" alt="Search">
+            <img src="/nav/search.png" class="home_bttn" alt="Search" loading="lazy">
         </a>
         <a href="/app">
-            <img src="/nav/apps.png" class="home_bttn" alt="Apps">
+            <img src="/nav/apps.png" class="home_bttn" alt="Apps" loading="lazy">
         </a>
     </header>
 
@@ -266,16 +267,16 @@
             <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
             <div class="footer">
                 <button class="fullscreen_button" onclick="toggleFullScreen()">
-                    <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+                    <img src="/nav/fullscreenbutton.png" alt="Fullscreen" loading="lazy">
                 </button>
                 <button class="reload_button" onclick="reloadGame()">
-                    <img src="/nav/reload.png" alt="Reload">
+                    <img src="/nav/reload.png" alt="Reload" loading="lazy">
                 </button>
                 <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
-                    <img src="/nav/flash.png" alt="Flashlight">
+                    <img src="/nav/flash.png" alt="Flashlight" loading="lazy">
                 </button>
                 <button class="chat_button" onclick="toggleChat()">
-                    <img src="/nav/chat_icon.png" alt="Chat">
+                    <img src="/nav/chat_icon.png" alt="Chat" loading="lazy">
                 </button>
             </div>
         </div>
@@ -284,7 +285,7 @@
     </div>
 
     <div class="side-ad right-ad">
-        <script type="text/javascript">
+        <script defer type="text/javascript">
             aclib.runBanner({
                 zoneId: '9007002'
             });
