@@ -39,16 +39,17 @@
             flex-direction: row;
             min-height: 100vh;
             width: 100%;
-            padding: 20px;
             align-items: center;
             justify-content: center;
             gap: 15px;
             position: relative;
+            overflow: hidden;
         }
 
         .ad-container {
-            flex: 1;
-            max-width: 20vw;
+            flex: 0 0 auto;
+            width: 15%;
+            max-width: 200px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -58,7 +59,7 @@
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: min(60vw, 1280px);
+            width: min(70vw, 960px);
             margin: 0 auto;
             flex: 1;
             display: flex;
