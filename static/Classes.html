@@ -4,14 +4,11 @@
     <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>Classes</title>
     <!-- Preload critical assets and game iframe for faster loading -->
-    <link rel="preload" href="/nav/home.png" as="image">
-    <link rel="preload" href="/nav/search.png" as="image">
-    <link rel="preload" href="/nav/apps.png" as="image">
+    <link rel="preload" href="/game/path" as="document">
     <link rel="preload" href="/nav/fullscreenbutton.png" as="image">
     <link rel="preload" href="/nav/reload.png" as="image">
     <link rel="preload" href="/nav/flash.png" as="image">
     <link rel="preload" href="/nav/chat_icon.png" as="image">
-    <link rel="preload" href="/game/path" as="document">
 
     <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js" defer></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732" crossorigin="anonymous"></script>
@@ -42,7 +39,7 @@
             flex-direction: column;
             min-height: 100vh;
             width: 100%;
-            padding: 60px 20px 20px 20px;
+            padding: 20px;
             align-items: center;
             justify-content: center;
             gap: 15px;
@@ -144,7 +141,7 @@
     </div>
 
     <script>
-        // Load iframe source and prioritize loading
+        // Prioritize loading the game iframe as the first action
         document.addEventListener("DOMContentLoaded", function() {
             let iframe = document.getElementById('gframe');
             iframe.src = localStorage.getItem('loadedG');
