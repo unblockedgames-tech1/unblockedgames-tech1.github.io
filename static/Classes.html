@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html>
-<script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
-<script type="text/javascript">
-    aclib.runInterstitial({
-        zoneId: '9007054',
-    });
-</script>
-<script>(function(){function setupAntiClose(){window.addEventListener('beforeunload',showWarning);window.addEventListener('keydown',handleKeyPress);updateActiveState(true)}function removeAntiClose(){window.removeEventListener('beforeunload',showWarning);window.removeEventListener('keydown',handleKeyPress);updateActiveState(false)}function handleKeyPress(e){if((e.ctrlKey&&e.key==='w')||(e.metaKey&&e.key==='w')){{if(localStorage.getItem('anticlose')==='true'){e.preventDefault();e.returnValue='Leave site? Changes you made may not be saved.';return e.returnValue}}}}function showWarning(e){if(!e.target.location.href.includes("redirect")&&localStorage.getItem('anticlose')==='true'){e.preventDefault();e.returnValue='Leave site? Changes you made may not be saved.';return e.returnValue}}function updateActiveState(isActive){const checkbox=document.getElementById('cbox_anticlose');if(checkbox){checkbox.checked=isActive}}function initAntiClose(){const isEnabled=localStorage.getItem('anticlose')==='true';if(isEnabled){setupAntiClose()}else if(localStorage.getItem('anticlose')===null){localStorage.setItem('anticlose','false')}updateActiveState(isEnabled)}window.addEventListener('storage',function(e){if(e.key==='anticlose'){if(e.newValue==='true'){setupAntiClose()}else{removeAntiClose()}}});if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initAntiClose)}else{initAntiClose()}})();</script>
 <head>
-    <script src="/assets/js/favicon-handler.js"></script>
     <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>Classes</title>
-    <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
-     crossorigin="anonymous"></script>
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/nav/home.png" as="image">
+    <link rel="preload" href="/nav/search.png" as="image">
+    <link rel="preload" href="/nav/apps.png" as="image">
+    <link rel="preload" href="/nav/fullscreenbutton.png" as="image">
+    <link rel="preload" href="/nav/reload.png" as="image">
+    <link rel="preload" href="/nav/flash.png" as="image">
+    <link rel="preload" href="/nav/chat_icon.png" as="image">
+
+    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732" crossorigin="anonymous"></script>
 
     <style>
+        /* Critical CSS inlined */
         * {
             margin: 0;
             padding: 0;
@@ -175,25 +176,22 @@
             z-index: 1;
         }
 
-        .fullscreen_button:hover img, 
-        .reload_button:hover img, 
-        .flash_button:hover img, 
-        .chat_button:hover img {
-            transform: scale(1.1);
-            z-index: 1;
+        .flash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, 
+                rgba(0, 0, 0, 0.8) 0%, 
+                rgba(0, 0, 0, 1) 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
-        .fullscreen_button:active img, 
-        .reload_button:active img, 
-        .flash_button:active img, 
-        .chat_button:active img {
-            transform: scale(0.9);
-            z-index: 1;
-        }
-
-        .flash_button.active img {
-            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.8));
-            z-index: 1;
+        .flash-active {
+            opacity: 1;
         }
 
         .side-ad {
@@ -238,194 +236,17 @@
             overflow: hidden;
             z-index: 5;
         }
-
-        .container > .ad-container:first-of-type {
-            margin-bottom: 0;
-        }
-
-        .container > .ad-container:last-of-type {
-            margin-top: 0;
-        }
-
-        .flash-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: radial-gradient(circle at center, 
-                rgba(0, 0, 0, 0.8) 0%, 
-                rgba(0, 0, 0, 1) 100%);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .game-glow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 150%;
-            height: 150%;
-            background: radial-gradient(ellipse at center,
-                rgba(255, 255, 255, 0.15) 0%,
-                rgba(255, 255, 255, 0.1) 30%,
-                rgba(255, 255, 255, 0) 70%);
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-
-        .flash-active {
-            opacity: 1;
-        }
-
-        .error-message {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.8);
-            color: white;
-            padding: 20px;
-            border-radius: 10px;
-            text-align: center;
-            display: none;
-            z-index: 100;
-            font-family: Arial, sans-serif;
-        }
-
-        .loading-spinner {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 50px;
-            height: 50px;
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            display: none;
-            z-index: 99;
-        }
-
-        @keyframes spin {
-            0% { transform: translate(-50%, -50%) rotate(0deg); }
-            100% { transform: translate(-50%, -50%) rotate(360deg); }
-        }
-
-        @media (max-width: 1400px) {
-            .game_container {
-                width: 70vw;
-            }
-            .side-ad {
-                width: 140px;
-                height: 500px;
-                border-radius: 18px;
-            }
-            .ad-container {
-                width: 650px;
-                height: 80px;
-                border-radius: 18px;
-            }
-        }
-
-        @media (max-width: 1200px) {
-            .game_container {
-                width: 75vw;
-            }
-            .side-ad {
-                width: 120px;
-                height: 400px;
-                border-radius: 16px;
-            }
-            .ad-container {
-                width: 580px;
-                height: 70px;
-                border-radius: 16px;
-            }
-        }
-
-        @media (max-width: 1000px) {
-            .game_container {
-                width: 80vw;
-            }
-            .side-ad {
-                width: 100px;
-                height: 350px;
-                border-radius: 14px;
-            }
-            .ad-container {
-                width: 480px;
-                height: 60px;
-                border-radius: 14px;
-            }
-        }
-
-        @media (max-width: 800px) {
-            .game_container {
-                width: 95vw;
-            }
-            .side-ad {
-                display: none;
-            }
-            .ad-container {
-                width: 95vw;
-                max-width: 480px;
-                height: 60px;
-                border-radius: 12px;
-            }
-            .container {
-                padding: 0 10px;
-                gap: 10px;
-            }
-        }
-
-        @media (max-height: 800px) {
-            .side-ad {
-                max-height: 70vh;
-            }
-            .game_container {
-                height: 65vh;
-            }
-            .ad-container {
-                height: 50px;
-            }
-            .container {
-                margin-top: 30px;
-                gap: 10px;
-            }
-        }
-
-        @media (max-height: 600px) {
-            .side-ad {
-                max-height: 60vh;
-            }
-            .game_container {
-                height: 60vh;
-                min-height: 250px;
-            }
-            .ad-container {
-                height: 40px;
-            }
-            .container {
-                margin-top: 20px;
-                gap: 8px;
-            }
-        }
     </style>
 </head>
 <body>
     <div class="flash-overlay" id="flashOverlay"></div>
 
     <div class="side-ad left-ad">
-    <script type="text/javascript">
-        aclib.runBanner({
-            zoneId: '9007002',
-        });
-    </script>
+        <script type="text/javascript">
+            aclib.runBanner({
+                zoneId: '9007002'
+            });
+        </script>
     </div>
 
     <header class="header">
@@ -441,13 +262,7 @@
     </header>
 
     <div class="container">
-        <div class="ad-container">
-    <script type="text/javascript">
-        aclib.runBanner({
-            zoneId: '9007010',
-        });
-    </script>
-        </div>
+        <div class="ad-container" id="topAd"></div>
         
         <div class="game_container">
             <div class="game-glow" id="gameGlow"></div>
@@ -468,23 +283,18 @@
             </div>
         </div>
         
-        <div class="ad-container">
-    <script type="text/javascript">
-        aclib.runBanner({
-            zoneId: '9007010',
-        });
-    </script>
-        </div>
+        <div class="ad-container" id="bottomAd"></div>
     </div>
 
     <div class="side-ad right-ad">
-    <script type="text/javascript">
-        aclib.runBanner({
-            zoneId: '9007002',
-        });
-    </script>
+        <script type="text/javascript">
+            aclib.runBanner({
+                zoneId: '9007002'
+            });
+        </script>
     </div>
 
+    <!-- Inline critical JavaScript -->
     <script>
         let loadedG = localStorage.getItem('loadedG');
         let iframe = document.getElementById('gframe');
@@ -535,24 +345,6 @@
             gameGlow.classList.toggle('flash-active', isFlashlightOn);
         }
 
-        iframe.addEventListener('click', function() {
-            this.focus();
-        });
-
-        window.addEventListener("keydown", function(e) {
-            if (!document.activeElement.classList.contains('game_iframe')) {
-                if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-                    e.preventDefault();
-                }
-            }
-        }, false);
-
-        document.addEventListener('fullscreenchange', function() {
-            if (document.fullscreenElement) {
-                iframe.focus();
-            }
-        });
-
         let isChatVisible = false;
         let chatContainer = document.createElement('div');
         chatContainer.id = 'chatContainer';
@@ -576,8 +368,8 @@
                     chatScript.defer = true;
                     chatScript.onload = function() {
                         new Crate({
-                            server: '1205329363394887722', // Void Network
-                            channel: '1205332504220012584' // #📍・voidnetwork-chattin
+                            server: '1205329363394887722',
+                            channel: '1205332504220012584'
                         }).mount('#chatContainer');
                     };
                     document.body.appendChild(chatScript);
