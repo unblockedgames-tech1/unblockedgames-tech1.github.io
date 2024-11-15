@@ -154,16 +154,110 @@
         function initializeDefaultApps() {
             const defaultApps = [
                 {
-                    title: "Netflix",
-                    imgSrc: "/appimg/netflix.png",
-                    link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")
-                },
-                {
-                    title: "Hulu",
-                    imgSrc: "https://assetshuluimcom-a.akamaihd.net/h3o/icons/favicon.ico.png",
-                    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")
-                },
-                // ... rest of your apps ...
+                                    title: "Netf<x>l</x>ix",
+                imgSrc: "/appimg/netflix.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")
+            },
+            {
+                title: "Hu<x>l</x>u",
+                imgSrc: "https://assetshuluimcom-a.akamaihd.net/h3o/icons/favicon.ico.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")
+            },
+            {
+                title: "Google", 
+                imgSrc: "/appimg/google.webp",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.google.com")
+            }, 
+            {
+                title: "Cha<x>tG</x>pt",
+                imgSrc: "/appimg/chatgpt.webp",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://deepai.org")
+            },
+	    {
+                title: "C</x>.a</x>i", 
+                imgSrc: "https://lh7-us.googleusercontent.com/gjIJGro8Ddy0NMCiSgvDpZ5IYdStj-197RAJu2nvnyUxUTQkGA1ugmHBKcwyQSdP6j44p3OFh5f1Yqfx_0fjIaAHk0BO0J0GMrepyP9gHr8cqR2BWQ4E9DSaUqugQcxYtY37Z09kjakjiqYPuaLybr1nNRc_YQ",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://character.ai")
+            },
+            {
+                title: "Di<x>s</x>cord", 
+                imgSrc: "/appimg/discord.webp",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com/")
+            },
+	    {
+                title: "Tu</x>bi", 
+                imgSrc: "https://m.media-amazon.com/images/I/715irEQPXzL.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://tubitv.com/")
+            },
+	    {
+                title: "Co</x>ol Ma</x>th Ga</x>me</x>s", 
+                imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwROf_FVSh9WkFeG15X-kVysnKddaMHvxSEA&s",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com")
+            },
+	    {
+                title: "Sn</x>ap</x>chat", 
+                imgSrc: "/appimg/snapchat.jpg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.snapchat.com")
+            },
+	    {
+                title: "Yo</x>utu</x>be", 
+                imgSrc: "/appimg/youtube.jpg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.youtube.com/shorts")
+            },
+	    {
+                title: "Ti</x>kt</x>ok", 
+                imgSrc: "/appimg/tiktok.jpg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.tiktok.com")
+            },
+	    {
+                title: "Spo</x>tify", 
+                imgSrc: "/appimg/spotify.jpeg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://open.spotify.com")
+            },
+	    {
+                title: "X</x>box Clo</x>ud Gam</x>ing", 
+                imgSrc: "/appimg/xboxcloud.png",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.xbox.com/en-us/play")
+            },
+	    {
+                title: "Red</x>dit", 
+                imgSrc: "/appimg/redit.jpg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.reddit.com")
+            },
+	    {
+                title: "KBH Gam</x>es", 
+                imgSrc: "/appimg/kbhgames.jpeg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://kbhgames.com")
+            },
+	    {
+                title: "Crazy Gam</x>es", 
+                imgSrc: "/appimg/Crazygames_jpg_logo.jpg",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.crazygames.com")
+            },
+	    {
+                title: "Vo</x>id Ne</x>tw</x>ork M</x>ovi</x>es", 
+                imgSrc: "https://lh7-us.googleusercontent.com/QTCoMxIz3RBckoShyk1mFjo23Sz1rfEf1pD7Eh1PHgW-g5QaQe5ebDi4_f5xtnRDKGPpHXJhmgrRLFEkWVVJZwI3XY2gbKAfo_yFVLoilwLFDppo4nPbzIrnUx__Cx53AtIb75hd1wbUdgeY0bOjgaIAcuEu9Q",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://drive.google.com/drive/folders/1Z-a9J8FVcL8Kja3SThUf7IWXha_wyFP00IhGoqkQnWXdSGjUX5BxkUa2sfiRHsbloSkktkGO?usp=drive_link")
+            },
+	    {
+                title: "Itch.io", 
+                imgSrc: "https://lh7-us.googleusercontent.com/tsqCKsr5eJWbZ2sS-vWCtcxHE0BToURQg_Spr4UOXdQgeqQAefy4C9iUJV21RKZ-gG4qNV47n60oXyphgQ40Noa6yXqalyiX1KOG4YuVT9SSuCi4YGTrPHYT1j26piMef1Ewi_x63KzHQPvwnJnvUiZNVQfyFQ",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://itch.io")
+            },
+	    {
+                title: "Byvolp", 
+                imgSrc: "data:image/webp;base64,UklGRkYEAABXRUJQVlA4IDoEAABwFQCdASpAAEAAPi0Ki0WhkNDN+BgCxLYATplXnEPWfxV/Zn/M/InVf77+FP2gytbbT7bvft6x9vF5nP1m/YDseegf0rPoAeap/1/2x+GT9t/2j9qM7VdKVNI8oDCQ1lUfQxnLkfUSQ3xzf06FnOqwQeEL8HRIrEWqvY0qNE96WMIVuUM0wGrpPOs5Unvit1ifIhjP9xtTOfu/l1le8B62wvqnTsR+PjWjWj6KS6XDIXZ5kPwA/v86a19w+RX3tOqfK8qweY2zdUIOR3IrR+CObv/7fdFwsNK3ujjKLAeBr8NcYOIYG+KppvBZjPmg7kLcLSxh+q8AovzL5n9Gon1mL9kWbZsBvRWbkeT+xq81in/3dF2yz/ys0xiNcwvtlJXgvw4giQCcnN34f2URvpS9p5SbYU+kNxKjoDsjUjsLkh697M4VrkFT4evY0SHFJ/FqbriNpk59KpJ1hDU+03gY/MLWrk6adHj/tHgtdKum+Z+9Unnoy8V/yMeB8y59SEsizIkPhDKMthSdsSOUrY5TQzPOhvNTil5m3fO69/QpF6HEM/G7ZBsKwBZDrAgef8ZifV4MRXBQnpUfVdjOfsMqzoxxOwGN5yh/a/Flf1pQHbzg5n3Yeg2cpLjTvz6fxagM/a+kRMps2YrW15p4K0tG3onFx7O7uRR2xbt3I33LHAvk+vI4dP+eTmPiqXF851ZNAjauEpALtvevQtX2Hs8x9vicHZRt9lLCjZYUM1JFRgjLl5BcHWYZSYLLlZ7JKWXVGP47fCHLtM0lv1LeJKs4mvfY7aSSOwg/9egHUfywddLELUV0GA/Cu2xHAWIqoeui+7KaYwnILymawQQ2jo21vgZ79RWCZ+GPXnBhoNTr+uX/4K9D8cJtn6hGMe+iRsd86WIv6Mt20oN0fh61GeJHWXuhZ1P7g/LhhWKmu5gRoIMrAVVVmc67bwxePM+jf/OZYPPTUlhnXt3Ic1f1Qr+RX041yVe9ipP+lm8sOMmP0+6x3fu0N0QdoEgZ3ufp3dHiE+MsIZeyWzsDkoHv9PDySOnYXq1yVqJ4QoGNY1C1TMYsdtdN8rfSac+lEzmp2UL8EtcqA+/gKiGwNGz5rUu+8bj7wFtad5cCMuoJSTAU85fA3TGXJD3n80wR21ZxxBZf1/0k5SmpH5/9G47kQg+Vb/1pp2bAfYz84WlT2y8J4Wd3mMlIgGoKuB3vCPHq20VaWAQqXNt89tGDIAp4SHhVcrmQZGhFO2BScDpZHmt1/YfZNJ/3ttd/5yV+IlYymTPAXeIQRLbrlBzzi8teL4WOwKStm/43UwuoxFTi6u/0ee0Im5/ZaUg2zH+KeS52Qha/9iVkoDGZZCJZlnhljmjRtzZu40wXvNtPp1yBVmni/j0m6S+b/H4ABDRqNfYWUjCtNmeRw7MYo8yE3l4BztWnRA7b5ts4qAAAAA==",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://byvolp.web.app/games/index.html")
+            },
+	    {
+                title: "Scratch", 
+                imgSrc: "https://lh7-us.googleusercontent.com/h-C_T3nObFIAEvl90InJVgWjq2EKLbLGPYg48R-524QlHLeRabpNlVt1E43bXu_Nd7Gyc1UWKEgly2twb9agFdis-jdQbxb7BDobAhHYOjl_eyrHgVc5ProgwxBlZpXfJVzTCVj-iIvZqupytr0jzixb_xz9ow",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://scratch.mit.edu/explore/projects/all")
+            },
+	    {
+                title: "Now.gg", 
+                imgSrc: "https://lh7-us.googleusercontent.com/yYUBlzdbc-zK9bt_WpYSGje9ow0uZ0o3G9Jd1DaHc1qV41GAvekR39CnksWIQSphsgpeIyde6tGqCgfUgeD_OiKKy1azVfkVYC_xqyu2FsgldwMYmcj8VUdGrnuGJelxisMB1Xl5MUUgPAMtPS5JiIvio8vTWw",
+                link: __uv$config.prefix + __uv$config.encodeUrl("https://now.gg")
+            },
             ];
             
             localStorage.setItem("apps", JSON.stringify(defaultApps));
