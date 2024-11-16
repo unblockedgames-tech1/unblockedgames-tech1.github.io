@@ -104,30 +104,15 @@
             flex-direction: column;
             width: 100%;
             max-width: 1280px;
-            margin: 0 auto;
-            gap: 15px;
             align-items: center;
-            padding: 0 10px;
+            gap: 10px;
         }
 
         .ad_horizontal {
-            width: 100%;
-            max-width: min(80vw, 960px);
-            height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(42, 42, 42, 0.6);
-            border-radius: 12px;
-            padding: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-
-        .ad_horizontal > div {
-            width: 100%;
-            height: 100%;
+            width: min(80vw, 960px);
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            padding: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -135,52 +120,31 @@
 
         .game_with_side_ads {
             display: flex;
-            justify-content: space-between;
-            width: 100%;
-            max-width: 1280px;
-            gap: 15px;
             align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
         }
 
         .ad_left, .ad_right {
-            flex: 0 0 auto;
-            max-width: min(15vw, 160px);
-            min-width: 60px;
-            height: auto;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: rgba(42, 42, 42, 0.6);
-            border-radius: 12px;
-            padding: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
-            overflow: hidden;
-        }
-
-        .ad_left > div, .ad_right > div {
-            width: 100%;
-            height: 100%;
+            width: 60px;
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            padding: 8px;
             display: flex;
             justify-content: center;
             align-items: center;
         }
 
         .game_container {
+            width: min(80vw, 960px);
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: 100%;
-            margin: 0 auto;
-            flex: 1;
             display: flex;
             flex-direction: column;
-            position: relative;
             aspect-ratio: 16/9;
-            height: auto;
             max-height: 80vh;
-            z-index: 1;
-            transition: all 0.3s ease;
         }
 
         .game_iframe {
@@ -238,33 +202,15 @@
             transition: transform 0.2s ease;
         }
 
-        /* Responsive adjustments */
         @media (max-width: 768px) {
-            .ads_container {
-                gap: 10px;
-            }
-
-            .game_with_side_ads {
-                gap: 10px;
-            }
-
             .ad_left, .ad_right {
-                padding: 5px;
-                min-width: 40px;
-            }
-
-            .ad_horizontal {
-                padding: 5px;
+                width: 50px;
             }
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 10px;
-            }
-
             .ad_left, .ad_right {
-                min-width: 30px;
+                width: 40px;
             }
         }
     </style>
