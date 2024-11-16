@@ -104,47 +104,51 @@
             flex-direction: column;
             width: 100%;
             max-width: 1280px;
-            align-items: center;
+            margin: 0 auto;
             gap: 10px;
+            align-items: center;
         }
 
         .ad_horizontal {
             width: min(80vw, 960px);
-            background-color: #2a2a2a;
-            border-radius: 15px;
-            padding: 8px;
+            height: auto;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
         .game_with_side_ads {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            justify-content: space-between;
             width: 100%;
+            max-width: 1280px;
+            gap: 10px;
+            align-items: center;
         }
 
         .ad_left, .ad_right {
-            width: 60px;
-            background-color: #2a2a2a;
-            border-radius: 15px;
-            padding: 8px;
+            flex: 0 0 60px;
+            max-width: 5vw;
+            height: auto;
             display: flex;
-            justify-content: center;
             align-items: center;
+            justify-content: center;
         }
 
         .game_container {
-            width: min(80vw, 960px);
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            width: min(80vw, 960px);
+            margin: 0 auto;
+            flex: 1;
             display: flex;
             flex-direction: column;
+            position: relative;
             aspect-ratio: 16/9;
+            height: auto;
             max-height: 80vh;
+            z-index: 1;
         }
 
         .game_iframe {
@@ -200,18 +204,6 @@
             width: 24px;
             height: 24px;
             transition: transform 0.2s ease;
-        }
-
-        @media (max-width: 768px) {
-            .ad_left, .ad_right {
-                width: 50px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .ad_left, .ad_right {
-                width: 40px;
-            }
         }
     </style>
 </head>
