@@ -11,13 +11,12 @@
     <link rel="preconnect" href="//acscdn.com" crossorigin>
     <link rel="preconnect" href="//pagead2.googlesyndication.com" crossorigin>
 
-    <!-- Preload critical assets -->
+    <!-- Preload critical assets with high priority -->
     <link rel="preload" href="/game/path" as="document" fetchpriority="high">
     <link rel="preload" href="/nav/fullscreenbutton.png" as="image" fetchpriority="high">
     <link rel="preload" href="/nav/reload.png" as="image" fetchpriority="high">
     <link rel="preload" href="/nav/flash.png" as="image" fetchpriority="high">
     <link rel="preload" href="/nav/chat_icon.png" as="image" fetchpriority="high">
-    <link rel="preload" href="/nav/thumbs-up.png" as="image" fetchpriority="high">
 
     <!-- Defer non-critical scripts -->
     <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js" defer></script>
@@ -149,7 +148,7 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
             position: relative;
             bottom: 0;
             z-index: 1;
@@ -178,73 +177,6 @@
             width: 24px;
             height: 24px;
             transition: transform 0.2s ease;
-        }
-
-        .like_container {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            height: 36px;
-            padding: 6px;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .like_button {
-            width: 24px;
-            height: 24px;
-            padding: 0;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .like_button img {
-            width: 24px;
-            height: 24px;
-            transition: transform 0.2s ease;
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
-        }
-
-        .like_container:hover .like_button img {
-            transform: scale(1.1);
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
-        }
-
-        .like_container:active .like_button img {
-            transform: scale(0.95);
-        }
-
-        .like_count {
-            color: white;
-            font-size: 14px;
-            font-family: "Be Vietnam Pro", sans-serif;
-            min-width: 20px;
-            text-align: left;
-            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
-        }
-
-        .like_container.liked .like_button img {
-            filter: invert(53%) sepia(86%) saturate(385%) hue-rotate(86deg) brightness(95%) contrast(92%);
-        }
-
-        .like_container.liked .like_count {
-            color: #4CAF50;
-        }
-
-        @keyframes likeAnimation {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.2); }
-            100% { transform: scale(1); }
-        }
-
-        .like_container.animate .like_button img {
-            animation: likeAnimation 0.3s ease-in-out;
         }
     </style>
 </head>
@@ -277,89 +209,39 @@
                 <button class="chat_button" onclick="toggleChat()">
                     <img src="/nav/chat_icon.png" alt="Chat">
                 </button>
-                <button class="like_container" onclick="handleLike()" id="likeContainer">
-                    <div class="like_button">
-                        <img src="/nav/like_icon.png" alt="Like">
-                    </div>
-                    <span class="like_count" id="likeCount">0</span>
-                </button>
             </div>
         </div>
     </div>
 
     <script>
-        // Initialize game loading
+        // Initialize game loading immediately
         (function() {
+            // Cache DOM elements
             const iframe = document.getElementById('gframe');
             const gameUrl = localStorage.getItem('loadedG');
             
+            // Start loading the game as soon as possible
             if (gameUrl) {
                 iframe.src = gameUrl;
             }
 
+            // Set up loading optimization
             const loadHandler = () => {
                 requestAnimationFrame(() => {
                     iframe.classList.add('loaded');
                     iframe.focus();
                 });
+                
+                // Remove listener after first load
                 iframe.removeEventListener('load', loadHandler);
             };
 
             iframe.addEventListener('load', loadHandler);
         })();
 
-        // Cache DOM elements
+        // Cache DOM elements for button functions
         const gameContainer = document.querySelector('.game_container');
         const iframe = document.getElementById('gframe');
-        const likeContainer = document.getElementById('likeContainer');
-        const likeCount = document.getElementById('likeCount');
-
-        // Initialize like system
-        let currentGameUrl = localStorage.getItem('loadedG');
-        let gameLikes = JSON.parse(localStorage.getItem('gameLikes') || '{}');
-        let likedGames = JSON.parse(localStorage.getItem('likedGames') || '{}');
-
-        function initializeLikeSystem() {
-            if (!currentGameUrl) return;
-            
-            // Set initial like count
-            const currentLikes = gameLikes[currentGameUrl] || 0;
-            likeCount.textContent = currentLikes;
-
-            // Set initial like state
-            if (likedGames[currentGameUrl]) {
-                likeContainer.classList.add('liked');
-            }
-        }
-
-        function handleLike() {
-            if (!currentGameUrl) return;
-
-            const isLiked = likedGames[currentGameUrl];
-            
-            if (isLiked) {
-                // Unlike
-                gameLikes[currentGameUrl] = Math.max(0, (gameLikes[currentGameUrl] || 0) - 1);
-                delete likedGames[currentGameUrl];
-                likeContainer.classList.remove('liked');
-            } else {
-                // Like
-                gameLikes[currentGameUrl] = (gameLikes[currentGameUrl] || 0) + 1;
-                likedGames[currentGameUrl] = true;
-                likeContainer.classList.add('liked');
-            }
-
-            // Update UI
-            likeCount.textContent = gameLikes[currentGameUrl];
-            
-            // Add animation
-            likeContainer.classList.add('animate');
-            setTimeout(() => likeContainer.classList.remove('animate'), 300);
-
-            // Save to localStorage
-            localStorage.setItem('gameLikes', JSON.stringify(gameLikes));
-            localStorage.setItem('likedGames', JSON.stringify(likedGames));
-        }
 
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
@@ -380,9 +262,6 @@
                 iframe.src = currentSrc;
             });
         }
-
-        // Initialize like system when the page loads
-        window.addEventListener('load', initializeLikeSystem);
     </script>
 </body>
 </html>
