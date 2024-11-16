@@ -3,12 +3,23 @@
 <head>
     <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>Classes</title>
-    <!-- Preload critical assets and game iframe for faster loading -->
-    <link rel="preload" href="/game/path" as="document">
-    <link rel="preload" href="/nav/fullscreenbutton.png" as="image">
-    <link rel="preload" href="/nav/reload.png" as="image">
-    <link rel="preload" href="/nav/flash.png" as="image">
-    <link rel="preload" href="/nav/chat_icon.png" as="image">
+    <!-- DNS prefetch for external domains -->
+    <link rel="dns-prefetch" href="//acscdn.com">
+    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+    
+    <!-- Preconnect to establish early connections -->
+    <link rel="preconnect" href="//acscdn.com" crossorigin>
+    <link rel="preconnect" href="//pagead2.googlesyndication.com" crossorigin>
+
+    <!-- Preload critical assets with high priority -->
+    <link rel="preload" href="/game/path" as="document" fetchpriority="high">
+    <link rel="preload" href="/nav/fullscreenbutton.png" as="image" fetchpriority="high">
+    <link rel="preload" href="/nav/reload.png" as="image" fetchpriority="high">
+    <link rel="preload" href="/nav/flash.png" as="image" fetchpriority="high">
+    <link rel="preload" href="/nav/chat_icon.png" as="image" fetchpriority="high">
+
+    <!-- Defer non-critical scripts -->
+    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js" defer></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732" crossorigin="anonymous"></script>
 
     <style>
@@ -120,12 +131,12 @@
             background-color: #1a1a1a;
             position: relative;
             z-index: 1;
-            /* Preload games to make them render faster */
-            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .game_iframe.loaded {
-            visibility: visible;
+            opacity: 1;
         }
 
         .footer {
@@ -203,28 +214,53 @@
     </div>
 
     <script>
-        // Prioritize loading the game iframe as the first action
-        document.addEventListener("DOMContentLoaded", function() {
-            let iframe = document.getElementById('gframe');
-            iframe.src = localStorage.getItem('loadedG');
-            iframe.onload = function() {
-                this.classList.add('loaded');
-                this.focus();
+        // Initialize game loading immediately
+        (function() {
+            // Cache DOM elements
+            const iframe = document.getElementById('gframe');
+            const gameUrl = localStorage.getItem('loadedG');
+            
+            // Start loading the game as soon as possible
+            if (gameUrl) {
+                iframe.src = gameUrl;
+            }
+
+            // Set up loading optimization
+            const loadHandler = () => {
+                requestAnimationFrame(() => {
+                    iframe.classList.add('loaded');
+                    iframe.focus();
+                });
+                
+                // Remove listener after first load
+                iframe.removeEventListener('load', loadHandler);
             };
-        });
+
+            iframe.addEventListener('load', loadHandler);
+        })();
+
+        // Cache DOM elements for button functions
+        const gameContainer = document.querySelector('.game_container');
+        const iframe = document.getElementById('gframe');
 
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
-                const container = document.querySelector('.game_container');
-                container.requestFullscreen().catch(console.error);
+                gameContainer.requestFullscreen().catch(err => {
+                    console.warn('Error attempting to enable fullscreen:', err);
+                });
             } else {
-                document.exitFullscreen().catch(console.error);
+                document.exitFullscreen().catch(err => {
+                    console.warn('Error attempting to exit fullscreen:', err);
+                });
             }
         }
 
         function reloadGame() {
-            let iframe = document.getElementById('gframe');
-            iframe.src = iframe.src;
+            const currentSrc = iframe.src;
+            iframe.src = 'about:blank';
+            requestAnimationFrame(() => {
+                iframe.src = currentSrc;
+            });
         }
     </script>
 </body>
