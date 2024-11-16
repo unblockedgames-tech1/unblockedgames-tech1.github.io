@@ -109,19 +109,19 @@
         }
 
         .ad_left, .ad_right {
-            flex: 1;
+            flex: 0 0 60px;
+            max-width: 5vw;
             height: auto;
             display: flex;
             align-items: center;
             justify-content: center;
-            max-width: calc(33.33% - 20px); /* Ensures ads are the same size as the game container */
         }
 
         .game_container {
             background-color: #2a2a2a;
             border-radius: 15px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            width: min(90vw, 1280px);
+            width: min(80vw, 960px);
             margin: 0 auto;
             flex: 1;
             display: flex;
