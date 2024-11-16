@@ -3,14 +3,16 @@
 <head>
     <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>Classes</title>
-    <!-- Preload critical assets and game iframe for faster loading -->
-    <link rel="preload" href="/game/path" as="document">
+    <!-- Preload critical assets -->
+    <link rel="preload" href="/nav/home.png" as="image">
+    <link rel="preload" href="/nav/search.png" as="image">
+    <link rel="preload" href="/nav/apps.png" as="image">
     <link rel="preload" href="/nav/fullscreenbutton.png" as="image">
     <link rel="preload" href="/nav/reload.png" as="image">
     <link rel="preload" href="/nav/flash.png" as="image">
     <link rel="preload" href="/nav/chat_icon.png" as="image">
 
-    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js" defer></script>
+    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732" crossorigin="anonymous"></script>
 
     <style>
@@ -39,7 +41,7 @@
             flex-direction: column;
             min-height: 100vh;
             width: 100%;
-            padding: 20px;
+            padding: 60px 20px 20px 20px;
             align-items: center;
             justify-content: center;
             gap: 15px;
@@ -122,12 +124,6 @@
             background-color: #1a1a1a;
             position: relative;
             z-index: 1;
-            /* Preload games to make them render faster */
-            visibility: hidden;
-        }
-
-        .game_iframe.loaded {
-            visibility: visible;
         }
 
         .footer {
@@ -169,9 +165,87 @@
             height: 24px;
             transition: transform 0.2s ease;
         }
+
+        .flash-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: radial-gradient(circle at center, 
+                rgba(0, 0, 0, 0.8) 0%, 
+                rgba(0, 0, 0, 1) 100%);
+            pointer-events: none;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .flash-active {
+            opacity: 1;
+        }
+
+        .side-ad {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 160px;
+            height: 600px;
+            max-height: 80vh;
+            z-index: 5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(42, 42, 42, 0.5);
+            border-radius: 20px;
+            padding: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+
+        .left-ad {
+            left: max(10px, calc((100vw - 1320px) / 2));
+        }
+
+        .right-ad {
+            right: max(10px, calc((100vw - 1320px) / 2));
+        }
+
+        .ad-container {
+            width: min(90vw, 728px);
+            height: 90px;
+            margin: 10px auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(42, 42, 42, 0.5);
+            border-radius: 20px;
+            padding: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            z-index: 5;
+            flex-shrink: 0;
+        }
+
+        @media (max-width: 1400px) {
+            .side-ad {
+                display: none;
+            }
+        }
     </style>
 </head>
 <body>
+    <div class="flash-overlay" id="flashOverlay"></div>
+
+    <div class="side-ad left-ad">
+        <script type="text/javascript">
+            aclib.runBanner({
+                zoneId: '9007002'
+            });
+        </script>
+    </div>
+
     <header class="header">
         <a href="/">
             <img src="/nav/home.png" class="home_bttn" alt="Home">
@@ -185,7 +259,10 @@
     </header>
 
     <div class="container">
+        <div class="ad-container" id="topAd"></div>
+        
         <div class="game_container">
+            <div class="game-glow" id="gameGlow"></div>
             <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
             <div class="footer">
                 <button class="fullscreen_button" onclick="toggleFullScreen()">
@@ -202,31 +279,105 @@
                 </button>
             </div>
         </div>
+        
+        <div class="ad-container" id="bottomAd"></div>
+    </div>
+
+    <div class="side-ad right-ad">
+        <script type="text/javascript">
+            aclib.runBanner({
+                zoneId: '9007002'
+            });
+        </script>
     </div>
 
     <script>
-        // Prioritize loading the game iframe as the first action
-        document.addEventListener("DOMContentLoaded", function() {
-            let iframe = document.getElementById('gframe');
-            iframe.src = localStorage.getItem('loadedG');
-            iframe.onload = function() {
-                this.classList.add('loaded');
-                this.focus();
-            };
-        });
+        let loadedG = localStorage.getItem('loadedG');
+        let iframe = document.getElementById('gframe');
+        iframe.src = loadedG;
+
+        iframe.onload = function() {
+            this.focus();
+        };
 
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
                 const container = document.querySelector('.game_container');
-                container.requestFullscreen().catch(console.error);
+                if (container.requestFullscreen) {
+                    container.requestFullscreen();
+                } else if (container.mozRequestFullScreen) {
+                    container.mozRequestFullScreen();
+                } else if (container.webkitRequestFullscreen) {
+                    container.webkitRequestFullscreen();
+                } else if (container.msRequestFullscreen) {
+                    container.msRequestFullscreen();
+                }
             } else {
-                document.exitFullscreen().catch(console.error);
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                }
             }
         }
 
         function reloadGame() {
-            let iframe = document.getElementById('gframe');
             iframe.src = iframe.src;
+        }
+
+        let isFlashlightOn = false;
+        const flashOverlay = document.getElementById('flashOverlay');
+        const gameGlow = document.getElementById('gameGlow');
+        const flashButton = document.getElementById('flashButton');
+
+        function toggleFlashlight() {
+            isFlashlightOn = !isFlashlightOn;
+            flashButton.classList.toggle('active', isFlashlightOn);
+            flashOverlay.classList.toggle('flash-active', isFlashlightOn);
+            gameGlow.classList.toggle('flash-active', isFlashlightOn);
+        }
+
+        let isChatVisible = false;
+        let chatContainer = document.createElement('div');
+        chatContainer.id = 'chatContainer';
+        chatContainer.style.position = 'fixed';
+        chatContainer.style.bottom = '50px';
+        chatContainer.style.right = '50px';
+        chatContainer.style.width = '400px';
+        chatContainer.style.height = '600px';
+        chatContainer.style.zIndex = '10';
+        chatContainer.style.display = 'none';
+        document.body.appendChild(chatContainer);
+
+        function toggleChat() {
+            if (!isChatVisible) {
+                chatContainer.style.display = 'block';
+                if (!document.getElementById('chatScript')) {
+                    let chatScript = document.createElement('script');
+                    chatScript.id = 'chatScript';
+                    chatScript.src = 'https://cdn.jsdelivr.net/npm/@widgetbot/crate@3';
+                    chatScript.async = true;
+                    chatScript.defer = true;
+                    chatScript.onload = function() {
+                        new Crate({
+                            server: '1205329363394887722',
+                            channel: '1205332504220012584'
+                        }).mount('#chatContainer');
+                    };
+                    document.body.appendChild(chatScript);
+                }
+            } else {
+                chatContainer.style.display = 'none';
+                let chatScript = document.getElementById('chatScript');
+                if (chatScript) {
+                    document.body.removeChild(chatScript);
+                }
+            }
+            isChatVisible = !isChatVisible;
         }
     </script>
 </body>
