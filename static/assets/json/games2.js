@@ -70,8 +70,8 @@ const games2Data = [
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/47589/")
 },
 {
-    title: "Rodha",
-    imgSrc: "https://lh7-us.googleusercontent.com/OF4fKFD4AbftL81PKtjYbFnTgxWDpth5EEhxICylwAwwJqKIyFKQjTL05HxlQyxbvr-jW8EXGMP-MK5nFM1QozZ_2Qyed8pwTGmPmUhw2UqX7YtKTx5iMldSY9Rg1kVCZ9y5OWUmwlOJVZ_x-G-9WC-fPJbsLA", 
+    title: "Tiny Fishing",
+    imgSrc: "https://lh7-us.googleusercontent.com/EV26Bodp3ZJew6gQI_do4BCsMR-U0gC2TQqJfe_X2Jvf8iCC69uQzlFbulvbxsYguhq1mjCAhsLNp6pjAzhZey_qqmPJkr--g0pVj5ngzmGTAI9Zfdzh-8NNdanWQt-DJApFDAIQclykpHmSsSjGGL0ulQb6AA", 
     link: "/local games/tiny_fishing"
 },
 
