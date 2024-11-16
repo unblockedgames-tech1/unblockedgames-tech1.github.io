@@ -101,10 +101,27 @@
 
         .ads_container {
             display: flex;
-            justify-content: space-between;
+            flex-direction: column;
             width: 100%;
             max-width: 1280px;
             margin: 0 auto;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .ad_horizontal {
+            width: min(80vw, 960px);
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .game_with_side_ads {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            max-width: 1280px;
             gap: 10px;
             align-items: center;
         }
@@ -142,7 +159,6 @@
             background-color: #1a1a1a;
             position: relative;
             z-index: 1;
-            /* Preload games to make them render faster */
             visibility: hidden;
         }
 
@@ -206,39 +222,64 @@
 
     <div class="container">
         <div class="ads_container">
-            <div class="ad_left">
+            <!-- Top Ad -->
+            <div class="ad_horizontal">
                 <div>
                     <script type="text/javascript">
                         aclib.runBanner({
-                            zoneId: '9014298',
+                            zoneId: '9014374',
                         });
                     </script>
                 </div>
             </div>
 
-            <div class="game_container">
-                <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
-                <div class="footer">
-                    <button class="fullscreen_button" onclick="toggleFullScreen()">
-                        <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
-                    </button>
-                    <button class="reload_button" onclick="reloadGame()">
-                        <img src="/nav/reload.png" alt="Reload">
-                    </button>
-                    <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
-                        <img src="/nav/flash.png" alt="Flashlight">
-                    </button>
-                    <button class="chat_button" onclick="toggleChat()">
-                        <img src="/nav/chat_icon.png" alt="Chat">
-                    </button>
+            <!-- Game container with side ads -->
+            <div class="game_with_side_ads">
+                <div class="ad_left">
+                    <div>
+                        <script type="text/javascript">
+                            aclib.runBanner({
+                                zoneId: '9014298',
+                            });
+                        </script>
+                    </div>
+                </div>
+
+                <div class="game_container">
+                    <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
+                    <div class="footer">
+                        <button class="fullscreen_button" onclick="toggleFullScreen()">
+                            <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+                        </button>
+                        <button class="reload_button" onclick="reloadGame()">
+                            <img src="/nav/reload.png" alt="Reload">
+                        </button>
+                        <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
+                            <img src="/nav/flash.png" alt="Flashlight">
+                        </button>
+                        <button class="chat_button" onclick="toggleChat()">
+                            <img src="/nav/chat_icon.png" alt="Chat">
+                        </button>
+                    </div>
+                </div>
+
+                <div class="ad_right">
+                    <div>
+                        <script type="text/javascript">
+                            aclib.runBanner({
+                                zoneId: '9014298',
+                            });
+                        </script>
+                    </div>
                 </div>
             </div>
 
-            <div class="ad_right">
+            <!-- Bottom Ad -->
+            <div class="ad_horizontal">
                 <div>
                     <script type="text/javascript">
                         aclib.runBanner({
-                            zoneId: '9014298',
+                            zoneId: '9014374',
                         });
                     </script>
                 </div>
