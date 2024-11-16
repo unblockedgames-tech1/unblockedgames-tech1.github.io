@@ -67,7 +67,7 @@ const games2Data = [
 {
     title: "Rodha",
     imgSrc: "https://lh7-us.googleusercontent.com/OF4fKFD4AbftL81PKtjYbFnTgxWDpth5EEhxICylwAwwJqKIyFKQjTL05HxlQyxbvr-jW8EXGMP-MK5nFM1QozZ_2Qyed8pwTGmPmUhw2UqX7YtKTx5iMldSY9Rg1kVCZ9y5OWUmwlOJVZ_x-G-9WC-fPJbsLA", 
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/rodha/game.html?nocheckorient=1")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/47589/")
 },
 
 
