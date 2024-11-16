@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html>
-<script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
 <head>
     <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>Classes</title>
@@ -101,12 +100,19 @@
 
         .ads_container {
             display: flex;
+            flex-direction: column;
             justify-content: space-between;
             width: 100%;
             max-width: 1280px;
             margin: 0 auto;
             gap: 10px;
             align-items: center;
+        }
+
+        .ad_top, .ad_bottom {
+            width: 100%;
+            text-align: center;
+            margin: 10px 0;
         }
 
         .ad_left, .ad_right {
@@ -205,6 +211,15 @@
     </header>
 
     <div class="container">
+        <div class="ad_top">
+            <div>
+                <script type="text/javascript">
+                    aclib.runBanner({
+                        zoneId: '9014374',
+                    });
+                </script>
+            </div>
+        </div>
         <div class="ads_container">
             <div class="ad_left">
                 <div>
@@ -242,6 +257,15 @@
                         });
                     </script>
                 </div>
+            </div>
+        </div>
+        <div class="ad_bottom">
+            <div>
+                <script type="text/javascript">
+                    aclib.runBanner({
+                        zoneId: '9014374',
+                    });
+                </script>
             </div>
         </div>
     </div>
