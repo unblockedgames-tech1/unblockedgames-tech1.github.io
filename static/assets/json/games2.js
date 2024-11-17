@@ -74,6 +74,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/EV26Bodp3ZJew6gQI_do4BCsMR-U0gC2TQqJfe_X2Jvf8iCC69uQzlFbulvbxsYguhq1mjCAhsLNp6pjAzhZey_qqmPJkr--g0pVj5ngzmGTAI9Zfdzh-8NNdanWQt-DJApFDAIQclykpHmSsSjGGL0ulQb6AA", 
     link: "/local games/tiny_fishing"
 },
+{
+    title: "Baldis Basics",
+    imgSrc: "https://lh7-us.googleusercontent.com/Iafhnkg3uzMv7lLK99ADN1O0tunCQwc0JLhuvYEhJrH6SiIgxVXhEUVHGEVrgC3KIATkNx5H0LHfq8-strKG-g4fsuoeRzjbQPJVCCzA063nQkqnk1nTEihZJaRv-4qDPXaMfDUcFPbvgaGFcTduBOsK8yq2kA", 
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://school-lessons.lol/_games/baldisbasics/")
+},
 
 
    ];
