@@ -86,60 +86,62 @@
         <div class="games-grid" id="gamesList"></div>
     </div>
 
-    <script type="module">
-        try {
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
             const gamesList = document.getElementById("gamesList");
 
-            // Import games
-            const { gamesData } = await import("/assets/json/games.js");
-            const { games2Data } = await import("/assets/json/games2.js");
-            
-            const games = [...gamesData, ...games2Data];
+            // Fetch games data
+            fetch("/assets/json/games.json")
+                .then(response => response.json())
+                .then(data => {
+                    const games = data.games;
 
-            function loadGame(game) {
-                const gameElement = document.createElement("div");
-                gameElement.className = "game";
+                    function loadGame(game) {
+                        const gameElement = document.createElement("div");
+                        gameElement.className = "game";
 
-                const imgElement = document.createElement("img");
-                imgElement.src = game.imgSrc;
-                imgElement.alt = game.title;
-                imgElement.className = "game-image";
+                        const imgElement = document.createElement("img");
+                        imgElement.src = game.imgSrc;
+                        imgElement.alt = game.title;
+                        imgElement.className = "game-image";
 
-                const titleElement = document.createElement("div");
-                titleElement.className = "game-info";
-                titleElement.innerHTML = `
-                    <h2 class="game-title">${game.title}</h2>
-                    <a href="javascript:void(0)" class="play-button" onclick="(function(e) {
-                        e.stopPropagation();
-                        localStorage.setItem('loadedG', '${game.link}');
-                        location.href = '/Classes.html';
-                    })(event)">Play</a>
-                `;
+                        const titleElement = document.createElement("div");
+                        titleElement.className = "game-info";
+                        titleElement.innerHTML = `
+                            <h2 class="game-title">${game.title}</h2>
+                            <a href="javascript:void(0)" class="play-button" onclick="(function(e) {
+                                e.stopPropagation();
+                                localStorage.setItem('loadedG', '${game.link}');
+                                location.href = '/Classes.html';
+                            })(event)">Play</a>
+                        `;
 
-                gameElement.appendChild(imgElement);
-                gameElement.appendChild(titleElement);
+                        gameElement.appendChild(imgElement);
+                        gameElement.appendChild(titleElement);
 
-                gameElement.onclick = () => {
-                    localStorage.setItem("loadedG", game.link);
-                    location.href = "/Classes.html";
-                };
+                        gameElement.onclick = () => {
+                            localStorage.setItem("loadedG", game.link);
+                            location.href = "/Classes.html";
+                        };
 
-                gamesList.appendChild(gameElement);
-            }
+                        gamesList.appendChild(gameElement);
+                    }
 
-            // Load all games initially
-            if (Array.isArray(games)) {
-                games.forEach(game => {
-                    loadGame(game);
+                    // Load all games initially
+                    if (Array.isArray(games)) {
+                        games.forEach(game => {
+                            loadGame(game);
+                        });
+                    } else {
+                        console.error("Games is not an array:", games);
+                        gamesList.innerHTML = '<div style="color: white;">Error: Games data is not in the correct format</div>';
+                    }
+                })
+                .catch(error => {
+                    console.error("Error loading games:", error);
+                    gamesList.innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
                 });
-            } else {
-                console.error("Games is not an array:", games);
-                gamesList.innerHTML = '<div style="color: white;">Error: Games data is not in the correct format</div>';
-            }
-        } catch (error) {
-            console.error("Error loading games:", error);
-            document.getElementById("gamesList").innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
-        }
+        });
     </script>
 </body>
 </html>
