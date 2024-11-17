@@ -9,18 +9,20 @@
     <script src="/config.js"></script>
     <title>Games Layout</title>
     <style>
-        /* Additional styles to achieve a Kazwire-like layout */
+        /* Adjusted styles to resemble Kazwire-like game layout */
         .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
             gap: 20px;
             padding: 20px;
             width: 100%;
             max-width: 1200px;
             margin: 0 auto;
+            justify-content: center;
         }
 
         .game {
+            flex: 0 1 calc(25% - 20px);
             position: relative;
             overflow: hidden;
             text-align: center;
@@ -36,7 +38,7 @@
 
         .game-image {
             width: 100%;
-            height: 150px;
+            height: 200px;
             object-fit: cover;
             border-top-left-radius: 15px;
             border-top-right-radius: 15px;
@@ -64,6 +66,18 @@
 
         .play-button:hover {
             background-color: #454545;
+        }
+
+        @media (max-width: 768px) {
+            .game {
+                flex: 0 1 calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .game {
+                flex: 0 1 calc(100% - 20px);
+            }
         }
     </style>
 </head>
