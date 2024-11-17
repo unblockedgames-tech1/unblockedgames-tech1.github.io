@@ -101,6 +101,20 @@
             width: 24px;
             height: 24px;
         }
+
+        /* Ad Container Styles */
+        #adContainer {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 640px;
+            height: 640px;
+            z-index: 1000;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
     </style>
 
     <!-- Preload game URL with high priority -->
@@ -193,12 +207,147 @@
                 iframe.src = currentSrc;
             });
         }
-    </script>
 
-    <!-- Defer non-critical scripts -->
-    <script>
+        // VAST Ad Handler Implementation
+        class VastAdHandler {
+            constructor() {
+                this.adContainer = null;
+                this.videoPlayer = null;
+                this.vastUrl = 'https://sophisticatedappearance.com/dVm/FNz/d.GgNZvPZBG/UB/TeymR9/ueZXUFl/k/PtTwUk3GN/DCkAxjOMT/UNtbN/TNcw0uOTTdEG5rNFiiZ/sPaBWj1ApqdEDi0fxQ';
+            }
+
+            initialize() {
+                // Create ad container
+                this.adContainer = document.createElement('div');
+                this.adContainer.id = 'adContainer';
+                document.body.appendChild(this.adContainer);
+
+                // Create video element
+                this.videoPlayer = document.createElement('video');
+                this.videoPlayer.style.width = '100%';
+                this.videoPlayer.style.height = '100%';
+                this.videoPlayer.setAttribute('playsinline', '');
+                this.videoPlayer.setAttribute('webkit-playsinline', '');
+                this.adContainer.appendChild(this.videoPlayer);
+
+                // Add close button
+                const closeButton = document.createElement('button');
+                closeButton.innerHTML = '×';
+                closeButton.style.cssText = `
+                    position: absolute;
+                    top: 5px;
+                    right: 5px;
+                    background: rgba(0,0,0,0.5);
+                    border: none;
+                    color: white;
+                    font-size: 20px;
+                    cursor: pointer;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                `;
+                closeButton.onclick = () => this.closeAd();
+                this.adContainer.appendChild(closeButton);
+            }
+
+            async loadVastXml() {
+                try {
+                    const response = await fetch(this.vastUrl);
+                    const vastXml = await response.text();
+                    const parser = new DOMParser();
+                    const xmlDoc = parser.parseFromString(vastXml, 'text/xml');
+                    return xmlDoc;
+                } catch (error) {
+                    console.error('Error loading VAST XML:', error);
+                    return null;
+                }
+            }
+
+            getMediaFiles(xmlDoc) {
+                const mediaFiles = xmlDoc.getElementsByTagName('MediaFile');
+                const sources = [];
+                
+                for (let mediaFile of mediaFiles) {
+                    const type = mediaFile.getAttribute('type');
+                    const url = mediaFile.textContent.trim();
+                    sources.push({ type, url });
+                }
+                
+                return sources;
+            }
+
+            trackImpression(xmlDoc) {
+                const impressionUrls = xmlDoc.getElementsByTagName('Impression');
+                for (let impression of impressionUrls) {
+                    const url = impression.textContent.trim();
+                    new Image().src = url;
+                }
+            }
+
+            trackEvent(xmlDoc, eventName) {
+                const trackingEvents = xmlDoc.getElementsByTagName('Tracking');
+                for (let event of trackingEvents) {
+                    if (event.getAttribute('event') === eventName) {
+                        const url = event.textContent.trim();
+                        new Image().src = url;
+                    }
+                }
+            }
+
+            handleClick(xmlDoc) {
+                const clickThrough = xmlDoc.getElementsByTagName('ClickThrough')[0];
+                if (clickThrough) {
+                    const url = clickThrough.textContent.trim();
+                    window.open(url, '_blank');
+                }
+            }
+
+            closeAd() {
+                this.videoPlayer.pause();
+                this.adContainer.style.display = 'none';
+            }
+
+            async playAd() {
+                const vastXml = await this.loadVastXml();
+                if (!vastXml) return;
+
+                const mediaFiles = this.getMediaFiles(vastXml);
+                if (mediaFiles.length === 0) return;
+
+                this.videoPlayer.innerHTML = '';
+                mediaFiles.forEach(({type, url}) => {
+                    const source = document.createElement('source');
+                    source.type = type;
+                    source.src = url;
+                    this.videoPlayer.appendChild(source);
+                });
+
+                this.adContainer.style.display = 'block';
+                this.trackImpression(vastXml);
+
+                this.videoPlayer.onclick = () => this.handleClick(vastXml);
+                this.videoPlayer.onplay = () => this.trackEvent(vastXml, 'start');
+                
+                try {
+                    await this.videoPlayer.play();
+                } catch (error) {
+                    console.error('Error playing video:', error);
+                }
+            }
+        }
+
+        // Initialize VAST Ad Handler
+        const vastAdHandler = new VastAdHandler();
+
         // Load external resources after main content
         window.addEventListener('load', () => {
+            // Initialize ad handler
+            vastAdHandler.initialize();
+            
+            // Play ad after a short delay
+            setTimeout(() => {
+                vastAdHandler.playAd();
+            }, 2000);
+
             // Add keyboard shortcut
             document.addEventListener('keydown', e => {
                 if (e.ctrlKey && e.key === '.') {
@@ -206,18 +355,7 @@
                 }
             });
 
-            // Load ads after everything else
-            (function(nphua){
-                var d = document,
-                    s = d.createElement('script'),
-                    l = d.scripts[d.scripts.length - 1];
-                s.settings = nphua || {};
-                s.src = "//achingborder.com/b.XtV/stdtG/l/0SY/W-cs/geYmD9Nu/ZLU/lSkrPoThUD3/N/D/kHweNCz/c/t/NmTxcz0nOBTiAB3fO/Ac";
-                s.async = true;
-                s.referrerPolicy = 'no-referrer-when-downgrade';
-                l.parentNode.insertBefore(s, l);
-            })({});
-           
+            // Load AdSense
             const adsenseScript = document.createElement('script');
             adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732';
             adsenseScript.async = true;
