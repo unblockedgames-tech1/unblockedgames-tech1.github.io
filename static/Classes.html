@@ -206,16 +206,7 @@
                 }
             });
 
-            // Load ad scripts
-            const adScript = document.createElement('script');
-            adScript.src = '//acscdn.com/script/aclib.js';
-            adScript.onload = () => {
-                if (window.aclib) {
-                    aclib.runInterstitial({ zoneId: '9018118' });
-                }
-            };
-            document.body.appendChild(adScript);
-
+           
             const adsenseScript = document.createElement('script');
             adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732';
             adsenseScript.async = true;
