@@ -1,333 +1,135 @@
-<!DOCTYPE html>
-<html>
-     crossorigin="anonymous"></script>
-<script>document.addEventListener('keydown', e => { if (e.ctrlKey && e.key === '.') window.open('https://classroom.google.com', '_blank'); });</script>
-<html lang="en">
-<style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000}.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#000 0,#1a1a1a 100%);display:flex;justify-content:center;align-items:center;z-index:999999;transition:opacity 1s ease-in-out}.loading-container{text-align:center;color:#fff}.logo{width:200px;height:200px;margin-bottom:30px;opacity:0;animation:fadeIn 1s ease-in-out forwards}.logo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.2)}.loading-text{font-size:1.5rem;text-align:center;color:#fff;margin-bottom:10px;letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:slideIn 2s ease-in-out forwards}.progress-bar{width:200px;height:2px;background:#1a1a1a;margin:20px auto;position:relative;border-radius:15px;overflow:hidden}.progress-fill{height:100%;width:0;background:#fff;position:absolute;transition:width .1s linear}.dots::after{content:'';animation:dotAnimation 2s infinite}@keyframes dotAnimation{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}@keyframes slideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.fade-out{opacity:0;pointer-events:none}</style><div class="overlay" id="loadingOverlay"><div class="loading-container"><div class="logo"><img src="https://lh7-us.googleusercontent.com/T0EBflHU0XFXtCMuWwLHa4K_8ipplFMZYf4MaErjFZy9TuLmQ2mcfV1JBghWB_AVZLYlEyPw63HurIrRL0JQ2hQSAqJRhVvllQKBoyhT817wE5DmJ9p6xyYG17GfyR2Mokr9Nvo5XrGntzul3C_axz1jOGke5w" alt="Logo"></div><div class="loading-text">Loading<span class="dots"></span></div><div class="progress-bar"><div class="progress-fill" id="progressBar"></div></div></div></div><script>document.addEventListener('DOMContentLoaded',function(){const e=document.getElementById('loadingOverlay'),n=document.getElementById('progressBar');let t=0,lastTime=performance.now(),frameCount=0,fps=60;const measurePerformance=()=>{frameCount++;const currentTime=performance.now();if(currentTime-lastTime>=1000){fps=frameCount;frameCount=0;lastTime=currentTime}requestAnimationFrame(measurePerformance)};requestAnimationFrame(measurePerformance);const baseSpeed=0.3;const animate=()=>{if(t<100){const performanceFactor=60/Math.max(fps,30);t+=baseSpeed*performanceFactor;n.style.width=`${Math.min(t,100)}%`;requestAnimationFrame(animate)}};requestAnimationFrame(animate);setTimeout(()=>{e.classList.add('fade-out')},Math.max(3000,5000*(30/fps)));e.addEventListener('transitionend',function(){this.classList.contains('fade-out')&&this.remove()})});</script>
-<script>(function(){function setupAntiClose(){window.addEventListener('beforeunload',showWarning);window.addEventListener('keydown',handleKeyPress);updateActiveState(true)}function removeAntiClose(){window.removeEventListener('beforeunload',showWarning);window.removeEventListener('keydown',handleKeyPress);updateActiveState(false)}function handleKeyPress(e){if((e.ctrlKey&&e.key==='w')||(e.metaKey&&e.key==='w')){{if(localStorage.getItem('anticlose')==='true'){e.preventDefault();e.returnValue='Leave site? Changes you made may not be saved.';return e.returnValue}}}}function showWarning(e){if(!e.target.location.href.includes("redirect")&&localStorage.getItem('anticlose')==='true'){e.preventDefault();e.returnValue='Leave site? Changes you made may not be saved.';return e.returnValue}}function updateActiveState(isActive){const checkbox=document.getElementById('cbox_anticlose');if(checkbox){checkbox.checked=isActive}}function initAntiClose(){const isEnabled=localStorage.getItem('anticlose')==='true';if(isEnabled){setupAntiClose()}else if(localStorage.getItem('anticlose')===null){localStorage.setItem('anticlose','false')}updateActiveState(isEnabled)}window.addEventListener('storage',function(e){if(e.key==='anticlose'){if(e.newValue==='true'){setupAntiClose()}else{removeAntiClose()}}});if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initAntiClose)}else{initAntiClose()}})();</script><script type="text/javascript">
-</script>
-<head>
+try {
+    const gamesList = document.getElementById("gamesList");
+    console.log("Found games list element:", gamesList);
 
-
-
-
-
-
-    
-    <script src="/assets/js/favicon-handler.js"></script>
-    <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
-    <title>Classes</title>
-    <script src="/assets/js/ads.js"></script>
-    <script src="/assets/js/onload.js"></script>
-    
-
-    <style>
-        #particles-js {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            pointer-events: none;
-        }
-
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            padding: 0;
-            margin: 0;
-        }
-
-        .iframe-section {
-            width: 95%;
-            max-width: 1200px;
-            height: 80%;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        iframe {
-            flex: 1;
-            border: none;
-            border-radius: 15px;
-        }
-
-        @media (max-width: 800px) {
-            .iframe-section {
-                height: auto;
-                padding-bottom: 75%;
-            }
-
-            iframe {
-                height: 100%;
-            }
-        }
-
-        .title {
-            font-size: 1.5rem;
-            text-align: center;
-            color: #fff;
-            margin-bottom: 10px;
-            position: relative;
-            animation: slideIn 2s ease-in-out forwards;
-            opacity: 0;
-        }
-
-        @keyframes slideIn {
-            0% {
-                transform: translateY(-50px);
-                opacity: 0;
-            }
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .flex-container {
-            display: flex;
-            position: relative;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 5rem;
-        }
-
-        .game {
-            border-radius: 30rem;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-            cursor: pointer;
-        }
-
-        .game:hover {
-            transform: scale(1.05);
-        }
-
-        .game-image {
-            width: 16vw;
-            height: 16vw;
-            border-radius: 2rem;
-            object-fit: cover;
-            transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
-            box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-            animation: subtle-pulse 4s infinite;
-            animation-delay: 1s;
-        }
-
-        .game-info {
-            padding: 10px;
-            text-align: center;
-            background-color: #555555;
-            border-radius: 30px;
-            z-index: 11;
-        }
-
-        .game-title {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        .play-button {
-            background-color: #555555;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: background-color 0.3s ease-in-out;
-            z-index: 12;
-            cursor: pointer;
-            display: inline-block;
-        }
-
-        .play-button:hover {
-            background-color: #454545;
-            box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-        }
-
-        @keyframes subtle-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.01); }
-            100% { transform: scale(1); }
-        }
-
-        .random-game-button {
-            padding: 10px;
-            border-radius: 10px;
-            border: 2px solid #555555;
-            background: transparent;
-            color: white;
-            font-size: 1.2em;
-            margin: 20px;
-            width: 300px;
-        }
-    </style>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-VXDP7XC98T');
-    </script>
-
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/config.js"></script>
-    <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <link rel="stylesheet" href="/assets/css/index.css">
-    <script src="/global.js"></script>
-
-    <!--UV things-->
-    <script src="uv/uv.bundle.js"></script>
-    <script src="uv/uv.config.js"></script>
-    <script>
-        const stockSW = "/uv/sw.js";
-        const swAllowedHostnames = ["localhost", "127.0.0.1"];
-        function registerSW() {
-            if (!navigator.serviceWorker) {
-                if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
-                    throw new Error("Service workers cannot be registered without https.");
-                throw new Error("Your browser doesn't support service workers.");
-            }
-            navigator.serviceWorker.register(stockSW);
-        }
-        registerSW();   
-    </script>
-</head>
-
-<body>
-    <h1> </h1>
-    <h1> </h1>
-    <div style="text-align: center;">
-        <input class="random-game-button" placeholder="Search for a game!" id="searchGames">
-        <button class="random-game-button" id="randomGameBtn">Random Game</button>
-    </div>
-
-    <!-- Google Tag Manager -->
-    <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-PZXRTFX5');
-    </script>
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
-            height="0" width="0" style="display:none;visibility:hidden">
-        </iframe>
-    </noscript>
-
-    <div id="header"></div>
-    <div id="footer"></div>
-    <div class="flex-container" id="gamesList"></div>
-
-    <script>
-        loadHTML("/assets/html/header.html", "header");
-        loadHTML("/assets/html/footer.html", "footer");
-    </script>
-
-    <script type="module">
-        try {
-            const gamesList = document.getElementById("gamesList");
-            console.log("Found games list element:", gamesList);
-
-            // Wait for UV config
-            await new Promise(resolve => {
+    // Wait for UV config
+    await new Promise(resolve => {
+        if (window.__uv$config) {
+            resolve();
+        } else {
+            const checkUV = setInterval(() => {
                 if (window.__uv$config) {
+                    clearInterval(checkUV);
                     resolve();
-                } else {
-                    const checkUV = setInterval(() => {
-                        if (window.__uv$config) {
-                            clearInterval(checkUV);
-                            resolve();
-                        }
-                    }, 100);
                 }
-            });
-
-            console.log("UV config loaded:", window.__uv$config);
-
-            // Import games
-            const { gamesData } = await import("/assets/json/games.js");
-            const { games2Data } = await import("/assets/json/games2.js");
-            
-            const games = [...gamesData, ...games2Data];
-
-            function loadGame(game) {
-                const gameElement = document.createElement("div");
-                gameElement.className = "game";
-
-                const imgElement = document.createElement("img");
-                imgElement.src = game.imgSrc;
-                imgElement.alt = game.title;
-                imgElement.className = "game-image";
-
-                const titleElement = document.createElement("div");
-                titleElement.className = "game-info";
-                titleElement.innerHTML = `
-                    <h2 class="game-title">${game.title}</h2>
-                    <a href="javascript:void(0)" class="play-button" onclick="(function(e) {
-                        e.stopPropagation();
-                        localStorage.setItem('loadedG', '${game.link}');
-                        location.href = '/Classes.html';
-                    })(event)">Play</a>
-                `;
-
-                gameElement.appendChild(imgElement);
-                gameElement.appendChild(titleElement);
-
-                gameElement.onclick = () => {
-                    localStorage.setItem("loadedG", game.link);
-                    location.href = "/Classes.html";
-                };
-
-                gamesList.appendChild(gameElement);
-            }
-
-            // Load all games initially
-            console.log("Starting to load games...");
-            if (Array.isArray(games)) {
-                games.forEach(game => {
-                    loadGame(game);
-                });
-            } else {
-                console.error("Games is not an array:", games);
-                gamesList.innerHTML = '<div style="color: white;">Error: Games data is not in the correct format</div>';
-            }
-
-            // Setup search functionality
-            document.getElementById("searchGames").addEventListener("keyup", function (e) {
-                gamesList.innerHTML = '';
-                const searchTerm = this.value.toLowerCase();
-                for (const game of games) {
-                    if (game.title.toLowerCase().includes(searchTerm)) {
-                        loadGame(game);
-                    }
-                }
-            });
-            document.getElementById("randomGameBtn").addEventListener("click", function() {
-                const randomGame = games[Math.floor(Math.random() * games.length)];
-                localStorage.setItem("loadedG", randomGame.link);
-                location.href = "/Classes.html";
-            });
-
-        } catch (error) {
-            console.error("Error loading games:", error);
-            document.getElementById("gamesList").innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
+            }, 100);
         }
-    </script>
-</body>
-</html>
+    });
+
+    console.log("UV config loaded:", window.__uv$config);
+
+    // Import games
+    const { gamesData } = await import("/assets/json/games.js");
+    const { games2Data } = await import("/assets/json/games2.js");
+    
+    const games = [...gamesData, ...games2Data];
+
+    function loadGame(game) {
+        const gameElement = document.createElement("div");
+        gameElement.className = "game";
+        
+        // Create container for image and overlay
+        const imageContainer = document.createElement("div");
+        imageContainer.style.position = "relative";
+        imageContainer.style.width = "16vw";
+        imageContainer.style.height = "16vw";
+        imageContainer.style.borderRadius = "2rem";
+        imageContainer.style.overflow = "hidden";
+
+        const imgElement = document.createElement("img");
+        imgElement.src = game.imgSrc;
+        imgElement.alt = game.title;
+        imgElement.className = "game-image";
+        imgElement.style.margin = "0";
+        imgElement.style.position = "absolute";
+        imgElement.style.top = "0";
+        imgElement.style.left = "0";
+        imgElement.style.width = "100%";
+        imgElement.style.height = "100%";
+
+        // Create overlay that appears on hover
+        const overlay = document.createElement("div");
+        overlay.style.position = "absolute";
+        overlay.style.top = "0";
+        overlay.style.left = "0";
+        overlay.style.width = "100%";
+        overlay.style.height = "100%";
+        overlay.style.backgroundColor = "rgba(0, 0, 0, 0.7)";
+        overlay.style.opacity = "0";
+        overlay.style.transition = "opacity 0.3s ease-in-out";
+        overlay.style.display = "flex";
+        overlay.style.flexDirection = "column";
+        overlay.style.justifyContent = "center";
+        overlay.style.alignItems = "center";
+        overlay.style.cursor = "pointer";
+
+        const titleElement = document.createElement("h2");
+        titleElement.className = "game-title";
+        titleElement.textContent = game.title;
+        titleElement.style.color = "#fff";
+        titleElement.style.margin = "0 0 10px 0";
+        titleElement.style.padding = "0 10px";
+        titleElement.style.textAlign = "center";
+
+        const playButton = document.createElement("button");
+        playButton.className = "play-button";
+        playButton.textContent = "Play Now";
+        playButton.style.border = "none";
+        playButton.style.cursor = "pointer";
+
+        overlay.appendChild(titleElement);
+        overlay.appendChild(playButton);
+
+        // Add hover effects
+        imageContainer.onmouseover = () => {
+            overlay.style.opacity = "1";
+        };
+        imageContainer.onmouseout = () => {
+            overlay.style.opacity = "0";
+        };
+
+        // Add click handler
+        imageContainer.onclick = (e) => {
+            e.stopPropagation();
+            localStorage.setItem("loadedG", game.link);
+            location.href = "/Classes.html";
+        };
+
+        imageContainer.appendChild(imgElement);
+        imageContainer.appendChild(overlay);
+        gameElement.appendChild(imageContainer);
+        gamesList.appendChild(gameElement);
+    }
+
+    // Load all games initially
+    console.log("Starting to load games...");
+    if (Array.isArray(games)) {
+        games.forEach(game => {
+            loadGame(game);
+        });
+    } else {
+        console.error("Games is not an array:", games);
+        gamesList.innerHTML = '<div style="color: white;">Error: Games data is not in the correct format</div>';
+    }
+
+    // Setup search functionality
+    document.getElementById("searchGames").addEventListener("keyup", function (e) {
+        gamesList.innerHTML = '';
+        const searchTerm = this.value.toLowerCase();
+        for (const game of games) {
+            if (game.title.toLowerCase().includes(searchTerm)) {
+                loadGame(game);
+            }
+        }
+    });
+
+    document.getElementById("randomGameBtn").addEventListener("click", function() {
+        const randomGame = games[Math.floor(Math.random() * games.length)];
+        localStorage.setItem("loadedG", randomGame.link);
+        location.href = "/Classes.html";
+    });
+
+} catch (error) {
+    console.error("Error loading games:", error);
+    document.getElementById("gamesList").innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
+}
