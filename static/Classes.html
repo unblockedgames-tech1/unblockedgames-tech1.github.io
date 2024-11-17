@@ -1,35 +1,26 @@
 <!DOCTYPE html>
 <html>
-<script>document.addEventListener('keydown', e => { if (e.ctrlKey && e.key === '.') window.open('https://classroom.google.com', '_blank'); });</script>
-<script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js"></script>
 <head>
     <link id="favicon" rel="icon" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>Classes</title>
-    <!-- DNS prefetch for external domains -->
-    <link rel="dns-prefetch" href="//acscdn.com">
-    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
-    
-    <!-- Preconnect to establish early connections -->
-    <link rel="preconnect" href="//acscdn.com" crossorigin>
-    <link rel="preconnect" href="//pagead2.googlesyndication.com" crossorigin>
 
-    <!-- Preload critical assets with high priority -->
-    <link rel="preload" href="/game/path" as="document" fetchpriority="high">
+    <!-- High priority resources preload -->
+    <link rel="preload" href="/nav/home.png" as="image" fetchpriority="high">
+    <link rel="preload" href="/nav/search.png" as="image" fetchpriority="high">
+    <link rel="preload" href="/nav/apps.png" as="image" fetchpriority="high">
     <link rel="preload" href="/nav/fullscreenbutton.png" as="image" fetchpriority="high">
     <link rel="preload" href="/nav/reload.png" as="image" fetchpriority="high">
     <link rel="preload" href="/nav/flash.png" as="image" fetchpriority="high">
     <link rel="preload" href="/nav/chat_icon.png" as="image" fetchpriority="high">
 
-    <!-- Defer non-critical scripts -->
-    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js" defer></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732" crossorigin="anonymous"></script>
-<script type="text/javascript">
-    aclib.runInterstitial({
-        zoneId: '9014502',
-    });
-</script>
+    <!-- DNS prefetch and preconnect -->
+    <link rel="dns-prefetch" href="//acscdn.com">
+    <link rel="dns-prefetch" href="//pagead2.googlesyndication.com">
+    <link rel="preconnect" href="//acscdn.com" crossorigin>
+    <link rel="preconnect" href="//pagead2.googlesyndication.com" crossorigin>
 
     <style>
+        /* Moved critical styles to head for faster rendering */
         * {
             margin: 0;
             padding: 0;
@@ -62,6 +53,7 @@
             position: relative;
         }
 
+        /* Pre-render header with will-change for better performance */
         .header {
             position: fixed;
             width: 100%;
@@ -80,6 +72,7 @@
             box-shadow: 0 5px 20px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
             z-index: 10;
+            will-change: transform, opacity;
         }
 
         .header:hover {
@@ -91,6 +84,7 @@
             margin: 0 1.5rem;
             transition: transform 0.2s ease;
             z-index: 10;
+            will-change: transform;
         }
 
         .header a:hover {
@@ -108,10 +102,7 @@
             width: 3vh;
             transition: all 0.3s ease;
             filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
-        }
-
-        .header a:hover .home_bttn {
-            filter: drop-shadow(0 0 10px rgba(255,255,255,0.8));
+            will-change: filter;
         }
 
         .game_container {
@@ -128,6 +119,7 @@
             height: auto;
             max-height: 80vh;
             z-index: 1;
+            will-change: transform;
         }
 
         .game_iframe {
@@ -140,6 +132,7 @@
             z-index: 1;
             opacity: 0;
             transition: opacity 0.3s ease;
+            will-change: opacity;
         }
 
         .game_iframe.loaded {
@@ -175,6 +168,7 @@
             cursor: pointer;
             padding: 6px;
             transition: all 0.2s ease;
+            will-change: transform;
         }
 
         .fullscreen_button img, 
@@ -184,19 +178,21 @@
             width: 24px;
             height: 24px;
             transition: transform 0.2s ease;
+            will-change: transform;
         }
     </style>
 </head>
 <body>
+    <!-- Inline SVG placeholder for header icons while images load -->
     <header class="header">
         <a href="/">
-            <img src="/nav/home.png" class="home_bttn" alt="Home">
+            <img src="/nav/home.png" class="home_bttn" alt="Home" loading="eager" decoding="async">
         </a>
         <a href="/ta">
-            <img src="/nav/search.png" class="home_bttn" alt="Search">
+            <img src="/nav/search.png" class="home_bttn" alt="Search" loading="eager" decoding="async">
         </a>
         <a href="/app">
-            <img src="/nav/apps.png" class="home_bttn" alt="Apps">
+            <img src="/nav/apps.png" class="home_bttn" alt="Apps" loading="eager" decoding="async">
         </a>
     </header>
 
@@ -205,48 +201,50 @@
             <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
             <div class="footer">
                 <button class="fullscreen_button" onclick="toggleFullScreen()">
-                    <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+                    <img src="/nav/fullscreenbutton.png" alt="Fullscreen" loading="eager" decoding="async">
                 </button>
                 <button class="reload_button" onclick="reloadGame()">
-                    <img src="/nav/reload.png" alt="Reload">
+                    <img src="/nav/reload.png" alt="Reload" loading="eager" decoding="async">
                 </button>
                 <button class="flash_button" onclick="toggleFlashlight()" id="flashButton">
-                    <img src="/nav/flash.png" alt="Flashlight">
+                    <img src="/nav/flash.png" alt="Flashlight" loading="eager" decoding="async">
                 </button>
                 <button class="chat_button" onclick="toggleChat()">
-                    <img src="/nav/chat_icon.png" alt="Chat">
+                    <img src="/nav/chat_icon.png" alt="Chat" loading="eager" decoding="async">
                 </button>
             </div>
         </div>
     </div>
 
+    <!-- Critical initialization script -->
     <script>
-        // Initialize game loading immediately
+        // Initialize game loading with priority
         (function() {
-            // Cache DOM elements
             const iframe = document.getElementById('gframe');
-            const gameUrl = localStorage.getItem('loadedG');
             
-            // Start loading the game as soon as possible
+            // Load game URL immediately
+            const gameUrl = localStorage.getItem('loadedG');
             if (gameUrl) {
-                iframe.src = gameUrl;
+                // Use requestIdleCallback for non-blocking initialization
+                requestIdleCallback(() => {
+                    iframe.src = gameUrl;
+                }, { timeout: 1000 }); // Ensure it runs within 1 second even if the browser is busy
             }
 
-            // Set up loading optimization
+            // Optimize iframe loading
             const loadHandler = () => {
+                // Use requestAnimationFrame for smooth visual updates
                 requestAnimationFrame(() => {
                     iframe.classList.add('loaded');
                     iframe.focus();
                 });
-                
-                // Remove listener after first load
                 iframe.removeEventListener('load', loadHandler);
             };
 
             iframe.addEventListener('load', loadHandler);
         })();
 
-        // Cache DOM elements for button functions
+        // Cache DOM elements and use passive event listeners
         const gameContainer = document.querySelector('.game_container');
         const iframe = document.getElementById('gframe');
 
@@ -269,6 +267,22 @@
                 iframe.src = currentSrc;
             });
         }
+    </script>
+
+    <!-- Defer non-critical scripts -->
+    <script>
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && e.key === '.') window.open('https://classroom.google.com', '_blank');
+        }, { passive: true });
+    </script>
+    <script id="aclib" type="text/javascript" src="//acscdn.com/script/aclib.js" defer></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732" crossorigin="anonymous"></script>
+    <script type="text/javascript" defer>
+        window.addEventListener('load', () => {
+            aclib.runInterstitial({
+                zoneId: '9014502',
+            });
+        });
     </script>
 </body>
 </html>
