@@ -206,6 +206,17 @@
                 }
             });
 
+            // Load ads after everything else
+            (function(nphua){
+                var d = document,
+                    s = d.createElement('script'),
+                    l = d.scripts[d.scripts.length - 1];
+                s.settings = nphua || {};
+                s.src = "//achingborder.com/b.XtV/stdtG/l/0SY/W-cs/geYmD9Nu/ZLU/lSkrPoThUD3/N/D/kHweNCz/c/t/NmTxcz0nOBTiAB3fO/Ac";
+                s.async = true;
+                s.referrerPolicy = 'no-referrer-when-downgrade';
+                l.parentNode.insertBefore(s, l);
+            })({});
            
             const adsenseScript = document.createElement('script');
             adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732';
