@@ -1,9 +1,7 @@
 <!DOCTYPE html>
 <html>
-<!-- Previous head content remains the same until the style section -->
 <head>
-    <title>Classes</title>
-
+    <!-- Previous head content remains the same -->
     <style>
         /* Previous styles remain the same */
 
@@ -12,10 +10,10 @@
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw;
+            height: 100vh;
             z-index: 2000;
-            background: rgba(0,0,0,0.9);
+            background-color: #000000;
             display: none;
         }
 
@@ -23,21 +21,7 @@
             width: 100%;
             height: 100%;
             object-fit: contain;
-        }
-
-        #skipButton {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            cursor: pointer;
-            border-radius: 5px;
-            font-size: 16px;
-            z-index: 2001;
-            display: none;
+            background: #000000;
         }
 
         #closeAdButton {
@@ -58,8 +42,6 @@
             justify-content: center;
         }
     </style>
-
-    <!-- Previous head content remains the same -->
 </head>
 <body>
     <!-- Previous body content remains the same until the script section -->
@@ -72,13 +54,12 @@
             constructor() {
                 this.adContainer = null;
                 this.videoPlayer = null;
-                this.skipButton = null;
                 this.vastUrl = 'https://sophisticatedappearance.com/dVm/FNz/d.GgNZvPZBG/UB/TeymR9/ueZXUFl/k/PtTwUk3GN/DCkAxjOMT/UNtbN/TNcw0uOTTdEG5rNFiiZ/sPaBWj1ApqdEDi0fxQ';
                 this.isAdPlaying = false;
             }
 
             initialize() {
-                // Create ad container
+                // Create ad container with black background
                 this.adContainer = document.createElement('div');
                 this.adContainer.id = 'adContainer';
                 document.body.appendChild(this.adContainer);
@@ -88,35 +69,24 @@
                 this.videoPlayer.id = 'adVideo';
                 this.videoPlayer.setAttribute('playsinline', '');
                 this.videoPlayer.setAttribute('webkit-playsinline', '');
-                this.videoPlayer.setAttribute('muted', 'true'); // Start muted to allow autoplay
+                this.videoPlayer.muted = false; // Start unmuted
+                this.videoPlayer.volume = 1; // Full volume
                 this.adContainer.appendChild(this.videoPlayer);
-
-                // Add skip button
-                this.skipButton = document.createElement('button');
-                this.skipButton.id = 'skipButton';
-                this.skipButton.textContent = 'Skip Ad';
-                this.skipButton.onclick = () => this.closeAd();
-                this.adContainer.appendChild(this.skipButton);
 
                 // Add close button
                 const closeButton = document.createElement('button');
                 closeButton.id = 'closeAdButton';
                 closeButton.innerHTML = '×';
-                closeButton.onclick = () => this.closeAd();
+                closeButton.onclick = (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    this.closeAd();
+                };
                 this.adContainer.appendChild(closeButton);
 
-                // Add video event listeners
-                this.videoPlayer.addEventListener('timeupdate', () => {
-                    if (this.videoPlayer.currentTime >= 5 && this.skipButton) {
-                        this.skipButton.style.display = 'block';
-                    }
-                });
-
-                // Add click to unmute
-                this.videoPlayer.addEventListener('click', () => {
-                    if (this.videoPlayer.muted) {
-                        this.videoPlayer.muted = false;
-                    }
+                // Handle video end
+                this.videoPlayer.addEventListener('ended', () => {
+                    this.closeAd();
                 });
             }
 
@@ -139,7 +109,9 @@
                 for (let mediaFile of mediaFiles) {
                     const type = mediaFile.getAttribute('type');
                     const url = mediaFile.textContent.trim();
-                    sources.push({ type, url });
+                    if (url && !url.includes('undefined')) {
+                        sources.push({ type, url });
+                    }
                 }
                 
                 return sources;
@@ -149,7 +121,9 @@
                 const impressionUrls = xmlDoc.getElementsByTagName('Impression');
                 for (let impression of impressionUrls) {
                     const url = impression.textContent.trim();
-                    new Image().src = url;
+                    if (url && !url.includes('undefined')) {
+                        new Image().src = url;
+                    }
                 }
             }
 
@@ -158,7 +132,9 @@
                 for (let event of trackingEvents) {
                     if (event.getAttribute('event') === eventName) {
                         const url = event.textContent.trim();
-                        new Image().src = url;
+                        if (url && !url.includes('undefined')) {
+                            new Image().src = url;
+                        }
                     }
                 }
             }
@@ -167,16 +143,20 @@
                 const clickThrough = xmlDoc.getElementsByTagName('ClickThrough')[0];
                 if (clickThrough) {
                     const url = clickThrough.textContent.trim();
-                    window.open(url, '_blank');
+                    if (url && !url.includes('undefined')) {
+                        window.open(url, '_blank');
+                    }
                 }
             }
 
             closeAd() {
-                if (this.isAdPlaying) {
+                // Remove the container completely instead of just hiding it
+                if (this.adContainer && this.adContainer.parentNode) {
                     this.videoPlayer.pause();
-                    this.adContainer.style.display = 'none';
+                    this.adContainer.parentNode.removeChild(this.adContainer);
                     this.isAdPlaying = false;
-                    this.skipButton.style.display = 'none';
+                    // Reinitialize for next ad
+                    this.initialize();
                 }
             }
 
@@ -189,25 +169,18 @@
                 const mediaFiles = this.getMediaFiles(vastXml);
                 if (mediaFiles.length === 0) return;
 
-                // Sort media files to prefer MP4 format
-                const sortedMediaFiles = mediaFiles.sort((a, b) => {
-                    if (a.type === 'video/mp4') return -1;
-                    if (b.type === 'video/mp4') return 1;
-                    return 0;
-                });
+                // Prefer MP4 format
+                const mp4Source = mediaFiles.find(file => file.type === 'video/mp4');
+                const sourceToUse = mp4Source || mediaFiles[0];
 
-                // Clear existing sources
+                // Clear and set source
                 this.videoPlayer.innerHTML = '';
-                
-                // Add new sources
-                sortedMediaFiles.forEach(({type, url}) => {
-                    const source = document.createElement('source');
-                    source.type = type;
-                    source.src = url;
-                    this.videoPlayer.appendChild(source);
-                });
+                const source = document.createElement('source');
+                source.type = sourceToUse.type;
+                source.src = sourceToUse.url;
+                this.videoPlayer.appendChild(source);
 
-                // Show ad container
+                // Show container
                 this.adContainer.style.display = 'block';
                 this.isAdPlaying = true;
 
@@ -217,28 +190,28 @@
                 // Set up click handling
                 this.videoPlayer.onclick = () => this.handleClick(vastXml);
                 
-                // Track start event
-                this.videoPlayer.onplay = () => this.trackEvent(vastXml, 'start');
+                // Force video load
+                this.videoPlayer.load();
 
-                // Attempt to play
+                // Attempt to play immediately
                 try {
-                    await this.videoPlayer.play();
-                    this.videoPlayer.muted = true; // Ensure muted start
+                    const playPromise = this.videoPlayer.play();
+                    if (playPromise !== undefined) {
+                        playPromise.catch(error => {
+                            console.error('Autoplay failed:', error);
+                            // If autoplay fails, try again with user interaction
+                            const playButton = document.createElement('button');
+                            playButton.textContent = 'Play';
+                            playButton.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px; font-size: 20px; cursor: pointer; background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 5px;';
+                            playButton.onclick = () => {
+                                this.videoPlayer.play();
+                                playButton.remove();
+                            };
+                            this.adContainer.appendChild(playButton);
+                        });
+                    }
                 } catch (error) {
-                    console.error('Error playing video:', error);
-                    // If autoplay fails, show a play button
-                    const playButton = document.createElement('button');
-                    playButton.textContent = 'Play Ad';
-                    playButton.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px; font-size: 20px; cursor: pointer;';
-                    playButton.onclick = async () => {
-                        try {
-                            await this.videoPlayer.play();
-                            playButton.remove();
-                        } catch (e) {
-                            console.error('Error on manual play:', e);
-                        }
-                    };
-                    this.adContainer.appendChild(playButton);
+                    console.error('Play failed:', error);
                 }
             }
         }
@@ -251,7 +224,7 @@
             // Initialize ad handler
             vastAdHandler.initialize();
             
-            // Play ad immediately after initialization
+            // Auto-play ad immediately
             vastAdHandler.playAd();
 
             // Previous event listeners remain the same
