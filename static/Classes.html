@@ -1,233 +1,217 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <!-- Previous head content remains the same -->
+    <title>Classes</title>
+
+    <!-- Critical CSS for immediate UI rendering -->
     <style>
-        /* Previous styles remain the same */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-        /* Updated Ad Container Styles */
-        #adContainer {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
+        body {
+            background-color: #121212;
             height: 100vh;
-            z-index: 2000;
-            background-color: #000000;
-            display: none;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
-        #adVideo {
+        .header {
+            position: fixed;
             width: 100%;
-            height: 100%;
-            object-fit: contain;
-            background: #000000;
+            background: linear-gradient(90deg, rgba(41,41,41,0.9) 0%, rgba(61,61,61,0.9) 50%, rgba(41,41,41,0.9) 100%);
+            color: white;
+            left: 0;
+            padding: 1rem;
+            top: 0;
+            font-family: "Be Vietnam Pro", sans-serif;
+            font-weight: 700;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            z-index: 10;
         }
 
-        #closeAdButton {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            cursor: pointer;
-            border-radius: 50%;
-            font-size: 24px;
-            z-index: 2001;
+        .header a {
+            margin: 0 1.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
+
+        .home_bttn {
+            height: 3vh;
+            width: 3vh;
+            filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+        }
+
+        .game_container {
+            width: min(90vw, 1280px);
+            aspect-ratio: 16/9;
+            height: auto;
+            max-height: 80vh;
+            background-color: #2a2a2a;
+            border-radius: 15px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game_iframe {
+            width: 100%;
+            height: calc(100% - 36px);
+            border: none;
+            border-radius: 10px 10px 0 0;
+            background-color: #1a1a1a;
+            display: block;
+        }
+
+        .footer {
+            height: 36px;
+            background-color: #2a2a2a;
+            border-radius: 0 0 15px 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .footer button {
+            width: 36px;
+            height: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 6px;
+        }
+
+        .footer button img {
+            width: 24px;
+            height: 24px;
+        }
     </style>
+
+    <!-- Preload game URL with high priority -->
+    <script>
+        // Preload game URL immediately
+        const gameUrl = localStorage.getItem('loadedG');
+        if (gameUrl) {
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.as = 'document';
+            preloadLink.href = gameUrl;
+            preloadLink.fetchPriority = 'high';
+            document.head.appendChild(preloadLink);
+        }
+    </script>
+
+    <!-- Preload critical UI assets -->
+    <link rel="preload" href="/nav/home.png" as="image">
+    <link rel="preload" href="/nav/search.png" as="image">
+    <link rel="preload" href="/nav/apps.png" as="image">
+    <link rel="preload" href="/nav/fullscreenbutton.png" as="image">
+    <link rel="preload" href="/nav/reload.png" as="image">
+    <link rel="preload" href="/nav/flash.png" as="image">
+    <link rel="preload" href="/nav/chat_icon.png" as="image">
 </head>
 <body>
-    <!-- Previous body content remains the same until the script section -->
+    <header class="header">
+        <a href="/">
+            <img src="/nav/home.png" class="home_bttn" alt="Home" fetchpriority="high">
+        </a>
+        <a href="/ta">
+            <img src="/nav/search.png" class="home_bttn" alt="Search" fetchpriority="high">
+        </a>
+        <a href="/app">
+            <img src="/nav/apps.png" class="home_bttn" alt="Apps" fetchpriority="high">
+        </a>
+    </header>
 
+    <div class="game_container">
+        <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
+        <div class="footer">
+            <button onclick="toggleFullScreen()">
+                <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+            </button>
+            <button onclick="reloadGame()">
+                <img src="/nav/reload.png" alt="Reload">
+            </button>
+            <button onclick="toggleFlashlight()" id="flashButton">
+                <img src="/nav/flash.png" alt="Flashlight">
+            </button>
+            <button onclick="toggleChat()">
+                <img src="/nav/chat_icon.png" alt="Chat">
+            </button>
+        </div>
+    </div>
+
+    <!-- Core functionality script -->
     <script>
-        // Previous game-related functions remain the same
-
-        // Updated VAST Ad Handler Implementation
-        class VastAdHandler {
-            constructor() {
-                this.adContainer = null;
-                this.videoPlayer = null;
-                this.vastUrl = 'https://sophisticatedappearance.com/dVm/FNz/d.GgNZvPZBG/UB/TeymR9/ueZXUFl/k/PtTwUk3GN/DCkAxjOMT/UNtbN/TNcw0uOTTdEG5rNFiiZ/sPaBWj1ApqdEDi0fxQ';
-                this.isAdPlaying = false;
-            }
-
-            initialize() {
-                // Create ad container with black background
-                this.adContainer = document.createElement('div');
-                this.adContainer.id = 'adContainer';
-                document.body.appendChild(this.adContainer);
-
-                // Create video element
-                this.videoPlayer = document.createElement('video');
-                this.videoPlayer.id = 'adVideo';
-                this.videoPlayer.setAttribute('playsinline', '');
-                this.videoPlayer.setAttribute('webkit-playsinline', '');
-                this.videoPlayer.muted = false; // Start unmuted
-                this.videoPlayer.volume = 1; // Full volume
-                this.adContainer.appendChild(this.videoPlayer);
-
-                // Add close button
-                const closeButton = document.createElement('button');
-                closeButton.id = 'closeAdButton';
-                closeButton.innerHTML = '×';
-                closeButton.onclick = (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    this.closeAd();
-                };
-                this.adContainer.appendChild(closeButton);
-
-                // Handle video end
-                this.videoPlayer.addEventListener('ended', () => {
-                    this.closeAd();
+        // Initialize game loading immediately
+        (function() {
+            const iframe = document.getElementById('gframe');
+            const gameUrl = localStorage.getItem('loadedG');
+            
+            if (gameUrl) {
+                // Load game with high priority
+                requestAnimationFrame(() => {
+                    iframe.src = gameUrl;
                 });
             }
+        })();
 
-            async loadVastXml() {
-                try {
-                    const response = await fetch(this.vastUrl);
-                    const vastXml = await response.text();
-                    const parser = new DOMParser();
-                    return parser.parseFromString(vastXml, 'text/xml');
-                } catch (error) {
-                    console.error('Error loading VAST XML:', error);
-                    return null;
-                }
-            }
+        // Cache DOM elements
+        const gameContainer = document.querySelector('.game_container');
+        const iframe = document.getElementById('gframe');
 
-            getMediaFiles(xmlDoc) {
-                const mediaFiles = xmlDoc.getElementsByTagName('MediaFile');
-                const sources = [];
-                
-                for (let mediaFile of mediaFiles) {
-                    const type = mediaFile.getAttribute('type');
-                    const url = mediaFile.textContent.trim();
-                    if (url && !url.includes('undefined')) {
-                        sources.push({ type, url });
-                    }
-                }
-                
-                return sources;
-            }
-
-            trackImpression(xmlDoc) {
-                const impressionUrls = xmlDoc.getElementsByTagName('Impression');
-                for (let impression of impressionUrls) {
-                    const url = impression.textContent.trim();
-                    if (url && !url.includes('undefined')) {
-                        new Image().src = url;
-                    }
-                }
-            }
-
-            trackEvent(xmlDoc, eventName) {
-                const trackingEvents = xmlDoc.getElementsByTagName('Tracking');
-                for (let event of trackingEvents) {
-                    if (event.getAttribute('event') === eventName) {
-                        const url = event.textContent.trim();
-                        if (url && !url.includes('undefined')) {
-                            new Image().src = url;
-                        }
-                    }
-                }
-            }
-
-            handleClick(xmlDoc) {
-                const clickThrough = xmlDoc.getElementsByTagName('ClickThrough')[0];
-                if (clickThrough) {
-                    const url = clickThrough.textContent.trim();
-                    if (url && !url.includes('undefined')) {
-                        window.open(url, '_blank');
-                    }
-                }
-            }
-
-            closeAd() {
-                // Remove the container completely instead of just hiding it
-                if (this.adContainer && this.adContainer.parentNode) {
-                    this.videoPlayer.pause();
-                    this.adContainer.parentNode.removeChild(this.adContainer);
-                    this.isAdPlaying = false;
-                    // Reinitialize for next ad
-                    this.initialize();
-                }
-            }
-
-            async playAd() {
-                if (this.isAdPlaying) return;
-
-                const vastXml = await this.loadVastXml();
-                if (!vastXml) return;
-
-                const mediaFiles = this.getMediaFiles(vastXml);
-                if (mediaFiles.length === 0) return;
-
-                // Prefer MP4 format
-                const mp4Source = mediaFiles.find(file => file.type === 'video/mp4');
-                const sourceToUse = mp4Source || mediaFiles[0];
-
-                // Clear and set source
-                this.videoPlayer.innerHTML = '';
-                const source = document.createElement('source');
-                source.type = sourceToUse.type;
-                source.src = sourceToUse.url;
-                this.videoPlayer.appendChild(source);
-
-                // Show container
-                this.adContainer.style.display = 'block';
-                this.isAdPlaying = true;
-
-                // Track impression
-                this.trackImpression(vastXml);
-
-                // Set up click handling
-                this.videoPlayer.onclick = () => this.handleClick(vastXml);
-                
-                // Force video load
-                this.videoPlayer.load();
-
-                // Attempt to play immediately
-                try {
-                    const playPromise = this.videoPlayer.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(error => {
-                            console.error('Autoplay failed:', error);
-                            // If autoplay fails, try again with user interaction
-                            const playButton = document.createElement('button');
-                            playButton.textContent = 'Play';
-                            playButton.style.cssText = 'position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); padding: 20px; font-size: 20px; cursor: pointer; background: rgba(0,0,0,0.7); color: white; border: none; border-radius: 5px;';
-                            playButton.onclick = () => {
-                                this.videoPlayer.play();
-                                playButton.remove();
-                            };
-                            this.adContainer.appendChild(playButton);
-                        });
-                    }
-                } catch (error) {
-                    console.error('Play failed:', error);
-                }
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                gameContainer.requestFullscreen().catch(err => {
+                    console.warn('Error attempting to enable fullscreen:', err);
+                });
+            } else {
+                document.exitFullscreen();
             }
         }
 
-        // Initialize VAST Ad Handler
-        const vastAdHandler = new VastAdHandler();
+        function reloadGame() {
+            const currentSrc = iframe.src;
+            iframe.src = 'about:blank';
+            requestAnimationFrame(() => {
+                iframe.src = currentSrc;
+            });
+        }
+    </script>
 
+    <!-- Defer non-critical scripts -->
+    <script>
         // Load external resources after main content
         window.addEventListener('load', () => {
-            // Initialize ad handler
-            vastAdHandler.initialize();
-            
-            // Auto-play ad immediately
-            vastAdHandler.playAd();
+            // Add keyboard shortcut
+            document.addEventListener('keydown', e => {
+                if (e.ctrlKey && e.key === '.') {
+                    window.open('https://classroom.google.com', '_blank');
+                }
+            });
 
-            // Previous event listeners remain the same
+           
+            const adsenseScript = document.createElement('script');
+            adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732';
+            adsenseScript.async = true;
+            adsenseScript.crossOrigin = 'anonymous';
+            document.body.appendChild(adsenseScript);
         });
     </script>
 </body>
