@@ -84,6 +84,16 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/9gBn_-diXW0qiyzxP1M3D65mJgpeZ7RqM2mSy2HwTz78-cd7HY0HEra0of4EhWsrOHBMoMzwEMWlBCPD0v-M59XTbuR9vCnByqM2QA_wBv_qeETzKCVIedkDRi7yEo4jnCJqu4sSeOANEPEg-Ej7VOmm9HTPdw",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.smbgames.be")
 },
+{
+    title: "EggyCar", 
+    imgSrc: "https://lh7-us.googleusercontent.com/XzQmqFIMuI1P7JPJYEMDsaVvnyUEx3Yi-yHMb56pAWDDP6BS9L7nhz-9Z6qGfcqqU7SK3-dLuBVBBd7ptmx-zFOm5jK3Nba_o8I8pNAq3-NpNcInyXFJJ1woU3a-jDQ9zONSio91O_5QCYVWAqn-_vIgMW7rCQ",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://html5.gamedistribution.com/rvvASMiM/59a98bf799ef499d9d7b9285bccaa196/index.html?gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL2VnZ3ljYXIuY28vIiwicGFyZW50RG9tYWluIjoiZWdneWNhci5jbyIsInRvcERvbWFpbiI6ImVnZ3ljYXIuY28iLCJoYXNJbXByZXNzaW9uIjp0cnVlLCJsb2FkZXJFbmFibGVkIjp0cnVlLCJob3N0IjoiaHRtbDUuZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJ2ZXJzaW9uIjoiMS41LjE3In0%253D")
+},
+{
+    title: "Geometrydash Meltdown", 
+    imgSrc: "https://lh7-us.googleusercontent.com/2VSrflEy3rxlwUHDLPkDuICjlqthjIkW1bBHNE548hX_uxU6n2wn0qFwl49ufqQowttCUksEdwEU4itmDSK6SFjx9Fgj-H1mQxde_uig6NvIoj1RNoJqzH54IJMAqcb8cw6-Jqz0f8T45Moj1rHKz5yXtZRH7Q",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://geometrydash-meltdown.com")
+},
 
 
    ];
