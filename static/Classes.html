@@ -82,6 +82,42 @@
             display: block;
         }
 
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 36px);
+            background-color: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-family: system-ui, -apple-system, sans-serif;
+            border-radius: 10px 10px 0 0;
+            opacity: 1;
+            transition: opacity 0.3s ease;
+        }
+
+        .loading-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #ffffff3d;
+            border-top: 4px solid white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
         .footer {
             height: 36px;
             background-color: #2a2a2a;
@@ -125,6 +161,9 @@
     </header>
 
     <div class="game_container">
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-spinner"></div>
+        </div>
         <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" loading="eager"></iframe>
         <div class="footer">
             <button onclick="toggleFullScreen()">
@@ -145,21 +184,43 @@
     <script>
         let isFlashlightEnabled = false;
         
-        // Initialize game frame
+        // Initialize game frame with loading handling
         const iframe = document.getElementById('gframe');
+        const loadingOverlay = document.getElementById('loadingOverlay');
         const gameUrl = localStorage.getItem('loadedG');
 
+        function stopLoading() {
+            document.title = 'Ready | Classes';
+            loadingOverlay.classList.add('hidden');
+            
+            // Update favicon to stop loading animation
+            const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+            link.type = 'image/x-icon';
+            link.rel = 'shortcut icon';
+            link.href = '/favicon.ico';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+
         if (gameUrl) {
+            // Set up iframe load handling
             iframe.addEventListener('load', () => {
-                document.title = 'Classes';
-                const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-                link.type = 'image/x-icon';
-                link.rel = 'shortcut icon';
-                link.href = '/favicon.ico';
-                document.getElementsByTagName('head')[0].appendChild(link);
+                // Give a small delay to ensure content is actually loaded
+                setTimeout(stopLoading, 500);
             });
 
+            // Set up timeout in case game doesn't load properly
+            setTimeout(() => {
+                if (!loadingOverlay.classList.contains('hidden')) {
+                    stopLoading();
+                }
+            }, 10000); // 10 second timeout
+
+            // Load the game
             iframe.src = gameUrl;
+        } else {
+            // No game URL found
+            stopLoading();
+            iframe.srcdoc = '<div style="display:flex;justify-content:center;align-items:center;height:100%;color:white;font-family:system-ui;">No game loaded</div>';
         }
 
         const gameContainer = document.querySelector('.game_container');
@@ -178,11 +239,12 @@
 
         function reloadGame() {
             if (iframe.src) {
+                loadingOverlay.classList.remove('hidden');
                 const currentSrc = iframe.src;
                 iframe.src = 'about:blank';
-                requestAnimationFrame(() => {
+                setTimeout(() => {
                     iframe.src = currentSrc;
-                });
+                }, 100);
             }
         }
 
