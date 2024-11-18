@@ -113,49 +113,23 @@
     <div class="game_container">
         <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
         <div class="footer">
-            <button onclick="toggleFullScreen()">
+            <button onclick="document.querySelector('.game_container').requestFullscreen()">
                 <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
             </button>
-            <button onclick="reloadGame()">
+            <button onclick="document.getElementById('gframe').src = localStorage.getItem('loadedG')">
                 <img src="/nav/reload.png" alt="Reload">
             </button>
-            <button onclick="toggleFlashlight()" id="flashButton">
+            <button id="flashButton">
                 <img src="/nav/flash.png" alt="Flashlight">
             </button>
-            <button onclick="toggleChat()">
+            <button>
                 <img src="/nav/chat_icon.png" alt="Chat">
             </button>
         </div>
     </div>
 
     <script>
-        const iframe = document.getElementById('gframe');
-        const gameContainer = document.querySelector('.game_container');
-        
-        // Load game immediately
-        iframe.src = localStorage.getItem('loadedG');
-
-        function reloadGame() {
-            const gameUrl = localStorage.getItem('loadedG');
-            if (gameUrl) {
-                iframe.src = gameUrl;
-            }
-        }
-
-        function toggleFullScreen() {
-            if (!document.fullscreenElement) {
-                gameContainer.requestFullscreen().catch(console.error);
-            } else {
-                document.exitFullscreen();
-            }
-        }
-
-        // Keyboard shortcut
-        document.addEventListener('keydown', e => {
-            if (e.ctrlKey && e.key === '.') {
-                window.open('https://classroom.google.com', '_blank');
-            }
-        });
+        document.getElementById('gframe').src = localStorage.getItem('loadedG');
     </script>
 </body>
 </html>
