@@ -4,7 +4,6 @@
     <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
     <title>Privacy Policy - Void Network</title>
 
-
     <style>
         body {
             margin: 0;
@@ -13,6 +12,9 @@
             background-color: #1a1a1a;
             color: #ffffff;
             line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
 
         #particles-js {
@@ -26,11 +28,13 @@
         }
 
         .container {
+            flex: 1;
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
             padding: 2rem;
+            margin-top: 60px; /* Space for header */
+            margin-bottom: 60px; /* Space for footer */
         }
 
         .privacy-content {
@@ -75,10 +79,30 @@
             .privacy-content {
                 padding: 1rem;
             }
+            .container {
+                margin-top: 80px; /* More space for mobile header */
+            }
+        }
+
+        /* Additional styles to ensure header and footer display correctly */
+        #header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        #footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            z-index: 1000;
         }
     </style>
 
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
+    <script src="/assets/js/ads.js"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag() {
@@ -87,17 +111,25 @@
         gtag('js', new Date());
         gtag('config', 'G-VXDP7XC98T');
     </script>
+
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <script src="/global.js"></script>
+    <script src="/config.js"></script>
 </head>
 
-        <script>
-            // Load header and footer
-        loadHTML("/assets/html/header.html", "header");
-        loadHTML("/assets/html/footer.html", "footer");
-    <script>
-
 <body>
+    <!-- Google Tag Manager -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+
+    <!-- Dynamically Loaded Header -->
+    <div id="header"></div>
+
+    <!-- Particle Background -->
     <div id="particles-js"></div>
     
+    <!-- Main Content -->
     <div class="container">
         <div class="privacy-content">
             <h1>Privacy Policy</h1>
@@ -131,9 +163,34 @@
         </div>
     </div>
 
+    <!-- Dynamically Loaded Footer -->
+    <div id="footer"></div>
+
     <script src="/assets/js/particles.js"></script>
     <script>
         particlesJS.load('particles-js', '/assets/json/particles.json');
+
+        // Function to load header and footer
+        function loadHTML(url, elementId) {
+            fetch(url)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.text();
+                })
+                .then(data => {
+                    document.getElementById(elementId).innerHTML = data;
+                })
+                .catch(error => {
+                    console.error('Error loading HTML:', error);
+                    document.getElementById(elementId).innerHTML = `<p>Error loading content: ${error.message}</p>`;
+                });
+        }
+
+        // Load header and footer
+        loadHTML("/assets/html/header.html", "header");
+        loadHTML("/assets/html/footer.html", "footer");
     </script>
 </body>
 </html>
