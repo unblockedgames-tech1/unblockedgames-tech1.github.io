@@ -4,10 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classes</title>
+    <!-- Preload critical resources -->
     <link rel="preload" as="image" href="/nav/home.png" fetchpriority="high">
     <link rel="preload" as="image" href="/nav/search.png" fetchpriority="high">
     <link rel="preload" as="image" href="/nav/apps.png" fetchpriority="high">
-
+    
     <style>
         * {
             margin: 0;
@@ -108,6 +109,34 @@
             height: 24px;
             will-change: transform;
         }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: calc(100% - 36px);
+            background: #1a1a1a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px 10px 0 0;
+            z-index: 2;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #333;
+            border-top: 5px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
     </style>
 </head>
 <body>
@@ -124,7 +153,10 @@
     </header>
 
     <div class="game_container">
-        <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" loading="eager"></iframe>
+        <div class="loading-overlay" id="loadingOverlay">
+            <div class="loading-spinner"></div>
+        </div>
+        <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard"></iframe>
         <div class="footer">
             <button onclick="toggleFullScreen()">
                 <img src="/nav/fullscreenbutton.png" alt="Fullscreen" loading="lazy">
@@ -142,21 +174,83 @@
     </div>
 
     <script>
-        // Initialize game frame
+        // Cache DOM elements
         const iframe = document.getElementById('gframe');
-        const gameUrl = localStorage.getItem('loadedG');
+        const gameContainer = document.querySelector('.game_container');
+        const loadingOverlay = document.getElementById('loadingOverlay');
+        
+        // Initialize game loading system
+        class GameLoader {
+            constructor() {
+                this.gameUrl = localStorage.getItem('loadedG');
+                this.loadingTimeout = null;
+                this.initialize();
+            }
 
-        if (gameUrl) {
-            iframe.addEventListener('load', () => {
+            initialize() {
+                if (!this.gameUrl) return;
+
+                // Set up loading timeout
+                this.loadingTimeout = setTimeout(() => {
+                    this.handleLoadingTimeout();
+                }, 30000); // 30 second timeout
+
+                // Set up iframe listeners
+                iframe.addEventListener('load', () => this.handleGameLoad());
+                iframe.addEventListener('error', () => this.handleLoadError());
+
+                // Start preloading the game
+                this.preloadGame();
+            }
+
+            preloadGame() {
+                // Create a connection to warm up the server
+                const preloadLink = document.createElement('link');
+                preloadLink.rel = 'preload';
+                preloadLink.as = 'document';
+                preloadLink.href = this.gameUrl;
+                document.head.appendChild(preloadLink);
+
+                // After a brief delay to allow preloading, set the actual source
+                setTimeout(() => {
+                    iframe.src = this.gameUrl;
+                }, 100);
+            }
+
+            handleGameLoad() {
+                clearTimeout(this.loadingTimeout);
                 document.title = 'Ready | Classes';
-            });
+                loadingOverlay.style.display = 'none';
+                
+                // Cache the successful load
+                sessionStorage.setItem('gameLoaded', 'true');
+            }
 
-            // Set game URL directly
-            iframe.src = gameUrl;
+            handleLoadError() {
+                clearTimeout(this.loadingTimeout);
+                loadingOverlay.style.display = 'none';
+                console.error('Game failed to load');
+                // Implement your error handling here
+            }
+
+            handleLoadingTimeout() {
+                console.warn('Game load timed out - attempting reload');
+                this.reloadGame();
+            }
+
+            reloadGame() {
+                loadingOverlay.style.display = 'flex';
+                const currentSrc = iframe.src;
+                iframe.src = 'about:blank';
+                
+                requestAnimationFrame(() => {
+                    iframe.src = currentSrc;
+                });
+            }
         }
 
-        // Cache DOM elements
-        const gameContainer = document.querySelector('.game_container');
+        // Initialize the game loader
+        const gameLoader = new GameLoader();
 
         // Optimized fullscreen toggle
         function toggleFullScreen() {
@@ -173,13 +267,7 @@
 
         // Optimized game reload
         function reloadGame() {
-            if (iframe.src) {
-                const currentSrc = iframe.src;
-                iframe.src = 'about:blank';
-                requestAnimationFrame(() => {
-                    iframe.src = currentSrc;
-                });
-            }
+            gameLoader.reloadGame();
         }
 
         // Keyboard shortcut (deferred)
