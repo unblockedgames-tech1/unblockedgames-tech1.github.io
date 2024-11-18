@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classes</title>
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="preload" as="image" href="/nav/home.png" fetchpriority="high">
     <link rel="preload" as="image" href="/nav/search.png" fetchpriority="high">
     <link rel="preload" as="image" href="/nav/apps.png" fetchpriority="high">
@@ -142,6 +143,8 @@
     </div>
 
     <script>
+        let isFlashlightEnabled = false;
+        
         // Initialize game frame
         const iframe = document.getElementById('gframe');
         const gameUrl = localStorage.getItem('loadedG');
@@ -149,16 +152,18 @@
         if (gameUrl) {
             iframe.addEventListener('load', () => {
                 document.title = 'Ready | Classes';
+                const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
+                link.type = 'image/x-icon';
+                link.rel = 'shortcut icon';
+                link.href = '/favicon.ico';
+                document.getElementsByTagName('head')[0].appendChild(link);
             });
 
-            // Set game URL directly
             iframe.src = gameUrl;
         }
 
-        // Cache DOM elements
         const gameContainer = document.querySelector('.game_container');
 
-        // Optimized fullscreen toggle
         function toggleFullScreen() {
             try {
                 if (!document.fullscreenElement) {
@@ -171,7 +176,6 @@
             }
         }
 
-        // Optimized game reload
         function reloadGame() {
             if (iframe.src) {
                 const currentSrc = iframe.src;
@@ -182,7 +186,15 @@
             }
         }
 
-        // Keyboard shortcut (deferred)
+        function toggleFlashlight() {
+            isFlashlightEnabled = !isFlashlightEnabled;
+            document.body.style.backgroundColor = isFlashlightEnabled ? '#ffffff' : '#121212';
+        }
+
+        function toggleChat() {
+            window.open('about:blank', '_blank');
+        }
+
         window.addEventListener('load', () => {
             document.addEventListener('keydown', e => {
                 if (e.ctrlKey && e.key === '.') {
