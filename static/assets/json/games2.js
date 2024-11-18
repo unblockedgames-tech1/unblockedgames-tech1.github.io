@@ -94,6 +94,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/2VSrflEy3rxlwUHDLPkDuICjlqthjIkW1bBHNE548hX_uxU6n2wn0qFwl49ufqQowttCUksEdwEU4itmDSK6SFjx9Fgj-H1mQxde_uig6NvIoj1RNoJqzH54IJMAqcb8cw6-Jqz0f8T45Moj1rHKz5yXtZRH7Q",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://geometrydash-meltdown.com")
 },
+{
+    title: "Geometrydash SubZero", 
+    imgSrc: "https://lh7-us.googleusercontent.com/2VSrflEy3rxlwUHDLPkDuICjlqthjIkW1bBHNE548hX_uxU6n2wn0qFwl49ufqQowttCUksEdwEU4itmDSK6SFjx9Fgj-H1mQxde_uig6NvIoj1RNoJqzH54IJMAqcb8cw6-Jqz0f8T45Moj1rHKz5yXtZRH7Q",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://geometrydash-meltdown.com")
+},
 
 
    ];
