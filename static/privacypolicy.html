@@ -1,22 +1,62 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <link rel="icon" type="image/png" href="https://ssl.gstatic.com/classroom/favicon.png">
-    <title>Privacy Policy - Void Network</title>
+    <script src="/config.js"></script>
+    <link rel="stylesheet" href="/assets/css/styles.css" type="text/css">   
+    <script src="/assets/js/particles.js"></script>
+    <script>
+        particlesJS.load('particles-js', '/assets/json/particles.json');
+    </script>
+    <script>
+        function redirect(location) {
+            window.location.href = location;
+        }
+    </script>
 
     <style>
+        /* Apply the Orbitron font for a futuristic style */
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
         body {
+            background-color: rgb(41, 41, 41);
+            font-family: 'Orbitron', sans-serif;
+            color: #d1d1d1;
             margin: 0;
             padding: 0;
-            font-family: Arial, sans-serif;
-            background-color: #1a1a1a;
-            color: #ffffff;
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
+            text-align: center;
+            overflow-x: hidden;
         }
-
+        h1 {
+            font-size: 3em;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            position: relative;
+            color: white;
+            animation: glowBlue 3s infinite alternate;
+        }
+        p {
+            font-size: 1.5em;
+            line-height: 1.8;
+            animation: slideIn 2s ease-out;
+        }
+        @keyframes glowBlue {
+            0% {
+                text-shadow: 0 0 5px #001f4d, 0 0 10px #001f4d, 0 0 15px #001f4d;
+            }
+            100% {
+                text-shadow: 0 0 10px #001f4d, 0 0 20px #001f4d, 0 0 30px #001f4d;
+            }
+        }
+        @keyframes slideIn {
+            0% {
+                opacity: 0;
+                transform: translateX(-100%);
+            }
+            100% {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
         #particles-js {
             position: fixed;
             top: 0;
@@ -24,19 +64,12 @@
             width: 100%;
             height: 100%;
             z-index: -1;
-            pointer-events: none;
         }
-
-        .container {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 2rem;
-            margin-top: 60px; /* Space for header */
-            margin-bottom: 60px; /* Space for footer */
+        .content {
+            position: relative;
+            z-index: 1;
+            color: white;
         }
-
         .privacy-content {
             max-width: 800px;
             width: 95%;
@@ -44,101 +77,30 @@
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 1s ease-in-out;
+            margin: 80px auto;
+            position: relative;
+            z-index: 1;
         }
-
-        .privacy-content h1 {
-            text-align: center;
-            color: #fff;
-            margin-bottom: 2rem;
-            font-size: 2rem;
-        }
-
         .privacy-content h2 {
             color: #4a9eff;
             margin-top: 1.5rem;
             font-size: 1.3rem;
         }
-
         .privacy-content p {
             margin-bottom: 1rem;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @media (max-width: 600px) {
-            .privacy-content {
-                padding: 1rem;
-            }
-            .container {
-                margin-top: 80px; /* More space for mobile header */
-            }
-        }
-
-        #header {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        #footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            z-index: 1000;
-        }
-
-        .content {
-            position: relative;
-            z-index: 1;
-            color: white;
+            font-size: 1em;
         }
     </style>
-
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-    <script src="/assets/js/ads.js"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'G-VXDP7XC98T');
-    </script>
-
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <script src="/global.js"></script>
-    <script src="/config.js"></script>
 </head>
-
 <body>
-    <!-- Google Tag Manager -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-    </noscript>
-
-    <!-- Dynamically Loaded Header -->
+    <div id="particles-js"></div>
+    
     <div id="header" class="content">
-        <!-- Temporary content to ensure header visibility -->
         <p>Loading header...</p>
     </div>
 
-    <!-- Particle Background -->
-    <div id="particles-js"></div>
-    
-    <!-- Main Content -->
-    <div class="container">
+    <div>
+        <br><br><br>
         <div class="privacy-content">
             <h1>Privacy Policy</h1>
             
@@ -171,17 +133,11 @@
         </div>
     </div>
 
-    <!-- Dynamically Loaded Footer -->
     <div id="footer" class="content">
-        <!-- Temporary content to ensure footer visibility -->
         <p>Loading footer...</p>
     </div>
 
-    <script src="/assets/js/particles.js"></script>
     <script>
-        particlesJS.load('particles-js', '/assets/json/particles.json');
-
-        // Function to load header and footer using XMLHttpRequest
         function loadHTML(url, elementId) {
             var xhr = new XMLHttpRequest();
             xhr.open('GET', url, true);
@@ -192,8 +148,7 @@
             };
             xhr.send();
         }
-
-        // Load header and footer
+        // Load header and footer HTML files
         loadHTML("/assets/html/header.html", "header");
         loadHTML("/assets/html/footer.html", "footer");
     </script>
