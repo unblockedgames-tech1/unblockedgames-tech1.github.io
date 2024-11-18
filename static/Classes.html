@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classes</title>
-    <link rel="icon" type="image/x-icon" href="/favicon.ico">
     <link rel="preload" as="image" href="/nav/home.png" fetchpriority="high">
     <link rel="preload" as="image" href="/nav/search.png" fetchpriority="high">
     <link rel="preload" as="image" href="/nav/apps.png" fetchpriority="high">
@@ -182,45 +181,40 @@
     </div>
 
     <script>
-        let isFlashlightEnabled = false;
+        // Immediately stop the loading indicator
+        document.title = 'Classes';
         
-        // Initialize game frame with loading handling
+        // Force stop loading after 100ms
+        setTimeout(() => {
+            document.title = 'Ready | Classes';
+            if (document.querySelector("link[rel*='icon']")) {
+                document.querySelector("link[rel*='icon']").remove();
+            }
+        }, 100);
+
+        let isFlashlightEnabled = false;
         const iframe = document.getElementById('gframe');
         const loadingOverlay = document.getElementById('loadingOverlay');
         const gameUrl = localStorage.getItem('loadedG');
 
-        function stopLoading() {
-            document.title = 'Ready | Classes';
-            loadingOverlay.classList.add('hidden');
-            
-            // Update favicon to stop loading animation
-            const link = document.querySelector("link[rel*='icon']") || document.createElement('link');
-            link.type = 'image/x-icon';
-            link.rel = 'shortcut icon';
-            link.href = '/favicon.ico';
-            document.getElementsByTagName('head')[0].appendChild(link);
-        }
-
         if (gameUrl) {
-            // Set up iframe load handling
-            iframe.addEventListener('load', () => {
-                // Give a small delay to ensure content is actually loaded
-                setTimeout(stopLoading, 500);
-            });
-
-            // Set up timeout in case game doesn't load properly
-            setTimeout(() => {
-                if (!loadingOverlay.classList.contains('hidden')) {
-                    stopLoading();
-                }
-            }, 10000); // 10 second timeout
-
-            // Load the game
+            // Set source immediately without waiting
             iframe.src = gameUrl;
+            
+            // Hide loading overlay after 1 second
+            setTimeout(() => {
+                loadingOverlay.classList.add('hidden');
+            }, 1000);
+            
+            // Force stop loading after 2 seconds max
+            setTimeout(() => {
+                document.title = 'Ready | Classes';
+                if (document.querySelector("link[rel*='icon']")) {
+                    document.querySelector("link[rel*='icon']").remove();
+                }
+            }, 2000);
         } else {
-            // No game URL found
-            stopLoading();
-            iframe.srcdoc = '<div style="display:flex;justify-content:center;align-items:center;height:100%;color:white;font-family:system-ui;">No game loaded</div>';
+            loadingOverlay.classList.add('hidden');
         }
 
         const gameContainer = document.querySelector('.game_container');
@@ -244,7 +238,18 @@
                 iframe.src = 'about:blank';
                 setTimeout(() => {
                     iframe.src = currentSrc;
-                }, 100);
+                    // Hide loading overlay after 1 second
+                    setTimeout(() => {
+                        loadingOverlay.classList.add('hidden');
+                    }, 1000);
+                    // Force stop loading after reload
+                    setTimeout(() => {
+                        document.title = 'Ready | Classes';
+                        if (document.querySelector("link[rel*='icon']")) {
+                            document.querySelector("link[rel*='icon']").remove();
+                        }
+                    }, 100);
+                }, 50);
             }
         }
 
@@ -263,6 +268,11 @@
                     window.open('https://classroom.google.com', '_blank');
                 }
             });
+        });
+        
+        // Additional loading optimization
+        window.addEventListener('beforeunload', () => {
+            document.title = 'Classes';
         });
     </script>
 </body>
