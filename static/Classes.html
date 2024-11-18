@@ -2,9 +2,9 @@
 <html>
 <head>
     <title>Classes</title>
-    <meta charset="UTF-8">
+
+    <!-- Critical CSS for immediate UI rendering -->
     <style>
-        /* Previous CSS remains unchanged */
         * {
             margin: 0;
             padding: 0;
@@ -102,34 +102,117 @@
             height: 24px;
         }
     </style>
+
+    <!-- Preload game URL with high priority -->
+    <script>
+        // Preload game URL immediately
+        const gameUrl = localStorage.getItem('loadedG');
+        if (gameUrl) {
+            const preloadLink = document.createElement('link');
+            preloadLink.rel = 'preload';
+            preloadLink.as = 'document';
+            preloadLink.href = gameUrl;
+            preloadLink.fetchPriority = 'high';
+            document.head.appendChild(preloadLink);
+        }
+    </script>
+
+    <!-- Preload critical UI assets -->
+    <link rel="preload" href="/nav/home.png" as="image">
+    <link rel="preload" href="/nav/search.png" as="image">
+    <link rel="preload" href="/nav/apps.png" as="image">
+    <link rel="preload" href="/nav/fullscreenbutton.png" as="image">
+    <link rel="preload" href="/nav/reload.png" as="image">
+    <link rel="preload" href="/nav/flash.png" as="image">
+    <link rel="preload" href="/nav/chat_icon.png" as="image">
 </head>
 <body>
     <header class="header">
-        <a href="/"><img src="/nav/home.png" class="home_bttn" alt="Home"></a>
-        <a href="/ta"><img src="/nav/search.png" class="home_bttn" alt="Search"></a>
-        <a href="/app"><img src="/nav/apps.png" class="home_bttn" alt="Apps"></a>
+        <a href="/">
+            <img src="/nav/home.png" class="home_bttn" alt="Home" fetchpriority="high">
+        </a>
+        <a href="/ta">
+            <img src="/nav/search.png" class="home_bttn" alt="Search" fetchpriority="high">
+        </a>
+        <a href="/app">
+            <img src="/nav/apps.png" class="home_bttn" alt="Apps" fetchpriority="high">
+        </a>
     </header>
 
     <div class="game_container">
         <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
         <div class="footer">
-            <button onclick="document.querySelector('.game_container').requestFullscreen()">
+            <button onclick="toggleFullScreen()">
                 <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
             </button>
-            <button onclick="document.getElementById('gframe').src = localStorage.getItem('loadedG')">
+            <button onclick="reloadGame()">
                 <img src="/nav/reload.png" alt="Reload">
             </button>
-            <button id="flashButton">
+            <button onclick="toggleFlashlight()" id="flashButton">
                 <img src="/nav/flash.png" alt="Flashlight">
             </button>
-            <button>
+            <button onclick="toggleChat()">
                 <img src="/nav/chat_icon.png" alt="Chat">
             </button>
         </div>
     </div>
 
+    <!-- Core functionality script -->
     <script>
-        document.getElementById('gframe').src = localStorage.getItem('loadedG');
+        // Initialize game loading immediately
+        (function() {
+            const iframe = document.getElementById('gframe');
+            const gameUrl = localStorage.getItem('loadedG');
+            
+            if (gameUrl) {
+                // Load game with high priority
+                requestAnimationFrame(() => {
+                    iframe.src = gameUrl;
+                });
+            }
+        })();
+
+        // Cache DOM elements
+        const gameContainer = document.querySelector('.game_container');
+        const iframe = document.getElementById('gframe');
+
+        function toggleFullScreen() {
+            if (!document.fullscreenElement) {
+                gameContainer.requestFullscreen().catch(err => {
+                    console.warn('Error attempting to enable fullscreen:', err);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        function reloadGame() {
+            const currentSrc = iframe.src;
+            iframe.src = 'about:blank';
+            requestAnimationFrame(() => {
+                iframe.src = currentSrc;
+            });
+        }
+    </script>
+
+    <!-- Defer non-critical scripts -->
+    <script>
+        // Load external resources after main content
+        window.addEventListener('load', () => {
+            // Add keyboard shortcut
+            document.addEventListener('keydown', e => {
+                if (e.ctrlKey && e.key === '.') {
+                    window.open('https://classroom.google.com', '_blank');
+                }
+            });
+
+           
+            const adsenseScript = document.createElement('script');
+            adsenseScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732';
+            adsenseScript.async = true;
+            adsenseScript.crossOrigin = 'anonymous';
+            document.body.appendChild(adsenseScript);
+        });
     </script>
 </body>
 </html>
