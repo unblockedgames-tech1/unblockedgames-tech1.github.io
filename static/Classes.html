@@ -3,9 +3,8 @@
 <head>
     <title>Classes</title>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <style>
+        /* Previous CSS remains unchanged */
         * {
             margin: 0;
             padding: 0;
@@ -102,36 +101,17 @@
             width: 24px;
             height: 24px;
         }
-
-        .loading-indicator {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: white;
-            background: rgba(0,0,0,0.7);
-            padding: 1rem;
-            border-radius: 8px;
-        }
     </style>
 </head>
 <body>
     <header class="header">
-        <a href="/">
-            <img src="/nav/home.png" class="home_bttn" alt="Home">
-        </a>
-        <a href="/ta">
-            <img src="/nav/search.png" class="home_bttn" alt="Search">
-        </a>
-        <a href="/app">
-            <img src="/nav/apps.png" class="home_bttn" alt="Apps">
-        </a>
+        <a href="/"><img src="/nav/home.png" class="home_bttn" alt="Home"></a>
+        <a href="/ta"><img src="/nav/search.png" class="home_bttn" alt="Search"></a>
+        <a href="/app"><img src="/nav/apps.png" class="home_bttn" alt="Apps"></a>
     </header>
 
     <div class="game_container">
         <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard" allowfullscreen></iframe>
-        <div class="loading-indicator" id="loadingIndicator">Loading game...</div>
         <div class="footer">
             <button onclick="toggleFullScreen()">
                 <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
@@ -149,62 +129,28 @@
     </div>
 
     <script>
-        // Initialize variables
         const iframe = document.getElementById('gframe');
         const gameContainer = document.querySelector('.game_container');
-        const loadingIndicator = document.getElementById('loadingIndicator');
-        let loadTimeout;
-
-        // Load game with timeout and error handling
-        function loadGame() {
-            const gameUrl = localStorage.getItem('loadedG');
-            if (!gameUrl) return;
-
-            loadingIndicator.style.display = 'block';
-            
-            // Clear previous timeout if exists
-            if (loadTimeout) clearTimeout(loadTimeout);
-
-            // Set new timeout for loading
-            loadTimeout = setTimeout(() => {
-                if (!iframe.contentWindow || !iframe.contentWindow.document) {
-                    reloadGame();
-                }
-            }, 10000); // 10 second timeout
-
-            iframe.onload = () => {
-                clearTimeout(loadTimeout);
-                loadingIndicator.style.display = 'none';
-            };
-
-            iframe.onerror = () => {
-                clearTimeout(loadTimeout);
-                loadingIndicator.textContent = 'Failed to load game. Retrying...';
-                setTimeout(reloadGame, 2000);
-            };
-
-            iframe.src = gameUrl;
-        }
+        
+        // Load game immediately
+        iframe.src = localStorage.getItem('loadedG');
 
         function reloadGame() {
-            iframe.src = 'about:blank';
-            setTimeout(loadGame, 100);
+            const gameUrl = localStorage.getItem('loadedG');
+            if (gameUrl) {
+                iframe.src = gameUrl;
+            }
         }
 
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
-                gameContainer.requestFullscreen().catch(err => {
-                    console.warn('Error attempting to enable fullscreen:', err);
-                });
+                gameContainer.requestFullscreen().catch(console.error);
             } else {
                 document.exitFullscreen();
             }
         }
 
-        // Initialize game on page load
-        document.addEventListener('DOMContentLoaded', loadGame);
-
-        // Handle keyboard shortcut
+        // Keyboard shortcut
         document.addEventListener('keydown', e => {
             if (e.ctrlKey && e.key === '.') {
                 window.open('https://classroom.google.com', '_blank');
