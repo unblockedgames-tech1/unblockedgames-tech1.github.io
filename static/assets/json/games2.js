@@ -79,6 +79,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/Iafhnkg3uzMv7lLK99ADN1O0tunCQwc0JLhuvYEhJrH6SiIgxVXhEUVHGEVrgC3KIATkNx5H0LHfq8-strKG-g4fsuoeRzjbQPJVCCzA063nQkqnk1nTEihZJaRv-4qDPXaMfDUcFPbvgaGFcTduBOsK8yq2kA", 
     link: __uv$config.prefix + __uv$config.encodeUrl("https://school-lessons.lol/_games/baldisbasics/")
 },
+{
+    title: "Mario Games", 
+    imgSrc: "https://lh7-us.googleusercontent.com/9gBn_-diXW0qiyzxP1M3D65mJgpeZ7RqM2mSy2HwTz78-cd7HY0HEra0of4EhWsrOHBMoMzwEMWlBCPD0v-M59XTbuR9vCnByqM2QA_wBv_qeETzKCVIedkDRi7yEo4jnCJqu4sSeOANEPEg-Ej7VOmm9HTPdw",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.smbgames.be")
+},
 
 
    ];
