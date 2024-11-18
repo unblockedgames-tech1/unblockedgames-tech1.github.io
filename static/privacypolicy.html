@@ -84,7 +84,6 @@
             }
         }
 
-        /* Additional styles to ensure header and footer display correctly */
         #header {
             position: fixed;
             top: 0;
@@ -97,6 +96,12 @@
             bottom: 0;
             width: 100%;
             z-index: 1000;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            color: white;
         }
     </style>
 
@@ -124,7 +129,10 @@
     </noscript>
 
     <!-- Dynamically Loaded Header -->
-    <div id="header"></div>
+    <div id="header" class="content">
+        <!-- Temporary content to ensure header visibility -->
+        <p>Loading header...</p>
+    </div>
 
     <!-- Particle Background -->
     <div id="particles-js"></div>
@@ -164,28 +172,25 @@
     </div>
 
     <!-- Dynamically Loaded Footer -->
-    <div id="footer"></div>
+    <div id="footer" class="content">
+        <!-- Temporary content to ensure footer visibility -->
+        <p>Loading footer...</p>
+    </div>
 
     <script src="/assets/js/particles.js"></script>
     <script>
         particlesJS.load('particles-js', '/assets/json/particles.json');
 
-        // Function to load header and footer
+        // Function to load header and footer using XMLHttpRequest
         function loadHTML(url, elementId) {
-            fetch(url)
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.text();
-                })
-                .then(data => {
-                    document.getElementById(elementId).innerHTML = data;
-                })
-                .catch(error => {
-                    console.error('Error loading HTML:', error);
-                    document.getElementById(elementId).innerHTML = `<p>Error loading content: ${error.message}</p>`;
-                });
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', url, true);
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    document.getElementById(elementId).innerHTML = xhr.responseText;
+                }
+            };
+            xhr.send();
         }
 
         // Load header and footer
