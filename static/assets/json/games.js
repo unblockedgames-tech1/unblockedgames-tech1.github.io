@@ -243,12 +243,12 @@ const gamesData = [
 {
     title: "Neon Rocket", 
     imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaJqSQk_jqdQ2VHOq4TcXbtIaspCYt9noyQ&s",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.cbc.ca/kidscbc2/content/games/neon_rocket/index.html")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/neon-rocket/game.html?nocheckorient=1")
 },
 {
     title: "Head Soccer", 
     imgSrc: "https://play-lh.googleusercontent.com/yVRLyqu3y5wKs5WKcaeeKbTZygK-rCp6SDScAyTX4XqvJlNSi4WZzbDZf2a_zR-47g",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.mathplayground.com/pp-head-soccer/index.html")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/head-soccer/game.html?nocheckorient=1")
 },
 {
     title: "Tomb Of The Mask", 
