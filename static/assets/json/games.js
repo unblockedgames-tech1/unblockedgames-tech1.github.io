@@ -273,7 +273,7 @@ const gamesData = [
 {
     title: "Tunnel Rush", 
     imgSrc: "gameimg/tunnelrush2.png",
-    link: "/local games/tunnelrush/tunnelrush.html"
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://tunnelrush.app/iframe/index.html")
 },
 {
     title: "Tanuki Sunset", 
