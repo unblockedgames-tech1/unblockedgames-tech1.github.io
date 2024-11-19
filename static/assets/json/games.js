@@ -273,7 +273,7 @@ const gamesData = [
 {
     title: "Tunnel Rush", 
     imgSrc: "gameimg/tunnelrush2.png",
-    link: "/local games/tunnelrush"
+    link: "local games/tunnelrush"
 },
 {
     title: "Tanuki Sunset", 
