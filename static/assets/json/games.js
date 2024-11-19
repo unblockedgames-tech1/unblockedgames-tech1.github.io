@@ -433,7 +433,7 @@ const gamesData = [
 {
     title: "Crossy Road", 
     imgSrc: "https://lh7-us.googleusercontent.com/q9pQl7MZG2X6QYEVsGMYZp5PoalmJCY0bK9o5wcNEhEhN6pWmDTutZNwmEhfNVUIhqKAGlt6VNjGOInVSkkphG8D8uyx0gF2KVzXTt3LLF9OyBSiI3XGb2PZsM6HPHRol1nfALe6m20v7xrFGsT2J43-dBnueA",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://stupendous-pie-ac17cf.netlify.app")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://crossyroad-pi.vercel.app")
 },
 {
     title: "A Dance Of Fire And Ice", 
