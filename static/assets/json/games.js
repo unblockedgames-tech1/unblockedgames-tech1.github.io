@@ -311,11 +311,6 @@ const gamesData = [
     link: __uv$config.prefix + __uv$config.encodeUrl("https://gun-spin.github.io/file/")
 },
 {
-    title: "Rocket League", 
-    imgSrc: "gameimg/rocketleague.png",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://imadejptr.github.io/strg/cm9ja2V0LXNvY2Nlcg==/index.html")
-},
-{
     title: "Stack Tris", 
     imgSrc: "gameimg/stacktris.png",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://abinbins.github.io/a6/stacktris/")
@@ -408,7 +403,7 @@ const gamesData = [
 {
     title: "Surviver.io", 
     imgSrc: "gameimg/survivor.png",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.yad.com/games/Survivor-Io/index.html?yad")
+    link: __uv$config.prefix + __uv$config.encodeUrl("//html5.gamedistribution.com/rvvASMiM/f1c451e586c04b4c8cba01b0c50d9090/index.html?gd_sdk_referrer_url=https%3A%2F%2Fwww.miniplay.com%2Fgame%2Fsurvivor-io&mp_api_as3_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fas3%2Flatest.swf&mp_api_as3_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-as%2F&mp_api_id=5418&mp_api_js_url=https%3A%2F%2Fssl.minijuegosgratis.com%2Flechuck%2Fjs%2Flatest.js&mp_api_js_url_bck=https%3A%2F%2Fapi.minijuegos.com%2Flechuck%2Fclient-js%2F&mp_assets=https%3A%2F%2Fs2.minijuegosgratis.com%2F&mp_embed=0&mp_game_id=243226&mp_game_uid=survivor-io&mp_game_url=https%3A%2F%2Fwww.miniplay.com%2Fembed%2Fsurvivor-io&mp_int=1&mp_locale=en_US&mp_player_type=IFRAME&mp_site_https_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_site_name=miniplay.com&mp_site_url=https%3A%2F%2Fwww.miniplay.com%2F&mp_timezone=America%2FNew_York&mp_view_type=&mini_signature=977a38e9593efe366a077777384e2a07&xdm_e=https%3A%2F%2Fwww.miniplay.com&xdm_c=default3861&xdm_p=1&gd_zone_config=eyJwYXJlbnRVUkwiOiJodHRwczovL3d3dy5taW5pcGxheS5jb20vZ2FtZS9zdXJ2aXZvci1pbyIsInBhcmVudERvbWFpbiI6Im1pbmlwbGF5LmNvbSIsInRvcERvbWFpbiI6Im1pbmlwbGF5LmNvbSIsImhhc0ltcHJlc3Npb24iOmZhbHNlLCJsb2FkZXJFbmFibGVkIjp0cnVlLCJob3N0IjoiaHRtbDUuZ2FtZWRpc3RyaWJ1dGlvbi5jb20iLCJ2ZXJzaW9uIjoiMS41LjE3In0%253D")
 },
 {
     title: "Subway Surfers", 
