@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classes</title>
-    <!-- Preload critical resources -->
+    <!-- Preconnect to origin -->
+    <link rel="preconnect" href="/" crossorigin>
+    <!-- Preload critical resources with priority hints -->
     <link rel="preload" as="image" href="/nav/home.png" fetchpriority="high">
     <link rel="preload" as="image" href="/nav/search.png" fetchpriority="high">
     <link rel="preload" as="image" href="/nav/apps.png" fetchpriority="high">
@@ -174,85 +176,135 @@
     </div>
 
     <script>
-        // Cache DOM elements
+        // Cache DOM elements and initialize variables early
         const iframe = document.getElementById('gframe');
         const gameContainer = document.querySelector('.game_container');
         const loadingOverlay = document.getElementById('loadingOverlay');
+        const cachedGameUrl = localStorage.getItem('loadedG');
 
-        // Initialize game loading system
+        // Initialize game loading system with performance optimizations
         class GameLoader {
             constructor() {
-                this.gameUrl = localStorage.getItem('loadedG');
+                this.gameUrl = cachedGameUrl;
                 this.loadingTimeout = null;
                 this.retryAttempts = 0;
                 this.maxRetries = 3;
                 this.loadStartTime = 0;
+                this.isLoading = false;
+                this.connectionCheckInterval = null;
                 this.initialize();
             }
 
             initialize() {
                 if (!this.gameUrl) return;
 
-                // Set up enhanced error handling and loading management
-                this.setupEventListeners();
-                
-                // Start loading process
-                this.startLoading();
+                // Check for cached game state
+                const cachedState = sessionStorage.getItem('gameLoaded');
+                if (cachedState === 'true') {
+                    this.loadFromCache();
+                } else {
+                    this.setupEventListeners();
+                    this.startLoading();
+                }
+            }
+
+            loadFromCache() {
+                // Attempt to load from browser cache first
+                iframe.src = this.gameUrl;
+                loadingOverlay.style.display = 'none';
             }
 
             setupEventListeners() {
+                // Use passive event listeners for better performance
                 iframe.addEventListener('load', () => this.handleGameLoad(), { passive: true });
                 iframe.addEventListener('error', () => this.handleLoadError(), { passive: true });
+
+                // Add connection status check
+                this.setupConnectionCheck();
+            }
+
+            setupConnectionCheck() {
+                // Check connection status periodically
+                this.connectionCheckInterval = setInterval(() => {
+                    if (navigator.onLine && this.isLoading) {
+                        this.attemptReconnection();
+                    }
+                }, 5000);
+            }
+
+            attemptReconnection() {
+                if (this.retryAttempts < this.maxRetries && !iframe.contentWindow) {
+                    this.reloadGame();
+                }
             }
 
             startLoading() {
+                if (this.isLoading) return;
+                
+                this.isLoading = true;
                 this.loadStartTime = performance.now();
                 
-                // Set up loading timeout with exponential backoff
-                const timeoutDuration = Math.min(15000 * (this.retryAttempts + 1), 30000);
-                this.loadingTimeout = setTimeout(() => this.handleLoadingTimeout(), timeoutDuration);
-
-                // Implement progressive loading
-                this.preloadGame();
+                // Implement progressive loading with connection awareness
+                if (navigator.onLine) {
+                    this.preloadGame();
+                } else {
+                    this.handleOffline();
+                }
             }
 
             preloadGame() {
-                // Create a connection to warm up the server
-                const preloadLink = document.createElement('link');
-                preloadLink.rel = 'preload';
-                preloadLink.as = 'document';
-                preloadLink.href = this.gameUrl;
-                document.head.appendChild(preloadLink);
+                // Create a lightweight preload check
+                const preloadCheck = new Image();
+                preloadCheck.onload = () => {
+                    this.loadGameWithFallback();
+                };
+                preloadCheck.onerror = () => {
+                    this.handleLoadError();
+                };
+                preloadCheck.src = '/nav/home.png'; // Use already cached image as check
+            }
 
-                // Load the game after brief preload
-                setTimeout(() => {
-                    if (!iframe.src || iframe.src === 'about:blank') {
+            loadGameWithFallback() {
+                // Clear any existing timeouts
+                if (this.loadingTimeout) {
+                    clearTimeout(this.loadingTimeout);
+                }
+
+                // Set up loading timeout with exponential backoff
+                const timeoutDuration = Math.min(10000 * Math.pow(1.5, this.retryAttempts), 30000);
+                this.loadingTimeout = setTimeout(() => this.handleLoadingTimeout(), timeoutDuration);
+
+                // Load the game with fallback
+                if (!iframe.src || iframe.src === 'about:blank') {
+                    requestIdleCallback(() => {
                         iframe.src = this.gameUrl;
-                    }
-                }, 50); // Reduced delay for faster loading
+                    }, { timeout: 1000 });
+                }
             }
 
             handleGameLoad() {
+                this.isLoading = false;
                 clearTimeout(this.loadingTimeout);
                 document.title = 'Classes';
                 loadingOverlay.style.display = 'none';
                 
-                // Reset retry counter on successful load
+                // Cache successful load state
                 this.retryAttempts = 0;
-                
-                // Cache the successful load
                 sessionStorage.setItem('gameLoaded', 'true');
+                
+                // Store performance metrics
+                const loadTime = performance.now() - this.loadStartTime;
+                sessionStorage.setItem('lastLoadTime', loadTime.toString());
             }
 
             handleLoadError() {
-                clearTimeout(this.loadingTimeout);
-                
                 if (this.retryAttempts < this.maxRetries) {
                     this.retryAttempts++;
-                    this.startLoading();
+                    // Use exponential backoff for retries
+                    setTimeout(() => this.startLoading(), Math.pow(2, this.retryAttempts) * 1000);
                 } else {
+                    this.isLoading = false;
                     loadingOverlay.style.display = 'none';
-                    console.error('Game failed to load after maximum retries');
                 }
             }
 
@@ -261,29 +313,48 @@
                     this.retryAttempts++;
                     this.reloadGame();
                 } else {
+                    this.isLoading = false;
                     loadingOverlay.style.display = 'none';
-                    console.warn('Game load timed out after maximum retries');
                 }
             }
 
+            handleOffline() {
+                // Cache the loading state and retry when online
+                window.addEventListener('online', () => {
+                    if (this.isLoading) {
+                        this.startLoading();
+                    }
+                }, { passive: true });
+            }
+
             reloadGame() {
+                if (this.isLoading) return;
+                
                 loadingOverlay.style.display = 'flex';
-                const currentSrc = iframe.src;
+                this.isLoading = true;
+                
+                // Clear iframe and reload efficiently
                 iframe.src = 'about:blank';
                 
-                // Use requestAnimationFrame for smoother reload
                 requestAnimationFrame(() => {
-                    if (currentSrc) {
-                        iframe.src = currentSrc;
-                    }
+                    setTimeout(() => {
+                        if (this.gameUrl) {
+                            iframe.src = this.gameUrl;
+                        }
+                    }, 50);
                 });
+            }
+
+            cleanup() {
+                clearInterval(this.connectionCheckInterval);
+                clearTimeout(this.loadingTimeout);
             }
         }
 
         // Initialize the game loader
         const gameLoader = new GameLoader();
 
-        // Keep original functions exactly as they were
+        // Original functions preserved
         function toggleFullScreen() {
             try {
                 if (!document.fullscreenElement) {
@@ -300,14 +371,19 @@
             gameLoader.reloadGame();
         }
 
-        // Keep original keyboard shortcut
+        // Keyboard shortcut with passive event listener
         window.addEventListener('load', () => {
             document.addEventListener('keydown', e => {
                 if (e.ctrlKey && e.key === '.') {
                     window.open('https://classroom.google.com', '_blank');
                 }
-            });
+            }, { passive: true });
         });
+
+        // Cleanup on page unload
+        window.addEventListener('unload', () => {
+            gameLoader.cleanup();
+        }, { passive: true });
     </script>
 </body>
 </html>
