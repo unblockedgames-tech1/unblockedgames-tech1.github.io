@@ -40,9 +40,46 @@ body, html {
     height: 70vh;
     display: flex;
     flex-direction: column;
-    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    position: relative;
+    box-shadow: 
+        0 0 10px rgba(255, 255, 255, 0.5),
+        0 0 20px rgba(255, 255, 255, 0.3),
+        0 0 30px rgba(255, 255, 255, 0.2);
+}
+
+.games-box::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    background: linear-gradient(45deg, 
+        rgba(255,255,255,0.1),
+        rgba(255,255,255,0.5),
+        rgba(255,255,255,0.1)
+    );
+    border-radius: 11px;
+    z-index: -1;
+    animation: borderGlow 4s linear infinite;
+    pointer-events: none;
+}
+
+@keyframes borderGlow {
+    0% {
+        filter: blur(5px);
+        opacity: 0.5;
+    }
+    50% {
+        filter: blur(7px);
+        opacity: 0.7;
+    }
+    100% {
+        filter: blur(5px);
+        opacity: 0.5;
+    }
 }
 
 .games-header {
