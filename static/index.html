@@ -33,7 +33,7 @@ body, html {
 }
 
 .games-box {
-    background: rgba(0, 0, 0, 0.8); /* Darker background */
+    background: rgba(0, 0, 0, 0.95);
     border-radius: 10px;
     width: 80%;
     max-width: 1000px;
@@ -44,34 +44,107 @@ body, html {
     z-index: 1;
 }
 
-/* Edge glow container */
+/* Primary glow effect */
 .games-box::before {
     content: '';
     position: absolute;
-    top: -2px;
-    right: -2px;
-    bottom: -2px;
-    left: -2px;
-    background: white;
-    border-radius: 10px;
-    z-index: -1;
-    box-shadow: 
-        0 0 5px #fff,
-        0 0 10px #fff,
-        0 0 15px #fff;
+    inset: -2px;
+    background: transparent;
+    border-radius: 12px;
+    padding: 2px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+    );
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: glow 8s linear infinite;
 }
 
-/* Inner content container */
+/* Secondary glow effect */
 .games-box::after {
     content: '';
     position: absolute;
-    top: 1px;
-    right: 1px;
-    bottom: 1px;
-    left: 1px;
-    background: #000;
-    border-radius: 9px;
-    z-index: -1;
+    inset: -2px;
+    background: transparent;
+    border-radius: 12px;
+    padding: 2px;
+    background: linear-gradient(
+        180deg,
+        transparent,
+        rgba(255, 255, 255, 0.8),
+        transparent
+    );
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: glow-vertical 6s linear infinite;
+}
+
+/* Corner highlights */
+.games-box-highlight {
+    position: absolute;
+    inset: 0;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+.games-box-highlight::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: 11px;
+    padding: 1px;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255, 255, 255, 0.5),
+        transparent 70%
+    );
+    -webkit-mask: 
+        linear-gradient(#fff 0 0) content-box,
+        linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    animation: rotate 4s linear infinite;
+}
+
+@keyframes glow {
+    0%, 100% {
+        filter: blur(3px) brightness(1);
+        opacity: 0.5;
+    }
+    50% {
+        filter: blur(4px) brightness(1.2);
+        opacity: 0.8;
+    }
+}
+
+@keyframes glow-vertical {
+    0%, 100% {
+        filter: blur(3px) brightness(1);
+        opacity: 0.5;
+    }
+    50% {
+        filter: blur(4px) brightness(1.2);
+        opacity: 0.8;
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 .games-header {
@@ -79,7 +152,7 @@ body, html {
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .site-title {
@@ -132,7 +205,9 @@ body, html {
     overflow-y: auto;
     flex-grow: 1;
     position: relative;
-    z-index: 1;
+    z-index: 2;
+    background: rgba(0, 0, 0, 0.95);
+    border-radius: 0 0 10px 10px;
 }
 
 .games-grid::-webkit-scrollbar {
@@ -235,6 +310,7 @@ body, html {
     
     <div class="container">
         <div class="games-box">
+            <div class="games-box-highlight"></div>
             <div class="games-header">
                 <h1 class="site-title">Void Network</h1>
                 <h2 class="games-title">Games</h2>
