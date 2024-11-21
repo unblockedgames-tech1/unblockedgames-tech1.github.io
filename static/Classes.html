@@ -180,14 +180,27 @@
         
         class GameLoader {
             constructor() {
-                this.gameUrl = localStorage.getItem('loadedG');
+                this.currentGameUrl = null;
                 this.retryAttempts = 0;
                 this.maxRetries = 3;
                 this.initialize();
+                
+                // Listen for messages from the parent window
+                window.addEventListener('message', (event) => {
+                    if (event.data && event.data.type === 'loadGame') {
+                        this.loadNewGame(event.data.gameUrl);
+                    }
+                });
             }
 
             initialize() {
-                if (!this.gameUrl) return;
+                // Get the game URL from the query parameter if it exists
+                const urlParams = new URLSearchParams(window.location.search);
+                const gameUrl = urlParams.get('game');
+                
+                if (gameUrl) {
+                    this.loadNewGame(gameUrl);
+                }
                 
                 // Set up event listeners
                 iframe.addEventListener('load', () => {
@@ -204,21 +217,33 @@
                         loadingOverlay.style.display = 'none';
                     }
                 });
+            }
 
-                // Start loading
+            loadNewGame(gameUrl) {
+                if (!gameUrl) return;
+                
+                // Update URL with the new game parameter
+                const newUrl = new URL(window.location.href);
+                newUrl.searchParams.set('game', gameUrl);
+                window.history.pushState({}, '', newUrl);
+                
+                this.currentGameUrl = gameUrl;
+                loadingOverlay.style.display = 'flex';
                 this.loadGame();
             }
 
             loadGame() {
-                if (this.gameUrl) {
-                    iframe.src = this.gameUrl;
+                if (this.currentGameUrl) {
+                    iframe.src = this.currentGameUrl;
                 }
             }
 
             reloadGame() {
-                loadingOverlay.style.display = 'flex';
-                iframe.src = 'about:blank';
-                setTimeout(() => this.loadGame(), 50);
+                if (this.currentGameUrl) {
+                    loadingOverlay.style.display = 'flex';
+                    iframe.src = 'about:blank';
+                    setTimeout(() => this.loadGame(), 50);
+                }
             }
         }
 
