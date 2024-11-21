@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classes</title>
-    <!-- Preload critical resources -->
     <link rel="preload" as="image" href="/nav/home.png" fetchpriority="high">
     <link rel="preload" as="image" href="/nav/search.png" fetchpriority="high">
     <link rel="preload" as="image" href="/nav/apps.png" fetchpriority="high">
@@ -180,15 +179,24 @@
         
         class GameLoader {
             constructor() {
-                this.gameUrl = localStorage.getItem('loadedG');
                 this.retryAttempts = 0;
                 this.maxRetries = 3;
                 this.initialize();
             }
 
             initialize() {
-                if (!this.gameUrl) return;
+                // Get game URL from query parameter
+                const urlParams = new URLSearchParams(window.location.search);
+                const gameUrl = urlParams.get('game');
                 
+                if (gameUrl) {
+                    this.loadGame(decodeURIComponent(gameUrl));
+                } else {
+                    // If no game URL provided, redirect back to game selection
+                    window.location.href = '/';
+                    return;
+                }
+
                 // Set up event listeners
                 iframe.addEventListener('load', () => {
                     document.title = 'Classes';
@@ -199,26 +207,27 @@
                 iframe.addEventListener('error', () => {
                     if (this.retryAttempts < this.maxRetries) {
                         this.retryAttempts++;
-                        setTimeout(() => this.loadGame(), 1000);
+                        setTimeout(() => this.loadGame(decodeURIComponent(gameUrl)), 1000);
                     } else {
                         loadingOverlay.style.display = 'none';
                     }
                 });
-
-                // Start loading
-                this.loadGame();
             }
 
-            loadGame() {
-                if (this.gameUrl) {
-                    iframe.src = this.gameUrl;
-                }
+            loadGame(url) {
+                if (!url) return;
+                loadingOverlay.style.display = 'flex';
+                iframe.src = url;
             }
 
             reloadGame() {
-                loadingOverlay.style.display = 'flex';
-                iframe.src = 'about:blank';
-                setTimeout(() => this.loadGame(), 50);
+                const urlParams = new URLSearchParams(window.location.search);
+                const gameUrl = urlParams.get('game');
+                if (gameUrl) {
+                    loadingOverlay.style.display = 'flex';
+                    iframe.src = 'about:blank';
+                    setTimeout(() => this.loadGame(decodeURIComponent(gameUrl)), 50);
+                }
             }
         }
 
@@ -242,13 +251,20 @@
         }
 
         // Keyboard shortcut
-        window.addEventListener('load', () => {
-            document.addEventListener('keydown', e => {
-                if (e.ctrlKey && e.key === '.') {
-                    window.open('https://classroom.google.com', '_blank');
-                }
-            });
-        });a
+        document.addEventListener('keydown', e => {
+            if (e.ctrlKey && e.key === '.') {
+                window.open('https://classroom.google.com', '_blank');
+            }
+        });
+
+        // Placeholder functions for other buttons
+        function toggleFlashlight() {
+            // Implement flashlight functionality if needed
+        }
+
+        function toggleChat() {
+            // Implement chat functionality if needed
+        }
     </script>
 </body>
 </html>
