@@ -548,7 +548,7 @@ const gamesData = [
 {
     title: "Stick Man Hook", 
     imgSrc: "https://lh7-us.googleusercontent.com/p1cpa6x0ie3KK2nP6lPYZPJl6w-WF-3J2iwx5uV3rr9RRbti0ze3UBusOLp6KwUs99P5NQQ6kNxGGZDxpnP68HVu94UhjUDY7vdQJzxgzKa3cZOt-6HlzWujgCh5NaR_GnJCde51WaPmkNsp1-gnCary0fMZlQ",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://stick-man-hook.github.io/file/")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://g.immortal2willlose.xyz/ghost/stickman-hook/")
 },
 {
     title: "Papa's Pizzeria", 
