@@ -1,174 +1,177 @@
 <!DOCTYPE html>
-<html>
-<head>
-     crossorigin="anonymous"></script>
-<script>document.addEventListener('keydown', e => { if (e.ctrlKey && e.key === '.') window.open('https://classroom.google.com', '_blank'); });</script>
 <html lang="en">
-<style>body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden;background:#000}.overlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#000 0,#1a1a1a 100%);display:flex;justify-content:center;align-items:center;z-index:999999;transition:opacity 1s ease-in-out}.loading-container{text-align:center;color:#fff}.logo{width:200px;height:200px;margin-bottom:30px;opacity:0;animation:fadeIn 1s ease-in-out forwards}.logo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.2)}.loading-text{font-size:1.5rem;text-align:center;color:#fff;margin-bottom:10px;letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:slideIn 2s ease-in-out forwards}.progress-bar{width:200px;height:2px;background:#1a1a1a;margin:20px auto;position:relative;border-radius:15px;overflow:hidden}.progress-fill{height:100%;width:0;background:#fff;position:absolute;transition:width .1s linear}.dots::after{content:'';animation:dotAnimation 2s infinite}@keyframes dotAnimation{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}@keyframes slideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.fade-out{opacity:0;pointer-events:none}</style>
-<script src="/assets/js/favicon-handler.js"></script>
-<script src="/assets/js/ads.js"></script>
-<script src="/assets/js/onload.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/config.js"></script>
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <script src="/global.js"></script>
+    <script src="uv/uv.bundle.js"></script>
+    <script src="uv/uv.config.js"></script>
 
 <style>
-    #particles-js {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-        pointer-events: none;
-    }
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow-x: hidden;
+}
 
-    .container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        padding: 0;
-        margin: 0;
-    }
+#particles-js {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+}
 
-    .iframe-section {
-        width: 95%;
-        max-width: 1200px;
-        height: 80%;
-        display: flex;
-        flex-direction: column;
-        position: relative;
-    }
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem;
+    position: relative;
+    z-index: 1;
+}
 
-    iframe {
-        flex: 1;
-        border: none;
-        border-radius: 15px;
-    }
+.games-box {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 800px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
 
-    @media (max-width: 800px) {
-        .iframe-section {
-            height: auto;
-            padding-bottom: 75%;
-        }
+.site-title {
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 0.5rem;
+    background: linear-gradient(45deg, #fff, #a0a0a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
 
-        iframe {
-            height: 100%;
-        }
-    }
+.games-title {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
 
-    .title {
-        font-size: 1.5rem;
-        text-align: center;
-        color: #fff;
-        margin-bottom: 10px;
-        position: relative;
-        animation: slideIn 2s ease-in-out forwards;
-        opacity: 0;
-    }
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 1rem;
+    max-height: 60vh;
+    overflow-y: auto;
+}
 
-    @keyframes slideIn {
-        0% {
-            transform: translateY(-50px);
-            opacity: 0;
-        }
-        100% {
-            transform: translateY(0);
-            opacity: 1;
-        }
-    }
+.games-grid::-webkit-scrollbar {
+    width: 8px;
+}
 
-    .flex-container {
-        display: flex;
-        position: relative;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 20px;
-        padding: 5rem;
-    }
+.games-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
 
-    .game {
-        border-radius: 30rem;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease-in-out;
-        cursor: pointer;
-    }
+.games-grid::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
 
-    .game:hover {
-        transform: scale(1.05);
-    }
+.game-item {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
 
-    .game-image {
-        width: 16vw;
-        height: 16vw;
-        border-radius: 2rem;
-        object-fit: cover;
-        transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
-        box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
-        animation: subtle-pulse 4s infinite;
-        animation-delay: 1s;
-    }
+.game-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
 
-    .game-info {
-        padding: 10px;
-        text-align: center;
-        background-color: #555555;
-        border-radius: 30px;
-        z-index: 11;
-    }
+.game-title {
+    font-size: 1rem;
+    color: #fff;
+    margin: 0;
+    font-weight: normal;
+    transition: all 0.3s ease;
+}
 
-    .game-title {
-        font-size: 20px;
-        margin-bottom: 10px;
-        color: #fff;
-    }
+.game-item:hover .game-title {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
 
-    .play-button {
-        background-color: #555555;
-        color: #fff;
-        padding: 10px 20px;
-        border-radius: 20px;
-        text-decoration: none;
-        transition: background-color 0.3s ease-in-out;
-        z-index: 12;
-        cursor: pointer;
-        display: inline-block;
-    }
+#searchGames {
+    width: 100%;
+    max-width: 400px;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-    .play-button:hover {
-        background-color: #454545;
-        box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-    }
+#searchGames:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
 
-    @keyframes subtle-pulse {
-        0% { transform: scale(1); }
-        50% { transform: scale(1.01); }
-        100% { transform: scale(1); }
-    }
+#searchGames::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
 
-    .random-game-button {
-        padding: 10px;
-        border-radius: 10px;
-        border: 2px solid #555555;
-        background: transparent;
-        color: white;
-        font-size: 1.2em;
-        margin: 20px;
-        width: 300px;
+@media (max-width: 600px) {
+    .games-box {
+        padding: 1rem;
     }
+    
+    .site-title {
+        font-size: 2rem;
+    }
+    
+    .games-title {
+        font-size: 1.2rem;
+    }
+    
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    }
+}
 </style>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<script src="/config.js"></script>
-<link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
-<link rel="stylesheet" href="/assets/css/styles.css">
-<link rel="stylesheet" href="/assets/css/index.css">
-<script src="/global.js"></script>
-
-<script src="uv/uv.bundle.js"></script>
-<script src="uv/uv.config.js"></script>
 <script>
     const stockSW = "/uv/sw.js";
     const swAllowedHostnames = ["localhost", "127.0.0.1"];
@@ -185,13 +188,6 @@
 </head>
 
 <body>
-    <h1> </h1>
-    <h1> </h1>
-    <div style="text-align: center;">
-        <input class="random-game-button" placeholder="Search for a game!" id="searchGames">
-        <button class="random-game-button" id="randomGameBtn">Random Game</button>
-    </div>
-
     <script>
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -207,8 +203,17 @@
     </noscript>
 
     <div id="header"></div>
+    
+    <div class="container">
+        <div class="games-box">
+            <h1 class="site-title">Void Network</h1>
+            <h2 class="games-title">Games</h2>
+            <input type="text" id="searchGames" placeholder="Search games...">
+            <div class="games-grid" id="gamesList"></div>
+        </div>
+    </div>
+
     <div id="footer"></div>
-    <div class="flex-container" id="gamesList"></div>
 
     <script>
         loadHTML("/assets/html/header.html", "header");
@@ -218,8 +223,7 @@
     <script type="module">
         try {
             const gamesList = document.getElementById("gamesList");
-            console.log("Found games list element:", gamesList);
-
+            
             await new Promise(resolve => {
                 if (window.__uv$config) {
                     resolve();
@@ -240,34 +244,14 @@
 
             function loadGame(game) {
                 const gameElement = document.createElement("div");
-                gameElement.className = "game";
-
-                const imgElement = document.createElement("img");
-                imgElement.src = game.imgSrc;
-                imgElement.alt = game.title;
-                imgElement.className = "game-image";
-
-                const titleElement = document.createElement("div");
-                titleElement.className = "game-info";
-                titleElement.innerHTML = `
-                    <h2 class="game-title">${game.title}</h2>
-                    <a href="javascript:void(0)" class="play-button" onclick="(function(e) {
-                        e.stopPropagation();
-                        window.location.href = '/Classes.html?game=${encodeURIComponent(game.link)}';
-                    })(event)">Play</a>
-                `;
-
-                gameElement.appendChild(imgElement);
-                gameElement.appendChild(titleElement);
-
+                gameElement.className = "game-item";
+                gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;
                 gameElement.onclick = () => {
                     window.location.href = `/Classes.html?game=${encodeURIComponent(game.link)}`;
                 };
-
                 gamesList.appendChild(gameElement);
             }
 
-            console.log("Starting to load games...");
             if (Array.isArray(games)) {
                 games.forEach(game => {
                     loadGame(game);
@@ -286,31 +270,25 @@
                     }
                 }
             });
-
-            document.getElementById("randomGameBtn").addEventListener("click", function() {
-                const randomGame = games[Math.floor(Math.random() * games.length)];
-                window.location.href = `/Classes.html?game=${encodeURIComponent(randomGame.link)}`;
-            });
-
         } catch (error) {
             console.error("Error loading games:", error);
-            document.getElementById("gamesList").innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
+            gamesList.innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
         }
     </script>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
-    authDomain: "void-netwo.firebaseapp.com",
-    projectId: "void-netwo",
-    storageBucket: "void-netwo.firebasestorage.app",
-    messagingSenderId: "962565650058",
-    appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
-  };
+        const firebaseConfig = {
+            apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
+            authDomain: "void-netwo.firebaseapp.com",
+            projectId: "void-netwo",
+            storageBucket: "void-netwo.firebasestorage.app",
+            messagingSenderId: "962565650058",
+            appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
+        };
 
-  const app = initializeApp(firebaseConfig);
-</script>
+        const app = initializeApp(firebaseConfig);
+    </script>
 </body>
 </html>
