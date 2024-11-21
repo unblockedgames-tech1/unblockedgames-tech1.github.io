@@ -473,7 +473,7 @@ const gamesData = [
 {
     title: "PokeRogue", 
     imgSrc: "https://lh7-us.googleusercontent.com/EO6IQPt2BjmQUAfEJRveuF1rVXvNp6SW5c0xME3_kbA6U-v9JJ63OWKarSMv7DHfUzQ7Il6lRwge-BTlAvPsfPb-Y-F9Jc4RbzvhJRAH3BqPihfo95T4WpaJSIinkaCFP9UDDfsIe8uL6-7tpqRA8ix6yxr-XA",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://pokerogue.net")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://playpokerogue.com/play/")
 },
 {
     title: "Plants VS Zombies", 
@@ -503,7 +503,7 @@ const gamesData = [
 {
     title: "Cannon Balls 3D", 
     imgSrc: "https://lh7-us.googleusercontent.com/JVoSv7MAeIBWYVblhbvFDEnlIn74qiVsmF-EJpQ07eCSr8H3XG7wX1CF7Xv9Y0o5roHvZ8l0TSz8kfuUQGsDJEiuC2e9ye4Uzkzk_LUewTddYFWHahQXpTEzNy6ajHitgTTPlKAbWXTEAmxsaG5QCCF7qFFyQw",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://play.famobi.com/cannon-balls-3d")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://cannonballs3d.h5games.usercontent.goog/v/004m7ejm69rs0/?origin=https%3A%2F%2Fgamesnacks.com&gameCenterId=gamesnacks&userActivityMetrics=true&eids=95322736%2C95336219%2C95344323&features=GameRendering__support_offline_feature%2CInterstitialFreqCap__block_pga_1m_interstitials%2CInterstitialFreqCap__freq_cap_60s%2CMonetization__populate_google_global_correlator#pc=3100681022882577&preStart=1732155158524")
 },
 {
     title: "Words of Wonders", 
