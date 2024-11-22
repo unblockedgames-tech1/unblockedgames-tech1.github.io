@@ -118,7 +118,6 @@
             to { transform: rotate(360deg); }
         }
     </style>
-    <meta http-equiv="Content-Security-Policy" content="frame-src 'self' https://example-games.com;">
 </head>
 <body>
     <header class="header">
@@ -145,6 +144,12 @@
             <button onclick="reloadGame()">
                 <img src="/nav/reload.png" alt="Reload">
             </button>
+            <button onclick="toggleFlashlight()">
+                <img src="/nav/flash.png" alt="Flashlight">
+            </button>
+            <button onclick="toggleChat()">
+                <img src="/nav/chat_icon.png" alt="Chat">
+            </button>
         </div>
     </div>
 
@@ -155,13 +160,11 @@
         window.addEventListener('load', () => {
             const urlParams = new URLSearchParams(window.location.search);
             const gameUrl = urlParams.get('game');
-
-            if (gameUrl && gameUrl.startsWith('http')) {
+            if (gameUrl) {
                 iframe.src = decodeURIComponent(gameUrl);
                 iframe.onload = () => loadingOverlay.style.display = 'none';
             } else {
-                console.error("Invalid game URL:", gameUrl);
-                loadingOverlay.style.display = 'none';
+                window.location.href = '/';
             }
         });
 
@@ -174,18 +177,12 @@
         }
 
         function reloadGame() {
-            iframe.src = iframe.src; // Reload iframe
+            iframe.src += '';
             loadingOverlay.style.display = 'flex';
         }
 
-        // Register Service Worker
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('/service-worker.js').then(() => {
-                console.log("Service Worker registered successfully.");
-            }).catch((err) => {
-                console.error("Service Worker registration failed:", err);
-            });
-        }
+        function toggleFlashlight() {}
+        function toggleChat() {}
     </script>
 </body>
 </html>
