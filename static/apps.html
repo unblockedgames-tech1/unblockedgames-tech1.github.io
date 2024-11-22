@@ -1,3 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<style id="loading-style">body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden}#loadingOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#000 0,#1a1a1a 100%);display:flex;justify-content:center;align-items:center;z-index:999999;transition:opacity 1s ease-in-out}#loadingContainer{text-align:center;color:#fff}#loadingLogo{width:200px;height:200px;margin-bottom:30px;opacity:0;animation:fadeIn 1s ease-in-out forwards}#loadingLogo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.2)}#loadingText{font-size:1.5rem;text-align:center;color:#fff;margin-bottom:10px;letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:slideIn 2s ease-in-out forwards}#loadingBar{width:200px;height:2px;background:#1a1a1a;margin:20px auto;position:relative;border-radius:15px;overflow:hidden}#progressFill{height:100%;width:0;background:#fff;position:absolute;transition:width .1s linear}.dots::after{content:'';animation:dotAnimation 2s infinite}@keyframes dotAnimation{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}@keyframes slideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.fade-out{opacity:0;pointer-events:none}</style>
+<div id="loadingOverlay">
+    <div id="loadingContainer">
+        <div id="loadingLogo">
+            <img src="https://lh7-us.googleusercontent.com/0ff1xEpXSGBfNtZuo4lHxeWmUza2nr6xF-lTTQIyHPNry153eN869FgqSFV6CZQc6Hhq1lzMFO-nV-4MKsnmvT_8KYM2weE3LB7wjl3DPfAxAqEeM0TKzis1zb9ATbcPFm3ZoVySKuT1fs5kLzcG4q9gXLS9JA" alt="Logo">
+        </div>
+        <div id="loadingText">Loading<span class="dots"></span></div>
+        <div id="loadingBar"><div id="progressFill"></div></div>
+    </div>
+</div>
+<script>!function(){let e=0,t=performance.now(),n=0,o=60;const a=document.getElementById("progressFill"),i=document.getElementById("loadingOverlay"),d=()=>{n++;const a=performance.now();a-t>=1e3&&(o=n,n=0,t=a),requestAnimationFrame(d)};requestAnimationFrame(d);const r=.3,s=()=>{if(e<100){const t=60/Math.max(o,30);e+=r*t,a.style.width=`${Math.min(e,100)}%`,requestAnimationFrame(s)}};requestAnimationFrame(s),setTimeout(()=>{i.classList.add("fade-out")},Math.max(3e3,5e3*(30/o))),i.addEventListener("transitionend",function(){this.classList.contains("fade-out")&&(i.remove(),document.getElementById("loading-style").remove())})}();</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="/config.js"></script>
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
+    <link rel="stylesheet" href="/assets/css/styles.css">
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <script src="/global.js"></script>
+    <script src="uv/uv.bundle.js"></script>
+    <script src="uv/uv.config.js"></script>
+
+<style>
 body, html {
     margin: 0;
     padding: 0;
@@ -202,3 +227,174 @@ body, html {
         font-size: 2rem;
     }
 }
+</style>
+</head>
+<body>
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PZXRTFX5');
+    </script>
+
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
+            height="0" width="0" style="display:none;visibility:hidden">
+        </iframe>
+    </noscript>
+
+    <div class="stars"></div>
+    <div id="header"></div>
+    
+    <div class="container">
+        <div class="games-box">
+            <div class="games-header">
+                <h1 class="site-title">Void Network</h1>
+                <h2 class="games-title">Apps</h2>
+                <input type="text" id="searchApps" placeholder="Search apps...">
+            </div>
+            <div class="games-grid" id="gamesList"></div>
+        </div>
+    </div>
+
+    <div id="footer"></div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 2;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                const duration = 20 + Math.random() * 20;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `${Math.random() * duration}s`;
+                star.style.opacity = Math.random() * 0.8 + 0.2;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading ${url}:`, error);
+            }
+        }
+
+        const stockSW = "/uv/sw.js";
+        const swAllowedHostnames = ["localhost", "127.0.0.1"];
+        
+        async function registerSW() {
+            if (!navigator.serviceWorker) {
+                if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
+                    throw new Error("Service workers cannot be registered without https.");
+                throw new Error("Your browser doesn't support service workers.");
+            }
+            await navigator.serviceWorker.register(stockSW);
+        }
+
+        function renderAppsList() {
+            const gamesList = document.getElementById("gamesList");
+            const defaultApps = [
+                {
+                    title: "Netflix",
+                    link: "https://netflix.com"
+                }
+                // Add more apps here as needed
+            ];
+            
+            if (!gamesList) return;
+            
+            gamesList.innerHTML = '';
+            
+            defaultApps.forEach(app => {
+                const appElement = document.createElement("div");
+                appElement.className = "game-item";
+
+                const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(app.link);
+                
+                appElement.innerHTML = `<h3 class="game-title">${app.title}</h3>`;
+                appElement.onclick = () => {
+                    window.location.href = `/Classes.html?game=${encodeURIComponent(encodedUrl)}`;
+                };
+
+                gamesList.appendChild(appElement);
+            });
+        }
+
+        document.getElementById("searchApps").addEventListener("keyup", function(e) {
+            const gamesList = document.getElementById("gamesList");
+            const searchTerm = this.value.toLowerCase();
+            const defaultApps = [
+                {
+                    title: "Netflix",
+                    link: "https://netflix.com"
+                }
+                // Add more apps here as needed
+            ];
+
+gamesList.innerHTML = '';
+            
+            defaultApps.forEach(app => {
+                if (app.title.toLowerCase().includes(searchTerm)) {
+                    const appElement = document.createElement("div");
+                    appElement.className = "game-item";
+
+                    const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(app.link);
+                    
+                    appElement.innerHTML = `<h3 class="game-title">${app.title}</h3>`;
+                    appElement.onclick = () => {
+                        window.location.href = `/Classes.html?game=${encodeURIComponent(encodedUrl)}`;
+                    };
+
+                    gamesList.appendChild(appElement);
+                }
+            });
+        });
+
+        window.addEventListener('load', () => {
+            createStars();
+            renderAppsList();
+        });
+
+        document.addEventListener("DOMContentLoaded", async () => {
+            try {
+                await registerSW();
+                await Promise.all([
+                    loadHTML("/assets/html/header.html", "header"),
+                    loadHTML("/assets/html/footer.html", "footer")
+                ]);
+            } catch (error) {
+                console.error("Initialization error:", error);
+            }
+        });
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
+            authDomain: "void-netwo.firebaseapp.com",
+            projectId: "void-netwo",
+            storageBucket: "void-netwo.firebasestorage.app",
+            messagingSenderId: "962565650058",
+            appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
+</body>
+</html>
