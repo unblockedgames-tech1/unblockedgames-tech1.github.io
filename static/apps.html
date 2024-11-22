@@ -337,25 +337,25 @@ body, html {
                     {title: "Disney Plus", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.disneyplus.com/welcome/stream")}
       ];
 
-        localStorage.setItem("apps", JSON.stringify(defaultApps));
-        defaultApps.forEach(game => loadGame(game));
+            localStorage.setItem("apps", JSON.stringify(defaultApps));
+            defaultApps.forEach(game => loadGame(game));
 
-        document.getElementById("searchGames").addEventListener("keyup", function(e) {
-            const searchTerm = this.value.toLowerCase();
+            document.getElementById("searchGames").addEventListener("keyup", function(e) {
+                const searchTerm = this.value.toLowerCase();
+                const gamesList = document.getElementById("gamesList");
+                gamesList.innerHTML = '';
+                defaultApps.filter(game => game.title.toLowerCase().includes(searchTerm))
+                        .forEach(game => loadGame(game));
+            });
+
+        } catch (error) {
+            console.error("Initialization error:", error);
             const gamesList = document.getElementById("gamesList");
-            gamesList.innerHTML = '';
-            defaultApps.filter(game => game.title.toLowerCase().includes(searchTerm))
-                    .forEach(game => loadGame(game));
-        });
-
-    } catch (error) {
-        console.error("Initialization error:", error);
-        const gamesList = document.getElementById("gamesList");
-        if (gamesList) {
-            gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;
+            if (gamesList) {
+                gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;
+            }
         }
-    }
-});
+    });
 </script>
 
 <script type="module">
@@ -372,5 +372,3 @@ body, html {
 
     const app = initializeApp(firebaseConfig);
 </script>
-</body>
-</html>
