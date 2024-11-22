@@ -252,13 +252,13 @@ body, html {
     <script>
         function createStars() {
             const starsContainer = document.querySelector('.stars');
-            const numberOfStars = 200;
+            const numberOfStars = 500;
 
             for (let i = 0; i < numberOfStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
                 
-                const size = Math.random() * 2;
+                const size = Math.random() * 5;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
                 star.style.left = `${Math.random() * 100}%`;
