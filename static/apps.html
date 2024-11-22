@@ -314,37 +314,6 @@
                 };
                 gamesList.appendChild(gameElement);
             }
-
-        // Function to render games list
-        function renderGamesList() {
-            const gamesList = document.getElementById("gamesList");
-            const gamesData = JSON.parse(localStorage.getItem("apps"));
-            
-            if (!gamesList || !gamesData) return;
-
-            gamesList.innerHTML = ''; // Clear existing content
-            
-            gamesData.forEach(game => {
-                const gameElement = document.createElement("div");
-                gameElement.className = "game";
-
-                const imgElement = document.createElement("img");
-                imgElement.src = game.imgSrc;
-                imgElement.alt = game.title;
-                imgElement.className = "game-image";
-
-                const titleElement = document.createElement("div");
-                titleElement.className = "game-info";
-                titleElement.innerHTML = `
-                    <h2 class="game-title">${game.title}</h2>
-                    <a href="javascript:void(0)" class="play-button" onclick="(function(e) {
-                        e.stopPropagation();
-                        localStorage.setItem('loadedG', '${game.link}');
-                        location.href = '/Classes.html';
-                        return false;
-                    })(event)">Use</a>
-                `;
-
                 gameElement.appendChild(imgElement);
                 gameElement.appendChild(titleElement);
 
