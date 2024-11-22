@@ -240,20 +240,18 @@ body, html {
 
     <div id="footer"></div>
 
-    <script>
-        // Functions
-        async function registerSW() {
-            const stockSW = "/uv/sw.js";
-            const swAllowedHostnames = ["localhost", "127.0.0.1"];
-            if (!navigator.serviceWorker) {
-                if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
-                    throw new Error("Service workers cannot be registered without https.");
-                throw new Error("Your browser doesn't support service workers.");
-            }
-            await navigator.serviceWorker.register(stockSW);
-        }
-
 <script>
+    async function registerSW() {
+        const stockSW = "/uv/sw.js";
+        const swAllowedHostnames = ["localhost", "127.0.0.1"];
+        if (!navigator.serviceWorker) {
+            if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
+                throw new Error("Service workers cannot be registered without https.");
+            throw new Error("Your browser doesn't support service workers.");
+        }
+        await navigator.serviceWorker.register(stockSW);
+    }
+
     function createStars() {
         const starsContainer = document.querySelector('.stars');
         const numberOfStars = 200;
@@ -290,7 +288,6 @@ body, html {
         gameElement.className = "game-item";
         gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;
         
-        // Direct redirect without using localStorage
         gameElement.onclick = () => {
             const frame = document.createElement('iframe');
             frame.style.width = '100%';
@@ -309,6 +306,7 @@ body, html {
 
     document.addEventListener("DOMContentLoaded", async function() {
         try {
+            await registerSW();
             createStars();
             await Promise.all([
                 loadHTML("/assets/html/header.html", "header"),
