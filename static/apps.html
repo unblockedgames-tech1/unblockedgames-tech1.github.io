@@ -253,60 +253,67 @@ body, html {
             await navigator.serviceWorker.register(stockSW);
         }
 
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            const numberOfStars = 200;
+<script>
+    function createStars() {
+        const starsContainer = document.querySelector('.stars');
+        const numberOfStars = 200;
 
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 2;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                const duration = 20 + Math.random() * 20;
-                star.style.animationDuration = `${duration}s`;
-                star.style.animationDelay = `${Math.random() * duration}s`;
-                star.style.opacity = Math.random() * 0.8 + 0.2;
-                starsContainer.appendChild(star);
-            }
+        for (let i = 0; i < numberOfStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 2;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            const duration = 20 + Math.random() * 20;
+            star.style.animationDuration = `${duration}s`;
+            star.style.animationDelay = `${Math.random() * duration}s`;
+            star.style.opacity = Math.random() * 0.8 + 0.2;
+            starsContainer.appendChild(star);
         }
+    }
 
-        async function loadHTML(url, elementId) {
-            try {
-                const response = await fetch(url);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-            } catch (error) {
-                console.error(`Error loading ${url}:`, error);
-            }
+    async function loadHTML(url, elementId) {
+        try {
+            const response = await fetch(url);
+            const html = await response.text();
+            document.getElementById(elementId).innerHTML = html;
+        } catch (error) {
+            console.error(`Error loading ${url}:`, error);
         }
+    }
 
-        function loadGame(game) {
-            const gamesList = document.getElementById("gamesList");
-            const gameElement = document.createElement("div");
-            gameElement.className = "game-item";
-            gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;
-            gameElement.onclick = () => {
-                localStorage.setItem('loadedG', game.link);
-                location.href = '/Classes.html';
-            };
-            gamesList.appendChild(gameElement);
-        }
+    function loadGame(game) {
+        const gamesList = document.getElementById("gamesList");
+        const gameElement = document.createElement("div");
+        gameElement.className = "game-item";
+        gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;
+        
+        // Direct redirect without using localStorage
+        gameElement.onclick = () => {
+            const frame = document.createElement('iframe');
+            frame.style.width = '100%';
+            frame.style.height = '100%';
+            frame.style.border = 'none';
+            frame.style.position = 'fixed';
+            frame.style.top = '0';
+            frame.style.left = '0';
+            frame.style.zIndex = '999999';
+            frame.src = game.link;
+            document.body.appendChild(frame);
+        };
+        
+        gamesList.appendChild(gameElement);
+    }
 
-        // Start execution when DOM is ready
-        document.addEventListener("DOMContentLoaded", async function() {
-            try {
-                await registerSW();
-                createStars();
-
-                // Load header and footer
-                await Promise.all([
-                    loadHTML("/assets/html/header.html", "header"),
-                    loadHTML("/assets/html/footer.html", "footer")
-                ]);
-
+    document.addEventListener("DOMContentLoaded", async function() {
+        try {
+            createStars();
+            await Promise.all([
+                loadHTML("/assets/html/header.html", "header"),
+                loadHTML("/assets/html/footer.html", "footer")
+            ]);
                 // Define apps
                 const defaultApps = [
                     {title: "Netflix", link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")},
