@@ -282,19 +282,18 @@ body, html {
         }
     }
 
-    function loadGame(game) {
-        const gamesList = document.getElementById("gamesList");
-        const gameElement = document.createElement("div");
-        gameElement.className = "game-item";
-        gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;
-        
-        gameElement.onclick = () => {
-            window.localStorage.setItem('loadedG', game.link);
-            window.location.href = '/Classes.html';
-        };
-        
-        gamesList.appendChild(gameElement);
-    }
+   function loadGame(game) {
+    const gamesList = document.getElementById("gamesList");
+    const gameElement = document.createElement("div");
+    gameElement.className = "game-item";
+    gameElement.innerHTML = <h3 class="game-title">${game.title}</h3>;
+
+    gameElement.onclick = () => {
+        window.location.href = /Classes.html?game=${encodeURIComponent(game.link)};
+    };
+
+    gamesList.appendChild(gameElement);
+}
 
     document.addEventListener("DOMContentLoaded", async function() {
         try {
