@@ -289,16 +289,8 @@ body, html {
         gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;
         
         gameElement.onclick = () => {
-            const frame = document.createElement('iframe');
-            frame.style.width = '100%';
-            frame.style.height = '100%';
-            frame.style.border = 'none';
-            frame.style.position = 'fixed';
-            frame.style.top = '0';
-            frame.style.left = '0';
-            frame.style.zIndex = '999999';
-            frame.src = game.link;
-            document.body.appendChild(frame);
+            window.localStorage.setItem('loadedG', game.link);
+            window.location.href = '/Classes.html';
         };
         
         gamesList.appendChild(gameElement);
