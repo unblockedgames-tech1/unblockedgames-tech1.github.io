@@ -113,6 +113,12 @@
             animation: spin 1s linear infinite;
         }
 
+        .error-message {
+            color: #ff4444;
+            text-align: center;
+            padding: 20px;
+        }
+
         @keyframes spin {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -158,52 +164,99 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const swAllowedHostnames = ['localhost', '127.0.0.1'];
         const stockSW3 = '/uv/sw.js';
+        
+        // Set a timeout for loading
+        const LOADING_TIMEOUT = 15000; // 15 seconds
+        let loadingTimer;
 
+        // Register service worker in the background
         async function registerSWv2() {
-            if (!navigator.serviceWorker) {
+            if (!navigator.serviceWorker) return;
+            try {
                 if (
                     location.protocol !== 'https:' &&
                     !swAllowedHostnames.includes(location.hostname)
-                )
-                    throw new Error(
-                        'Service workers cannot be registered without https.'
-                    );
-                throw new Error("Your browser doesn't support service workers.");
-            }
-            await navigator.serviceWorker.register(stockSW3);
-        }
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            try {
-                await registerSWv2();
+                ) return;
+                
+                await navigator.serviceWorker.register(stockSW3, { scope: '/' });
                 console.log('Service Worker registered successfully');
             } catch (error) {
                 console.error('Service Worker registration failed:', error);
             }
-        });
+        }
 
-        window.addEventListener('load', () => {
+        // Initialize game loading
+        function initializeGame() {
             const urlParams = new URLSearchParams(window.location.search);
             const gameUrl = urlParams.get('game');
-            if (gameUrl) {
-                iframe.src = decodeURIComponent(gameUrl);
-                iframe.onload = () => loadingOverlay.style.display = 'none';
-            } else {
+            
+            if (!gameUrl) {
                 window.location.href = '/';
+                return;
             }
+
+            loadGame(decodeURIComponent(gameUrl));
+        }
+
+        // Load the game with timeout and error handling
+        function loadGame(url) {
+            loadingOverlay.style.display = 'flex';
+            
+            // Set loading timeout
+            loadingTimer = setTimeout(() => {
+                handleLoadError('Game loading timed out. Please try again.');
+            }, LOADING_TIMEOUT);
+
+            // Load the game
+            iframe.onload = () => {
+                clearTimeout(loadingTimer);
+                loadingOverlay.style.display = 'none';
+            };
+
+            iframe.onerror = () => {
+                handleLoadError('Failed to load the game. Please try again.');
+            };
+
+            iframe.src = url;
+        }
+
+        // Handle loading errors
+        function handleLoadError(message) {
+            clearTimeout(loadingTimer);
+            loadingOverlay.innerHTML = `<div class="error-message">${message}</div>`;
+            setTimeout(() => {
+                loadingOverlay.style.display = 'none';
+            }, 3000);
+        }
+
+        // Initialize everything
+        document.addEventListener('DOMContentLoaded', () => {
+            // Register service worker in the background
+            registerSWv2();
+            
+            // Initialize game immediately
+            initializeGame();
         });
 
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
-                document.documentElement.requestFullscreen();
+                document.documentElement.requestFullscreen().catch(err => {
+                    console.error('Failed to enter fullscreen:', err);
+                });
             } else {
-                document.exitFullscreen();
+                document.exitFullscreen().catch(err => {
+                    console.error('Failed to exit fullscreen:', err);
+                });
             }
         }
 
         function reloadGame() {
-            iframe.src += '';
+            const currentSrc = iframe.src;
+            iframe.src = '';
             loadingOverlay.style.display = 'flex';
+            setTimeout(() => {
+                loadGame(currentSrc);
+            }, 100);
         }
 
         function toggleFlashlight() {}
