@@ -34,12 +34,8 @@ body, html {
 }
 
 @keyframes moveStar {
-    from {
-        transform: translateY(0);
-    }
-    to {
-        transform: translateY(100vh);
-    }
+    from { transform: translateY(0); }
+    to { transform: translateY(100vh); }
 }
 
 .star {
@@ -66,8 +62,8 @@ body, html {
     background: #000;
     border-radius: 10px;
     width: 80%;
-    max-width: 1200px;
-    height: 80vh;
+    max-width: 1000px;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -147,13 +143,43 @@ body, html {
 
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
     padding: 1.5rem;
     overflow-y: auto;
     flex-grow: 1;
     position: relative;
     z-index: 1;
+}
+
+.game-item {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.game-title {
+    font-size: 1rem;
+    color: #fff;
+    margin: 0;
+    font-weight: normal;
+    transition: all 0.3s ease;
+}
+
+.game-item:hover .game-title {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
 .games-grid::-webkit-scrollbar {
@@ -175,66 +201,19 @@ body, html {
     background: rgba(255, 255, 255, 0.3);
 }
 
-.game {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    overflow: hidden;
-    transition: transform 0.3s ease-in-out;
-    cursor: pointer;
-}
-
-.game:hover {
-    transform: translateY(-5px);
-}
-
-.game-image {
-    width: 100%;
-    height: 150px;
-    object-fit: cover;
-    border-radius: 15px 15px 0 0;
-}
-
-.game-info {
-    padding: 1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 0 0 15px 15px;
-}
-
-.game-title {
-    font-size: 1rem;
-    color: #fff;
-    margin: 0;
-    text-align: center;
-}
-
-.play-button {
-    display: block;
-    width: 80%;
-    margin: 0.5rem auto 0;
-    padding: 0.5rem;
-    background: rgba(255, 255, 255, 0.2);
-    border: none;
-    border-radius: 20px;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    transition: background 0.3s ease;
-}
-
-.play-button:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
-
 @media (max-width: 768px) {
     .games-box {
         width: 95%;
-        height: 85vh;
+        height: 80vh;
     }
     
     .games-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-        gap: 1rem;
         padding: 1rem;
+    }
+    
+    .site-title {
+        font-size: 2rem;
     }
 }
 </style>
@@ -273,7 +252,6 @@ body, html {
     <div id="footer"></div>
 
     <script>
-        // Stars background
         function createStars() {
             const starsContainer = document.querySelector('.stars');
             const numberOfStars = 200;
@@ -281,25 +259,19 @@ body, html {
             for (let i = 0; i < numberOfStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                
                 const size = Math.random() * 2;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
-                
                 star.style.left = `${Math.random() * 100}%`;
                 star.style.top = `${Math.random() * 100}%`;
-                
                 const duration = 20 + Math.random() * 20;
                 star.style.animationDuration = `${duration}s`;
                 star.style.animationDelay = `${Math.random() * duration}s`;
-                
                 star.style.opacity = Math.random() * 0.8 + 0.2;
-                
                 starsContainer.appendChild(star);
             }
         }
 
-        // Initialize everything
         document.addEventListener("DOMContentLoaded", async function() {
             try {
                 createStars();
@@ -307,7 +279,7 @@ body, html {
                     loadHTML("/assets/html/header.html", "header"),
                     loadHTML("/assets/html/footer.html", "footer")
                 ]);
-                
+
                 const defaultApps = [
                     {title: "Netflix", link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")},
                     {title: "Hulu", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")},
