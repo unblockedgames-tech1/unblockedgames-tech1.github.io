@@ -1,374 +1,376 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/assets/js/favicon-handler.js"></script>
-    <script src="uv/uv.bundle.js"></script>
-    <script src="uv/uv.config.js"></script>
-    <script src="/config.js"></script>
-    <script src="/global.js"></script>
-    <link rel="stylesheet" href="/assets/css/styles.css">
-
-    <style>
-        body, html {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background: #000;
-            color: #fff;
-            font-family: Arial, sans-serif;
-            overflow: hidden;
-        }
-
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        @keyframes moveStar {
-            from {
-                transform: translateY(0);
-            }
-            to {
-                transform: translateY(100vh);
-            }
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #fff;
-            border-radius: 50%;
-            animation: moveStar linear infinite;
-        }
-
-        .container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            padding: 1rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .games-box {
-            background: #000;
-            border-radius: 10px;
-            width: 80%;
-            max-width: 1000px;
-            height: 70vh;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-            padding: 2px;
-            box-shadow: 
-                0 0 2px #fff,
-                0 0 4px #fff,
-                0 0 6px #fff,
-                0 0 8px #fff,
-                inset 0 0 2px rgba(255, 255, 255, 0.2);
-        }
-
-        .games-box::before {
-            content: '';
-            position: absolute;
-            inset: -1px;
-            background: #fff;
-            border-radius: 10px;
-            z-index: -1;
-            box-shadow: 
-                0 0 15px #fff,
-                0 0 30px rgba(255, 255, 255, 0.8),
-                0 0 40px rgba(255, 255, 255, 0.6),
-                0 0 50px rgba(255, 255, 255, 0.4);
-            opacity: 0.5;
-        }
-
-        .games-header {
-            padding: 1.5rem;
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            position: relative;
-            z-index: 1;
-        }
-
-        .site-title {
-            font-size: 2.5rem;
-            margin: 0 0 0.5rem 0;
-            background: linear-gradient(45deg, #fff, #a0a0a0);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            font-weight: bold;
-        }
-
-        .games-title {
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        #searchGames {
-            width: 80%;
-            max-width: 400px;
-            padding: 0.8rem 1.5rem;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 25px;
-            background: rgba(255, 255, 255, 0.05);
-            color: #fff;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            margin: 1rem auto 0 auto;
-            display: block;
-        }
-
-        #searchGames:focus {
-            outline: none;
-            background: rgba(255, 255, 255, 0.1);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        #searchGames::placeholder {
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-            gap: 1rem;
-            padding: 1.5rem;
-            overflow-y: auto;
-            flex-grow: 1;
-            position: relative;
-            z-index: 1;
-        }
-
-        .games-grid::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        .games-grid::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.05);
-            margin: 4px;
-            border-radius: 4px;
-        }
-
-        .games-grid::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 4px;
-        }
-
-        .games-grid::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .game-item {
-            padding: 1rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .game-item:hover {
-            background: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .game-title {
-            font-size: 1rem;
-            color: #fff;
-            margin: 0;
-            font-weight: normal;
-            transition: all 0.3s ease;
-        }
-
-        .game-item:hover .game-title {
-            color: #fff;
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-        }
-
-        @media (max-width: 768px) {
-            .games-box {
-                width: 95%;
-                height: 80vh;
-            }
-
-            .games-grid {
-                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-                padding: 1rem;
-            }
-
-            .site-title {
-                font-size: 2rem;
-            }
-        }
-    </style>
-</head>
-
-<body>
-    <div class="stars"></div>
-    
-    <div id="header"></div>
-    
-    <div class="container">
-        <div class="games-box">
-            <div class="games-header">
-                <h1 class="site-title">Void Network</h1>
-                <h2 class="games-title">Apps</h2>
-                <input type="text" id="searchGames" placeholder="Search apps...">
-            </div>
-            <div class="games-grid" id="gamesList"></div>
-        </div>
-    </div>
-
-    <div id="footer"></div>
-
-    <script>
-        async function registerSW() {
-            const stockSW = "/uv/sw.js";
-            const swAllowedHostnames = ["localhost", "127.0.0.1"];
-            if (!navigator.serviceWorker) {
-                if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
-                    throw new Error("Service workers cannot be registered without https.");
-                throw new Error("Your browser doesn't support service workers.");
-            }
-            await navigator.serviceWorker.register(stockSW);
-        }
-
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            const numberOfStars = 200;
-
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 2;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                const duration = 20 + Math.random() * 20;
-                star.style.animationDuration = `${duration}s`;
-                star.style.animationDelay = `${Math.random() * duration}s`;
-                star.style.opacity = Math.random() * 0.8 + 0.2;
-                starsContainer.appendChild(star);
-            }
-        }
-
-        async function loadHTML(url, elementId) {
-            try {
-                const response = await fetch(url);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-            } catch (error) {
-                console.error(`Error loading ${url}:`, error);
-            }
-        }
-
-        function loadGame(game) {
-            const gamesList = document.getElementById("gamesList");
-            const gameElement = document.createElement("div");
-            gameElement.className = "game-item";
-            gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;
-            
-            gameElement.onclick = () => {
-                window.localStorage.setItem('loadedG', game.link);
-                window.location.href = '/Classes.html';
-            };
-            
-            gamesList.appendChild(gameElement);
-        }
-
-        document.addEventListener("DOMContentLoaded", async function() {
-            try {
-                await registerSW();
-                createStars();
-                await Promise.all([
-                    loadHTML("/assets/html/header.html", "header"),
-                    loadHTML("/assets/html/footer.html", "footer")
-                ]);
-                // Define apps
-                const defaultApps = [
-                    {title: "Netflix", link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")},
-                    {title: "Hulu", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")},
-                    {title: "Google", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.google.com")},
-                    {title: "ChatGPT", link: __uv$config.prefix + __uv$config.encodeUrl("https://deepai.org")},
-                    {title: "Character AI", link: __uv$config.prefix + __uv$config.encodeUrl("https://character.ai")},
-                    {title: "Discord", link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com/")},
-                    {title: "Tubi", link: __uv$config.prefix + __uv$config.encodeUrl("https://tubitv.com/")},
-                    {title: "Cool Math Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com")},
-                    {title: "Snapchat", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.snapchat.com")},
-                    {title: "Youtube", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.youtube.com/shorts")},
-                    {title: "TikTok", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.tiktok.com")},
-                    {title: "Spotify", link: __uv$config.prefix + __uv$config.encodeUrl("https://open.spotify.com")},
-                    {title: "Xbox Cloud Gaming", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.xbox.com/en-us/play")},
-                    {title: "Reddit", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.reddit.com")},
-                    {title: "KBH Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://kbhgames.com")},
-                    {title: "Crazy Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.crazygames.com")},
-                    {title: "Void Network Movies", link: __uv$config.prefix + __uv$config.encodeUrl("https://mega.nz/folder/6J9iBQ7A#JZqvYH9wm-YRl_ZlnoK-cg")},
-                    {title: "Itch.io", link: __uv$config.prefix + __uv$config.encodeUrl("https://itch.io")},
-                    {title: "Byvolp", link: __uv$config.prefix + __uv$config.encodeUrl("https://byvolp.web.app/games/index.html")},
-                    {title: "Scratch", link: __uv$config.prefix + __uv$config.encodeUrl("https://scratch.mit.edu/explore/projects/all")},
-                    {title: "Now.gg", link: __uv$config.prefix + __uv$config.encodeUrl("https://now.gg")},
-                    {title: "Crazy Sports", link: __uv$config.prefix + __uv$config.encodeUrl("https://test-theta-eight-39.vercel.app")},
-                    {title: "9anime", link: __uv$config.prefix + __uv$config.encodeUrl("https://9animetv.to")},
-                    {title: "Twitch", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.twitch.tv")},
-                    {title: "Github", link: __uv$config.prefix + __uv$config.encodeUrl("https://github.com")},
-                    {title: "HoodaMath", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/#gsc.tab=0")},
-                    {title: "Apple Music", link: __uv$config.prefix + __uv$config.encodeUrl("https://music.apple.com/us/new")},
-                    {title: "Vidbinge", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.vidbinge.com")},
-                    {title: "Disney Plus", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.disneyplus.com/welcome/stream")}
-      ];
-
-            localStorage.setItem("apps", JSON.stringify(defaultApps));
-            defaultApps.forEach(game => loadGame(game));
-
-            document.getElementById("searchGames").addEventListener("keyup", function(e) {
-                const searchTerm = this.value.toLowerCase();
-                const gamesList = document.getElementById("gamesList");
-                gamesList.innerHTML = '';
-                defaultApps.filter(game => game.title.toLowerCase().includes(searchTerm))
-                        .forEach(game => loadGame(game));
-            });
-
-        } catch (error) {
-            console.error("Initialization error:", error);
-            const gamesList = document.getElementById("gamesList");
-            if (gamesList) {
-                gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;
-            }
-        }
-    });
-</script>
-
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
-        authDomain: "void-netwo.firebaseapp.com",
-        projectId: "void-netwo",
-        storageBucket: "void-netwo.firebasestorage.app",
-        messagingSenderId: "962565650058",
-        appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
-    };
-
-    const app = initializeApp(firebaseConfig);
-</script>
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+   <meta charset="UTF-8">  
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+   <script src="/assets/js/favicon-handler.js"></script>  
+   <script src="uv/uv.bundle.js"></script>  
+   <script src="uv/uv.config.js"></script>  
+   <script src="/config.js"></script>  
+   <script src="/global.js"></script>  
+   <link rel="stylesheet" href="/assets/css/styles.css">  
+  
+   <style>  
+      body, html {  
+        margin: 0;  
+        padding: 0;  
+        width: 100%;  
+        height: 100%;  
+        background: #000;  
+        color: #fff;  
+        font-family: Arial, sans-serif;  
+        overflow: hidden;  
+      }  
+  
+      .stars {  
+        position: fixed;  
+        top: 0;  
+        left: 0;  
+        width: 100%;  
+        height: 100%;  
+        pointer-events: none;  
+        z-index: 0;  
+      }  
+  
+      @keyframes moveStar {  
+        from {  
+           transform: translateY(0);  
+        }  
+        to {  
+           transform: translateY(100vh);  
+        }  
+      }  
+  
+      .star {  
+        position: absolute;  
+        width: 2px;  
+        height: 2px;  
+        background: #fff;  
+        border-radius: 50%;  
+        animation: moveStar linear infinite;  
+      }  
+  
+      .container {  
+        display: flex;  
+        flex-direction: column;  
+        align-items: center;  
+        justify-content: center;  
+        min-height: 100vh;  
+        padding: 1rem;  
+        position: relative;  
+        z-index: 1;  
+      }  
+  
+      .games-box {  
+        background: #000;  
+        border-radius: 10px;  
+        width: 80%;  
+        max-width: 1000px;  
+        height: 70vh;  
+        display: flex;  
+        flex-direction: column;  
+        position: relative;  
+        padding: 2px;  
+        box-shadow:  
+           0 0 2px #fff,  
+           0 0 4px #fff,  
+           0 0 6px #fff,  
+           0 0 8px #fff,  
+           inset 0 0 2px rgba(255, 255, 255, 0.2);  
+      }  
+  
+      .games-box::before {  
+        content: '';  
+        position: absolute;  
+        inset: -1px;  
+        background: #fff;  
+        border-radius: 10px;  
+        z-index: -1;  
+        box-shadow:  
+           0 0 15px #fff,  
+           0 0 30px rgba(255, 255, 255, 0.8),  
+           0 0 40px rgba(255, 255, 255, 0.6),  
+           0 0 50px rgba(255, 255, 255, 0.4);  
+        opacity: 0.5;  
+      }  
+  
+      .games-header {  
+        padding: 1.5rem;  
+        text-align: center;  
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);  
+        position: relative;  
+        z-index: 1;  
+      }  
+  
+      .site-title {  
+        font-size: 2.5rem;  
+        margin: 0 0 0.5rem 0;  
+        background: linear-gradient(45deg, #fff, #a0a0a0);  
+        -webkit-background-clip: text;  
+        -webkit-text-fill-color: transparent;  
+        font-weight: bold;  
+      }  
+  
+      .games-title {  
+        font-size: 1.2rem;  
+        margin: 0.5rem 0;  
+        color: #888;  
+        text-transform: uppercase;  
+        letter-spacing: 2px;  
+      }  
+  
+      #searchGames {  
+        width: 80%;  
+        max-width: 400px;  
+        padding: 0.8rem 1.5rem;  
+        border: 1px solid rgba(255, 255, 255, 0.1);  
+        border-radius: 25px;  
+        background: rgba(255, 255, 255, 0.05);  
+        color: #fff;  
+        font-size: 1rem;  
+        transition: all 0.3s ease;  
+        margin: 1rem auto 0 auto;  
+        display: block;  
+      }  
+  
+      #searchGames:focus {  
+        outline: none;  
+        background: rgba(255, 255, 255, 0.1);  
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);  
+        border-color: rgba(255, 255, 255, 0.2);  
+      }  
+  
+      #searchGames::placeholder {  
+        color: rgba(255, 255, 255, 0.5);  
+      }  
+  
+      .games-grid {  
+        display: grid;  
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));  
+        gap: 1rem;  
+        padding: 1.5rem;  
+        overflow-y: auto;  
+        flex-grow: 1;  
+        position: relative;  
+        z-index: 1;  
+      }  
+  
+      .games-grid::-webkit-scrollbar {  
+        width: 8px;  
+      }  
+  
+      .games-grid::-webkit-scrollbar-track {  
+        background: rgba(255, 255, 255, 0.05);  
+        margin: 4px;  
+        border-radius: 4px;  
+      }  
+  
+      .games-grid::-webkit-scrollbar-thumb {  
+        background: rgba(255, 255, 255, 0.2);  
+        border-radius: 4px;  
+      }  
+  
+      .games-grid::-webkit-scrollbar-thumb:hover {  
+        background: rgba(255, 255, 255, 0.3);  
+      }  
+  
+      .game-item {  
+        padding: 1rem;  
+        background: rgba(255, 255, 255, 0.05);  
+        border-radius: 8px;  
+        transition: all 0.3s ease;  
+        cursor: pointer;  
+        text-align: center;  
+        border: 1px solid rgba(255, 255, 255, 0.1);  
+      }  
+  
+      .game-item:hover {  
+        background: rgba(255, 255, 255, 0.1);  
+        transform: translateY(-2px);  
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);  
+        border-color: rgba(255, 255, 255, 0.2);  
+      }  
+  
+      .game-title {  
+        font-size: 1rem;  
+        color: #fff;  
+        margin: 0;  
+        font-weight: normal;  
+        transition: all 0.3s ease;  
+      }  
+  
+      .game-item:hover .game-title {  
+        color: #fff;  
+        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);  
+      }  
+  
+      @media (max-width: 768px) {  
+        .games-box {  
+           width: 95%;  
+           height: 80vh;  
+        }  
+  
+        .games-grid {  
+           grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));  
+           padding: 1rem;  
+        }  
+  
+        .site-title {  
+           font-size: 2rem;  
+        }  
+      }  
+   </style>  
+</head>  
+  
+<body>  
+   <div class="stars"></div>  
+    
+   <div id="header"></div>  
+    
+   <div class="container">  
+      <div class="games-box">  
+        <div class="games-header">  
+           <h1 class="site-title">Void Network</h1>  
+           <h2 class="games-title">Apps</h2>  
+           <input type="text" id="searchGames" placeholder="Search apps...">  
+        </div>  
+        <div class="games-grid" id="gamesList"></div>  
+      </div>  
+   </div>  
+  
+   <div id="footer"></div>  
+  
+   <script>  
+      async function registerSW() {  
+        const stockSW = "/uv/sw.js";  
+        const swAllowedHostnames = ["localhost", "127.0.0.1"];  
+        if (!navigator.serviceWorker) {  
+           if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))  
+              throw new Error("Service workers cannot be registered without https.");  
+           throw new Error("Your browser doesn't support service workers.");  
+        }  
+        await navigator.serviceWorker.register(stockSW);  
+      }  
+  
+      function createStars() {  
+        const starsContainer = document.querySelector('.stars');  
+        const numberOfStars = 200;  
+  
+        for (let i = 0; i < numberOfStars; i++) {  
+           const star = document.createElement('div');  
+           star.className = 'star';  
+           const size = Math.random() * 2;  
+           star.style.width = `${size}px`;  
+           star.style.height = `${size}px`;  
+           star.style.left = `${Math.random() * 100}%`;  
+           star.style.top = `${Math.random() * 100}%`;  
+           const duration = 20 + Math.random() * 20;  
+           star.style.animationDuration = `${duration}s`;  
+           star.style.animationDelay = `${Math.random() * duration}s`;  
+           star.style.opacity = Math.random() * 0.8 + 0.2;  
+           starsContainer.appendChild(star);  
+        }  
+      }  
+  
+      async function loadHTML(url, elementId) {  
+        try {  
+           const response = await fetch(url);  
+           const html = await response.text();  
+           document.getElementById(elementId).innerHTML = html;  
+        } catch (error) {  
+           console.error(`Error loading ${url}:`, error);  
+        }  
+      }  
+  
+      function loadGame(game) {  
+        const gamesList = document.getElementById("gamesList");  
+        const gameElement = document.createElement("div");  
+        gameElement.className = "game-item";  
+        gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;  
+          
+        gameElement.onclick = () => {  
+           const gameUrl = game.link;  
+           window.location.href = `/Classes.html?game=${encodeURIComponent(gameUrl)}`;  
+        };  
+          
+        gamesList.appendChild(gameElement);  
+      }  
+  
+      document.addEventListener("DOMContentLoaded", async function() {  
+        try {  
+           await registerSW();  
+           createStars();  
+           await Promise.all([  
+              loadHTML("/assets/html/header.html", "header"),  
+              loadHTML("/assets/html/footer.html", "footer")  
+           ]);  
+           // Define apps  
+           const defaultApps = [  
+              {title: "Netflix", link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")},  
+              {title: "Hulu", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")},  
+              {title: "Google", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.google.com")},  
+              {title: "ChatGPT", link: __uv$config.prefix + __uv$config.encodeUrl("https://deepai.org")},  
+              {title: "Character AI", link: __uv$config.prefix + __uv$config.encodeUrl("https://character.ai")},  
+              {title: "Discord", link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com/")},  
+              {title: "Tubi", link: __uv$config.prefix + __uv$config.encodeUrl("https://tubitv.com/")},  
+              {title: "Cool Math Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com")},  
+              {title: "Snapchat", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.snapchat.com")},  
+              {title: "Youtube", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.youtube.com/shorts")},  
+              {title: "TikTok", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.tiktok.com")},  
+              {title: "Spotify", link: __uv$config.prefix + __uv$config.encodeUrl("https://open.spotify.com")},  
+              {title: "Xbox Cloud Gaming", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.xbox.com/en-us/play")},  
+              {title: "Reddit", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.reddit.com")},  
+              {title: "KBH Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://kbhgames.com")},  
+              {title: "Crazy Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.crazygames.com")},  
+              {title: "Void Network Movies", link: __uv$config.prefix + __uv$config.encodeUrl("https://mega.nz/folder/6J9iBQ7A#JZqvYH9wm-YRl_ZlnoK-cg")},  
+              {title: "Itch.io", link: __uv$config.prefix + __uv$config.encodeUrl("https://itch.io")},  
+              {title: "Byvolp", link: __uv$config.prefix + __uv$config.encodeUrl("https://byvolp.web.app/games/index.html")},  
+              {title: "Scratch", link: __uv$config.prefix + __uv$config.encodeUrl("https://scratch.mit.edu/explore/projects/all")},  
+              {title: "Now.gg", link: __uv$config.prefix + __uv$config.encodeUrl("https://now.gg")},  
+              {title: "Crazy Sports", link: __uv$config.prefix + __uv$config.encodeUrl("https://test-theta-eight-39.vercel.app")},  
+              {title: "9anime", link: __uv$config.prefix + __uv$config.encodeUrl("https://9animetv.to")},  
+              {title: "Twitch", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.twitch.tv")},  
+              {title: "Github", link: __uv$config.prefix + __uv$config.encodeUrl("https://github.com")},  
+              {title: "HoodaMath", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/#gsc.tab=0")},  
+              {title: "Apple Music", link: __uv$config.prefix + __uv$config.encodeUrl("https://music.apple.com/us/new")},  
+              {title: "Vidbinge", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.vidbinge.com")},  
+              {title: "Disney Plus", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.disneyplus.com/welcome")}  
+           ];  
+  
+           localStorage.setItem("apps", JSON.stringify(defaultApps));  
+           defaultApps.forEach(game => loadGame(game));  
+  
+           document.getElementById("searchGames").addEventListener("keyup", function(e) {  
+              const searchTerm = this.value.toLowerCase();  
+              const gamesList = document.getElementById("gamesList");  
+              gamesList.innerHTML = '';  
+              defaultApps.filter(game => game.title.toLowerCase().includes(searchTerm))  
+                   .forEach(game => loadGame(game));  
+           });  
+  
+        } catch (error) {  
+           console.error("Initialization error:", error);  
+           const gamesList = document.getElementById("gamesList");  
+           if (gamesList) {  
+              gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;  
+           }  
+        }  
+      });  
+   </script>  
+  
+   <script type="module">  
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";  
+  
+      const firebaseConfig = {  
+        apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",  
+        authDomain: "void-netwo.firebaseapp.com",  
+        projectId: "void-netwo",  
+        storageBucket: "void-netwo.firebasestorage.app",  
+        messagingSenderId: "962565650058",  
+        appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"  
+      };  
+  
+      const app = initializeApp(firebaseConfig);  
+   </script>  
+</body>  
+</html>
