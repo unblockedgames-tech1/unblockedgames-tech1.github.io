@@ -15,89 +15,177 @@
     <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/styles.css">
     <style>
-        .flex-container {
-            display: flex;
-            position: relative;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
-            padding: 5rem;
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            color: #fff;
+            font-family: Arial, sans-serif;
+            overflow: hidden;
         }
 
-        .game {
-            border-radius: 30rem;
+        .container {
+            display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease-in-out;
-            cursor: pointer;
+            min-height: 100vh;
+            padding: 1rem;
+            position: relative;
+            z-index: 1;
         }
 
-        .game:hover {
-            transform: scale(1.05);
+        .games-box {
+            background: #000;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 1000px;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            padding: 2px;
+            box-shadow: 
+                0 0 2px #fff,
+                0 0 4px #fff,
+                0 0 6px #fff,
+                0 0 8px #fff,
+                inset 0 0 2px rgba(255, 255, 255, 0.2);
         }
 
-        .game-image {
-            width: 288px;
-            height: 288px;
-            border-radius: 20px;
-            object-fit: cover;
-            transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            animation: subtle-pulse 4s infinite;
-            animation-delay: 1s;
+        .games-box::before {
+            content: '';
+            position: absolute;
+            inset: -1px;
+            background: #fff;
+            border-radius: 10px;
+            z-index: -1;
+            box-shadow: 
+                0 0 15px #fff,
+                0 0 30px rgba(255, 255, 255, 0.8),
+                0 0 40px rgba(255, 255, 255, 0.6),
+                0 0 50px rgba(255, 255, 255, 0.4);
+            opacity: 0.5;
         }
 
-        .game:hover .game-image {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
-            animation: none;
-        }
-
-        @keyframes subtle-pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.01); }
-            100% { transform: scale(1); }
-        }
-
-        .game-info {
-            padding: 10px;
+        .games-header {
+            padding: 1.5rem;
             text-align: center;
-            background-color: #555555;
-            border-radius: 30px;
-            z-index: 11;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+        }
+
+        .site-title {
+            font-size: 2.5rem;
+            margin: 0 0 0.5rem 0;
+            background: linear-gradient(45deg, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: bold;
+        }
+
+        .games-title {
+            font-size: 1.2rem;
+            margin: 0.5rem 0;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 1rem;
+            padding: 1.5rem;
+            overflow-y: auto;
+            flex-grow: 1;
+            position: relative;
+            z-index: 1;
+        }
+
+        .games-grid::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .games-grid::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+            margin: 4px;
+            border-radius: 4px;
+        }
+
+        .games-grid::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+        }
+
+        .games-grid::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.3);
+        }
+
+        .game-item {
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .game-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .game-title {
-            font-size: 20px;
-            margin-bottom: 10px;
+            font-size: 1rem;
             color: #fff;
+            margin: 0;
+            font-weight: normal;
+            transition: all 0.3s ease;
         }
 
-        .play-button {
-            background-color: #555555;
+        .game-item:hover .game-title {
             color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            text-decoration: none;
-            transition: background-color 0.3s ease-in-out;
-            cursor: pointer;
-            display: inline-block;
-            z-index: 12;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
         }
 
-        .play-button:hover {
-            background-color: #454545;
+        @media (max-width: 768px) {
+            .games-box {
+                width: 95%;
+                height: 80vh;
+            }
+            
+            .games-grid {
+                grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+                padding: 1rem;
+            }
+            
+            .site-title {
+                font-size: 2rem;
+            }
         }
     </style>
 </head>
 <body>
     <div id="header"></div>
-    <div id="footer"></div>
-    <div id="div_appout">
-        <div class="flex-container" id="gamesList"></div>
+    
+    <div class="container">
+        <div class="games-box">
+            <div class="games-header">
+                <h1 class="site-title">Void Network</h1>
+                <h2 class="games-title">Apps</h2>
+            </div>
+            <div class="games-grid" id="gamesList"></div>
+        </div>
     </div>
+
+    <div id="footer"></div>
 
     <script>
         // Function to load HTML content
@@ -122,7 +210,6 @@
                 }
                 throw new Error("Your browser doesn't support service workers.");
             }
-            
             try {
                 await navigator.serviceWorker.register(stockSW);
             } catch (error) {
@@ -133,154 +220,11 @@
         // Function to render games list
         function renderGamesList() {
             const gamesList = document.getElementById("gamesList");
-            // Default apps defined directly in code instead of localStorage
             const defaultApps = [
                 {
-                                    title: "Netf<x>l</x>ix",
-                imgSrc: "/appimg/netflix.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")
-            },
-            {
-                title: "Hu<x>l</x>u",
-                imgSrc: "https://assetshuluimcom-a.akamaihd.net/h3o/icons/favicon.ico.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")
-            },
-            {
-                title: "Google", 
-                imgSrc: "/appimg/google.webp",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.google.com")
-            }, 
-            {
-                title: "Cha<x>tG</x>pt",
-                imgSrc: "/appimg/chatgpt.webp",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://deepai.org")
-            },
-	    {
-                title: "C</x>.a</x>i", 
-                imgSrc: "https://lh7-us.googleusercontent.com/gjIJGro8Ddy0NMCiSgvDpZ5IYdStj-197RAJu2nvnyUxUTQkGA1ugmHBKcwyQSdP6j44p3OFh5f1Yqfx_0fjIaAHk0BO0J0GMrepyP9gHr8cqR2BWQ4E9DSaUqugQcxYtY37Z09kjakjiqYPuaLybr1nNRc_YQ",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://character.ai")
-            },
-            {
-                title: "Di<x>s</x>cord", 
-                imgSrc: "/appimg/discord.webp",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com/")
-            },
-	    {
-                title: "Tu</x>bi", 
-                imgSrc: "https://m.media-amazon.com/images/I/715irEQPXzL.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://tubitv.com/")
-            },
-	    {
-                title: "Co</x>ol Ma</x>th Ga</x>me</x>s", 
-                imgSrc: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRwROf_FVSh9WkFeG15X-kVysnKddaMHvxSEA&s",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com")
-            },
-	    {
-                title: "Sn</x>ap</x>chat", 
-                imgSrc: "/appimg/snapchat.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.snapchat.com")
-            },
-	    {
-                title: "Yo</x>utu</x>be", 
-                imgSrc: "/appimg/youtube.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.youtube.com/shorts")
-            },
-	    {
-                title: "Ti</x>kt</x>ok", 
-                imgSrc: "/appimg/tiktok.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.tiktok.com")
-            },
-	    {
-                title: "Spo</x>tify", 
-                imgSrc: "/appimg/spotify.jpeg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://open.spotify.com")
-            },
-	    {
-                title: "X</x>box Clo</x>ud Gam</x>ing", 
-                imgSrc: "/appimg/xboxcloud.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.xbox.com/en-us/play")
-            },
-	    {
-                title: "Red</x>dit", 
-                imgSrc: "/appimg/redit.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.reddit.com")
-            },
-	    {
-                title: "KBH Gam</x>es", 
-                imgSrc: "/appimg/kbhgames.jpeg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://kbhgames.com")
-            },
-	    {
-                title: "Crazy Gam</x>es", 
-                imgSrc: "/appimg/Crazygames_jpg_logo.jpg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.crazygames.com")
-            },
-	    {
-                title: "Vo</x>id Ne</x>tw</x>ork M</x>ovi</x>es", 
-                imgSrc: "https://lh7-us.googleusercontent.com/QTCoMxIz3RBckoShyk1mFjo23Sz1rfEf1pD7Eh1PHgW-g5QaQe5ebDi4_f5xtnRDKGPpHXJhmgrRLFEkWVVJZwI3XY2gbKAfo_yFVLoilwLFDppo4nPbzIrnUx__Cx53AtIb75hd1wbUdgeY0bOjgaIAcuEu9Q",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://mega.nz/folder/6J9iBQ7A#JZqvYH9wm-YRl_ZlnoK-cg")
-            },
-	    {
-                title: "Itch.io", 
-                imgSrc: "https://lh7-us.googleusercontent.com/tsqCKsr5eJWbZ2sS-vWCtcxHE0BToURQg_Spr4UOXdQgeqQAefy4C9iUJV21RKZ-gG4qNV47n60oXyphgQ40Noa6yXqalyiX1KOG4YuVT9SSuCi4YGTrPHYT1j26piMef1Ewi_x63KzHQPvwnJnvUiZNVQfyFQ",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://itch.io")
-            },
-	    {
-                title: "Byvolp", 
-                imgSrc: "data:image/webp;base64,UklGRkYEAABXRUJQVlA4IDoEAABwFQCdASpAAEAAPi0Ki0WhkNDN+BgCxLYATplXnEPWfxV/Zn/M/InVf77+FP2gytbbT7bvft6x9vF5nP1m/YDseegf0rPoAeap/1/2x+GT9t/2j9qM7VdKVNI8oDCQ1lUfQxnLkfUSQ3xzf06FnOqwQeEL8HRIrEWqvY0qNE96WMIVuUM0wGrpPOs5Unvit1ifIhjP9xtTOfu/l1le8B62wvqnTsR+PjWjWj6KS6XDIXZ5kPwA/v86a19w+RX3tOqfK8qweY2zdUIOR3IrR+CObv/7fdFwsNK3ujjKLAeBr8NcYOIYG+KppvBZjPmg7kLcLSxh+q8AovzL5n9Gon1mL9kWbZsBvRWbkeT+xq81in/3dF2yz/ys0xiNcwvtlJXgvw4giQCcnN34f2URvpS9p5SbYU+kNxKjoDsjUjsLkh697M4VrkFT4evY0SHFJ/FqbriNpk59KpJ1hDU+03gY/MLWrk6adHj/tHgtdKum+Z+9Unnoy8V/yMeB8y59SEsizIkPhDKMthSdsSOUrY5TQzPOhvNTil5m3fO69/QpF6HEM/G7ZBsKwBZDrAgef8ZifV4MRXBQnpUfVdjOfsMqzoxxOwGN5yh/a/Flf1pQHbzg5n3Yeg2cpLjTvz6fxagM/a+kRMps2YrW15p4K0tG3onFx7O7uRR2xbt3I33LHAvk+vI4dP+eTmPiqXF851ZNAjauEpALtvevQtX2Hs8x9vicHZRt9lLCjZYUM1JFRgjLl5BcHWYZSYLLlZ7JKWXVGP47fCHLtM0lv1LeJKs4mvfY7aSSOwg/9egHUfywddLELUV0GA/Cu2xHAWIqoeui+7KaYwnILymawQQ2jo21vgZ79RWCZ+GPXnBhoNTr+uX/4K9D8cJtn6hGMe+iRsd86WIv6Mt20oN0fh61GeJHWXuhZ1P7g/LhhWKmu5gRoIMrAVVVmc67bwxePM+jf/OZYPPTUlhnXt3Ic1f1Qr+RX041yVe9ipP+lm8sOMmP0+6x3fu0N0QdoEgZ3ufp3dHiE+MsIZeyWzsDkoHv9PDySOnYXq1yVqJ4QoGNY1C1TMYsdtdN8rfSac+lEzmp2UL8EtcqA+/gKiGwNGz5rUu+8bj7wFtad5cCMuoJSTAU85fA3TGXJD3n80wR21ZxxBZf1/0k5SmpH5/9G47kQg+Vb/1pp2bAfYz84WlT2y8J4Wd3mMlIgGoKuB3vCPHq20VaWAQqXNt89tGDIAp4SHhVcrmQZGhFO2BScDpZHmt1/YfZNJ/3ttd/5yV+IlYymTPAXeIQRLbrlBzzi8teL4WOwKStm/43UwuoxFTi6u/0ee0Im5/ZaUg2zH+KeS52Qha/9iVkoDGZZCJZlnhljmjRtzZu40wXvNtPp1yBVmni/j0m6S+b/H4ABDRqNfYWUjCtNmeRw7MYo8yE3l4BztWnRA7b5ts4qAAAAA==",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://byvolp.web.app/games/index.html")
-            },
-	    {
-                title: "Scratch", 
-                imgSrc: "https://lh7-us.googleusercontent.com/h-C_T3nObFIAEvl90InJVgWjq2EKLbLGPYg48R-524QlHLeRabpNlVt1E43bXu_Nd7Gyc1UWKEgly2twb9agFdis-jdQbxb7BDobAhHYOjl_eyrHgVc5ProgwxBlZpXfJVzTCVj-iIvZqupytr0jzixb_xz9ow",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://scratch.mit.edu/explore/projects/all")
-            },
-	    {
-                title: "Now.gg", 
-                imgSrc: "https://lh7-us.googleusercontent.com/yYUBlzdbc-zK9bt_WpYSGje9ow0uZ0o3G9Jd1DaHc1qV41GAvekR39CnksWIQSphsgpeIyde6tGqCgfUgeD_OiKKy1azVfkVYC_xqyu2FsgldwMYmcj8VUdGrnuGJelxisMB1Xl5MUUgPAMtPS5JiIvio8vTWw",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://now.gg")
-            },	    
-	    {
-                title: "Crazy Sports", 
-                imgSrc: "https://lh7-us.googleusercontent.com/hTOUCALGi8n6Wj7mAQOfcY5kKGSXoKY5LoCxyHT9Oo8xfEwRYcLbojpzO_rPFSJqZK8lM5C-DUbun7Wk3mlPbt55elSoNVzChb3gxxN5T4L7f9pST1Ckc9LTHdoQF4RBkBZedn-3wyPhRXNVIMt58qa7P8GMrw",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://test-theta-eight-39.vercel.app")
-            },	   
-	    {
-                title: "9anime (Sketchy)", 
-                imgSrc: "https://lh7-us.googleusercontent.com/_EkmKJ4k-Hhdz7vT-vikmrfp3R5-Ldy-Jb8zCC0sBm5ILUhvcclFzIx1h6CQF4aWuJkrR8kAzshlEjiwvSIyi-rNjdJG7anAPilKCxSLkTeFQ2xmuQA_nOjuAePBBmwnIcD9kDzOkor1dJ1OQo86NmPq-8y7Tg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://9animetv.to")
-            },	   
-	    {
-                title: "Twitch", 
-                imgSrc: "https://lh7-us.googleusercontent.com/1bCnBMdn9M51jgUy5tRWA1o7qkO5ezxq6Qo4FpMS-LXTnP5MJUgGfoJHAXx68kidtjIYe9cKBM5ZV9dwAFviWwW9fYNtdnJUS4-f6ff4YmP-p-67B8OqJfjKnMJJqjRrF9ewkiJWpA2sqWNcuyGFQ_9bvHjU7w",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.twitch.tv")
-            },	    
-	    {
-                title: "Github", 
-                imgSrc: "https://lh7-us.googleusercontent.com/BebSUbSt4y06MsCVLXB-x2vs5NhbyaZmiCli_w03sco46wgtGgJkLqFbpX679-wqayNYdntQ-8hXtfh8U7fEisz8-jD-qIM-lDUvkicrH4rewiuXL-E5mihseC_Nawjk-wUSWlSyiYlvlvoAAKcP4xvX1W7C7A",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://github.com")
-            },	   
-	    {
-                title: "HoodaMath", 
-                imgSrc: "https://lh7-us.googleusercontent.com/bUuvpLH4tRyovmquyp-DlvE0aW6tImIvOSvq4oK-RytlkUSH7rbrhWMRkXlT-ca96qLztAOXery9PpUAmIWnEoIlL72qQs79SX46mEu2ucHa5oxstme4WS_qW9mMuXWP0m_jQZdLIRkPBEPvpZ7_bS5TGFBntg",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/#gsc.tab=0")
-            },	   
-	    {
-                title: "Apple Music", 
-                imgSrc: "https://lh7-us.googleusercontent.com/OSj8nAaatigDl07y-HtTz2kpM_lcrpPZBmHMsWHmqeHJ6uzA5gZFzGMB5S9egY6G73tfydQlwANAtmSx5BQS-eslJ9mCVf9oBAJsHwc__iF2YBQqlRUvX9-4ADU4Q_ZaEzZSp8p2YxaXyB7AW57BtTL8e_S79Q",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://music.apple.com/us/new")
-            },	 	   
-	    {
-                title: "Vidbinge", 
-                imgSrc: "https://lh7-us.googleusercontent.com/zI8NsPINlsHH3TWralF9mkLf0xsG2Hl-xKuwbJ5StWC2HOQRX8BMoo5QLqA-sD_nyt6kj8oPCWXaaOHiP6r0u4NXCFEMpX4FIw4Qf-M-TlvGGUbwHvHGlD7p8IVLQJPTy9RpSnjaN4B2TLEAKaVyL78RjUeGlw",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.vidbinge.com")
-            },	  	    
-	    {
-                title: "Disney Plus", 
-                imgSrc: "https://lh7-us.googleusercontent.com/wsqRrone5cSXW6meq_V6B1kSbApOhcqICtDyuao8IxfAt4zfk-1P1EZHVWhqbENmxeKg40Shbpsw_R2YQhdF5-1-qg-b7TuNqXdry6MI_O3FHbJHNN7eh4U0vcBItz6Xz4s2dpQ-_uyfDcQwuuaqWL8EJwPgcQ",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://www.disneyplus.com/welcome/stream")
-            },
-                // Add more apps here as needed
+                    title: "Netflix",
+                    link: "https://netflix.com"
+                }
             ];
             
             if (!gamesList) return;
@@ -288,42 +232,18 @@
             gamesList.innerHTML = '';
             
             defaultApps.forEach(app => {
-                const gameElement = document.createElement("div");
-                gameElement.className = "game";
-
-                const imgElement = document.createElement("img");
-                imgElement.src = app.imgSrc;
-                imgElement.alt = app.title;
-                imgElement.className = "game-image";
+                const appElement = document.createElement("div");
+                appElement.className = "game-item";
 
                 const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(app.link);
                 
-                const titleElement = document.createElement("div");
-                titleElement.className = "game-info";
-                titleElement.innerHTML = `
-                    <h2 class="game-title">${app.title}</h2>
-                    <a href="javascript:void(0)" class="play-button" onclick="handleAppClick(event, '${encodedUrl}')">Use</a>
-                `;
-
-                gameElement.appendChild(imgElement);
-                gameElement.appendChild(titleElement);
-
-                gameElement.onclick = (e) => {
-                    if (!e.target.classList.contains('play-button')) {
-                        handleAppClick(e, encodedUrl);
-                    }
+                appElement.innerHTML = `<h3 class="game-title">${app.title}</h3>`;
+                appElement.onclick = () => {
+                    window.location.href = `/Classes.html?game=${encodeURIComponent(encodedUrl)}`;
                 };
 
-                gamesList.appendChild(gameElement);
+                gamesList.appendChild(appElement);
             });
-        }
-
-        // Function to handle app clicks
-        function handleAppClick(event, encodedUrl) {
-            event.preventDefault();
-            event.stopPropagation();
-            // Modified to match the Classes.html page's URL parameter name 'game'
-            window.location.href = `/Classes.html?game=${encodeURIComponent(encodedUrl)}`;
         }
 
         // Initialize everything when the DOM is ready
