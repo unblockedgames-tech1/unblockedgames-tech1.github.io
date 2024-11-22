@@ -296,8 +296,13 @@ body, html {
             ];
             
 localStorage.setItem("apps", JSON.stringify(defaultApps));
-            const gamesList = document.getElementById("gamesList");
+            renderGamesList();
+        }
 
+        function renderGamesList() {
+            const gamesList = document.getElementById("gamesList");
+            const defaultApps = JSON.parse(localStorage.getItem("apps"));
+            
             if (!gamesList) return;
 
             gamesList.innerHTML = '';
@@ -312,55 +317,69 @@ localStorage.setItem("apps", JSON.stringify(defaultApps));
                 };
                 gamesList.appendChild(gameElement);
             });
+        }
 
-            document.getElementById("searchGames").addEventListener("keyup", function(e) {
-                const searchTerm = this.value.toLowerCase();
-                gamesList.innerHTML = '';
-                defaultApps.filter(app => app.title.toLowerCase().includes(searchTerm))
-                          .forEach(app => {
-                    const gameElement = document.createElement("div");
-                    gameElement.className = "game-item";
-                    gameElement.innerHTML = `<h3 class="game-title">${app.title}</h3>`;
-                    gameElement.onclick = () => {
-                        localStorage.setItem("loadedG", app.link);
-                        location.href = "/Classes.html";
-                    };
-                    gamesList.appendChild(gameElement);
-                });
-            });
-
-        } catch (error) {
-            console.error("Initialization error:", error);
-            if (gamesList) {
-                gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading ${url}:`, error);
             }
         }
-    });
 
-    async function loadHTML(url, elementId) {
-        try {
-            const response = await fetch(url);
-            const html = await response.text();
-            document.getElementById(elementId).innerHTML = html;
-        } catch (error) {
-            console.error(`Error loading ${url}:`, error);
-        }
-    }
-</script>
+        // Initialize everything
+        document.addEventListener("DOMContentLoaded", async function() {
+            try {
+                createStars();
+                await Promise.all([
+                    loadHTML("/assets/html/header.html", "header"),
+                    loadHTML("/assets/html/footer.html", "footer")
+                ]);
+                initializeDefaultApps();
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+                document.getElementById("searchGames").addEventListener("keyup", function(e) {
+                    const searchTerm = this.value.toLowerCase();
+                    const defaultApps = JSON.parse(localStorage.getItem("apps"));
+                    const gamesList = document.getElementById("gamesList");
+                    gamesList.innerHTML = '';
+                    
+                    defaultApps.filter(app => app.title.toLowerCase().includes(searchTerm))
+                              .forEach(app => {
+                                  const gameElement = document.createElement("div");
+                                  gameElement.className = "game-item";
+                                  gameElement.innerHTML = `<h3 class="game-title">${app.title}</h3>`;
+                                  gameElement.onclick = () => {
+                                      localStorage.setItem("loadedG", app.link);
+                                      location.href = "/Classes.html";
+                                  };
+                                  gamesList.appendChild(gameElement);
+                              });
+                });
+            } catch (error) {
+                console.error("Initialization error:", error);
+                const gamesList = document.getElementById("gamesList");
+                if (gamesList) {
+                    gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;
+                }
+            }
+        });
+    </script>
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
-        authDomain: "void-netwo.firebaseapp.com",
-        projectId: "void-netwo",
-        storageBucket: "void-netwo.firebasestorage.app",
-        messagingSenderId: "962565650058",
-        appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
-    };
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
-    const app = initializeApp(firebaseConfig);
-</script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
+            authDomain: "void-netwo.firebaseapp.com",
+            projectId: "void-netwo",
+            storageBucket: "void-netwo.firebasestorage.app",
+            messagingSenderId: "962565650058",
+            appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
+        };
+
+        const app = initializeApp(firebaseConfig);
+    </script>
 </body>
 </html>
