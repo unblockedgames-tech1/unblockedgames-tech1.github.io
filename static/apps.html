@@ -309,55 +309,91 @@ localStorage.setItem("apps", JSON.stringify(defaultApps));
                 gamesList.appendChild(gameElement);
             }
 
-            if (Array.isArray(defaultApps)) {
-                defaultApps.forEach(game => {
-                    loadGame(game);
-                });
-            } else {
-                console.error("Apps is not an array:", defaultApps);
-                gamesList.innerHTML = '<div style="color: white;">Error: Apps data is not in the correct format</div>';
+        // Create stars
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 200;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 2;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                const duration = 20 + Math.random() * 20;
+                star.style.animationDuration = `${duration}s`;
+                star.style.animationDelay = `${Math.random() * duration}s`;
+                
+                star.style.opacity = Math.random() * 0.8 + 0.2;
+                
+                starsContainer.appendChild(star);
             }
+        }
 
-            document.getElementById("searchGames").addEventListener("keyup", function(e) {
-                gamesList.innerHTML = '';
-                const searchTerm = this.value.toLowerCase();
-                for (const game of defaultApps) {
-                    if (game.title.toLowerCase().includes(searchTerm)) {
+        // Initialize everything when the DOM is ready
+        document.addEventListener("DOMContentLoaded", async function() {
+            try {
+                await registerSW();
+                createStars();
+                await Promise.all([
+                    loadHTML("/assets/html/header.html", "header"),
+                    loadHTML("/assets/html/footer.html", "footer")
+                ]);
+
+                if (Array.isArray(defaultApps)) {
+                    defaultApps.forEach(game => {
                         loadGame(game);
-                    }
+                    });
+                } else {
+                    console.error("Apps is not an array:", defaultApps);
+                    gamesList.innerHTML = '<div style="color: white;">Error: Apps data is not in the correct format</div>';
                 }
-            });
 
-        } catch (error) {
-            console.error("Error loading apps:", error);
-            gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;
+                document.getElementById("searchGames").addEventListener("keyup", function(e) {
+                    gamesList.innerHTML = '';
+                    const searchTerm = this.value.toLowerCase();
+                    for (const game of defaultApps) {
+                        if (game.title.toLowerCase().includes(searchTerm)) {
+                            loadGame(game);
+                        }
+                    }
+                });
+
+            } catch (error) {
+                console.error("Error loading apps:", error);
+                gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;
+            }
+        });
+
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading ${url}:`, error);
+            }
         }
-    });
+    </script>
 
-    async function loadHTML(url, elementId) {
-        try {
-            const response = await fetch(url);
-            const html = await response.text();
-            document.getElementById(elementId).innerHTML = html;
-        } catch (error) {
-            console.error(`Error loading ${url}:`, error);
-        }
-    }
-</script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        const firebaseConfig = {
+            apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
+            authDomain: "void-netwo.firebaseapp.com",
+            projectId: "void-netwo",
+            storageBucket: "void-netwo.firebasestorage.app",
+            messagingSenderId: "962565650058",
+            appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
+        };
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
-        authDomain: "void-netwo.firebaseapp.com",
-        projectId: "void-netwo",
-        storageBucket: "void-netwo.firebasestorage.app",
-        messagingSenderId: "962565650058",
-        appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
-    };
-
-    const app = initializeApp(firebaseConfig);
-</script>
+        const app = initializeApp(firebaseConfig);
+    </script>
 </body>
 </html>
