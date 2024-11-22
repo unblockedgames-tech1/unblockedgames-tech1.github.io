@@ -240,160 +240,135 @@ body, html {
 
     <div id="footer"></div>
 
-    <script>
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            const numberOfStars = 200;
+function registerSW() {
+    const stockSW = "/uv/sw.js";
+    const swAllowedHostnames = ["localhost", "127.0.0.1"];
+    if (!navigator.serviceWorker) {
+        if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
+            throw new Error("Service workers cannot be registered without https.");
+        throw new Error("Your browser doesn't support service workers.");
+    }
+    navigator.serviceWorker.register(stockSW);
+}
 
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                const size = Math.random() * 2;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                const duration = 20 + Math.random() * 20;
-                star.style.animationDuration = `${duration}s`;
-                star.style.animationDelay = `${Math.random() * duration}s`;
-                star.style.opacity = Math.random() * 0.8 + 0.2;
-                starsContainer.appendChild(star);
-            }
-        }
+function createStars() {
+    const starsContainer = document.querySelector('.stars');
+    const numberOfStars = 200;
 
-        // Initialize default apps
-        function initializeDefaultApps() {
-            const defaultApps = [
-                {title: "Netflix", link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")},
-                {title: "Hulu", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")},
-                {title: "Google", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.google.com")},
-                {title: "ChatGPT", link: __uv$config.prefix + __uv$config.encodeUrl("https://deepai.org")},
-                {title: "Character AI", link: __uv$config.prefix + __uv$config.encodeUrl("https://character.ai")},
-                {title: "Discord", link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com/")},
-                {title: "Tubi", link: __uv$config.prefix + __uv$config.encodeUrl("https://tubitv.com/")},
-                {title: "Cool Math Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com")},
-                {title: "Snapchat", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.snapchat.com")},
-                {title: "Youtube", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.youtube.com/shorts")},
-                {title: "TikTok", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.tiktok.com")},
-                {title: "Spotify", link: __uv$config.prefix + __uv$config.encodeUrl("https://open.spotify.com")},
-                {title: "Xbox Cloud Gaming", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.xbox.com/en-us/play")},
-                {title: "Reddit", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.reddit.com")},
-                {title: "KBH Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://kbhgames.com")},
-                {title: "Crazy Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.crazygames.com")},
-                {title: "Void Network Movies", link: __uv$config.prefix + __uv$config.encodeUrl("https://mega.nz/folder/6J9iBQ7A#JZqvYH9wm-YRl_ZlnoK-cg")},
-                {title: "Itch.io", link: __uv$config.prefix + __uv$config.encodeUrl("https://itch.io")},
-                {title: "Byvolp", link: __uv$config.prefix + __uv$config.encodeUrl("https://byvolp.web.app/games/index.html")},
-                {title: "Scratch", link: __uv$config.prefix + __uv$config.encodeUrl("https://scratch.mit.edu/explore/projects/all")},
-                {title: "Now.gg", link: __uv$config.prefix + __uv$config.encodeUrl("https://now.gg")},
-                {title: "Crazy Sports", link: __uv$config.prefix + __uv$config.encodeUrl("https://test-theta-eight-39.vercel.app")},
-                {title: "9anime", link: __uv$config.prefix + __uv$config.encodeUrl("https://9animetv.to")},
-                {title: "Twitch", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.twitch.tv")},
-                {title: "Github", link: __uv$config.prefix + __uv$config.encodeUrl("https://github.com")},
-                {title: "HoodaMath", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/#gsc.tab=0")},
-                {title: "Apple Music", link: __uv$config.prefix + __uv$config.encodeUrl("https://music.apple.com/us/new")},
-                {title: "Vidbinge", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.vidbinge.com")},
-                {title: "Disney Plus", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.disneyplus.com/welcome/stream")}
-            ];
-            
-localStorage.setItem("apps", JSON.stringify(defaultApps));
+    for (let i = 0; i < numberOfStars; i++) {
+        const star = document.createElement('div');
+        star.className = 'star';
+        const size = Math.random() * 2;
+        star.style.width = `${size}px`;
+        star.style.height = `${size}px`;
+        star.style.left = `${Math.random() * 100}%`;
+        star.style.top = `${Math.random() * 100}%`;
+        const duration = 20 + Math.random() * 20;
+        star.style.animationDuration = `${duration}s`;
+        star.style.animationDelay = `${Math.random() * duration}s`;
+        star.style.opacity = Math.random() * 0.8 + 0.2;
+        starsContainer.appendChild(star);
+    }
+}
+
+async function loadHTML(url, elementId) {
+    try {
+        const response = await fetch(url);
+        const html = await response.text();
+        document.getElementById(elementId).innerHTML = html;
+    } catch (error) {
+        console.error(`Error loading ${url}:`, error);
+    }
+}
+
+function loadGame(game) {
+    const gamesList = document.getElementById("gamesList");
+    const gameElement = document.createElement("div");
+    gameElement.className = "game-item";
+    gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;
+    gameElement.onclick = () => {
+        localStorage.setItem('loadedG', game.link);
+        location.href = '/Classes.html';
+    };
+    gamesList.appendChild(gameElement);
+}
+
+document.addEventListener("DOMContentLoaded", async function() {
+    try {
+        await registerSW();
+        createStars();
+
+        await Promise.all([
+            loadHTML("/assets/html/header.html", "header"),
+            loadHTML("/assets/html/footer.html", "footer")
+        ]);
+
+        const defaultApps = [
+            {title: "Netflix", link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")},
+            {title: "Hulu", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")},
+            {title: "Google", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.google.com")},
+            {title: "ChatGPT", link: __uv$config.prefix + __uv$config.encodeUrl("https://deepai.org")},
+            {title: "Character AI", link: __uv$config.prefix + __uv$config.encodeUrl("https://character.ai")},
+            {title: "Discord", link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com/")},
+            {title: "Tubi", link: __uv$config.prefix + __uv$config.encodeUrl("https://tubitv.com/")},
+            {title: "Cool Math Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com")},
+            {title: "Snapchat", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.snapchat.com")},
+            {title: "Youtube", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.youtube.com/shorts")},
+            {title: "TikTok", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.tiktok.com")},
+            {title: "Spotify", link: __uv$config.prefix + __uv$config.encodeUrl("https://open.spotify.com")},
+            {title: "Xbox Cloud Gaming", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.xbox.com/en-us/play")},
+            {title: "Reddit", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.reddit.com")},
+            {title: "KBH Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://kbhgames.com")},
+            {title: "Crazy Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.crazygames.com")},
+            {title: "Void Network Movies", link: __uv$config.prefix + __uv$config.encodeUrl("https://mega.nz/folder/6J9iBQ7A#JZqvYH9wm-YRl_ZlnoK-cg")},
+            {title: "Itch.io", link: __uv$config.prefix + __uv$config.encodeUrl("https://itch.io")},
+            {title: "Byvolp", link: __uv$config.prefix + __uv$config.encodeUrl("https://byvolp.web.app/games/index.html")},
+            {title: "Scratch", link: __uv$config.prefix + __uv$config.encodeUrl("https://scratch.mit.edu/explore/projects/all")},
+            {title: "Now.gg", link: __uv$config.prefix + __uv$config.encodeUrl("https://now.gg")},
+            {title: "Crazy Sports", link: __uv$config.prefix + __uv$config.encodeUrl("https://test-theta-eight-39.vercel.app")},
+            {title: "9anime", link: __uv$config.prefix + __uv$config.encodeUrl("https://9animetv.to")},
+            {title: "Twitch", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.twitch.tv")},
+            {title: "Github", link: __uv$config.prefix + __uv$config.encodeUrl("https://github.com")},
+            {title: "HoodaMath", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/#gsc.tab=0")},
+            {title: "Apple Music", link: __uv$config.prefix + __uv$config.encodeUrl("https://music.apple.com/us/new")},
+            {title: "Vidbinge", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.vidbinge.com")},
+            {title: "Disney Plus", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.disneyplus.com/welcome/stream")}
+        ];
+
+        localStorage.setItem("apps", JSON.stringify(defaultApps));
+        defaultApps.forEach(game => loadGame(game));
+
+        document.getElementById("searchGames").addEventListener("keyup", function(e) {
+            const searchTerm = this.value.toLowerCase();
             const gamesList = document.getElementById("gamesList");
-
-            function loadGame(game) {
-                const gameElement = document.createElement("div");
-                gameElement.className = "game-item";
-                gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;
-                gameElement.onclick = () => {
-                    localStorage.setItem('loadedG', game.link);
-                    location.href = '/Classes.html';
-                };
-                gamesList.appendChild(gameElement);
-            }
-
-        // Create stars
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            const numberOfStars = 200;
-
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                
-                const size = Math.random() * 2;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                
-                const duration = 20 + Math.random() * 20;
-                star.style.animationDuration = `${duration}s`;
-                star.style.animationDelay = `${Math.random() * duration}s`;
-                
-                star.style.opacity = Math.random() * 0.8 + 0.2;
-                
-                starsContainer.appendChild(star);
-            }
-        }
-
-        // Initialize everything when the DOM is ready
-        document.addEventListener("DOMContentLoaded", async function() {
-            try {
-                await registerSW();
-                createStars();
-                await Promise.all([
-                    loadHTML("/assets/html/header.html", "header"),
-                    loadHTML("/assets/html/footer.html", "footer")
-                ]);
-
-                if (Array.isArray(defaultApps)) {
-                    defaultApps.forEach(game => {
-                        loadGame(game);
-                    });
-                } else {
-                    console.error("Apps is not an array:", defaultApps);
-                    gamesList.innerHTML = '<div style="color: white;">Error: Apps data is not in the correct format</div>';
-                }
-
-                document.getElementById("searchGames").addEventListener("keyup", function(e) {
-                    gamesList.innerHTML = '';
-                    const searchTerm = this.value.toLowerCase();
-                    for (const game of defaultApps) {
-                        if (game.title.toLowerCase().includes(searchTerm)) {
-                            loadGame(game);
-                        }
-                    }
-                });
-
-            } catch (error) {
-                console.error("Error loading apps:", error);
-                gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;
-            }
+            gamesList.innerHTML = '';
+            defaultApps.filter(game => game.title.toLowerCase().includes(searchTerm))
+                    .forEach(game => loadGame(game));
         });
 
-        async function loadHTML(url, elementId) {
-            try {
-                const response = await fetch(url);
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-            } catch (error) {
-                console.error(`Error loading ${url}:`, error);
-            }
+    } catch (error) {
+        console.error("Initialization error:", error);
+        const gamesList = document.getElementById("gamesList");
+        if (gamesList) {
+            gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;
         }
-    </script>
+    }
+});
+</script>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
-            authDomain: "void-netwo.firebaseapp.com",
-            projectId: "void-netwo",
-            storageBucket: "void-netwo.firebasestorage.app",
-            messagingSenderId: "962565650058",
-            appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
-        };
+    const firebaseConfig = {
+        apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
+        authDomain: "void-netwo.firebaseapp.com",
+        projectId: "void-netwo",
+        storageBucket: "void-netwo.firebasestorage.app",
+        messagingSenderId: "962565650058",
+        appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
+    };
 
-        const app = initializeApp(firebaseConfig);
-    </script>
+    const app = initializeApp(firebaseConfig);
+</script>
 </body>
 </html>
