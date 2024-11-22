@@ -270,127 +270,124 @@ body, html {
     </div>
 </div>
 <div id="footer"></div>
+<!-- Stars Generation Script -->
+<script>
+    function createStars() {
+        const starsContainer = document.querySelector('.stars');
+        const numberOfStars = 200;
+        for (let i = 0; i < numberOfStars; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            
+            // Varied star sizes with more small stars
+            const size = Math.random() < 0.8 ? 
+                Math.random() * 2 : // 80% small stars
+                Math.random() * 3 + 2; // 20% larger stars
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            
+            // Random position
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            
+            // Slower twinkle animation
+            const duration = 3 + Math.random() * 4;
+            star.style.animationDuration = `${duration}s`;
+            
+            // Random delay
+            star.style.animationDelay = `${Math.random() * duration}s`;
+            
+            // Set base opacity
+            const baseOpacity = Math.random() * 0.5 + 0.3;
+            star.style.setProperty('--base-opacity', baseOpacity);
+            
+            starsContainer.appendChild(star);
+        }
+    }
+
+    function createShootingStar() {
+        const container = document.querySelector('.shooting-stars');
+        const star = document.createElement('div');
+        star.className = 'shooting-star';
+        
+        // Random starting position
+        const startX = Math.random() * window.innerWidth;
+        const startY = Math.random() * (window.innerHeight / 2);
+        star.style.left = `${startX}px`;
+        star.style.top = `${startY}px`;
+        
+        // Random angle and distance
+        const angle = Math.random() * 30 + 30;
+        const travelDistance = Math.random() * 400 + 200;
+        
+        star.style.setProperty('--angle', `${angle}deg`);
+        star.style.setProperty('--travel-distance', `${travelDistance}px`);
+        
+        // Animation duration
+        const duration = Math.random() * 0.5 + 0.5;
+        star.style.animation = `shoot ${duration}s linear`;
+        
+        container.appendChild(star);
+        
+        // Remove after animation
+        setTimeout(() => {
+            star.remove();
+        }, duration * 1000);
+    }
+
+    // Initialize stars
+    createStars();
+
+    // Randomly create shooting stars
+    setInterval(() => {
+        if (Math.random() < 0.3) {
+            createShootingStar();
+        }
+    }, 2000);
+</script>
 
 <style>
-.stars {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.star {
-    position: absolute;
-    background: white;
-    border-radius: 50%;
-    animation: twinkle linear infinite;
-}
-
-.shooting-star {
-    position: absolute;
-    width: 4px;
-    height: 4px;
-    background: linear-gradient(to right, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
-    animation: shoot linear;
-}
-
-@keyframes twinkle {
-    0% { transform: scale(1); opacity: var(--base-opacity); }
-    50% { transform: scale(0.7); opacity: calc(var(--base-opacity) * 0.3); }
-    100% { transform: scale(1); opacity: var(--base-opacity); }
-}
-
-@keyframes shoot {
-    from {
-        transform: translateX(0) translateY(0) rotate(var(--angle));
-        opacity: 1;
+    .stars {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        overflow: hidden;
     }
-    to {
-        transform: translateX(var(--travel-distance)) translateY(var(--travel-distance)) rotate(var(--angle));
-        opacity: 0;
+
+    .star {
+        position: absolute;
+        background: white;
+        border-radius: 50%;
+        animation: twinkle linear infinite;
     }
-}
-</style>
 
-<script>
-function createStars() {
-    const starsContainer = document.querySelector('.stars');
-    const numberOfStars = 200; // Reduced number for less cluttered sky
-    
-    for (let i = 0; i < numberOfStars; i++) {
-        const star = document.createElement('div');
-        star.className = 'star';
-        
-        // Varied star sizes with more small stars
-        const size = Math.random() < 0.8 ? 
-            Math.random() * 2 : // 80% small stars
-            Math.random() * 3 + 2; // 20% larger stars
-        
-        star.style.width = `${size}px`;
-        star.style.height = `${size}px`;
-        
-        // Position stars
-        star.style.left = `${Math.random() * 100}%`;
-        star.style.top = `${Math.random() * 100}%`;
-        
-        // Slower twinkle animation
-        const duration = 3 + Math.random() * 4;
-        star.style.animationDuration = `${duration}s`;
-        
-        // Random delay for more natural effect
-        star.style.animationDelay = `${Math.random() * duration}s`;
-        
-        // Set base opacity as CSS variable
-        const baseOpacity = Math.random() * 0.5 + 0.3;
-        star.style.setProperty('--base-opacity', baseOpacity);
-        
-        starsContainer.appendChild(star);
+    .shooting-star {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: linear-gradient(to right, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0) 100%);
+        animation: shoot linear;
     }
-}
 
-function createShootingStar() {
-    const container = document.querySelector('.shooting-stars');
-    const star = document.createElement('div');
-    star.className = 'shooting-star';
-    
-    // Random starting position (top half of screen)
-    const startX = Math.random() * window.innerWidth;
-    const startY = Math.random() * (window.innerHeight / 2);
-    star.style.left = `${startX}px`;
-    star.style.top = `${startY}px`;
-    
-    // Random angle and distance
-    const angle = Math.random() * 30 + 30; // 30-60 degrees
-    const travelDistance = Math.random() * 400 + 200; // 200-600px
-    
-    star.style.setProperty('--angle', `${angle}deg`);
-    star.style.setProperty('--travel-distance', `${travelDistance}px`);
-    
-    // Animation duration
-    const duration = Math.random() * 0.5 + 0.5; // 0.5-1 second
-    star.style.animation = `shoot ${duration}s linear`;
-    
-    container.appendChild(star);
-    
-    // Remove after animation
-    setTimeout(() => {
-        star.remove();
-    }, duration * 1000);
-}
-
-// Initialize stars
-createStars();
-
-// Randomly create shooting stars
-setInterval(() => {
-    if (Math.random() < 0.3) { // 30% chance every 2 seconds
-        createShootingStar();
+    @keyframes twinkle {
+        0% { transform: scale(1); opacity: var(--base-opacity); }
+        50% { transform: scale(0.7); opacity: calc(var(--base-opacity) * 0.3); }
+        100% { transform: scale(1); opacity: var(--base-opacity); }
     }
-}, 2000);
-</script>
+
+    @keyframes shoot {
+        from {
+            transform: translateX(0) translateY(0) rotate(var(--angle));
+            opacity: 1;
+        }
+        to {
+            transform: translateX(var(--travel-distance)) translateY(var(--travel-distance)) rotate(var(--angle));
+            opacity: 0;
+        }
+    }
 
         // Create stars when the page loads
         window.addEventListener('load', createStars);
