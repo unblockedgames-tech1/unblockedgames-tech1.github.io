@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+  <script src="/assets/js/favicon-handler.js"></script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>New Tab</title>
     
-    <script src="/assets/js/favicon-handler.js"></script>
+    <!-- Scripts -->
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
     <script src="/config.js"></script>
     <script src="/global.js"></script>
     
+    <!-- Styles -->
     <link rel="stylesheet" href="/assets/css/styles.css">
     <style>
         .flex-container {
@@ -88,71 +90,17 @@
         .play-button:hover {
             background-color: #454545;
         }
-
-        .search-container {
-            text-align: center;
-            padding: 20px;
-            margin-top: 20px;
-        }
-
-        .search-input {
-            padding: 10px;
-            width: 300px;
-            border-radius: 20px;
-            border: 1px solid #555555;
-            margin-right: 10px;
-            font-size: 16px;
-            outline: none;
-        }
-
-        .search-input:focus {
-            border-color: #454545;
-            box-shadow: 0 0 5px rgba(69, 69, 69, 0.3);
-        }
-
-        .search-button {
-            background-color: #555555;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 20px;
-            border: none;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s ease-in-out, transform 0.2s ease;
-        }
-
-        .search-button:hover {
-            background-color: #454545;
-            transform: scale(1.05);
-        }
-
-        .search-button:active {
-            transform: scale(0.95);
-        }
     </style>
 </head>
 <body>
     <div id="header"></div>
-    
-    <div class="search-container">
-        <form onsubmit="handleSearch(event)">
-            <input type="text" 
-                   class="search-input" 
-                   id="searchInput" 
-                   placeholder="Enter URL or search term..."
-                   autocomplete="off"
-                   autofocus>
-            <button type="submit" class="search-button">Search</button>
-        </form>
-    </div>
-
+    <div id="footer"></div>
     <div id="div_appout">
         <div class="flex-container" id="gamesList"></div>
     </div>
 
-    <div id="footer"></div>
-
     <script>
+        // Function to load HTML content
         async function loadHTML(url, elementId) {
             try {
                 const response = await fetch(url);
@@ -163,6 +111,7 @@
             }
         }
 
+        // Function to initialize UV service worker
         async function registerSW() {
             const stockSW = "/uv/sw.js";
             const swAllowedHostnames = ["localhost", "127.0.0.1"];
@@ -181,73 +130,39 @@
             }
         }
 
-        function writeIframe(src) {
-            const stag = document.getElementById('stag');
-            const uvsearch = document.getElementById('uvsearch');
-            
-            if (stag) stag.remove();
-            if (uvsearch) uvsearch.remove();
-            
-            const iframe = document.createElement("iframe");
-            iframe.style.border = 'none';
-            iframe.style.width = '100%';
-            iframe.style.height = '100%';
-            iframe.style.margin = '0';
-            iframe.src = src;
-            iframe.style.padding = '0.5px';
-            iframe.style.position = 'fixed';
-            iframe.style.display = 'block';
-            
-            document.getElementById('div_appout').appendChild(iframe);
-        }
-
-        function initializeDefaultApps() {
+        // Function to render games list
+        function renderGamesList() {
+            const gamesList = document.getElementById("gamesList");
+            // Default apps defined directly in code instead of localStorage
             const defaultApps = [
                 {
                     title: "Netflix",
                     imgSrc: "/appimg/netflix.png",
-                    link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")
-                },
-                {
-                    title: "YouTube",
-                    imgSrc: "/appimg/youtube.png",
-                    link: __uv$config.prefix + __uv$config.encodeUrl("https://youtube.com")
-                },
-                {
-                    title: "Discord",
-                    imgSrc: "/appimg/discord.png",
-                    link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com")
+                    link: "https://netflix.com"
                 }
-                // Add more default apps as needed
+                // Add more apps here as needed
             ];
             
-            if (!localStorage.getItem("apps")) {
-                localStorage.setItem("apps", JSON.stringify(defaultApps));
-            }
-        }
-
-        function renderGamesList() {
-            const gamesList = document.getElementById("gamesList");
-            const gamesData = JSON.parse(localStorage.getItem("apps"));
+            if (!gamesList) return;
             
-            if (!gamesList || !gamesData) return;
-
             gamesList.innerHTML = '';
             
-            gamesData.forEach(game => {
+            defaultApps.forEach(app => {
                 const gameElement = document.createElement("div");
                 gameElement.className = "game";
 
                 const imgElement = document.createElement("img");
-                imgElement.src = game.imgSrc;
-                imgElement.alt = game.title;
+                imgElement.src = app.imgSrc;
+                imgElement.alt = app.title;
                 imgElement.className = "game-image";
 
+                const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(app.link);
+                
                 const titleElement = document.createElement("div");
                 titleElement.className = "game-info";
                 titleElement.innerHTML = `
-                    <h2 class="game-title">${game.title}</h2>
-                    <a href="javascript:void(0)" class="play-button" onclick="handleAppClick(event, '${game.link}')">Use</a>
+                    <h2 class="game-title">${app.title}</h2>
+                    <a href="javascript:void(0)" class="play-button" onclick="handleAppClick(event, '${encodedUrl}')">Use</a>
                 `;
 
                 gameElement.appendChild(imgElement);
@@ -255,7 +170,7 @@
 
                 gameElement.onclick = (e) => {
                     if (!e.target.classList.contains('play-button')) {
-                        handleAppClick(e, game.link);
+                        handleAppClick(e, encodedUrl);
                     }
                 };
 
@@ -263,37 +178,14 @@
             });
         }
 
-        function handleSearch(event) {
+        // Function to handle app clicks
+        function handleAppClick(event, encodedUrl) {
             event.preventDefault();
-            const searchInput = document.getElementById('searchInput').value.trim();
-            
-            if (!searchInput) return;
-
-            let url;
-            try {
-                url = new URL(searchInput);
-                // Check if the URL has a protocol, if not add https
-                if (!url.protocol || url.protocol === ':') {
-                    url = new URL('https://' + searchInput);
-                }
-            } catch {
-                // If not a valid URL, assume it's a search query
-                url = new URL(`https://www.google.com/search?q=${encodeURIComponent(searchInput)}`);
-            }
-
-            // Encode the URL using UV config
-            const encodedUrl = __uv$config.prefix + __uv$config.encodeUrl(url.toString());
-            
-            // Redirect to Classes page with the encoded URL
+            event.stopPropagation();
             window.location.href = `/Classes.html?url=${encodeURIComponent(encodedUrl)}`;
         }
 
-        function handleAppClick(event, link) {
-            event.preventDefault();
-            event.stopPropagation();
-            window.location.href = `/Classes.html?url=${encodeURIComponent(link)}`;
-        }
-
+        // Initialize everything when the DOM is ready
         document.addEventListener("DOMContentLoaded", async function() {
             try {
                 await registerSW();
@@ -301,7 +193,6 @@
                     loadHTML("/assets/html/header.html", "header"),
                     loadHTML("/assets/html/footer.html", "footer")
                 ]);
-                initializeDefaultApps();
                 renderGamesList();
             } catch (error) {
                 console.error("Initialization error:", error);
