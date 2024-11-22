@@ -309,156 +309,37 @@ body, html {
                 ]);
                 
                 const defaultApps = [
-                {
-                                    title: "Netf<x>l</x>ix",
-                imgSrc: "/appimg/netflix.png",
-                link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")
-            },
-{
-    title: "Netf<x>l</x>ix",
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")
-},
-{
-    title: "Hu<x>l</x>u",
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")
-},
-{
-    title: "Google", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.google.com")
-}, 
-{
-    title: "Cha<x>tG</x>pt",
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://deepai.org")
-},
-{
-    title: "C</x>.a</x>i", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://character.ai")
-},
-{
-    title: "Di<x>s</x>cord", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com/")
-},
-{
-    title: "Tu</x>bi", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://tubitv.com/")
-},
-{
-    title: "Co</x>ol Ma</x>th Ga</x>me</x>s", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com")
-},
-{
-    title: "Sn</x>ap</x>chat", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.snapchat.com")
-},
-{
-    title: "Yo</x>utu</x>be", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.youtube.com/shorts")
-},
-{
-    title: "Ti</x>kt</x>ok", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.tiktok.com")
-},
-{
-    title: "Spo</x>tify", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://open.spotify.com")
-},
-{
-    title: "X</x>box Clo</x>ud Gam</x>ing", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.xbox.com/en-us/play")
-},
-{
-    title: "Red</x>dit", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.reddit.com")
-},
-{
-    title: "KBH Gam</x>es", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://kbhgames.com")
-},
-{
-    title: "Crazy Gam</x>es", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.crazygames.com")
-},
-{
-    title: "Vo</x>id Ne</x>tw</x>ork M</x>ovi</x>es", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://mega.nz/folder/6J9iBQ7A#JZqvYH9wm-YRl_ZlnoK-cg")
-},
-{
-    title: "Itch.io", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://itch.io")
-},
-{
-    title: "Byvolp", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://byvolp.web.app/games/index.html")
-},
-{
-    title: "Scratch", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://scratch.mit.edu/explore/projects/all")
-},
-{
-    title: "Now.gg", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://now.gg")
-},
-{
-    title: "Crazy Sports", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://test-theta-eight-39.vercel.app")
-},
-{
-    title: "9anime (Sketchy)", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://9animetv.to")
-},
-{
-    title: "Twitch", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.twitch.tv")
-},
-{
-    title: "Github", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://github.com")
-},
-{
-    title: "HoodaMath", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/#gsc.tab=0")
-},
-{
-    title: "Apple Music", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://music.apple.com/us/new")
-},
-{
-    title: "Vidbinge", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.vidbinge.com")
-},
-{
-    title: "Disney Plus", 
-    imgSrc: "",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.disneyplus.com/welcome/stream")
-}
+                    {title: "Netflix", link: __uv$config.prefix + __uv$config.encodeUrl("https://netflix.com")},
+                    {title: "Hulu", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hulu.com")},
+                    {title: "Google", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.google.com")},
+                    {title: "ChatGPT", link: __uv$config.prefix + __uv$config.encodeUrl("https://deepai.org")},
+                    {title: "Character AI", link: __uv$config.prefix + __uv$config.encodeUrl("https://character.ai")},
+                    {title: "Discord", link: __uv$config.prefix + __uv$config.encodeUrl("https://discord.com/")},
+                    {title: "Tubi", link: __uv$config.prefix + __uv$config.encodeUrl("https://tubitv.com/")},
+                    {title: "Cool Math Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com")},
+                    {title: "Snapchat", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.snapchat.com")},
+                    {title: "Youtube", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.youtube.com/shorts")},
+                    {title: "TikTok", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.tiktok.com")},
+                    {title: "Spotify", link: __uv$config.prefix + __uv$config.encodeUrl("https://open.spotify.com")},
+                    {title: "Xbox Cloud Gaming", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.xbox.com/en-us/play")},
+                    {title: "Reddit", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.reddit.com")},
+                    {title: "KBH Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://kbhgames.com")},
+                    {title: "Crazy Games", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.crazygames.com")},
+                    {title: "Void Network Movies", link: __uv$config.prefix + __uv$config.encodeUrl("https://mega.nz/folder/6J9iBQ7A#JZqvYH9wm-YRl_ZlnoK-cg")},
+                    {title: "Itch.io", link: __uv$config.prefix + __uv$config.encodeUrl("https://itch.io")},
+                    {title: "Byvolp", link: __uv$config.prefix + __uv$config.encodeUrl("https://byvolp.web.app/games/index.html")},
+                    {title: "Scratch", link: __uv$config.prefix + __uv$config.encodeUrl("https://scratch.mit.edu/explore/projects/all")},
+                    {title: "Now.gg", link: __uv$config.prefix + __uv$config.encodeUrl("https://now.gg")},
+                    {title: "Crazy Sports", link: __uv$config.prefix + __uv$config.encodeUrl("https://test-theta-eight-39.vercel.app")},
+                    {title: "9anime", link: __uv$config.prefix + __uv$config.encodeUrl("https://9animetv.to")},
+                    {title: "Twitch", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.twitch.tv")},
+                    {title: "Github", link: __uv$config.prefix + __uv$config.encodeUrl("https://github.com")},
+                    {title: "HoodaMath", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/#gsc.tab=0")},
+                    {title: "Apple Music", link: __uv$config.prefix + __uv$config.encodeUrl("https://music.apple.com/us/new")},
+                    {title: "Vidbinge", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.vidbinge.com")},
+                    {title: "Disney Plus", link: __uv$config.prefix + __uv$config.encodeUrl("https://www.disneyplus.com/welcome/stream")}
+                ];
+
 
                 ];
 
