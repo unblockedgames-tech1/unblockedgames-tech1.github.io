@@ -66,6 +66,12 @@
             border: none;
             border-radius: 10px 10px 0 0;
             background-color: #000;
+            position: relative;
+            z-index: 1;
+        }
+
+        .game_iframe.loaded {
+            z-index: 2;
         }
 
         .footer {
@@ -76,6 +82,7 @@
             justify-content: center;
             align-items: center;
             gap: 10px;
+            z-index: 10;
         }
 
         .footer button {
@@ -98,10 +105,15 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            display: flex;
+            display: none;
             justify-content: center;
             align-items: center;
             border-radius: 10px;
+            z-index: 1000;
+        }
+
+        .loading-overlay.visible {
+            display: flex;
         }
 
         .loading-spinner {
@@ -117,6 +129,8 @@
             color: #ff4444;
             text-align: center;
             padding: 20px;
+            font-size: 16px;
+            max-width: 80%;
         }
 
         @keyframes spin {
@@ -164,12 +178,22 @@
         const loadingOverlay = document.getElementById('loadingOverlay');
         const swAllowedHostnames = ['localhost', '127.0.0.1'];
         const stockSW3 = '/uv/sw.js';
-        
-        // Set a timeout for loading
-        const LOADING_TIMEOUT = 15000; // 15 seconds
+        const LOADING_TIMEOUT = 15000;
         let loadingTimer;
+        let isGameLoaded = false;
 
-        // Register service worker in the background
+        function showLoading() {
+            loadingOverlay.classList.add('visible');
+            isGameLoaded = false;
+            iframe.classList.remove('loaded');
+        }
+
+        function hideLoading() {
+            loadingOverlay.classList.remove('visible');
+            isGameLoaded = true;
+            iframe.classList.add('loaded');
+        }
+
         async function registerSWv2() {
             if (!navigator.serviceWorker) return;
             try {
@@ -185,7 +209,6 @@
             }
         }
 
-        // Initialize game loading
         function initializeGame() {
             const urlParams = new URLSearchParams(window.location.search);
             const gameUrl = urlParams.get('game');
@@ -198,19 +221,24 @@
             loadGame(decodeURIComponent(gameUrl));
         }
 
-        // Load the game with timeout and error handling
         function loadGame(url) {
-            loadingOverlay.style.display = 'flex';
+            showLoading();
             
-            // Set loading timeout
+            if (loadingTimer) {
+                clearTimeout(loadingTimer);
+            }
+
             loadingTimer = setTimeout(() => {
-                handleLoadError('Game loading timed out. Please try again.');
+                if (!isGameLoaded) {
+                    handleLoadError('Game loading timed out. Please try again.');
+                }
             }, LOADING_TIMEOUT);
 
-            // Load the game
             iframe.onload = () => {
                 clearTimeout(loadingTimer);
-                loadingOverlay.style.display = 'none';
+                setTimeout(() => {
+                    hideLoading();
+                }, 500);
             };
 
             iframe.onerror = () => {
@@ -220,23 +248,28 @@
             iframe.src = url;
         }
 
-        // Handle loading errors
         function handleLoadError(message) {
             clearTimeout(loadingTimer);
             loadingOverlay.innerHTML = `<div class="error-message">${message}</div>`;
             setTimeout(() => {
-                loadingOverlay.style.display = 'none';
+                hideLoading();
+                loadingOverlay.innerHTML = '<div class="loading-spinner"></div>';
             }, 3000);
         }
 
-        // Initialize everything
         document.addEventListener('DOMContentLoaded', () => {
-            // Register service worker in the background
             registerSWv2();
-            
-            // Initialize game immediately
             initializeGame();
         });
+
+        function reloadGame() {
+            const currentSrc = iframe.src;
+            iframe.src = 'about:blank';
+            showLoading();
+            setTimeout(() => {
+                iframe.src = currentSrc;
+            }, 100);
+        }
 
         function toggleFullScreen() {
             if (!document.fullscreenElement) {
@@ -250,17 +283,38 @@
             }
         }
 
-        function reloadGame() {
-            const currentSrc = iframe.src;
-            iframe.src = '';
-            loadingOverlay.style.display = 'flex';
-            setTimeout(() => {
-                loadGame(currentSrc);
+        function toggleFlashlight() {}
+        function toggleChat() {}
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden && isGameLoaded) {
+                hideLoading();
+            }
+        });
+
+        iframe.addEventListener('mousemove', () => {
+            if (loadingOverlay.classList.contains('visible') && iframe.src && iframe.src !== 'about:blank') {
+                hideLoading();
+            }
+        }, { once: true });
+
+        // Additional fallback for games that might not trigger load events properly
+        let loadCheckInterval;
+        function startLoadCheck() {
+            if (loadCheckInterval) clearInterval(loadCheckInterval);
+            let attempts = 0;
+            loadCheckInterval = setInterval(() => {
+                attempts++;
+                if (iframe.contentWindow && iframe.contentWindow.document) {
+                    hideLoading();
+                    clearInterval(loadCheckInterval);
+                } else if (attempts >= 50) { // 5 seconds maximum
+                    clearInterval(loadCheckInterval);
+                }
             }, 100);
         }
 
-        function toggleFlashlight() {}
-        function toggleChat() {}
+        iframe.addEventListener('load', startLoadCheck);
     </script>
 </body>
 </html>
