@@ -182,7 +182,8 @@
         function handleAppClick(event, encodedUrl) {
             event.preventDefault();
             event.stopPropagation();
-            window.location.href = `/Classes.html?url=${encodeURIComponent(encodedUrl)}`;
+            // Modified to match the Classes.html page's URL parameter name 'game'
+            window.location.href = `/Classes.html?game=${encodeURIComponent(encodedUrl)}`;
         }
 
         // Initialize everything when the DOM is ready
