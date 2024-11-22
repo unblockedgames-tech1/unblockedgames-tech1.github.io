@@ -1,115 +1,204 @@
-<!DOCTYPE html>
-<html lang="en">
-  <script src="/assets/js/favicon-handler.js"></script>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>New Tab</title>
+body, html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    color: #fff;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+}
+
+.stars {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+
+@keyframes moveStar {
+    from { transform: translateY(0); }
+    to { transform: translateY(100vh); }
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: #fff;
+    border-radius: 50%;
+    animation: moveStar linear infinite;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.games-box {
+    background: #000;
+    border-radius: 10px;
+    width: 80%;
+    max-width: 1000px;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    padding: 2px;
+    box-shadow: 
+        0 0 2px #fff,
+        0 0 4px #fff,
+        0 0 6px #fff,
+        0 0 8px #fff,
+        inset 0 0 2px rgba(255, 255, 255, 0.2);
+}
+
+.games-box::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: #fff;
+    border-radius: 10px;
+    z-index: -1;
+    box-shadow: 
+        0 0 15px #fff,
+        0 0 30px rgba(255, 255, 255, 0.8),
+        0 0 40px rgba(255, 255, 255, 0.6),
+        0 0 50px rgba(255, 255, 255, 0.4);
+    opacity: 0.5;
+}
+
+.games-header {
+    padding: 1.5rem;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 1;
+}
+
+.site-title {
+    font-size: 2.5rem;
+    margin: 0 0 0.5rem 0;
+    background: linear-gradient(45deg, #fff, #a0a0a0);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: bold;
+}
+
+.games-title {
+    font-size: 1.2rem;
+    margin: 0.5rem 0;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+#searchApps {
+    width: 80%;
+    max-width: 400px;
+    padding: 0.8rem 1.5rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 25px;
+    background: rgba(255, 255, 255, 0.05);
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    margin: 1rem auto 0 auto;
+    display: block;
+}
+
+#searchApps:focus {
+    outline: none;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+#searchApps::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
+    overflow-y: auto;
+    flex-grow: 1;
+    position: relative;
+    z-index: 1;
+}
+
+.games-grid::-webkit-scrollbar {
+    width: 8px;
+}
+
+.games-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    margin: 4px;
+    border-radius: 4px;
+}
+
+.games-grid::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 4px;
+}
+
+.games-grid::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.game-item {
+    padding: 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.game-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+.game-title {
+    font-size: 1rem;
+    color: #fff;
+    margin: 0;
+    font-weight: normal;
+    transition: all 0.3s ease;
+}
+
+.game-item:hover .game-title {
+    color: #fff;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+    .games-box {
+        width: 95%;
+        height: 80vh;
+    }
     
-    <!-- Scripts -->
-    <script src="uv/uv.bundle.js"></script>
-    <script src="uv/uv.config.js"></script>
-    <script src="/config.js"></script>
-    <script src="/global.js"></script>
+    .games-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        padding: 1rem;
+    }
     
-    <!-- Styles -->
-    <link rel="stylesheet" href="/assets/css/styles.css">
-    <style>
-        /* All your existing styles remain exactly the same */
-        
-        /* Added stars styles */
-        .stars {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        @keyframes moveStar {
-            from { transform: translateY(0); }
-            to { transform: translateY(100vh); }
-        }
-
-        .star {
-            position: absolute;
-            width: 2px;
-            height: 2px;
-            background: #fff;
-            border-radius: 50%;
-            animation: moveStar linear infinite;
-        }
-    </style>
-</head>
-<body>
-    <!-- Added stars container -->
-    <div class="stars"></div>
-
-    <div id="header"></div>
-    
-    <div class="container">
-        <div class="games-box">
-            <div class="games-header">
-                <h1 class="site-title">Void Network</h1>
-                <h2 class="games-title">Apps</h2>
-            </div>
-            <div class="games-grid" id="gamesList"></div>
-        </div>
-    </div>
-
-    <div id="footer"></div>
-
-    <script>
-        // Previous functions remain the same
-        
-        // Added stars generation function
-        function createStars() {
-            const starsContainer = document.querySelector('.stars');
-            const numberOfStars = 200;
-
-            for (let i = 0; i < numberOfStars; i++) {
-                const star = document.createElement('div');
-                star.className = 'star';
-                
-                // Random star size
-                const size = Math.random() * 2;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                
-                // Random position
-                star.style.left = `${Math.random() * 100}%`;
-                star.style.top = `${Math.random() * 100}%`;
-                
-                // Random speed
-                const duration = 20 + Math.random() * 20;
-                star.style.animationDuration = `${duration}s`;
-                
-                // Random delay
-                star.style.animationDelay = `${Math.random() * duration}s`;
-                
-                // Random opacity
-                star.style.opacity = Math.random() * 0.8 + 0.2;
-                
-                starsContainer.appendChild(star);
-            }
-        }
-
-        // Modified initialization to include stars
-        document.addEventListener("DOMContentLoaded", async function() {
-            try {
-                await registerSW();
-                await Promise.all([
-                    loadHTML("/assets/html/header.html", "header"),
-                    loadHTML("/assets/html/footer.html", "footer")
-                ]);
-                renderGamesList();
-                createStars(); // Added stars creation
-            } catch (error) {
-                console.error("Initialization error:", error);
-            }
-        });
-    </script>
-</body>
-</html>
+    .site-title {
+        font-size: 2rem;
+    }
+}
