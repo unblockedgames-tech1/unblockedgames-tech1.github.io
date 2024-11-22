@@ -315,82 +315,32 @@ body, html {
 
                 ];
 
-                localStorage.setItem("apps", JSON.stringify(defaultApps));
-                
-                const gamesList = document.getElementById("gamesList");
-                const apps = JSON.parse(localStorage.getItem("apps"));
-                
-                apps.forEach(app => {
-                    const gameElement = document.createElement("div");
-                    gameElement.className = "game";
+localStorage.setItem("apps", JSON.stringify(defaultApps));
+const gamesList = document.getElementById("gamesList");
 
-                    const imgElement = document.createElement("img");
-                    imgElement.src = app.imgSrc;
-                    imgElement.alt = app.title;
-                    imgElement.className = "game-image";
+function loadApp(app) {
+    const gameElement = document.createElement("div");
+    gameElement.className = "game-item";
+    gameElement.innerHTML = `<h3 class="game-title">${app.title}</h3>`;
+    gameElement.onclick = () => {
+        localStorage.setItem('loadedG', app.link);
+        location.href = '/Classes.html';
+    };
+    gamesList.appendChild(gameElement);
+}
 
-                    const gameInfo = document.createElement("div");
-                    gameInfo.className = "game-info";
-                    gameInfo.innerHTML = `
-                        <h3 class="game-title">${app.title}</h3>
-                        <a href="javascript:void(0)" class="play-button" onclick="(function(e) {
-                            e.stopPropagation();
-                            localStorage.setItem('loadedG', '${app.link}');
-                            location.href = '/Classes.html';
-                        })(event)">Use</a>
-                    `;
+defaultApps.forEach(app => loadApp(app));
 
-                    gameElement.appendChild(imgElement);
-                    gameElement.appendChild(gameInfo);
+document.getElementById("searchGames").addEventListener("keyup", function(e) {
+    const searchTerm = this.value.toLowerCase();
+    gamesList.innerHTML = '';
+    defaultApps.filter(app => app.title.toLowerCase().includes(searchTerm))
+              .forEach(app => loadApp(app));
+});
 
-                    gameElement.onclick = () => {
-                        localStorage.setItem("loadedG", app.link);
-                        location.href = "/Classes.html";
-                    };
-
-                    gamesList.appendChild(gameElement);
-                });
-
-                // Search functionality
-                document.getElementById("searchGames").addEventListener("keyup", function(e) {
-                    const searchTerm = this.value.toLowerCase();
-                    const apps = JSON.parse(localStorage.getItem("apps"));
-                    gamesList.innerHTML = '';
-                    
-                    apps.filter(app => app.title.toLowerCase().includes(searchTerm))
-                        .forEach(app => {
-                            const gameElement = document.createElement("div");
-                            gameElement.className = "game";
-
-                            const imgElement = document.createElement("img");
-                            imgElement.src = app.imgSrc;
-                            imgElement.alt = app.title;
-                            imgElement.className = "game-image";
-
-                            const gameInfo = document.createElement("div");
-                            gameInfo.className = "game-info";
-                            gameInfo.innerHTML = `
-                                <h3 class="game-title">${app.title}</h3>
-                                <a href="javascript:void(0)" class="play-button" onclick="(function(e) {
-                                    e.stopPropagation();
-                                    localStorage.setItem('loadedG', '${app.link}');
-                                    location.href = '/Classes.html';
-                                })(event)">Use</a>
-                            `;
-
-                            gameElement.appendChild(imgElement);
-                            gameElement.appendChild(gameInfo);
-
-                            gameElement.onclick = () => {
-                                localStorage.setItem("loadedG", app.link);
-                                location.href = "/Classes.html";
-                            };
-
-                            gamesList.appendChild(gameElement);
-                        });
-                });
             } catch (error) {
                 console.error("Initialization error:", error);
+                gamesList.innerHTML = `<div style="color: white;">Error loading apps: ${error.message}</div>`;
             }
         });
 
