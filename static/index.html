@@ -1,6 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<style id="loading-style">body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden}#loadingOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#000 0,#1a1a1a 100%);display:flex;justify-content:center;align-items:center;z-index:999999;transition:opacity 1s ease-in-out}#loadingContainer{text-align:center;color:#fff}#loadingLogo{width:200px;height:200px;margin-bottom:30px;opacity:0;animation:fadeIn 1s ease-in-out forwards}#loadingLogo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.2)}#loadingText{font-size:1.5rem;text-align:center;color:#fff;margin-bottom:10px;letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:slideIn 2s ease-in-out forwards}#loadingBar{width:200px;height:2px;background:#1a1a1a;margin:20px auto;position:relative;border-radius:15px;overflow:hidden}#progressFill{height:100%;width:0;background:#fff;position:absolute;transition:width .1s linear}.dots::after{content:'';animation:dotAnimation 2s infinite}@keyframes dotAnimation{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}@keyframes slideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.fade-out{opacity:0;pointer-events:none}</style><div id="loadingOverlay"><div id="loadingContainer"><div id="loadingLogo"><img src="https://lh7-us.googleusercontent.com/0ff1xEpXSGBfNtZuo4lHxeWmUza2nr6xF-lTTQIyHPNry153eN869FgqSFV6CZQc6Hhq1lzMFO-nV-4MKsnmvT_8KYM2weE3LB7wjl3DPfAxAqEeM0TKzis1zb9ATbcPFm3ZoVySKuT1fs5kLzcG4q9gXLS9JA" alt="Logo"></div><div id="loadingText">Loading<span class="dots"></span></div><div id="loadingBar"><div id="progressFill"></div></div></div></div><script>!function(){let e=0,t=performance.now(),n=0,o=60;const a=document.getElementById("progressFill"),i=document.getElementById("loadingOverlay"),d=()=>{n++;const a=performance.now();a-t>=1e3&&(o=n,n=0,t=a),requestAnimationFrame(d)};requestAnimationFrame(d);const r=.3,s=()=>{if(e<100){const t=60/Math.max(o,30);e+=r*t,a.style.width=`${Math.min(e,100)}%`,requestAnimationFrame(s)}};requestAnimationFrame(s),setTimeout(()=>{i.classList.add("fade-out")},Math.max(3e3,5e3*(30/o))),i.addEventListener("transitionend",function(){this.classList.contains("fade-out")&&(i.remove(),document.getElementById("loading-style").remove())})}();</script>
+<style id="loading-style">body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden}#loadingOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#000 0,#1a1a1a 100%);display:flex;justify-content:center;align-items:center;z-index:999999;transition:opacity 1s ease-in-out}#loadingContainer{text-align:center;color:#fff}#loadingLogo{width:200px;height:200px;margin-bottom:30px;opacity:0;animation:fadeIn 1s ease-in-out forwards}#loadingLogo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.2)}#loadingText{font-size:1.5rem;text-align:center;color:#fff;margin-bottom:10px;letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:slideIn 2s ease-in-out forwards}#loadingBar{width:200px;height:2px;background:#1a1a1a;margin:20px auto;position:relative;border-radius:15px;overflow:hidden}#progressFill{height:100%;width:0;background:#fff;position:absolute;transition:width .1s linear}.dots::after{content:'';animation:dotAnimation 2s infinite}@keyframes dotAnimation{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}@keyframes slideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.fade-out{opacity:0;pointer-events:none}</style>
+<div id="loadingOverlay">
+    <div id="loadingContainer">
+        <div id="loadingLogo">
+            <img src="https://lh7-us.googleusercontent.com/0ff1xEpXSGBfNtZuo4lHxeWmUza2nr6xF-lTTQIyHPNry153eN869FgqSFV6CZQc6Hhq1lzMFO-nV-4MKsnmvT_8KYM2weE3LB7wjl3DPfAxAqEeM0TKzis1zb9ATbcPFm3ZoVySKuT1fs5kLzcG4q9gXLS9JA" alt="Logo">
+        </div>
+        <div id="loadingText">Loading<span class="dots"></span></div>
+        <div id="loadingBar">
+            <div id="progressFill"></div>
+        </div>
+    </div>
+</div>
+<script>!function(){let e=0,t=performance.now(),n=0,o=60;const a=document.getElementById("progressFill"),i=document.getElementById("loadingOverlay"),d=()=>{n++;const a=performance.now();a-t>=1e3&&(o=n,n=0,t=a),requestAnimationFrame(d)};requestAnimationFrame(d);const r=.3,s=()=>{if(e<100){const t=60/Math.max(o,30);e+=r*t,a.style.width=`${Math.min(e,100)}%`,requestAnimationFrame(s)}};requestAnimationFrame(s),setTimeout(()=>{i.classList.add("fade-out")},Math.max(3e3,5e3*(30/o))),i.addEventListener("transitionend",function(){this.classList.contains("fade-out")&&(i.remove(),document.getElementById("loading-style").remove())})}();</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,7 +36,6 @@ body, html {
     overflow: hidden;
 }
 
-/* Stars Background */
 .stars {
     position: fixed;
     top: 0;
@@ -185,6 +196,35 @@ body, html {
     cursor: pointer;
     text-align: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.game-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.game-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.game-title {
+    font-size: 0.9rem;
+    color: #fff;
+    margin: 0;
+    font-weight: normal;
+    transition: all 0.3s ease;
 }
 
 .game-item:hover {
@@ -192,14 +232,6 @@ body, html {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border-color: rgba(255, 255, 255, 0.2);
-}
-
-.game-title {
-    font-size: 1rem;
-    color: #fff;
-    margin: 0;
-    font-weight: normal;
-    transition: all 0.3s ease;
 }
 
 .game-item:hover .game-title {
@@ -214,8 +246,17 @@ body, html {
     }
     
     .games-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         padding: 1rem;
+    }
+    
+    .game-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .game-title {
+        font-size: 0.8rem;
     }
     
     .site-title {
@@ -254,7 +295,6 @@ body, html {
         </iframe>
     </noscript>
 
-    <!-- Stars Container -->
     <div class="stars"></div>
 
     <div id="header"></div>
@@ -272,7 +312,6 @@ body, html {
 
     <div id="footer"></div>
 
-    <!-- Stars Generation Script -->
     <script>
         function createStars() {
             const starsContainer = document.querySelector('.stars');
@@ -282,39 +321,28 @@ body, html {
                 const star = document.createElement('div');
                 star.className = 'star';
                 
-                // Random star size
                 const size = Math.random() * 5;
                 star.style.width = `${size}px`;
                 star.style.height = `${size}px`;
                 
-                // Random position
                 star.style.left = `${Math.random() * 100}%`;
                 star.style.top = `${Math.random() * 100}%`;
                 
-                // Random speed
                 const duration = 20 + Math.random() * 20;
                 star.style.animationDuration = `${duration}s`;
                 
-                // Random delay
                 star.style.animationDelay = `${Math.random() * duration}s`;
                 
-                // Random opacity
                 star.style.opacity = Math.random() * 0.8 + 0.2;
                 
                 starsContainer.appendChild(star);
             }
         }
 
-        // Create stars when the page loads
         window.addEventListener('load', createStars);
     </script>
 
-    <script>
-        loadHTML("/assets/html/header.html", "header");
-        loadHTML("/assets/html/footer.html", "footer");
-    </script>
-
-    <script type="module">
+<script type="module">
         try {
             const gamesList = document.getElementById("gamesList");
             
@@ -339,7 +367,12 @@ body, html {
             function loadGame(game) {
                 const gameElement = document.createElement("div");
                 gameElement.className = "game-item";
-                gameElement.innerHTML = `<h3 class="game-title">${game.title}</h3>`;
+                gameElement.innerHTML = `
+                    <div class="game-icon">
+                        <img src="/api/placeholder/64/64" alt="${game.title} icon">
+                    </div>
+                    <h3 class="game-title">${game.title}</h3>
+                `;
                 gameElement.onclick = () => {
                     window.location.href = `/Classes.html?game=${encodeURIComponent(game.link)}`;
                 };
