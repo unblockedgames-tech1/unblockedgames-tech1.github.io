@@ -343,79 +343,62 @@ body, html {
     </script>
 
 <script type="module">
-        try {
-            const gamesList = document.getElementById("gamesList");
-            
-            await new Promise(resolve => {
-                if (window.__uv$config) {
-                    resolve();
-                } else {
-                    const checkUV = setInterval(() => {
-                        if (window.__uv$config) {
-                            clearInterval(checkUV);
-                            resolve();
-                        }
-                    }, 100);
-                }
-            });
-
-            const { gamesData } = await import("/assets/json/games.js");
-            const { games2Data } = await import("/assets/json/games2.js");
-            
-            const games = [...gamesData, ...games2Data];
-
-            function loadGame(game) {
-                const gameElement = document.createElement("div");
-                gameElement.className = "game-item";
-                gameElement.innerHTML = `
-                    <div class="game-icon">
-                        <img src="/api/placeholder/64/64" alt="${game.title} icon">
-                    </div>
-                    <h3 class="game-title">${game.title}</h3>
-                `;
-                gameElement.onclick = () => {
-                    window.location.href = `/Classes.html?game=${encodeURIComponent(game.link)}`;
-                };
-                gamesList.appendChild(gameElement);
-            }
-
-            if (Array.isArray(games)) {
-                games.forEach(game => {
-                    loadGame(game);
-                });
+    try {
+        const gamesList = document.getElementById("gamesList");
+        
+        await new Promise(resolve => {
+            if (window.__uv$config) {
+                resolve();
             } else {
-                console.error("Games is not an array:", games);
-                gamesList.innerHTML = '<div style="color: white;">Error: Games data is not in the correct format</div>';
-            }
-
-            document.getElementById("searchGames").addEventListener("keyup", function(e) {
-                gamesList.innerHTML = '';
-                const searchTerm = this.value.toLowerCase();
-                for (const game of games) {
-                    if (game.title.toLowerCase().includes(searchTerm)) {
-                        loadGame(game);
+                const checkUV = setInterval(() => {
+                    if (window.__uv$config) {
+                        clearInterval(checkUV);
+                        resolve();
                     }
-                }
-            });
-        } catch (error) {
-            console.error("Error loading games:", error);
-            gamesList.innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
+                }, 100);
+            }
+        });
+
+        const { gamesData } = await import("/assets/json/games.js");
+        const { games2Data } = await import("/assets/json/games2.js");
+        
+        const games = [...gamesData, ...games2Data];
+
+        function loadGame(game) {
+            const gameElement = document.createElement("div");
+            gameElement.className = "game-item";
+            gameElement.innerHTML = `
+                <div class="game-icon">
+                    <img src="${game.imgSrc}" alt="${game.title} icon">
+                </div>
+                <h3 class="game-title">${game.title}</h3>
+            `;
+            gameElement.onclick = () => {
+                window.location.href = `/Classes.html?game=${encodeURIComponent(game.link)}`;
+            };
+            gamesList.appendChild(gameElement);
         }
-    </script>
 
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js";
+        if (Array.isArray(games)) {
+            games.forEach(game => {
+                loadGame(game);
+            });
+        } else {
+            console.error("Games is not an array:", games);
+            gamesList.innerHTML = '<div style="color: white;">Error: Games data is not in the correct format</div>';
+        }
 
-        const firebaseConfig = {
-            apiKey: "AIzaSyBpiXLUYp_6M1BWEGmHzBjlLXMnbas0nB4",
-            authDomain: "void-netwo.firebaseapp.com",
-            projectId: "void-netwo",
-            storageBucket: "void-netwo.firebasestorage.app",
-            messagingSenderId: "962565650058",
-            appId: "1:962565650058:web:c3a2d5783ee0a34a2b1f73"
-        };
-
-        const app = initializeApp(firebaseConfig);
-    </script>
-</body>
-</html>
+        document.getElementById("searchGames").addEventListener("keyup", function(e) {
+            gamesList.innerHTML = '';
+            const searchTerm = this.value.toLowerCase();
+            for (const game of games) {
+                if (game.title.toLowerCase().includes(searchTerm)) {
+                    loadGame(game);
+                }
+            }
+        });
+    } catch (error) {
+        console.error("Error loading games:", error);
+        gamesList.innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
+    }
+</script>
