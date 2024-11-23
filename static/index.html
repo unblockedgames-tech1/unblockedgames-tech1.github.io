@@ -401,4 +401,6 @@ body, html {
         console.error("Error loading games:", error);
         gamesList.innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
     }
+                        loadHTML("/assets/html/header.html", "header"),
+                    loadHTML("/assets/html/footer.html", "footer")
 </script>
