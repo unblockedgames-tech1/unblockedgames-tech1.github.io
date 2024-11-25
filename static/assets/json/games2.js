@@ -92,12 +92,12 @@ const games2Data = [
 {
     title: "Geometrydash Meltdown", 
     imgSrc: "https://lh7-us.googleusercontent.com/2VSrflEy3rxlwUHDLPkDuICjlqthjIkW1bBHNE548hX_uxU6n2wn0qFwl49ufqQowttCUksEdwEU4itmDSK6SFjx9Fgj-H1mQxde_uig6NvIoj1RNoJqzH54IJMAqcb8cw6-Jqz0f8T45Moj1rHKz5yXtZRH7Q",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://geometrydash-meltdown.com")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/geometry-dash-meltdown/game.html?nocheckorient=1")
 },
 {
     title: "Geometrydash SubZero", 
     imgSrc: "https://lh7-us.googleusercontent.com/o-ZnHpcqHAa_1e_GPwUc8XNC0gKFSLry0EoFtYZYwW2sOkWNvumU4KGblA0s_vkslqDiIsK4_tuRg_QKlirNjO6UajJZUIKwNHfxPIM1KZsEE6pd4j2HEVCKbvzt64fW48qA8K1eb3rf_OhoInyvjdmRQy0duw",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://geometrydash-meltdown.com/geometry-dash-subzero.embed")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/geometry-dash-subzero/game.html?nocheckorient=1")
 },
 
 
