@@ -97,7 +97,7 @@ const games2Data = [
 {
     title: "Geometrydash SubZero", 
     imgSrc: "https://lh7-us.googleusercontent.com/o-ZnHpcqHAa_1e_GPwUc8XNC0gKFSLry0EoFtYZYwW2sOkWNvumU4KGblA0s_vkslqDiIsK4_tuRg_QKlirNjO6UajJZUIKwNHfxPIM1KZsEE6pd4j2HEVCKbvzt64fW48qA8K1eb3rf_OhoInyvjdmRQy0duw",
-    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.hoodamath.com/mobile/games/geometry-dash-subzero/game.html?nocheckorient=1")
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://turbowarp.org/216343253/embed?autoplay&addons=remove-curved-stage-border")
 },
 
 
