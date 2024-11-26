@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-  <script src="/assets/js/favicon-handler.js"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classes</title>
+    <script src="/assets/js/favicon-handler.js"></script>
     <style>
         * {
             margin: 0;
@@ -91,22 +91,51 @@
             width: 24px;
             height: 24px;
         }
+
+        .loading-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 36px;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px 10px 0 0;
+            z-index: 100;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #333;
+            border-top: 5px solid #fff;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .hidden {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <header class="header">
-        <a href="/">
-            <img src="/nav/home.png" class="home_bttn" alt="Home">
-        </a>
-        <a href="/ta">
-            <img src="/nav/search.png" class="home_bttn" alt="Search">
-        </a>
-        <a href="/app">
-            <img src="/nav/apps.png" class="home_bttn" alt="Apps">
-        </a>
+        <a href="/"><img src="/nav/home.png" class="home_bttn" alt="Home"></a>
+        <a href="/ta"><img src="/nav/search.png" class="home_bttn" alt="Search"></a>
+        <a href="/app"><img src="/nav/apps.png" class="home_bttn" alt="Apps"></a>
     </header>
 
     <div class="game_container">
+        <div id="loadingOverlay" class="loading-overlay">
+            <div class="loading-spinner"></div>
+        </div>
         <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard"></iframe>
         <div class="footer">
             <button onclick="toggleFullScreen()">
@@ -126,24 +155,11 @@
 
     <script>
         const iframe = document.getElementById('gframe');
+        const loadingOverlay = document.getElementById('loadingOverlay');
         const swAllowedHostnames = ['localhost', '127.0.0.1'];
         const stockSW3 = '/uv/sw.js';
 
-        async function registerSWv2() {
-            if (!navigator.serviceWorker) return;
-            try {
-                if (
-                    location.protocol !== 'https:' &&
-                    !swAllowedHostnames.includes(location.hostname)
-                ) return;
-                
-                await navigator.serviceWorker.register(stockSW3, { scope: '/' });
-                console.log('Service Worker registered successfully');
-            } catch (error) {
-                console.error('Service Worker registration failed:', error);
-            }
-        }
-
+        // Initialize game loading immediately
         function initializeGame() {
             const urlParams = new URLSearchParams(window.location.search);
             const gameUrl = urlParams.get('game');
@@ -153,15 +169,50 @@
                 return;
             }
 
+            // Show loading overlay
+            loadingOverlay.classList.remove('hidden');
+
+            // Load the game
             iframe.src = decodeURIComponent(gameUrl);
+
+            // Hide loading overlay when game loads
+            iframe.onload = () => {
+                loadingOverlay.classList.add('hidden');
+            };
         }
 
+        // Register Service Worker in parallel
+        async function registerSWv2() {
+            if (!navigator.serviceWorker) return;
+            
+            try {
+                if (
+                    location.protocol !== 'https:' &&
+                    !swAllowedHostnames.includes(location.hostname)
+                ) return;
+
+                // Check if service worker is already registered
+                const registration = await navigator.serviceWorker.getRegistration();
+                if (registration) {
+                    console.log('Service Worker already registered');
+                    return;
+                }
+
+                await navigator.serviceWorker.register(stockSW3, { scope: '/' });
+                console.log('Service Worker registered successfully');
+            } catch (error) {
+                console.error('Service Worker registration failed:', error);
+            }
+        }
+
+        // Initialize both processes immediately
         document.addEventListener('DOMContentLoaded', () => {
-            registerSWv2();
             initializeGame();
+            registerSWv2();
         });
 
         function reloadGame() {
+            loadingOverlay.classList.remove('hidden');
             const currentSrc = iframe.src;
             iframe.src = 'about:blank';
             setTimeout(() => {
