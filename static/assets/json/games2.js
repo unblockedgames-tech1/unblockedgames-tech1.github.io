@@ -99,7 +99,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/o-ZnHpcqHAa_1e_GPwUc8XNC0gKFSLry0EoFtYZYwW2sOkWNvumU4KGblA0s_vkslqDiIsK4_tuRg_QKlirNjO6UajJZUIKwNHfxPIM1KZsEE6pd4j2HEVCKbvzt64fW48qA8K1eb3rf_OhoInyvjdmRQy0duw",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://turbowarp.org/216343253/embed?autoplay&addons=remove-curved-stage-border")
 },
-
+{
+    title: "Papa's Cheeseria", 
+    imgSrc: "https://lh7-us.googleusercontent.com/vvyk1JdsAgFsPPE4lTjaW2KeG9Yf1C49WBvdZNZWQr2vyIChl5XCIy7DCByd8estWUjxVYBWowhFV11oqIqdw2IDtj-Mqjl2eqNBraif34wCjkhUT2OYtCPweDFTk_YQiOHufRMUqsT3Z7_kcTVqptmnvrOQPg",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/49657/")
+},
 
    ];
 export { games2Data }; // Named export
