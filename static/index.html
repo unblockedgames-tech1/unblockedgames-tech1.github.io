@@ -1,15 +1,6 @@
 <!DOCTYPE html>
 <!-- GSO 22 -->
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732" crossorigin="anonymous"></script>
-<ins class="adsbygoogle"
-     style="display:block; margin: 20px auto; max-width: 728px; width: 100%;"
-     data-ad-format="rectangle"
-     data-ad-client="ca-pub-4845994519357732"
-     data-ad-slot="1770504012"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
 <html lang="en">
 <!-- GSO 22 -->
   <script src="/assets/js/favicon-handler.js"></script>
@@ -289,9 +280,37 @@ body, html {
     }
 }
 </style>
+
+<script>
+    const stockSW = "/uv/sw.js";
+    const swAllowedHostnames = ["localhost", "127.0.0.1"];
+    function registerSW() {
+        if (!navigator.serviceWorker) {
+            if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
+                throw new Error("Service workers cannot be registered without https.");
+            throw new Error("Your browser doesn't support service workers.");
+        }
+        navigator.serviceWorker.register(stockSW);
+    }
+    registerSW();   
+</script>
 </head>
 
 <body>
+    <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-PZXRTFX5');
+    </script>
+
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
+            height="0" width="0" style="display:none;visibility:hidden">
+        </iframe>
+    </noscript>
+
     <div class="stars"></div>
 
     <div id="header"></div>
@@ -303,8 +322,8 @@ body, html {
                 <h2 class="games-title">Games</h2>
                 <input type="text" id="searchGames" placeholder="Search games...">
             </div>
-
-            <!-- Ad section added here -->
+            
+            <!-- Google Ad added here -->
             <ins class="adsbygoogle"
                  style="display:block; margin: 20px auto; max-width: 728px; width: 100%;"
                  data-ad-format="rectangle"
@@ -313,12 +332,42 @@ body, html {
             <script>
                  (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
-
+            
             <div class="games-grid" id="gamesList"></div>
         </div>
     </div>
 
     <div id="footer"></div>
+
+    <script>
+        function createStars() {
+            const starsContainer = document.querySelector('.stars');
+            const numberOfStars = 500;
+
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                
+                const size = Math.random() * 5;
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                
+                star.style.left = `${Math.random() * 100}%`;
+                star.style.top = `${Math.random() * 100}%`;
+                
+                const duration = 20 + Math.random() * 20;
+                star.style.animationDuration = `${duration}s`;
+                
+                star.style.animationDelay = `${Math.random() * duration}s`;
+                
+                star.style.opacity = Math.random() * 0.8 + 0.2;
+                
+                starsContainer.appendChild(star);
+            }
+        }
+
+        window.addEventListener('load', createStars);
+    </script>
 
     <script type="module">
         try {
