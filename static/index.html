@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!—GSO 22—>
-  <script src="/assets/js/favicon-handler.js"></script>
+<script src="/assets/js/favicon-handler.js"></script>
 <html lang="en">
 <style id="loading-style">body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden}#loadingOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#000 0,#1a1a1a 100%);display:flex;justify-content:center;align-items:center;z-index:999999;transition:opacity 1s ease-in-out}#loadingContainer{text-align:center;color:#fff}#loadingLogo{width:200px;height:200px;margin-bottom:30px;opacity:0;animation:fadeIn 1s ease-in-out forwards}#loadingLogo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.2)}#loadingText{font-size:1.5rem;text-align:center;color:#fff;margin-bottom:10px;letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:slideIn 2s ease-in-out forwards}#loadingBar{width:200px;height:2px;background:#1a1a1a;margin:20px auto;position:relative;border-radius:15px;overflow:hidden}#progressFill{height:100%;width:0;background:#fff;position:absolute;transition:width .1s linear}.dots::after{content:'';animation:dotAnimation 2s infinite}@keyframes dotAnimation{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}@keyframes slideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.fade-out{opacity:0;pointer-events:none}</style>
 <div id="loadingOverlay">
@@ -35,7 +35,7 @@
         gtag('config', 'G-VXDP7XC98T');
     </script> 
   
-  <!-- Google Tag Manager -->
+    <!-- Google Tag Manager -->
     <script>
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -60,7 +60,7 @@ body, html {
     background: #000;
     color: #fff;
     font-family: Arial, sans-serif;
-    overflow: hidden;
+    overflow-x: hidden;
 }
 
 .stars {
@@ -95,7 +95,7 @@ body, html {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     min-height: 100vh;
     padding: 1rem;
     position: relative;
@@ -118,6 +118,7 @@ body, html {
         0 0 6px #fff,
         0 0 8px #fff,
         inset 0 0 2px rgba(255, 255, 255, 0.2);
+    margin: 20px 0;
 }
 
 .games-box::before {
@@ -266,6 +267,87 @@ body, html {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
+/* Ad Container Styles */
+.ad-container {
+    width: 80%;
+    max-width: 1000px;
+    min-height: 280px;
+    margin: 20px 0;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.ad-container::before {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: #fff;
+    border-radius: 10px;
+    z-index: -1;
+    opacity: 0.1;
+}
+
+.adsbygoogle {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 280px;
+    display: block !important;
+}
+
+/* Popup Ad Styles */
+.popup-ad-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 999999;
+    justify-content: center;
+    align-items: center;
+}
+
+.popup-ad-container {
+    position: relative;
+    width: 90%;
+    max-width: 800px;
+    height: 80vh;
+    max-height: 600px;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+}
+
+.popup-ad-container .adsbygoogle {
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 400px;
+}
+
+.close-ad {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 30px;
+    height: 30px;
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+}
+
 @media (max-width: 768px) {
     .games-box {
         width: 95%;
@@ -276,8 +358,7 @@ body, html {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         padding: 1rem;
     }
-    
-    .game-icon {
+  .game-icon {
         width: 48px;
         height: 48px;
     }
@@ -289,22 +370,23 @@ body, html {
     .site-title {
         font-size: 2rem;
     }
+
+    .ad-container {
+        width: 95%;
+        min-height: 200px;
+    }
+
+    .popup-ad-container {
+        width: 95%;
+        height: 70vh;
+        padding: 10px;
+    }
+
+    .popup-ad-container .adsbygoogle {
+        min-height: 300px;
+    }
 }
 </style>
-
-<script>
-    const stockSW = "/uv/sw.js";
-    const swAllowedHostnames = ["localhost", "127.0.0.1"];
-    function registerSW() {
-        if (!navigator.serviceWorker) {
-            if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
-                throw new Error("Service workers cannot be registered without https.");
-            throw new Error("Your browser doesn't support service workers.");
-        }
-        navigator.serviceWorker.register(stockSW);
-    }
-    registerSW();   
-</script>
 </head>
 
 <body>
@@ -322,11 +404,41 @@ body, html {
         </iframe>
     </noscript>
 
-    <div class="stars"></div>
+    <!-- Popup Ad -->
+    <div class="popup-ad-overlay">
+        <div class="popup-ad-container">
+            <button class="close-ad">×</button>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
+                crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="autorelaxed"
+                data-ad-client="ca-pub-4845994519357732"
+                data-ad-slot="1770504012"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+    </div>
 
+    <div class="stars"></div>
     <div id="header"></div>
     
     <div class="container">
+        <!-- Top Ad -->
+        <div class="ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
+                crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="autorelaxed"
+                data-ad-client="ca-pub-4845994519357732"
+                data-ad-slot="1770504012"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
         <div class="games-box">
             <div class="games-header">
                 <h1 class="site-title">Void Network</h1>
@@ -335,10 +447,30 @@ body, html {
             </div>
             <div class="games-grid" id="gamesList"></div>
         </div>
+
+        <!-- Bottom Ad -->
+        <div class="ad-container">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
+                crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-format="autorelaxed"
+                data-ad-client="ca-pub-4845994519357732"
+                data-ad-slot="1770504012"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
     </div>
 
     <div id="footer"></div>
 
+    <!-- Loading Animation Script -->
+    <script>
+        !function(){let e=0,t=performance.now(),n=0,o=60;const a=document.getElementById("progressFill"),i=document.getElementById("loadingOverlay"),d=()=>{n++;const a=performance.now();a-t>=1e3&&(o=n,n=0,t=a),requestAnimationFrame(d)};requestAnimationFrame(d);const r=.3,s=()=>{if(e<100){const t=60/Math.max(o,30);e+=r*t,a.style.width=`${Math.min(e,100)}%`,requestAnimationFrame(s)}};requestAnimationFrame(s),setTimeout(()=>{i.classList.add("fade-out")},Math.max(3e3,5e3*(30/o))),i.addEventListener("transitionend",function(){this.classList.contains("fade-out")&&(i.remove(),document.getElementById("loading-style").remove())})}();
+    </script>
+
+    <!-- Stars Animation Script -->
     <script>
         function createStars() {
             const starsContainer = document.querySelector('.stars');
@@ -369,65 +501,128 @@ body, html {
         window.addEventListener('load', createStars);
     </script>
 
-<script type="module">
-    try {
-        const gamesList = document.getElementById("gamesList");
-        
-        await new Promise(resolve => {
-            if (window.__uv$config) {
-                resolve();
-            } else {
-                const checkUV = setInterval(() => {
-                    if (window.__uv$config) {
-                        clearInterval(checkUV);
-                        resolve();
-                    }
-                }, 100);
+    <!-- Service Worker Registration -->
+    <script>
+        const stockSW = "/uv/sw.js";
+        const swAllowedHostnames = ["localhost", "127.0.0.1"];
+        function registerSW() {
+            if (!navigator.serviceWorker) {
+                if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
+                    throw new Error("Service workers cannot be registered without https.");
+                throw new Error("Your browser doesn't support service workers.");
             }
-        });
-
-        const { gamesData } = await import("/assets/json/games.js");
-        const { games2Data } = await import("/assets/json/games2.js");
-        
-        const games = [...gamesData, ...games2Data];
-
-        function loadGame(game) {
-            const gameElement = document.createElement("div");
-            gameElement.className = "game-item";
-            gameElement.innerHTML = `
-                <div class="game-icon">
-                    <img src="${game.imgSrc}" alt="${game.title} icon">
-                </div>
-                <h3 class="game-title">${game.title}</h3>
-            `;
-            gameElement.onclick = () => {
-                window.location.href = `/Classes.html?game=${encodeURIComponent(game.link)}`;
-            };
-            gamesList.appendChild(gameElement);
+            navigator.serviceWorker.register(stockSW);
         }
+        registerSW();   
+    </script>
 
-        if (Array.isArray(games)) {
-            games.forEach(game => {
-                loadGame(game);
-            });
-        } else {
-            console.error("Games is not an array:", games);
-            gamesList.innerHTML = '<div style="color: white;">Error: Games data is not in the correct format</div>';
-        }
-
-        document.getElementById("searchGames").addEventListener("keyup", function(e) {
-            gamesList.innerHTML = '';
-            const searchTerm = this.value.toLowerCase();
-            for (const game of games) {
-                if (game.title.toLowerCase().includes(searchTerm)) {
-                    loadGame(game);
+    <!-- Games Loading Script -->
+    <script type="module">
+        try {
+            const gamesList = document.getElementById("gamesList");
+            
+            await new Promise(resolve => {
+                if (window.__uv$config) {
+                    resolve();
+                } else {
+                    const checkUV = setInterval(() => {
+                        if (window.__uv$config) {
+                            clearInterval(checkUV);
+                            resolve();
+                        }
+                    }, 100);
                 }
+            });
+
+            const { gamesData } = await import("/assets/json/games.js");
+            const { games2Data } = await import("/assets/json/games2.js");
+            
+            const games = [...gamesData, ...games2Data];
+
+            function loadGame(game) {
+                const gameElement = document.createElement("div");
+                gameElement.className = "game-item";
+                gameElement.innerHTML = `
+                    <div class="game-icon">
+                        <img src="${game.imgSrc}" alt="${game.title} icon">
+                    </div>
+                    <h3 class="game-title">${game.title}</h3>
+                `;
+                gameElement.onclick = () => {
+                    window.location.href = `/Classes.html?game=${encodeURIComponent(game.link)}`;
+                };
+                gamesList.appendChild(gameElement);
+            }
+
+            if (Array.isArray(games)) {
+                games.forEach(game => {
+                    loadGame(game);
+                });
+            } else {
+                console.error("Games is not an array:", games);
+                gamesList.innerHTML = '<div style="color: white;">Error: Games data is not in the correct format</div>';
+            }
+
+            document.getElementById("searchGames").addEventListener("keyup", function(e) {
+                gamesList.innerHTML = '';
+                const searchTerm = this.value.toLowerCase();
+                for (const game of games) {
+                    if (game.title.toLowerCase().includes(searchTerm)) {
+                        loadGame(game);
+                    }
+                }
+            });
+        } catch (error) {
+            console.error("Error loading games:", error);
+            gamesList.innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
+        }
+        
+        loadHTML("/assets/html/header.html", "header"),
+        loadHTML("/assets/html/footer.html", "footer")
+    </script>
+
+    <!-- Popup Ad Management -->
+    <script>
+        function showPopupAd() {
+            const overlay = document.querySelector('.popup-ad-overlay');
+            overlay.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePopupAd() {
+            const overlay = document.querySelector('.popup-ad-overlay');
+            overlay.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // Show popup ad after 30 seconds
+        setTimeout(showPopupAd, 30000);
+
+        // Show popup ad when user tries to leave the page
+        let showExitPopup = true;
+        document.addEventListener('mouseleave', (e) => {
+            if (e.clientY < 0 && showExitPopup) {
+                showPopupAd();
+                showExitPopup = false;
             }
         });
-    } catch (error) {
-        console.error("Error loading games:", error);
-        gamesList.innerHTML = `<div style="color: white;">Error loading games: ${error.message}</div>`;
-    }
-                        loadHTML("/assets/html/header.html", "header"),
-                    loadHTML("/assets/html/footer.html", "footer")
-</script>
+
+        // Close popup ad when clicking close button
+        document.querySelector('.close-ad').addEventListener('click', closePopupAd);
+
+        // Close popup ad when clicking outside
+        document.querySelector('.popup-ad-overlay').addEventListener('click', (e) => {
+            if (e.target === document.querySelector('.popup-ad-overlay')) {
+                closePopupAd();
+            }
+        });
+
+        // Add escape key functionality to close popup
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePopupAd();
+            }
+        });
+    </script>
+</body>
+</html>
