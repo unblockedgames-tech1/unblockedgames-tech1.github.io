@@ -187,7 +187,7 @@ body, html {
 
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 1rem;
     padding: 1.5rem;
     overflow-y: auto;
@@ -230,8 +230,8 @@ body, html {
 }
 
 .game-icon {
-    width: 80px;
-    height: 80px;
+    width: 64px;
+    height: 64px;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.1);
     display: flex;
@@ -273,13 +273,13 @@ body, html {
     }
     
     .games-grid {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
         padding: 1rem;
     }
     
     .game-icon {
-        width: 60px;
-        height: 60px;
+        width: 48px;
+        height: 48px;
     }
     
     .game-title {
@@ -333,23 +333,21 @@ body, html {
                 <h2 class="games-title">Games</h2>
                 <input type="text" id="searchGames" placeholder="Search games...">
             </div>
-            
-            <!-- Google AdSense Ad Unit -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
-                crossorigin="anonymous"></script>
-            <!-- Voiddd -->
-            <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-4845994519357732"
-                data-ad-slot="7653386084"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
 
             <div class="games-grid" id="gamesList"></div>
         </div>
+        <!-- Google AdSense Ad Unit -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
+            crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+            style="display:block; margin-top: 20px;"
+            data-ad-client="ca-pub-4845994519357732"
+            data-ad-slot="7653386084"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
     <div id="footer"></div>
