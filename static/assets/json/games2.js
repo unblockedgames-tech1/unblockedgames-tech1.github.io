@@ -104,6 +104,12 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/vvyk1JdsAgFsPPE4lTjaW2KeG9Yf1C49WBvdZNZWQr2vyIChl5XCIy7DCByd8estWUjxVYBWowhFV11oqIqdw2IDtj-Mqjl2eqNBraif34wCjkhUT2OYtCPweDFTk_YQiOHufRMUqsT3Z7_kcTVqptmnvrOQPg",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/49657/")
 },
+{
+    title: "Papa's Freezeria", 
+    imgSrc: "https://lh7-us.googleusercontent.com/oqGyMLvZptjeWaKEcJa0IHF_OzZmtKZ4-CEm0eIO-hNtacbgZCgrqPztf-MRxUr6lodNhwJnb2qfX2AHQtaiYybOtIQtylifGyUpg11BY9e9BdIH8vEwOgAGoRpricltz9D54dnbs5ieSefqLr5zo9M_kp7LcQ",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/48987/")
+},
+
 
    ];
 export { games2Data }; // Named export
