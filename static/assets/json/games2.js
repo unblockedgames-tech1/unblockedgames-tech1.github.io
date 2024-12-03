@@ -114,6 +114,16 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/f245bUohfS2AYZl6SXWqFUpB5XpG-MZEnYkV-UyMs7sXjMWF21J_q9lq0zQ71iXmhh43ZOqIWI7fHUh1BUootQdvn2zAzVef57JlBf2Qj8fJnOM9M-bZHFFaVu4hNVd_mrsnPygEx3GzoACiPzMmZGg4C7xeag",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/49658/")
 },
+{
+    title: "Papa's Pancakeria", 
+    imgSrc: "https://lh7-us.googleusercontent.com/sADH9NN9n4Zg3t2ldKE12Rr8bgQi5ka6ghioaktq-NTOoWUsQwuCK21GtMOBsPTlCfH3wIWQNNewP8huHoojGiS2kSYoPTfMuTcx8q59-WnTb7HWx-76yk0_cO4heYbySARam5HDUhsD5pr6mMGI2VyjOQFoHA",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/49174/")
+},
+{
+    title: "Papa's Hot Doggeria", 
+    imgSrc: "https://lh7-us.googleusercontent.com/ebJueDFHMa2JSUjmm-UUcTM-3bhYljhqBuWNbFNSSR3J4z3Xw_Cr_d-t0uZ9Q1zoFNj8KBZ9hICkydsj0VVtYkv1-7pwEJRDhB8v3RdmhCsoz8KrNwk6AMISf_OxTYDn5Uzqwwo9WBAJrdIM1KE0mf5IsWucuw",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/50216/")
+},
 
 
    ];
