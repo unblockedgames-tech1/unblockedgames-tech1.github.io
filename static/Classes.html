@@ -59,6 +59,7 @@
             justify-content: center;
             color: #fff;
             font-family: system-ui, sans-serif;
+            position: relative;
         }
 
         .header {
@@ -86,19 +87,22 @@
             width: 3vh;
         }
 
-        .content_wrapper {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            margin-top: 50px;
-        }
-
         .ad_container {
+            position: fixed;
             width: 165px;
             height: 800px;
             background: rgba(255, 255, 255, 0.05);
             border-radius: 10px;
             overflow: hidden;
+            z-index: 1;
+        }
+
+        .ad_left {
+            left: 10px;
+        }
+
+        .ad_right {
+            right: 10px;
         }
 
         .game_container {
@@ -111,6 +115,7 @@
             flex-direction: column;
             position: relative;
             box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+            z-index: 2;
         }
 
         .game_iframe {
@@ -152,50 +157,48 @@
         <a href="/app"><img src="/nav/apps.png" class="home_bttn" alt="Apps"></a>
     </header>
 
-    <div class="content_wrapper">
-        <div class="ad_container">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
-                crossorigin="anonymous"></script>
-            <!-- sigmaa -->
-            <ins class="adsbygoogle"
-                style="display:inline-block;width:165px;height:800px"
-                data-ad-client="ca-pub-4845994519357732"
-                data-ad-slot="3401379955"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+    <div class="ad_container ad_left">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
+            crossorigin="anonymous"></script>
+        <!-- sigmaa -->
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:165px;height:800px"
+            data-ad-client="ca-pub-4845994519357732"
+            data-ad-slot="3401379955"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
-        <div class="game_container">
-            <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard"></iframe>
-            <div class="footer">
-                <button onclick="toggleFullScreen()">
-                    <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
-                </button>
-                <button onclick="reloadGame()">
-                    <img src="/nav/reload.png" alt="Reload">
-                </button>
-                <button onclick="toggleFlashlight()">
-                    <img src="/nav/flash.png" alt="Flashlight">
-                </button>
-                <button onclick="toggleChat()">
-                    <img src="/nav/chat_icon.png" alt="Chat">
-                </button>
-            </div>
+    <div class="game_container">
+        <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard"></iframe>
+        <div class="footer">
+            <button onclick="toggleFullScreen()">
+                <img src="/nav/fullscreenbutton.png" alt="Fullscreen">
+            </button>
+            <button onclick="reloadGame()">
+                <img src="/nav/reload.png" alt="Reload">
+            </button>
+            <button onclick="toggleFlashlight()">
+                <img src="/nav/flash.png" alt="Flashlight">
+            </button>
+            <button onclick="toggleChat()">
+                <img src="/nav/chat_icon.png" alt="Chat">
+            </button>
         </div>
+    </div>
 
-        <div class="ad_container">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
-                crossorigin="anonymous"></script>
-            <!-- sigmaa -->
-            <ins class="adsbygoogle"
-                style="display:inline-block;width:165px;height:800px"
-                data-ad-client="ca-pub-4845994519357732"
-                data-ad-slot="3401379955"></ins>
-            <script>
-                (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+    <div class="ad_container ad_right">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
+            crossorigin="anonymous"></script>
+        <!-- sigmaa -->
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:165px;height:800px"
+            data-ad-client="ca-pub-4845994519357732"
+            data-ad-slot="3401379955"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
 
     <script>
