@@ -127,10 +127,9 @@ body, html {
 .games-box {
     background: #000;
     border-radius: 10px;
-    width: min(80%, calc(100vh * 1.2));
-    height: min(70vh, calc(80vw * 0.8));
-    min-width: 280px;
-    min-height: 400px;
+    width: 80%;
+    max-width: 1000px;
+    height: 70vh;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -142,7 +141,6 @@ body, html {
         0 0 8px #fff,
         inset 0 0 2px rgba(255, 255, 255, 0.2);
     z-index: 3;
-    margin: auto;
 }
 
 .games-box::before {
@@ -161,7 +159,7 @@ body, html {
 }
 
 .games-header {
-    padding: clamp(0.5rem, 2vw, 1.5rem);
+    padding: 1.5rem;
     text-align: center;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: relative;
@@ -169,7 +167,7 @@ body, html {
 }
 
 .site-title {
-    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-size: 2.5rem;
     margin: 0 0 0.5rem 0;
     background: linear-gradient(45deg, #fff, #a0a0a0);
     -webkit-background-clip: text;
@@ -178,7 +176,7 @@ body, html {
 }
 
 .games-title {
-    font-size: clamp(0.8rem, 2vw, 1.2rem);
+    font-size: 1.2rem;
     margin: 0.5rem 0;
     color: #888;
     text-transform: uppercase;
@@ -212,9 +210,9 @@ body, html {
 
 .games-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: min(1rem, 2vw);
-    padding: min(1.5rem, 3vw);
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 1rem;
+    padding: 1.5rem;
     overflow-y: auto;
     flex-grow: 1;
     position: relative;
@@ -241,7 +239,7 @@ body, html {
 }
 
 .game-item {
-    padding: min(1rem, 2vw);
+    padding: 1rem;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     transition: all 0.3s ease;
@@ -255,8 +253,8 @@ body, html {
 }
 
 .game-icon {
-    width: clamp(48px, 8vw, 64px);
-    height: clamp(48px, 8vw, 64px);
+    width: 64px;
+    height: 64px;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.1);
     display: flex;
@@ -272,7 +270,7 @@ body, html {
 }
 
 .game-title {
-    font-size: clamp(0.8rem, 1.5vw, 1rem);
+    font-size: 1rem;
     color: #fff;
     margin: 0;
     font-weight: normal;
@@ -294,24 +292,25 @@ body, html {
 @media (max-width: 768px) {
     .games-box {
         width: 95%;
-        height: min(80vh, calc(95vw * 0.8));
-        min-height: 300px;
+        height: 80vh;
     }
     
     .games-grid {
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        gap: 0.5rem;
-        padding: 0.5rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .games-box {
-        min-height: 250px;
+        grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+        padding: 1rem;
     }
     
-    .games-grid {
-        grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    .game-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    .game-title {
+        font-size: 0.9rem;
+    }
+    
+    .site-title {
+        font-size: 2rem;
     }
 }
 </style>
@@ -344,7 +343,7 @@ body, html {
         })(window,document,'script','dataLayer','GTM-PZXRTFX5');
     </script>
 
-    <noscript>
+<noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
             height="0" width="0" style="display:none;visibility:hidden">
         </iframe>
