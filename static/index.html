@@ -2,19 +2,6 @@
 <!-- GSO 22 -->
   <script src="/assets/js/favicon-handler.js"></script>
 <html lang="en">
-<style id="loading-style">body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden}#loadingOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#000 0,#1a1a1a 100%);display:flex;justify-content:center;align-items:center;z-index:999999;transition:opacity 1s ease-in-out}#loadingContainer{text-align:center;color:#fff}#loadingLogo{width:200px;height:200px;margin-bottom:30px;opacity:0;animation:fadeIn 1s ease-in-out forwards}#loadingLogo img{width:100%;height:100%;object-fit:contain;filter:brightness(1.2)}#loadingText{font-size:1.5rem;text-align:center;color:#fff;margin-bottom:10px;letter-spacing:.2em;text-transform:uppercase;opacity:0;animation:slideIn 2s ease-in-out forwards}#loadingBar{width:200px;height:2px;background:#1a1a1a;margin:20px auto;position:relative;border-radius:15px;overflow:hidden}#progressFill{height:100%;width:0;background:#fff;position:absolute;transition:width .1s linear}.dots::after{content:'';animation:dotAnimation 2s infinite}@keyframes dotAnimation{0%{content:''}25%{content:'.'}50%{content:'..'}75%{content:'...'}100%{content:''}}@keyframes fadeIn{from{opacity:0;transform:scale(.95)}to{opacity:1;transform:scale(1)}}@keyframes slideIn{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}.fade-out{opacity:0;pointer-events:none}</style>
-<div id="loadingOverlay">
-    <div id="loadingContainer">
-        <div id="loadingLogo">
-            <img src="https://lh7-us.googleusercontent.com/5Fbqj024fM1jyET0B-xC-r_j93ktHdB5dYlB80U7oxpfzefa3nFPjxwdbgE9LgwVN6URIpbowiYLJg376qRm2cPd3eD8h0ot8aeosM6xb2uZaWLIATnAah--MUM1RNliv8znm8Yv2VTfPR5n_1JpwzarFulfpQ" alt="Logo">
-        </div>
-        <div id="loadingText">Loading<span class="dots"></span></div>
-        <div id="loadingBar">
-            <div id="progressFill"></div>
-        </div>
-    </div>
-</div>
-<script>!function(){let e=0,t=performance.now(),n=0,o=60;const a=document.getElementById("progressFill"),i=document.getElementById("loadingOverlay"),d=()=>{n++;const a=performance.now();a-t>=1e3&&(o=n,n=0,t=a),requestAnimationFrame(d)};requestAnimationFrame(d);const r=.3,s=()=>{if(e<100){const t=60/Math.max(o,30);e+=r*t,a.style.width=`${Math.min(e,100)}%`,requestAnimationFrame(s)}};requestAnimationFrame(s),setTimeout(()=>{i.classList.add("fade-out")},Math.max(3e3,5e3*(30/o))),i.addEventListener("transitionend",function(){this.classList.contains("fade-out")&&(i.remove(),document.getElementById("loading-style").remove())})}();</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
