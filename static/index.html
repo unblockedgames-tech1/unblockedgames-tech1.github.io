@@ -188,13 +188,16 @@ body, html {
     color: rgba(255, 255, 255, 0.5);
 }
 
+.scrollable-content {
+    overflow-y: auto;
+    flex-grow: 1;
+    padding: 1.5rem;
+}
+
 .games-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 1rem;
-    padding: 1.5rem;
-    overflow-y: auto;
-    flex-grow: 1;
     position: relative;
     z-index: 1;
 }
@@ -270,11 +273,9 @@ body, html {
 }
 
 .ad-container {
-    width: 100%;
-    max-width: 100%;
-    margin: 1rem auto;
-    padding: 0 1.5rem;
-    box-sizing: border-box;
+    width: calc(100% - 3rem);
+    max-width: 600px;
+    margin: 0 auto 1rem auto;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     position: relative;
@@ -286,8 +287,10 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 90px;
+    min-height: 60px;
     width: 100%;
+    max-height: 90px;
+    overflow: hidden;
 }
 
 @media (max-width: 768px) {
@@ -298,7 +301,6 @@ body, html {
     
     .games-grid {
         grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-        padding: 1rem;
     }
     
     .game-icon {
@@ -314,8 +316,13 @@ body, html {
         font-size: 2rem;
     }
 
+    .scrollable-content {
+        padding: 1rem;
+    }
+    
     .ad-container {
-        padding: 0 1rem;
+        width: calc(100% - 2rem);
+        margin: 0 auto 0.5rem auto;
     }
 }
 </style>
@@ -346,13 +353,16 @@ body, html {
                 <input type="text" id="searchGames" placeholder="Search games...">
             </div>
 
-            <!-- New ad container -->
-            <div class="ad-container">
-                <script async="async" data-cfasync="false" src="//pl25250402.profitablecpmrate.com/fb9be2f0eedc9c6ef42e40a34f0c7269/invoke.js"></script>
-                <div id="container-fb9be2f0eedc9c6ef42e40a34f0c7269"></div>
-            </div>
+            <div class="scrollable-content">
+                <!-- Ad container inside scrollable area -->
+                <div class="ad-container">
+                    <script async="async" data-cfasync="false" src="//pl25250402.profitablecpmrate.com/fb9be2f0eedc9c6ef42e40a34f0c7269/invoke.js"></script>
+                    <div id="container-fb9be2f0eedc9c6ef42e40a34f0c7269"></div>
+                </div>
 
-            <div class="games-grid" id="gamesList"></div>
+                <!-- Games grid -->
+                <div class="games-grid" id="gamesList"></div>
+            </div>
         </div>
 
         <!-- Google AdSense Ad Unit -->
