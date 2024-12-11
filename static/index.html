@@ -274,12 +274,13 @@ body, html {
 
 .ad-container {
     width: calc(100% - 3rem);
-    max-width: 600px;
-    margin: 0 auto 1rem auto;
+    max-width: 800px;
+    margin: 0 auto 1.5rem auto;
     background: rgba(255, 255, 255, 0.05);
     border-radius: 8px;
     position: relative;
     z-index: 2;
+    padding: 1rem 0;
 }
 
 .ad-container > div {
@@ -287,9 +288,9 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 60px;
+    min-height: 100px;
     width: 100%;
-    max-height: 90px;
+    max-height: 250px;
     overflow: hidden;
 }
 
@@ -322,7 +323,8 @@ body, html {
     
     .ad-container {
         width: calc(100% - 2rem);
-        margin: 0 auto 0.5rem auto;
+        margin: 0 auto 1rem auto;
+        min-height: 90px;
     }
 }
 </style>
@@ -354,7 +356,7 @@ body, html {
             </div>
 
             <div class="scrollable-content">
-                <!-- Ad container inside scrollable area -->
+                <!-- Updated Ad container -->
                 <div class="ad-container">
                     <script async="async" data-cfasync="false" src="//pl25250402.profitablecpmrate.com/fb9be2f0eedc9c6ef42e40a34f0c7269/invoke.js"></script>
                     <div id="container-fb9be2f0eedc9c6ef42e40a34f0c7269"></div>
@@ -448,8 +450,7 @@ body, html {
             function loadGame(game) {
                 const gameElement = document.createElement("div");
                 gameElement.className = "game-item";
-                gameElement.innerHTML = `
-                    <div class="game-icon">
+                gameElement.innerHTML = `<div class="game-icon">
                         <img src="${game.imgSrc}" alt="${game.title} icon">
                     </div>
                     <h3 class="game-title">${game.title}</h3>
