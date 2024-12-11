@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <!-- GSO 22 -->
-  <script src="/assets/js/favicon-handler.js"></script>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -12,8 +11,9 @@
     <script src="/global.js"></script>
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
+    <script src="/assets/js/favicon-handler.js"></script>
 
-     <!-- Google tag (gtag.js) -->
+    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -22,7 +22,7 @@
         gtag('config', 'G-VXDP7XC98T');
     </script> 
   
-  <!-- Google Tag Manager -->
+    <!-- Google Tag Manager -->
     <script>
         (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
         new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -30,13 +30,6 @@
         'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
         })(window,document,'script','dataLayer','GTM-PZXRTFX5');
     </script>
-
-    <!-- Google Tag Manager (noscript) -->
-    <noscript>
-        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
-            height="0" width="0" style="display:none;visibility:hidden">
-        </iframe>
-    </noscript>
 
 <style>
 .background-overlay {
@@ -276,6 +269,27 @@ body, html {
     text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
 }
 
+.ad-container {
+    width: 100%;
+    max-width: 100%;
+    margin: 1rem auto;
+    padding: 0 1.5rem;
+    box-sizing: border-box;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    position: relative;
+    z-index: 2;
+}
+
+.ad-container > div {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 90px;
+    width: 100%;
+}
+
 @media (max-width: 768px) {
     .games-box {
         width: 95%;
@@ -299,22 +313,13 @@ body, html {
     .site-title {
         font-size: 2rem;
     }
+
+    .ad-container {
+        padding: 0 1rem;
+    }
 }
 </style>
 
-<script>
-    const stockSW = "/uv/sw.js";
-    const swAllowedHostnames = ["localhost", "127.0.0.1"];
-    function registerSW() {
-        if (!navigator.serviceWorker) {
-            if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
-                throw new Error("Service workers cannot be registered without https.");
-            throw new Error("Your browser doesn't support service workers.");
-        }
-        navigator.serviceWorker.register(stockSW);
-    }
-    registerSW();   
-</script>
 </head>
 
 <body>
@@ -322,15 +327,8 @@ body, html {
         <img src="nav/voidc.gif" alt="background">
     </div>
     
-    <script>
-        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-PZXRTFX5');
-    </script>
-
-<noscript>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
             height="0" width="0" style="display:none;visibility:hidden">
         </iframe>
@@ -348,8 +346,15 @@ body, html {
                 <input type="text" id="searchGames" placeholder="Search games...">
             </div>
 
+            <!-- New ad container -->
+            <div class="ad-container">
+                <script async="async" data-cfasync="false" src="//pl25250402.profitablecpmrate.com/fb9be2f0eedc9c6ef42e40a34f0c7269/invoke.js"></script>
+                <div id="container-fb9be2f0eedc9c6ef42e40a34f0c7269"></div>
+            </div>
+
             <div class="games-grid" id="gamesList"></div>
         </div>
+
         <!-- Google AdSense Ad Unit -->
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4845994519357732"
             crossorigin="anonymous"></script>
@@ -367,6 +372,18 @@ body, html {
     <div id="footer"></div>
 
     <script>
+        const stockSW = "/uv/sw.js";
+        const swAllowedHostnames = ["localhost", "127.0.0.1"];
+        function registerSW() {
+            if (!navigator.serviceWorker) {
+                if (location.protocol !== "https:" && !swAllowedHostnames.includes(location.hostname))
+                    throw new Error("Service workers cannot be registered without https.");
+                throw new Error("Your browser doesn't support service workers.");
+            }
+            navigator.serviceWorker.register(stockSW);
+        }
+        registerSW();   
+
         function createStars() {
             const starsContainer = document.querySelector('.stars');
             const numberOfStars = 500;
