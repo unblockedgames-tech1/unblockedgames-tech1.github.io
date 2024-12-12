@@ -13,7 +13,7 @@
         </div>
     </div>
 </div>
-<script>!function(){let e=0,t=performance.now(),n=0,o=60;const a=document.getElementById("progressFill"),i=document.getElementById("loadingOverlay"),d=()=>{n++;const a=performance.now();a-t>=1e3&&(o=n,n=0,t=a),requestAnimationFrame(d)};requestAnimationFrame(d);const r=.3,s=()=>{if(e<100){const t=60/Math.max(o,30);e+=r*t,a.style.width=`${Math.min(e,100)}%`,requestAnimationFrame(s)}};requestAnimationFrame(s),setTimeout(()=>{i.classList.add("fade-out")},Math.max(3e3,5e3*(30/o))),i.addEventListener("transitionend",function(){this.classList.contains("fade-out")&&(i.remove(),document.getElementById("loading-style").remove())})}();</script>
+<script>!function(){let e=0,t=performance.now(),n=0,o=60;const a=document.getElementById("progressFill"),i=document.getElementById("loadingOverlay"),d=()=>{n++;const a=performance.now();a-t>=1e3&&(o=n,n=0,t=a),requestAnimationFrame(d)};requestAnimationFrame(d);const r=.3,s=()=>{if(e<200){const t=60/Math.max(o,30);e+=r*t,a.style.width=`${Math.min(e,100)}%`,requestAnimationFrame(s)}};requestAnimationFrame(s),setTimeout(()=>{i.classList.add("fade-out")},Math.max(3e3,5e3*(30/o))),i.addEventListener("transitionend",function(){this.classList.contains("fade-out")&&(i.remove(),document.getElementById("loading-style").remove())})}();</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
