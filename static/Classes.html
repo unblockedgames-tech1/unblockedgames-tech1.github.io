@@ -4,46 +4,62 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classes</title>
-    <!-- Early Service Worker registration -->
+    <!-- Performance Optimization Techniques -->
+    <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
+    <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
+    
     <script>
+        // Early Performance Optimization
+        window.addEventListener('pageshow', function(event) {
+            if (event.persisted) {
+                window.location.reload();
+            }
+        });
+
+        // Aggressive Caching and Preloading Strategy
+        const preloadResources = [
+            '/nav/home.png',
+            '/nav/search.png',
+            '/nav/apps.png',
+            '/nav/fullscreenbutton.png',
+            '/nav/reload.png',
+            '/nav/flash.png',
+            '/nav/chat_icon.png'
+        ];
+
+        // Preload critical navigation images
+        preloadResources.forEach(resource => {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = resource;
+            document.head.appendChild(link);
+        });
+
+        // Enhanced Service Worker Registration
         if ('serviceWorker' in navigator) {
             const swAllowedHostnames = ['localhost', '127.0.0.1'];
             
-            // Ensure we're using an absolute path to the service worker
             const swPath = new URL('/uv/sw.js', window.location.origin).href;
             const swScope = new URL('/', window.location.origin).href;
 
             if (location.protocol === 'https:' || swAllowedHostnames.includes(location.hostname)) {
-                navigator.serviceWorker.getRegistration(swScope).then(registration => {
-                    if (!registration) {
-                        navigator.serviceWorker.register(swPath, { 
-                            scope: swScope 
-                        })
+                window.addEventListener('load', () => {
+                    navigator.serviceWorker.register(swPath, { scope: swScope })
                         .then(reg => {
-                            console.log('Service Worker registered successfully:', reg);
-                            // Additional logging for debugging
-                            reg.addEventListener('updatefound', () => {
-                                console.log('Service Worker update found');
-                            });
+                            console.log('Service Worker registered successfully');
+                            
+                            // Immediate activation and control
+                            if (reg.active) {
+                                reg.active.postMessage({ type: 'SKIP_WAITING' });
+                            }
                         })
-                        .catch(error => {
-                            console.error('SW registration failed:', error);
-                            // More detailed error logging
-                            console.error('Error details:', {
-                                name: error.name,
-                                message: error.message,
-                                stack: error.stack
-                            });
-                        });
-                    } else {
-                        console.log('Service Worker already registered');
-                    }
-                }).catch(err => {
-                    console.error('Error checking SW registration:', err);
+                        .catch(error => console.error('SW registration failed:', error));
                 });
             }
         }
 
+        // Optimized Game Loading Function
         function initGame() {
             const urlParams = new URLSearchParams(window.location.search);
             const gameUrl = urlParams.get('game');
@@ -53,32 +69,55 @@
                 return;
             }
 
-            if (document.readyState === 'loading') {
-                document.addEventListener('DOMContentLoaded', () => loadGameUrl(gameUrl));
-            } else {
-                loadGameUrl(gameUrl);
-            }
+            // Use requestAnimationFrame for smoother loading
+            requestAnimationFrame(() => loadGameUrl(gameUrl));
         }
 
         function loadGameUrl(gameUrl) {
             const iframe = document.getElementById('gframe');
             if (iframe) {
+                // Performance and Error Handling Improvements
+                iframe.style.opacity = '0';  // Initially hide
+                iframe.style.transition = 'opacity 0.3s ease-in';
+
+                // Timeout to prevent indefinite loading
+                const loadTimeout = setTimeout(() => {
+                    console.error('Game loading timeout');
+                    iframe.style.opacity = '1';
+                    iframe.src = 'about:blank';
+                    alert('Game loading took too long. Please refresh or try another game.');
+                }, 15000);  // 15 seconds timeout
+
+                iframe.onload = () => {
+                    clearTimeout(loadTimeout);
+                    iframe.style.opacity = '1';
+                    console.log('Game loaded successfully');
+                };
+
+                iframe.onerror = () => {
+                    clearTimeout(loadTimeout);
+                    console.error('Game loading failed');
+                    iframe.style.opacity = '1';
+                    alert('Failed to load game. Please try a different game.');
+                };
+
+                // Decode and set source with additional error handling
                 try {
-                    // Additional error handling for iframe loading
-                    iframe.onerror = () => {
-                        console.error('Error loading game iframe');
-                        alert('Failed to load game. Please try again.');
-                    };
-                    iframe.src = decodeURIComponent(gameUrl);
+                    const decodedUrl = decodeURIComponent(gameUrl);
+                    iframe.src = decodedUrl;
                 } catch (error) {
-                    console.error('Error setting iframe src:', error);
-                    alert('An error occurred while loading the game.');
+                    console.error('URL decoding error:', error);
+                    alert('Invalid game URL. Please try again.');
                 }
             }
         }
 
-        initGame();
+        // Trigger game loading after minimal delay
+        window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(initGame, 50);  // Minimal delay for smoother initial render
+        });
     </script>
+    
     <style>
         * {
             margin: 0;
@@ -161,6 +200,7 @@
             border: none;
             border-radius: 10px 10px 0 0;
             background-color: #000;
+            transition: opacity 0.3s ease-in;
         }
 
         .footer {
@@ -243,9 +283,11 @@
             const iframe = document.getElementById('gframe');
             const currentSrc = iframe.src;
             
+            iframe.style.opacity = '0';
             iframe.src = 'about:blank';
             setTimeout(() => {
                 iframe.src = currentSrc;
+                iframe.style.opacity = '1';
             }, 100);
         }
 
