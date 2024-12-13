@@ -8,13 +8,38 @@
     <script>
         if ('serviceWorker' in navigator) {
             const swAllowedHostnames = ['localhost', '127.0.0.1'];
+            
+            // Ensure we're using an absolute path to the service worker
+            const swPath = new URL('/uv/sw.js', window.location.origin).href;
+            const swScope = new URL('/', window.location.origin).href;
+
             if (location.protocol === 'https:' || swAllowedHostnames.includes(location.hostname)) {
-                navigator.serviceWorker.getRegistration().then(registration => {
+                navigator.serviceWorker.getRegistration(swScope).then(registration => {
                     if (!registration) {
-                        navigator.serviceWorker.register('/uv/sw.js', { scope: '/' })
-                            .then(() => console.log('Service Worker registered'))
-                            .catch(error => console.error('SW registration failed:', error));
+                        navigator.serviceWorker.register(swPath, { 
+                            scope: swScope 
+                        })
+                        .then(reg => {
+                            console.log('Service Worker registered successfully:', reg);
+                            // Additional logging for debugging
+                            reg.addEventListener('updatefound', () => {
+                                console.log('Service Worker update found');
+                            });
+                        })
+                        .catch(error => {
+                            console.error('SW registration failed:', error);
+                            // More detailed error logging
+                            console.error('Error details:', {
+                                name: error.name,
+                                message: error.message,
+                                stack: error.stack
+                            });
+                        });
+                    } else {
+                        console.log('Service Worker already registered');
                     }
+                }).catch(err => {
+                    console.error('Error checking SW registration:', err);
                 });
             }
         }
@@ -37,7 +62,19 @@
 
         function loadGameUrl(gameUrl) {
             const iframe = document.getElementById('gframe');
-            if (iframe) iframe.src = decodeURIComponent(gameUrl);
+            if (iframe) {
+                try {
+                    // Additional error handling for iframe loading
+                    iframe.onerror = () => {
+                        console.error('Error loading game iframe');
+                        alert('Failed to load game. Please try again.');
+                    };
+                    iframe.src = decodeURIComponent(gameUrl);
+                } catch (error) {
+                    console.error('Error setting iframe src:', error);
+                    alert('An error occurred while loading the game.');
+                }
+            }
         }
 
         initGame();
