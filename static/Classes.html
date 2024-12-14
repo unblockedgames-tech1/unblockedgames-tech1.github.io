@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Classes</title>
-    <!-- Performance Optimization Techniques -->
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
     
@@ -16,7 +15,6 @@
             }
         });
 
-        // Aggressive Caching and Preloading Strategy
         const preloadResources = [
             '/nav/home.png',
             '/nav/search.png',
@@ -116,18 +114,17 @@
         function showPopup() {
             const popup = document.getElementById('gamePopup');
             popup.style.display = 'flex';
-        }
 
-        // Modified function to handle popup closing
-        function handlePopupClose() {
-            const popup = document.getElementById('gamePopup');
-            const adFrame = document.getElementById('popupAdFrame');
-            
-            // Close popup only when ad banner is clicked
-            adFrame.addEventListener('click', function() {
-                popup.style.display = 'none';
-                localStorage.setItem('lastPopupTime', Date.now());
-            });
+            // Add event listener to ad container to close popup
+            setTimeout(() => {
+                const adContainer = document.querySelector('.popup-content iframe');
+                if (adContainer) {
+                    adContainer.addEventListener('click', function() {
+                        popup.style.display = 'none';
+                        localStorage.setItem('lastPopupTime', Date.now());
+                    });
+                }
+            }, 1000);  // Small delay to ensure ad is loaded
         }
 
         // Function to check if popup should be shown
@@ -139,7 +136,6 @@
             // Check if it's first load or 5 minutes have passed
             if (isFirstLoad || !lastPopupTime || (currentTime - parseInt(lastPopupTime)) >= 5 * 60 * 1000) {
                 showPopup();
-                handlePopupClose();
                 
                 // Mark that it's no longer first load
                 if (isFirstLoad) {
@@ -211,10 +207,6 @@
             align-items: center;
         }
 
-        #popupAdFrame {
-            cursor: pointer;
-        }
-
         .header {
             position: fixed;
             width: 100%;
@@ -231,7 +223,6 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Rest of the CSS remains the same as before */
         .header a {
             margin: 0 1.5rem;
         }
@@ -321,11 +312,9 @@
                 };
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/84bc4d51be19ef242e1621ae1049ede0/invoke.js"></script>
-            <iframe id="popupAdFrame" src="about:blank" width="160" height="300" style="border:none;"></iframe>
         </div>
     </div>
 
-    <!-- Rest of the body remains the same as before -->
     <header class="header">
         <a href="/"><img src="/nav/home.png" class="home_bttn" alt="Home"></a>
         <a href="/ta"><img src="/nav/search.png" class="home_bttn" alt="Search"></a>
