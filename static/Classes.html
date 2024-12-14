@@ -112,20 +112,22 @@
             }
         }
 
-        // New function to show popup
+        // Modified function to show popup
         function showPopup() {
             const popup = document.getElementById('gamePopup');
             popup.style.display = 'flex';
         }
 
-        // Function to close popup
-        function closePopup(event) {
-            event.stopPropagation(); // Prevent event from bubbling
+        // Modified function to handle popup closing
+        function handlePopupClose() {
             const popup = document.getElementById('gamePopup');
-            popup.style.display = 'none';
-
-            // Set last popup time in localStorage
-            localStorage.setItem('lastPopupTime', Date.now());
+            const adFrame = document.getElementById('popupAdFrame');
+            
+            // Close popup only when ad banner is clicked
+            adFrame.addEventListener('click', function() {
+                popup.style.display = 'none';
+                localStorage.setItem('lastPopupTime', Date.now());
+            });
         }
 
         // Function to check if popup should be shown
@@ -137,6 +139,7 @@
             // Check if it's first load or 5 minutes have passed
             if (isFirstLoad || !lastPopupTime || (currentTime - parseInt(lastPopupTime)) >= 5 * 60 * 1000) {
                 showPopup();
+                handlePopupClose();
                 
                 // Mark that it's no longer first load
                 if (isFirstLoad) {
@@ -203,14 +206,12 @@
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
             color: white;
             position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
         }
 
-        .popup-close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            color: white;
-            font-size: 1.5rem;
+        #popupAdFrame {
             cursor: pointer;
         }
 
@@ -230,6 +231,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
 
+        /* Rest of the CSS remains the same as before */
         .header a {
             margin: 0 1.5rem;
         }
@@ -305,14 +307,25 @@
 </head>
 <body>
     <!-- Popup -->
-    <div id="gamePopup" class="popup" onclick="closePopup(event)">
-        <div class="popup-content" onclick="event.stopPropagation()">
-            <span class="popup-close" onclick="closePopup(event)">×</span>
+    <div id="gamePopup" class="popup">
+        <div class="popup-content">
             <h2>Welcome to the Game!</h2>
-            <p>Click anywhere to continue playing.</p>
+            <p>Click the ad banner to continue playing.</p>
+            <script type="text/javascript">
+                atOptions = {
+                    'key' : '84bc4d51be19ef242e1621ae1049ede0',
+                    'format' : 'iframe',
+                    'height' : 300,
+                    'width' : 160,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/84bc4d51be19ef242e1621ae1049ede0/invoke.js"></script>
+            <iframe id="popupAdFrame" src="about:blank" width="160" height="300" style="border:none;"></iframe>
         </div>
     </div>
 
+    <!-- Rest of the body remains the same as before -->
     <header class="header">
         <a href="/"><img src="/nav/home.png" class="home_bttn" alt="Home"></a>
         <a href="/ta"><img src="/nav/search.png" class="home_bttn" alt="Search"></a>
