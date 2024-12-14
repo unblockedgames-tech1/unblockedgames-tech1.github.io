@@ -113,11 +113,17 @@
         // Modified function to show popup
         function showPopup() {
             const popup = document.getElementById('gamePopup');
+            
+            // Check if ad blocker is preventing ad loading
+            const adContainer = document.querySelector('.popup-content iframe');
+            if (!adContainer || adContainer.clientHeight === 0) {
+                return; // Do not show popup if ad is blocked
+            }
+
             popup.style.display = 'flex';
 
             // Add event listener to ad container to close popup
             setTimeout(() => {
-                const adContainer = document.querySelector('.popup-content iframe');
                 if (adContainer) {
                     adContainer.addEventListener('click', function() {
                         popup.style.display = 'none';
