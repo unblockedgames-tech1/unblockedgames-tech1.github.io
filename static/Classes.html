@@ -358,37 +358,18 @@
         </div>
     </div>
 
-<div class="ad_container ad_right" id="dynamic-ad-right"></div>
-<script>
-    (function() {
-        // Obfuscated ad key and URL
-        const adKey = '52214ec5d4cf1c8a7b81861e1fdb4171';
-        const adScriptUrl = atob('Ly93d3cuaGlnaHBlcmZvcm1hbmNlZm9ybWF0LmNvbS8=') + adKey + '/invoke.js';
-
-        // Dynamically create the ad container
-        const adContainer = document.getElementById('dynamic-ad-right');
-        const adIframe = document.createElement('iframe');
-
-        adIframe.style.border = 'none';
-        adIframe.style.width = '160px';
-        adIframe.style.height = '600px';
-        adIframe.src = adScriptUrl; // Inject the ad script dynamically
-
-        // Append the iframe to the ad container
-        adContainer.appendChild(adIframe);
-
-        // Check for blocking and fallback
-        setTimeout(() => {
-            if (adIframe.clientHeight === 0 || adIframe.clientWidth === 0) {
-                adContainer.innerHTML = `
-                    <div style="background: gray; color: white; text-align: center; padding: 10px;">
-                        Please disable your ad blocker to support us!
-                    </div>
-                `;
-            }
-        }, 2000); // Wait 2 seconds to detect blocking
-    })();
+    <div class="ad_container ad_right">
+<script type="text/javascript">
+	atOptions = {
+		'key' : '52214ec5d4cf1c8a7b81861e1fdb4171',
+		'format' : 'iframe',
+		'height' : 600,
+		'width' : 160,
+		'params' : {}
+	};
 </script>
+<script type="text/javascript" src="//www.highperformanceformat.com/52214ec5d4cf1c8a7b81861e1fdb4171/invoke.js"></script>
+    </div>
 
     <script>
         function reloadGame() {
