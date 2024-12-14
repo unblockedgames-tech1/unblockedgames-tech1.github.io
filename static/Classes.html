@@ -358,42 +358,18 @@
         </div>
     </div>
 
-<div id="ad_container_unique" style="display:none;">
-    <!-- This will dynamically load the ad script -->
-</div>
+    <div class="ad_container ad_right">
 <script type="text/javascript">
-    (function() {
-        // Decode Base64 key and URL
-        const adKey = '52214ec5d4cf1c8a7b81861e1fdb4171';
-        const adScriptUrl = 'https://www.highperformanceformat.com/' + adKey + '/invoke.js';
-
-        // Create the ad script dynamically
-        const adScript = document.createElement('script');
-        adScript.type = 'text/javascript';
-        adScript.async = true;
-        adScript.src = adScriptUrl;
-
-        // Add event to show container after the script loads
-        adScript.onload = function() {
-            const adContainer = document.getElementById('ad_container_unique');
-            adContainer.style.display = 'block';
-        };
-
-        // Append the script to the head or body
-        document.head.appendChild(adScript);
-
-        // Set ad options globally (if required by the ad service)
-        window.atOptions = {
-            'key': adKey,
-            'format': 'iframe',
-            'height': 600,
-            'width': 160,
-            'params': {}
-        };
-    })();
+	atOptions = {
+		'key' : '52214ec5d4cf1c8a7b81861e1fdb4171',
+		'format' : 'iframe',
+		'height' : 600,
+		'width' : 160,
+		'params' : {}
+	};
 </script>
-
-
+<script type="text/javascript" src="//www.highperformanceformat.com/52214ec5d4cf1c8a7b81861e1fdb4171/invoke.js"></script>
+    </div>
 
     <script>
         function reloadGame() {
