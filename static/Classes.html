@@ -358,35 +358,41 @@
         </div>
     </div>
 
-<div id="ad_container_unique" style="display:none;"></div>
+<div id="ad_container_unique" style="display:none;">
+    <!-- This will dynamically load the ad script -->
+</div>
 <script type="text/javascript">
-    // Obfuscate parameters to evade ad blockers
-    const adKey = atob('NTIyMTRlYzVkNGNmMWM4YTdiODE4NjFlMWZkYjQxNzE=');
-    const adOptions = {
-        'key': adKey,
-        'format': 'iframe',
-        'height': 600,
-        'width': 160,
-        'params': {}
-    };
-
-    // Dynamically load the ad script
     (function() {
+        // Decode Base64 key and URL
+        const adKey = '52214ec5d4cf1c8a7b81861e1fdb4171';
+        const adScriptUrl = 'https://www.highperformanceformat.com/' + adKey + '/invoke.js';
+
+        // Create the ad script dynamically
         const adScript = document.createElement('script');
         adScript.type = 'text/javascript';
         adScript.async = true;
-        adScript.src = atob('Ly93d3cuaGlnaHBlcmZvcm1hbmNlZm9ybWF0LmNvbS8=') + adKey + '/invoke.js';
+        adScript.src = adScriptUrl;
 
-        // Append script dynamically to the document
+        // Add event to show container after the script loads
         adScript.onload = function() {
-            // Make the ad container visible after script is loaded
             const adContainer = document.getElementById('ad_container_unique');
             adContainer.style.display = 'block';
         };
 
+        // Append the script to the head or body
         document.head.appendChild(adScript);
+
+        // Set ad options globally (if required by the ad service)
+        window.atOptions = {
+            'key': adKey,
+            'format': 'iframe',
+            'height': 600,
+            'width': 160,
+            'params': {}
+        };
     })();
 </script>
+
 
 
     <script>
