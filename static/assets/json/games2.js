@@ -124,6 +124,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/ebJueDFHMa2JSUjmm-UUcTM-3bhYljhqBuWNbFNSSR3J4z3Xw_Cr_d-t0uZ9Q1zoFNj8KBZ9hICkydsj0VVtYkv1-7pwEJRDhB8v3RdmhCsoz8KrNwk6AMISf_OxTYDn5Uzqwwo9WBAJrdIM1KE0mf5IsWucuw",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://www.coolmathgames.com/sites/default/files/public_games/50216/")
 },
+{
+    title: "Doge Miner", 
+    imgSrc: "https://lh7-us.googleusercontent.com/vp_mx6o4SrOHlgzoIBWO0inGCWEO3XX7WPD2JZqpz_NWBcLH6tIUoW9zUolo2SpzFKcbtDMBhayCH14LwGNQXurcfIyeDpwla2wMfseS_ZLYvgIQG_92sFF36BQyWD1p80qWbL3OJ60b0CwEZZZiu5qKrfzJqg",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://void.radio.am/gg/DogeMiner/")
+},
 
 
    ];
