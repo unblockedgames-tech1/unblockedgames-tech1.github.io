@@ -76,6 +76,9 @@
                 font-size: 1.2rem;
                 border: 2px solid #fff;
                 animation: fadeIn 0.3s ease-in-out;
+                overflow-wrap: break-word; 
+                word-wrap: break-word; 
+                hyphens: auto;
             }
             @keyframes fadeIn {
                 from { opacity: 0; }
@@ -85,6 +88,13 @@
                 margin-top: 0;
                 font-weight: 600;
                 margin-bottom: 20px;
+            }
+            .popup p {
+                margin: 10px 0;
+                background: rgba(255,255,255,0.1);
+                padding: 8px;
+                border-radius: 5px;
+                min-height: 20px;
             }
             .popup .close-btn {
                 position: absolute;
@@ -105,27 +115,6 @@
             .popup .close-btn:hover {
                 transform: scale(1.2);
             }
-            .columns {
-                display: flex;
-                justify-content: space-between;
-                gap: 20px;
-                margin-top: 20px;
-                text-align: left;
-            }
-            .column h3 {
-                margin-top: 0;
-                margin-bottom: 10px;
-                font-size: 1.2rem;
-                font-weight: bold;
-                text-align: center;
-            }
-            .column p {
-                background: rgba(255,255,255,0.1);
-                padding: 8px;
-                border-radius: 5px;
-                margin: 5px 0;
-                min-height: 20px;
-            }
         `;
         document.head.appendChild(s);
 
@@ -134,21 +123,17 @@
                 "<div class='popup'>" +
                     "<button class='close-btn' onclick='document.querySelector(\".popup-overlay\").remove()'>X</button>" +
                     "<h2>" + popupTitle + "</h2>" +
-                    "<div class='columns'>" +
-                        "<div class='column'>" +
-                            "<h3>New Games</h3>" +
-                            "<p>Doge Miner!</p><p></p><p></p><p></p><p></p>" +
-                        "</div>" +
-                        "<div class='column'>" +
-                            "<h3>Featured</h3>" +
-                            "<p>New Void Network Roblox Game!</p>https://www.roblox.com/games/88467142109389/<p></p><p></p><p></p><p></p>" +
-                        "</div>" +
-                    "</div>" +
+                    "<p></p>" +
+                    "<p></p>" +
+                    "<p></p>" +
+                    "<p></p>" +
+                    "<p></p>" +
                 "</div>" +
             "</div>"
         );
     });
 </script>
+
 
 
 <style>
