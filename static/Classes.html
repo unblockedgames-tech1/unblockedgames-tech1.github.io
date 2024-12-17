@@ -14,7 +14,7 @@
             padding: 0;
             height: 100%;
             overflow: hidden; /* Prevent scrolling */
-            background-color: transparent; /* Ensure background is transparent */
+            background-color: #ffffff; /* Set a default background color */
             font-family: Arial, sans-serif; /* Optional: Set a default font */
         }
 
@@ -115,25 +115,22 @@
         </div>
     </div>
 
-    <!-- Optional: Your Game's Main Content -->
-    <!--
+    <!-- Your Game's Main Content -->
     <div id="gameContent">
         <h1>Welcome to the Game!</h1>
         <p>Enjoy your gameplay experience.</p>
+        <!-- Add more of your game content here -->
     </div>
-    -->
 
     <!-- JavaScript to Handle Ad Overlay Display and Removal -->
     <script>
         /**
-         * Function to remove the ad overlay and display nothingness.
+         * Function to remove the ad overlay without altering the main content.
          */
         function removeAdOverlay() {
             const adOverlay = document.getElementById('adOverlay');
             if (adOverlay) {
                 adOverlay.style.display = 'none';
-                // Clear the body content to show nothingness
-                document.body.innerHTML = '';
             }
         }
 
