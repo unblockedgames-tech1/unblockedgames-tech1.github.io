@@ -8,10 +8,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game with Ad Overlay</title>
     <style>
-        /* Base Styles */
-        body {
+        /* Remove body margin and ensure the overlay covers the entire viewport */
+        body, html {
             margin: 0;
             padding: 0;
+            height: 100%;
+            overflow: hidden; /* Prevent scrolling */
             background-color: #ffffff; /* Set a default background color */
             font-family: Arial, sans-serif; /* Optional: Set a default font */
         }
@@ -29,6 +31,7 @@
             justify-content: center;
             align-items: center;
             z-index: 1000; /* Ensure the overlay is on top */
+            /* Removed cursor: pointer to indicate non-clickable overlay */
         }
 
         /* Ad container styles */
@@ -65,7 +68,6 @@
             color: #004999; /* Darker blue on hover */
         }
 
-        /* Responsive Design */
         @media (max-width: 768px) {
             .ad-container {
                 width: 90%;
@@ -80,13 +82,6 @@
             .fallback-message {
                 font-size: 0.9em;
             }
-        }
-
-        /* Optional: Ensure main content takes full space */
-        #gameContent {
-            width: 100%;
-            min-height: 100vh; /* Ensure it takes at least the full viewport height */
-            /* Add any additional styles for your game content */
         }
     </style>
 </head>
@@ -123,9 +118,6 @@
     <!-- Your Game's Main Content -->
     <div id="gameContent">
         <!-- Add your game content here -->
-        <!-- Example: -->
-        <canvas id="gameCanvas" width="800" height="600"></canvas>
-        <script src="path-to-your-game.js"></script>
     </div>
 
     <!-- JavaScript to Handle Ad Overlay Display and Removal -->
