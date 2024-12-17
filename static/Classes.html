@@ -8,12 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game with Ad Overlay</title>
     <style>
-        /* Remove body margin and ensure the overlay covers the entire viewport */
-        body, html {
+        /* Base Styles */
+        body {
             margin: 0;
             padding: 0;
-            height: 100%;
-            overflow: hidden; /* Prevent scrolling when overlay is active */
             background-color: #ffffff; /* Set a default background color */
             font-family: Arial, sans-serif; /* Optional: Set a default font */
         }
@@ -31,7 +29,6 @@
             justify-content: center;
             align-items: center;
             z-index: 1000; /* Ensure the overlay is on top */
-            /* Removed cursor: pointer to indicate non-clickable overlay */
         }
 
         /* Ad container styles */
@@ -68,6 +65,7 @@
             color: #004999; /* Darker blue on hover */
         }
 
+        /* Responsive Design */
         @media (max-width: 768px) {
             .ad-container {
                 width: 90%;
@@ -84,11 +82,10 @@
             }
         }
 
-        /* Optional: Ensure main content takes full space when overlay is hidden */
+        /* Optional: Ensure main content takes full space */
         #gameContent {
             width: 100%;
-            height: 100%;
-            overflow: auto; /* Allow scrolling if needed */
+            min-height: 100vh; /* Ensure it takes at least the full viewport height */
             /* Add any additional styles for your game content */
         }
     </style>
@@ -140,8 +137,6 @@
             const adOverlay = document.getElementById('adOverlay');
             if (adOverlay) {
                 adOverlay.style.display = 'none';
-                // Re-enable scrolling if it was disabled
-                document.body.style.overflow = 'auto';
             }
         }
 
@@ -152,8 +147,6 @@
             const adOverlay = document.getElementById('adOverlay');
             if (adOverlay && adOverlay.style.display !== 'flex') {
                 adOverlay.style.display = 'flex';
-                // Disable scrolling when overlay is active
-                document.body.style.overflow = 'hidden';
 
                 // Hide fallback message initially
                 const fallback = document.getElementById('fallbackMessage');
