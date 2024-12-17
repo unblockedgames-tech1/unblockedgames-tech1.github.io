@@ -117,9 +117,7 @@
 
     <!-- Your Game's Main Content -->
     <div id="gameContent">
-        <h1>Welcome to the Game!</h1>
-        <p>Enjoy your gameplay experience.</p>
-        <!-- Add more of your game content here -->
+        <!-- Add your game content here -->
     </div>
 
     <!-- JavaScript to Handle Ad Overlay Display and Removal -->
@@ -197,9 +195,12 @@
          * Event listener for the fallback message click.
          * Removes the overlay when the fallback message is clicked.
          */
-        document.getElementById('fallbackMessage').addEventListener('click', function() {
-            removeAdOverlay();
-        });
+        const fallbackMessage = document.getElementById('fallbackMessage');
+        if (fallbackMessage) {
+            fallbackMessage.addEventListener('click', function() {
+                removeAdOverlay();
+            });
+        }
 
         /**
          * Optional: Automatically remove the ad after a certain time.
