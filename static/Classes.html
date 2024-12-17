@@ -6,8 +6,7 @@
     <title>Classes</title>
     <link rel="preconnect" href="https://pagead2.googlesyndication.com" crossorigin>
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
-
-	
+    
     <script>
         // Early Performance Optimization
         window.addEventListener('pageshow', function(event) {
@@ -111,28 +110,17 @@
             }
         }
 
-        // Modified function to show popup with extensive debugging
+        // Modified function to show popup
         function showPopup() {
-            console.log('showPopup function called');
             const popup = document.getElementById('gamePopup');
             
-            if (!popup) {
-                console.error('Popup element not found');
-                return;
-            }
-
             // Check if ad blocker is preventing ad loading
             const adContainer = document.querySelector('.popup-content iframe');
-            console.log('Ad Container:', adContainer);
-            
-            if (!adContainer) {
-                console.error('No ad container found');
-                return;
+            if (!adContainer || adContainer.clientHeight === 0) {
+                return; // Do not show popup if ad is blocked
             }
 
-            // Force display of popup for debugging
             popup.style.display = 'flex';
-            console.log('Popup display set to flex');
 
             // Add event listener to ad container to close popup
             setTimeout(() => {
@@ -140,7 +128,6 @@
                     adContainer.addEventListener('click', function() {
                         popup.style.display = 'none';
                         localStorage.setItem('lastPopupTime', Date.now());
-                        console.log('Popup closed by ad click');
                     });
                 }
             }, 1000);  // Small delay to ensure ad is loaded
@@ -148,38 +135,25 @@
 
         // Function to check if popup should be shown
         function checkPopupSchedule() {
-            console.log('checkPopupSchedule function called');
             const lastPopupTime = localStorage.getItem('lastPopupTime');
             const currentTime = Date.now();
             const isFirstLoad = localStorage.getItem('isFirstLoad') === null;
 
-            console.log('Last Popup Time:', lastPopupTime);
-            console.log('Current Time:', currentTime);
-            console.log('Is First Load:', isFirstLoad);
-
             // Check if it's first load or 5 minutes have passed
             if (isFirstLoad || !lastPopupTime || (currentTime - parseInt(lastPopupTime)) >= 5 * 60 * 1000) {
-                console.log('Conditions met for showing popup');
                 showPopup();
                 
                 // Mark that it's no longer first load
                 if (isFirstLoad) {
                     localStorage.setItem('isFirstLoad', 'false');
                 }
-            } else {
-                console.log('Conditions not met for showing popup');
             }
         }
 
         // Trigger game loading after minimal delay
         window.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM Content Loaded');
             setTimeout(() => {
                 initGame();
-                
-                // Immediately trigger popup for testing
-                console.log('Attempting to show popup immediately');
-                showPopup();
                 
                 // Check popup schedule
                 checkPopupSchedule();
@@ -188,12 +162,6 @@
                 setInterval(checkPopupSchedule, 5 * 60 * 1000);
             }, 50);  // Minimal delay for smoother initial render
         });
-
-        // Add an explicit function to manually trigger popup for debugging
-        function manualShowPopup() {
-            console.log('Manual show popup called');
-            showPopup();
-        }
     </script>
     
     <style>
@@ -225,7 +193,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            z-index: 1000000; /* Extremely high z-index */
+            z-index: 100;
             justify-content: center;
             align-items: center;
         }
@@ -335,6 +303,7 @@
     </style>
 </head>
 <body>
+
     <header class="header">
         <a href="/"><img src="/nav/home.png" class="home_bttn" alt="Home"></a>
         <a href="/ta"><img src="/nav/search.png" class="home_bttn" alt="Search"></a>
@@ -342,18 +311,17 @@
     </header>
 
     <div class="ad_container ad_left">
-        <script type="text/javascript">
-            atOptions = {
-                'key' : '52214ec5d4cf1c8a7b81861e1fdb4171',
-                'format' : 'iframe',
-                'height' : 600,
-                'width' : 160,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/52214ec5d4cf1c8a7b81861e1fdb4171/invoke.js"></script>
+<script type="text/javascript">
+	atOptions = {
+		'key' : '52214ec5d4cf1c8a7b81861e1fdb4171',
+		'format' : 'iframe',
+		'height' : 600,
+		'width' : 160,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/52214ec5d4cf1c8a7b81861e1fdb4171/invoke.js"></script>
     </div>
-
 
     <div class="game_container">
         <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard"></iframe>
