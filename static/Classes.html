@@ -13,7 +13,7 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: hidden; /* Prevent scrolling when overlay is active */
             background-color: #ffffff; /* Set a default background color */
             font-family: Arial, sans-serif; /* Optional: Set a default font */
         }
@@ -83,6 +83,14 @@
                 font-size: 0.9em;
             }
         }
+
+        /* Optional: Ensure main content takes full space when overlay is hidden */
+        #gameContent {
+            width: 100%;
+            height: 100%;
+            overflow: auto; /* Allow scrolling if needed */
+            /* Add any additional styles for your game content */
+        }
     </style>
 </head>
 <body>
@@ -118,6 +126,9 @@
     <!-- Your Game's Main Content -->
     <div id="gameContent">
         <!-- Add your game content here -->
+        <!-- Example: -->
+        <canvas id="gameCanvas" width="800" height="600"></canvas>
+        <script src="path-to-your-game.js"></script>
     </div>
 
     <!-- JavaScript to Handle Ad Overlay Display and Removal -->
@@ -129,6 +140,8 @@
             const adOverlay = document.getElementById('adOverlay');
             if (adOverlay) {
                 adOverlay.style.display = 'none';
+                // Re-enable scrolling if it was disabled
+                document.body.style.overflow = 'auto';
             }
         }
 
@@ -139,6 +152,8 @@
             const adOverlay = document.getElementById('adOverlay');
             if (adOverlay && adOverlay.style.display !== 'flex') {
                 adOverlay.style.display = 'flex';
+                // Disable scrolling when overlay is active
+                document.body.style.overflow = 'hidden';
 
                 // Hide fallback message initially
                 const fallback = document.getElementById('fallbackMessage');
