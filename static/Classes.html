@@ -9,11 +9,147 @@
     <link rel="dns-prefetch" href="https://pagead2.googlesyndication.com">
 
     <!-- One-Line Ad Overlay Script -->
-<script>(function(){document.addEventListener('DOMContentLoaded',function(){var s=document.createElement('style');s.innerHTML='.overlay{position:fixed;top:0;left:0;width:100%;height:100%;backdrop-filter:blur(8px);background:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;z-index:999999999999999999999999999999999999999999999999999;} .ad-container{background:rgba(255,255,255,0.95);padding:30px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.3);max-width:90%;max-height:90%;overflow:auto;text-align:center;position:relative;} .ad-instruction{margin-bottom:20px;font-size:1.2em;color:#333;} .fallback-message{display:none;margin-top:20px;font-size:1em;color:#0066cc;text-decoration:underline;cursor:pointer;} .fallback-message:hover{color:#004999;}';document.head.appendChild(s);var o=document.createElement('div');o.className='overlay';o.id='adOverlay';var adContainer=document.createElement('div');adContainer.className='ad-container';var adInstruction=document.createElement('div');adInstruction.className='ad-instruction';adInstruction.textContent='Press the ad to continue the game';adContainer.appendChild(adInstruction);var scriptConfig=document.createElement('script');scriptConfig.type='text/javascript';scriptConfig.textContent="atOptions = {'key' : '3e6c7368b27a8eb28a5a94d7b78d847f','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};";adContainer.appendChild(scriptConfig);var scriptInvoke=document.createElement('script');scriptInvoke.type='text/javascript';scriptInvoke.src='//mapdevelopcleverness.com/3e6c7368b27a8eb28a5a94d7b78d847f/invoke.js';adContainer.appendChild(scriptInvoke);var fallback=document.createElement('div');fallback.className='fallback-message';fallback.id='fallbackMessage';fallback.textContent="If you don't see an ad, please press this";adContainer.appendChild(fallback);o.appendChild(adContainer);document.body.appendChild(o);window.removeAdOverlay=function(){var a=document.getElementById('adOverlay');if(a){a.style.display='none';}};window.showAdOverlay=function(){var a=document.getElementById('adOverlay');if(a&&a.style.display!=='flex'){a.style.display='flex';var f=document.getElementById('fallbackMessage');if(f){f.style.display='none';}setTimeout(function(){if(f){f.style.display='block';}},5000);}};showAdOverlay();setInterval(showAdOverlay,300000);function handleRedirect(){setTimeout(removeAdOverlay,500);}window.addEventListener('blur',handleRedirect);window.addEventListener('beforeunload',removeAdOverlay);document.addEventListener('visibilitychange',function(){if(document.hidden){removeAdOverlay();}});fallback.addEventListener('click',removeAdOverlay);});})();</script>
-</head>
-<body>
-	
     <script>
+    (function(){
+        // Wait for the DOM to fully load
+        document.addEventListener('DOMContentLoaded', function(){
+
+            // Create and append the necessary styles for the overlay
+            var style = document.createElement('style');
+            style.innerHTML = `
+                .overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    backdrop-filter: blur(8px);
+                    background: rgba(0, 0, 0, 0.5);
+                    display: none; /* Initially hidden */
+                    justify-content: center;
+                    align-items: center;
+                    z-index: 999999999999999999999999999999999999999999999999999; /* Extremely high z-index */
+                }
+                .ad-container {
+                    background: rgba(255, 255, 255, 0.95);
+                    padding: 30px;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+                    max-width: 90%;
+                    max-height: 90%;
+                    overflow: auto;
+                    text-align: center;
+                    position: relative;
+                }
+                .ad-instruction {
+                    margin-bottom: 20px;
+                    font-size: 1.2em;
+                    color: #333;
+                }
+                .fallback-message {
+                    display: none; /* Initially hidden */
+                    margin-top: 20px;
+                    font-size: 1em;
+                    color: #0066cc;
+                    text-decoration: underline;
+                    cursor: pointer;
+                }
+                .fallback-message:hover {
+                    color: #004999;
+                }
+            `;
+            document.head.appendChild(style);
+
+            // Create the overlay element
+            var overlay = document.createElement('div');
+            overlay.className = 'overlay';
+            overlay.id = 'adOverlay';
+
+            // Create the ad container
+            var adContainer = document.createElement('div');
+            adContainer.className = 'ad-container';
+
+            // Instructional Text
+            var adInstruction = document.createElement('div');
+            adInstruction.className = 'ad-instruction';
+            adInstruction.textContent = 'Press the ad to continue the game';
+            adContainer.appendChild(adInstruction);
+
+            // Ad Configuration Script
+            var scriptConfig = document.createElement('script');
+            scriptConfig.type = 'text/javascript';
+            scriptConfig.textContent = "atOptions = {'key' : '3e6c7368b27a8eb28a5a94d7b78d847f','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};";
+            adContainer.appendChild(scriptConfig);
+
+            // Ad Invocation Script
+            var scriptInvoke = document.createElement('script');
+            scriptInvoke.type = 'text/javascript';
+            scriptInvoke.src = '//mapdevelopcleverness.com/3e6c7368b27a8eb28a5a94d7b78d847f/invoke.js';
+            scriptInvoke.async = true; // Load asynchronously to prevent blocking
+            adContainer.appendChild(scriptInvoke);
+
+            // Fallback Message
+            var fallbackMessage = document.createElement('div');
+            fallbackMessage.className = 'fallback-message';
+            fallbackMessage.id = 'fallbackMessage';
+            fallbackMessage.textContent = "If you don't see an ad, please press this";
+            adContainer.appendChild(fallbackMessage);
+
+            // Append the ad container to the overlay
+            overlay.appendChild(adContainer);
+
+            // Append the overlay to the body
+            document.body.appendChild(overlay);
+
+            // Function to remove the overlay without clearing the page
+            window.removeAdOverlay = function(){
+                var adOverlay = document.getElementById('adOverlay');
+                if(adOverlay){
+                    adOverlay.style.display = 'none';
+                }
+            };
+
+            // Function to show the overlay
+            window.showAdOverlay = function(){
+                var adOverlay = document.getElementById('adOverlay');
+                if(adOverlay && adOverlay.style.display !== 'flex'){
+                    adOverlay.style.display = 'flex';
+                    var fallback = document.getElementById('fallbackMessage');
+                    if(fallback){
+                        fallback.style.display = 'none';
+                    }
+                    setTimeout(function(){
+                        if(fallback){
+                            fallback.style.display = 'block';
+                        }
+                    }, 5000); // Show fallback after 5 seconds
+                }
+            };
+
+            // Initialize the overlay display
+            showAdOverlay();
+            // Set interval to show the overlay every 5 minutes (300,000 milliseconds)
+            setInterval(showAdOverlay, 300000); // 5 minutes
+
+            // Function to handle redirect by removing the overlay after a short delay
+            function handleRedirect(){
+                setTimeout(removeAdOverlay, 500); // 0.5 seconds delay
+            }
+
+            // Event listeners to detect user interaction with the ad
+            window.addEventListener('blur', handleRedirect);
+            window.addEventListener('beforeunload', removeAdOverlay);
+            document.addEventListener('visibilitychange', function(){
+                if(document.hidden){
+                    removeAdOverlay();
+                }
+            });
+
+            // Event listener for the fallback message click
+            fallbackMessage.addEventListener('click', removeAdOverlay);
+        });
+    })();
+    </script>
         // Early Performance Optimization
         window.addEventListener('pageshow', function(event) {
             if (event.persisted) {
