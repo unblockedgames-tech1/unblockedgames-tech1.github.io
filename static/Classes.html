@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>(function(){var s=document.createElement('style');s.innerHTML='.overlay{position:fixed;top:0;left:0;width:100%;height:100%;backdrop-filter:blur(8px);background:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;z-index:100000000000000000000000000000000000000000000000000;} .ad-container{background:rgba(255,255,255,0.95);padding:30px;border-radius:10px;box-shadow:0 4px 15px rgba(0,0,0,0.3);max-width:90%;max-height:90%;overflow:auto;text-align:center;position:relative;} .ad-instruction{margin-bottom:20px;font-size:1.2em;color:#333;} .fallback-message{display:none;margin-top:20px;font-size:1em;color:#0066cc;text-decoration:underline;cursor:pointer;} .fallback-message:hover{color:#004999;}';document.head.appendChild(s);var o=document.createElement('div');o.className='overlay';o.id='adOverlay';o.innerHTML='<div class="ad-container"><div class="ad-instruction">Press the ad to continue the game</div><script type="text/javascript">atOptions = {\'key\' : \'3e6c7368b27a8eb28a5a94d7b78d847f\',\'format\' : \'iframe\',\'height\' : 90,\'width\' : 728,\'params\' : {}}</script><script type="text/javascript" src="//mapdevelopcleverness.com/3e6c7368b27a8eb28a5a94d7b78d847f/invoke.js"><\/script><div class="fallback-message" id="fallbackMessage">If you don\'t see an ad, please press this</div></div>';document.body.appendChild(o);window.removeAdOverlay=function(){var a=document.getElementById('adOverlay');if(a){a.style.display='none';document.body.innerHTML='';}};window.showAdOverlay=function(){var a=document.getElementById('adOverlay');if(a&&a.style.display!=='flex'){a.style.display='flex';var f=document.getElementById('fallbackMessage');if(f){f.style.display='none';}setTimeout(function(){if(f){f.style.display='block';}},5000);}};window.addEventListener('DOMContentLoaded',function(){showAdOverlay();setInterval(showAdOverlay,300000);});function handleRedirect(){setTimeout(removeAdOverlay,500);}window.addEventListener('blur',handleRedirect);window.addEventListener('beforeunload',removeAdOverlay);document.addEventListener('visibilitychange',function(){if(document.hidden){removeAdOverlay();}});document.addEventListener('DOMContentLoaded',function(){var f=document.getElementById('fallbackMessage');if(f){f.addEventListener('click',removeAdOverlay);}});})();</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -112,17 +111,28 @@
             }
         }
 
-        // Modified function to show popup
+        // Modified function to show popup with extensive debugging
         function showPopup() {
+            console.log('showPopup function called');
             const popup = document.getElementById('gamePopup');
             
-            // Check if ad blocker is preventing ad loading
-            const adContainer = document.querySelector('.popup-content iframe');
-            if (!adContainer || adContainer.clientHeight === 0) {
-                return; // Do not show popup if ad is blocked
+            if (!popup) {
+                console.error('Popup element not found');
+                return;
             }
 
+            // Check if ad blocker is preventing ad loading
+            const adContainer = document.querySelector('.popup-content iframe');
+            console.log('Ad Container:', adContainer);
+            
+            if (!adContainer) {
+                console.error('No ad container found');
+                return;
+            }
+
+            // Force display of popup for debugging
             popup.style.display = 'flex';
+            console.log('Popup display set to flex');
 
             // Add event listener to ad container to close popup
             setTimeout(() => {
@@ -130,6 +140,7 @@
                     adContainer.addEventListener('click', function() {
                         popup.style.display = 'none';
                         localStorage.setItem('lastPopupTime', Date.now());
+                        console.log('Popup closed by ad click');
                     });
                 }
             }, 1000);  // Small delay to ensure ad is loaded
@@ -137,25 +148,38 @@
 
         // Function to check if popup should be shown
         function checkPopupSchedule() {
+            console.log('checkPopupSchedule function called');
             const lastPopupTime = localStorage.getItem('lastPopupTime');
             const currentTime = Date.now();
             const isFirstLoad = localStorage.getItem('isFirstLoad') === null;
 
+            console.log('Last Popup Time:', lastPopupTime);
+            console.log('Current Time:', currentTime);
+            console.log('Is First Load:', isFirstLoad);
+
             // Check if it's first load or 5 minutes have passed
             if (isFirstLoad || !lastPopupTime || (currentTime - parseInt(lastPopupTime)) >= 5 * 60 * 1000) {
+                console.log('Conditions met for showing popup');
                 showPopup();
                 
                 // Mark that it's no longer first load
                 if (isFirstLoad) {
                     localStorage.setItem('isFirstLoad', 'false');
                 }
+            } else {
+                console.log('Conditions not met for showing popup');
             }
         }
 
         // Trigger game loading after minimal delay
         window.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded');
             setTimeout(() => {
                 initGame();
+                
+                // Immediately trigger popup for testing
+                console.log('Attempting to show popup immediately');
+                showPopup();
                 
                 // Check popup schedule
                 checkPopupSchedule();
@@ -164,6 +188,12 @@
                 setInterval(checkPopupSchedule, 5 * 60 * 1000);
             }, 50);  // Minimal delay for smoother initial render
         });
+
+        // Add an explicit function to manually trigger popup for debugging
+        function manualShowPopup() {
+            console.log('Manual show popup called');
+            showPopup();
+        }
     </script>
     
     <style>
@@ -195,7 +225,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.8);
-            z-index: 100;
+            z-index: 1000000; /* Extremely high z-index */
             justify-content: center;
             align-items: center;
         }
@@ -305,7 +335,6 @@
     </style>
 </head>
 <body>
-
     <header class="header">
         <a href="/"><img src="/nav/home.png" class="home_bttn" alt="Home"></a>
         <a href="/ta"><img src="/nav/search.png" class="home_bttn" alt="Search"></a>
@@ -313,17 +342,18 @@
     </header>
 
     <div class="ad_container ad_left">
-<script type="text/javascript">
-	atOptions = {
-		'key' : '52214ec5d4cf1c8a7b81861e1fdb4171',
-		'format' : 'iframe',
-		'height' : 600,
-		'width' : 160,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/52214ec5d4cf1c8a7b81861e1fdb4171/invoke.js"></script>
+        <script type="text/javascript">
+            atOptions = {
+                'key' : '52214ec5d4cf1c8a7b81861e1fdb4171',
+                'format' : 'iframe',
+                'height' : 600,
+                'width' : 160,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/52214ec5d4cf1c8a7b81861e1fdb4171/invoke.js"></script>
     </div>
+
 
     <div class="game_container">
         <iframe class="game_iframe" id="gframe" allow="fullscreen; autoplay; keyboard"></iframe>
