@@ -5,21 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Void Network</title>
     
-    <!-- Favicon -->
     <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
-    
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="/assets/css/styles.css">
     <link rel="stylesheet" href="/assets/css/index.css">
     
-    <!-- Scripts -->
     <script src="/config.js"></script>
     <script src="/global.js"></script>
     <script src="uv/uv.bundle.js"></script>
     <script src="uv/uv.config.js"></script>
     <script src="/assets/js/favicon-handler.js"></script>
 
-    <!-- Google Tag Manager -->
     <script>
         (function(w,d,s,l,i){
             w[l]=w[l]||[];
@@ -33,7 +28,6 @@
         })(window,document,'script','dataLayer','GTM-PZXRTFX5');
     </script>
 
-    <!-- Updates Popup -->
     <script>
         var popupTitle = "Updates";
 
@@ -128,7 +122,6 @@
         });
     </script>
 
-    <!-- Loading Styles -->
     <style id="loading-style">
         body,html{margin:0;padding:0;width:100%;height:100%;overflow:hidden}
         #loadingOverlay{position:fixed;top:0;left:0;width:100%;height:100%;background:linear-gradient(135deg,#000 0,#1a1a1a 100%);display:flex;justify-content:center;align-items:center;z-index:999999;transition:opacity 1s ease-in-out}
@@ -145,7 +138,6 @@
         .fade-out{opacity:0;pointer-events:none}
     </style>
 
-    <!-- Additional Styles -->
     <style>
     .background-overlay {
         position: fixed;
@@ -191,12 +183,8 @@
     }
 
     @keyframes moveStar {
-        from {
-            transform: translateY(0);
-        }
-        to {
-            transform: translateY(100vh);
-        }
+        from { transform: translateY(0); }
+        to { transform: translateY(100vh); }
     }
 
     .star {
@@ -317,25 +305,6 @@
         z-index: 1;
     }
 
-    .games-grid::-webkit-scrollbar {
-        width: 8px;
-    }
-
-    .games-grid::-webkit-scrollbar-track {
-        background: rgba(255, 255, 255, 0.05);
-        margin: 4px;
-        border-radius: 4px;
-    }
-
-    .games-grid::-webkit-scrollbar-thumb {
-        background: rgba(255, 255, 255, 0.2);
-        border-radius: 4px;
-    }
-
-    .games-grid::-webkit-scrollbar-thumb:hover {
-        background: rgba(255, 255, 255, 0.3);
-    }
-
     .game-item {
         padding: 1rem;
         background: rgba(255, 255, 255, 0.05);
@@ -382,11 +351,6 @@
         border-color: rgba(255, 255, 255, 0.2);
     }
 
-    .game-item:hover .game-title {
-        color: #fff;
-        text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-    }
-
     @media (max-width: 768px) {
         .games-box {
             width: 95%;
@@ -418,14 +382,12 @@
 </head>
 
 <body>
-    <!-- Google Tag Manager (noscript) -->
     <noscript>
         <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PZXRTFX5"
             height="0" width="0" style="display:none;visibility:hidden">
         </iframe>
     </noscript>
 
-    <!-- Specified AD CODE placed within scrollable-content -->
     <div class="background-overlay">
         <img src="nav/voidc.gif" alt="background">
     </div>
@@ -441,8 +403,8 @@
                 <input type="text" id="searchGames" placeholder="Search games...">
             </div>
 
-            <div class="scrollable-content">
-                <!-- Specified AD CODE -->
+<div class="scrollable-content">
+                <!-- Ad container -->
                 <script async="async" data-cfasync="false" src="//mapdevelopcleverness.com/fb9be2f0eedc9c6ef42e40a34f0c7269/invoke.js"></script>
                 <div id="container-fb9be2f0eedc9c6ef42e40a34f0c7269"></div>
 
@@ -499,7 +461,41 @@
         }();
     </script>
 
-    <!-- Service Worker Registration and Star Creation -->
+    <!-- Ad Prevention and Click Handling -->
+    <script>
+        // Prevent unwanted redirects
+        window.addEventListener('click', function(e) {
+            const gameItem = e.target.closest('.game-item');
+            
+            if (gameItem) {
+                e.preventDefault();
+                const gameLink = gameItem.querySelector('.game-icon img')?.alt;
+                if (gameLink) {
+                    window.location.href = `/Classes.html?game=${encodeURIComponent(gameLink)}`;
+                }
+                return;
+            }
+
+            const isSearchInput = e.target.id === 'searchGames';
+            const isApprovedAd = e.target.closest('#container-fb9be2f0eedc9c6ef42e40a34f0c7269');
+            
+            if (!isSearchInput && !isApprovedAd) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+        });
+
+        // Block unwanted window opens
+        const originalOpen = window.open;
+        window.open = function(url, target, features) {
+            if (document.activeElement?.closest('#container-fb9be2f0eedc9c6ef42e40a34f0c7269')) {
+                return originalOpen.call(window, url, target, features);
+            }
+            return null;
+        };
+    </script>
+
+    <!-- Service Worker and Star Creation -->
     <script>
         const stockSW = "/uv/sw.js";
         const swAllowedHostnames = ["localhost", "127.0.0.1"];
@@ -520,21 +516,13 @@
             for (let i = 0; i < numberOfStars; i++) {
                 const star = document.createElement('div');
                 star.className = 'star';
-                
-                const size = Math.random() * 5;
-                star.style.width = `${size}px`;
-                star.style.height = `${size}px`;
-                
+                star.style.width = `${Math.random() * 5}px`;
+                star.style.height = star.style.width;
                 star.style.left = `${Math.random() * 100}%`;
                 star.style.top = `${Math.random() * 100}%`;
-                
-                const duration = 20 + Math.random() * 20;
-                star.style.animationDuration = `${duration}s`;
-                
-                star.style.animationDelay = `${Math.random() * duration}s`;
-                
+                star.style.animationDuration = `${20 + Math.random() * 20}s`;
+                star.style.animationDelay = `${Math.random() * 20}s`;
                 star.style.opacity = Math.random() * 0.8 + 0.2;
-                
                 starsContainer.appendChild(star);
             }
         }
@@ -542,7 +530,7 @@
         window.addEventListener('load', createStars);
     </script>
 
-    <!-- Games Loading and Header/Footer Inclusion -->
+    <!-- Games Loading -->
     <script type="module">
         try {
             const gamesList = document.getElementById("gamesList");
@@ -568,7 +556,8 @@
             function loadGame(game) {
                 const gameElement = document.createElement("div");
                 gameElement.className = "game-item";
-                gameElement.innerHTML = `<div class="game-icon">
+                gameElement.innerHTML = `
+                    <div class="game-icon">
                         <img src="${game.imgSrc}" alt="${game.title} icon">
                     </div>
                     <h3 class="game-title">${game.title}</h3>
@@ -580,22 +569,19 @@
             }
 
             if (Array.isArray(games)) {
-                games.forEach(game => {
-                    loadGame(game);
-                });
+                games.forEach(game => loadGame(game));
             } else {
-                console.error("Games is not an array:", games);
                 gamesList.innerHTML = '<div style="color: white;">Error: Games data is not in the correct format</div>';
             }
 
             document.getElementById("searchGames").addEventListener("keyup", function(e) {
                 gamesList.innerHTML = '';
                 const searchTerm = this.value.toLowerCase();
-                for (const game of games) {
+                games.forEach(game => {
                     if (game.title.toLowerCase().includes(searchTerm)) {
                         loadGame(game);
                     }
-                }
+                });
             });
         } catch (error) {
             console.error("Error loading games:", error);
