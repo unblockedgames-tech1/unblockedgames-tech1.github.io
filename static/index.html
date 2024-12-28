@@ -162,14 +162,12 @@
         overflow: hidden;
     }
 
-    /* Adjusted to slightly enlarge and offset the background image */
     .background-overlay img {
-        /* Overfill a bit so there's no black edging */
-        width: 105%;
-        height: 105%;
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        /* Move it so it remains centered while overfilling */
-        transform: translate(-2.5%, -2.5%);
+        min-width: 100%;
+        min-height: 100%;
     }
 
     body, html {
