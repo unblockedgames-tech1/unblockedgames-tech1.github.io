@@ -129,6 +129,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/vp_mx6o4SrOHlgzoIBWO0inGCWEO3XX7WPD2JZqpz_NWBcLH6tIUoW9zUolo2SpzFKcbtDMBhayCH14LwGNQXurcfIyeDpwla2wMfseS_ZLYvgIQG_92sFF36BQyWD1p80qWbL3OJ60b0CwEZZZiu5qKrfzJqg",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://void.radio.am/gg/DogeMiner/")
 },
+{
+    title: "Basket Random", 
+    imgSrc: "https://lh7-us.googleusercontent.com/YyUUZFVuXnOCbOxrH9HcMVm12qQd5I1vdw66Bx4Rpiq894Dn8AhQhdQbsKtO7NKs6LZ-R0NmU__tOxKAeC-S_ECuli0_HHesKMlv4CwEx-NLukuRkj5Q2_gVR8VwQsgyQd32kSZfwx_Ia14mhV87hyQ8rZ71qA",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://files.twoplayergames.org/files/games/other/Basket_Random/index.html")
+},
 
 
    ];
