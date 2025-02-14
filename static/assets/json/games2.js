@@ -174,6 +174,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/r1btoCmdzs-rIVwLRBnXQVaqwhYuAB-Mn5DFvsw9gPTw9EVKL_lU1DpUkhXEj9miZLwoxJtoZaNmy5-jPJVJe6dPh0a1RlqFl25LKlI1jkvxNBtuqpwHgU12cDe_ZSwJ_bHbWeQLuH0UrJ6Pb4pLgWIXxbmnVA",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://azgames.io/game/mountain-road/")
 },
+{
+    title: "Yohoho.io", 
+    imgSrc: "https://lh7-us.googleusercontent.com/wyR4TkA7-HykVDK44L6BzYCiX126c6wp5r3W7_QhvrtAuuRTxeAEg_zpAMctaXscZjX8I6Z9k44RMvGm2H3yc2bLPJPXjdV3Jya6NR5UGGmaS_qk62ZwaPXB906n318CRGp3eRu-KqNBK_LMS7g7f3bdQ2ODPg",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://yohoho.io")
+},
 
 
 
