@@ -1,130 +1,91 @@
 <!DOCTYPE html>
 <html>
-<script>(function(){function setupAntiClose(){window.addEventListener('beforeunload',showWarning);window.addEventListener('keydown',handleKeyPress);updateActiveState(true)}function removeAntiClose(){window.removeEventListener('beforeunload',showWarning);window.removeEventListener('keydown',handleKeyPress);updateActiveState(false)}function handleKeyPress(e){if((e.ctrlKey&&e.key==='w')||(e.metaKey&&e.key==='w')){{if(localStorage.getItem('anticlose')==='true'){e.preventDefault();e.returnValue='Leave site? Changes you made may not be saved.';return e.returnValue}}}}function showWarning(e){if(!e.target.location.href.includes("redirect")&&localStorage.getItem('anticlose')==='true'){e.preventDefault();e.returnValue='Leave site? Changes you made may not be saved.';return e.returnValue}}function updateActiveState(isActive){const checkbox=document.getElementById('cbox_anticlose');if(checkbox){checkbox.checked=isActive}}function initAntiClose(){const isEnabled=localStorage.getItem('anticlose')==='true';if(isEnabled){setupAntiClose()}else if(localStorage.getItem('anticlose')===null){localStorage.setItem('anticlose','false')}updateActiveState(isEnabled)}window.addEventListener('storage',function(e){if(e.key==='anticlose'){if(e.newValue==='true'){setupAntiClose()}else{removeAntiClose()}}});if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',initAntiClose)}else{initAntiClose()}})();</script>
 <head>
-  <script src="/assets/js/favicon-handler.js"></script>
-  <script src="/assets/js/ads.js"></script>
-
-    <!-- Snowfall Effect Styles -->
-    <style>
-        #snowflakes-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -11; /* Put behind content */
-        }
-        .snowflake {
-            position: absolute;
-            background-color: white;
-            border-radius: 50%;
-            pointer-events: none;
-        }
-    </style>
-
-    <!-- Snowfall Effect Script -->
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Create container
-            const snowflakesContainer = document.createElement('div');
-            snowflakesContainer.id = 'snowflakes-container';
-            document.body.appendChild(snowflakesContainer);
-
-            // Snowfall logic
-            const snowflakesCount = 200;
-
-            function createSnowflake() {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.style.width = `${Math.random() * 5 + 2}px`;
-                snowflake.style.height = snowflake.style.width;
-                snowflake.style.left = `${Math.random() * 100}vw`;
-                snowflake.style.animationDuration = `${Math.random() * 3 + 2}s`;
-                snowflake.style.opacity = Math.random();
-                return snowflake;
-            }
-
-            // Create animation style
-            const styleSheet = document.createElement('style');
-            styleSheet.textContent = `
-                @keyframes fall {
-                    0% {
-                        transform: translateY(-100vh);
-                    }
-                    100% {
-                        transform: translateY(100vh);
-                    }
-                }
-            `;
-            document.head.appendChild(styleSheet);
-
-            // Create snowflakes
-            for (let i = 0; i < snowflakesCount; i++) {
-                const snowflake = createSnowflake();
-                snowflake.style.animation = `fall ${snowflake.style.animationDuration} linear infinite`;
-                snowflakesContainer.appendChild(snowflake);
-            }
-        });
-    </script>
-  
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-VXDP7XC98T"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-VXDP7XC98T');
-  </script>
-
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-PZXRTFX5');</script>
-  <!-- End Google Tag Manager -->
+  <title>Dynamic Web Search</title>
   <style>
+    body {
+      background-color: black;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+    }
+    .search-container {
+      text-align: center;
+      position: relative;
+    }
+    .search-title {
+      color: white;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      text-shadow: 0 0 10px rgba(255,255,255,0.7);
+    }
+    .search-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
+    }
     .uvsearch {
-        width: 30rem;
-        padding: 1rem;
-        border: none;
-        border-radius: 10rem;
-        margin-bottom: 10rem;
-        text-align: center;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        font-size: 1.5rem;
+      width: 100%;
+      padding: 1rem;
+      background: transparent;
+      border: 2px solid rgba(255,255,255,0.5);
+      border-radius: 50px;
+      color: white;
+      font-size: 1.2rem;
+      text-align: center;
+      outline: none;
+      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
-    .centered_div {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+    .uvsearch::placeholder {
+      color: rgba(255,255,255,0.5);
     }
-    .loading {
-        display: none;
-        text-align: center;
-        color: white;
-        font-size: 1.5rem;
+    .uvsearch:focus {
+      border-color: white;
+      box-shadow: 0 0 15px rgba(255,255,255,0.7);
+    }
+    .search-glow {
+      position: absolute;
+      top: -10px;
+      left: -10px;
+      right: -10px;
+      bottom: -10px;
+      background: linear-gradient(45deg, 
+        rgba(255,255,255,0.1) 0%, 
+        rgba(255,255,255,0.3) 25%, 
+        rgba(255,255,255,0.1) 50%, 
+        rgba(255,255,255,0.3) 75%, 
+        rgba(255,255,255,0.1) 100%);
+      border-radius: 60px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: 0;
+    }
+    .search-wrapper:hover .search-glow,
+    .uvsearch:focus + .search-glow {
+      opacity: 1;
     }
   </style>
 </head>
 <body>
-  <!-- Scripts -->
-  <script src="uv/uv.bundle.js"></script>
-  <script src="uv/uv.config.js"></script> 
-  <script src="/config.js"></script>
-  <script src="/global.js"></script>
-  <script src="/assets/js/particles.js"></script>
-  <script src="/assets/js/adblock.js"></script>
-  <script>
-    loadHTML("/assets/html/header.html", "header")
-    loadHTML("/assets/html/footer.html", "footer")
+  <div class="search-container">
+    <h1 class="search-title">Search the Web</h1>
+    <div class="search-wrapper">
+      <input 
+        class="uvsearch" 
+        id="uvsearch" 
+        onkeypress="handleSearch(event)" 
+        placeholder="Enter your search..."
+      >
+      <div class="search-glow"></div>
+    </div>
+  </div>
 
+  <script>
     function parseSearch(str) {
       if (str.includes("http") && str.includes(":")) {
         return str;
@@ -145,30 +106,9 @@
       }
     }
   </script>
-
-  <link href="assets/css/styles.css" rel="stylesheet">
-
-  <div id="header"></div>
-  <div id="footer"></div>
-  <div class="centered_div">
-    <h1 style="text-align: center; color: white;" id="stag">Search the web</h1>
-    <input class="uvsearch" id="uvsearch" onkeypress="handleSearch(event)" placeholder="Enter your search...">
-  </div>
-
-  <!-- Ad Code 1 -->
-  <div id="awn-z8987922" style="position: relative; width: 100%; max-width: 300px; height: auto; margin: 20px auto;"></div>
-
-  <!-- Ad Code 2 -->
-  <script data-cfasync="false" type="text/javascript" style="display: none;">
-    var adcashMacros = {};
-    var zoneNativeSett={container:"awn",baseUrl:"discovernative.com/script/native.php",r:[8987490,8987922]};
-    var urls={cdnUrls:["//superonclick.com","//geniusonclick.com"],cdnIndex:0,rand:Math.random(),events:["click","mousedown","touchstart"],useFixer:!0,onlyFixer:!1,fixerBeneath:!1};function acPrefetch(e){var t,n=document.createElement("link");t=void 0!==document.head?document.head:document.getElementsByTagName("head")[0],n.rel="dns-prefetch",n.href=e,t.appendChild(n);var r=document.createElement("link");r.rel="preconnect",r.href=e,t.appendChild(r)}var nativeInit=new function(){var a="",i=Math.floor(1e12*Math.random()),o=Math.floor(1e12*Math.random()),t=window.location.protocol,c={_0:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(e){for(var t,n,r,a,i,o,c="",s=0;s<e.length;)a=(t=e.charCodeAt(s++))>>2,t=(3&t)<<4|(n=e.charCodeAt(s++))>>4,i=(15&n)<<2|(r=e.charCodeAt(s++))>>6,o=63&r,isNaN(n)?i=o=64:isNaN(r)&&(o=64),c=c+this._0.charAt(a)+this._0.charAt(t)+this._0.charAt(i)+this._0.charAt(o);return c}};this.init=function(){e()};var e=function(){var e=document.createElement("script");e.setAttribute("data-cfasync",!1),e.src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js",e.onerror=function(){!0,r(),n()},e.onload=function(){nativeForPublishers.init()},nativeForPublishers.attachScript(e)},n=function(){""!==a?s(i,t):setTimeout(n,250)},r=function(){var t=new(window.RTCPeerConnection||window.mozRTCPeerConnection||window.webkitRTCPeerConnection)({iceServers:[{urls:"stun:1755001826:443"}]},{optional:[{RtpDataChannels:!0}]});t.onicecandidate=function(e){!e.candidate||e.candidate&&-1==e.candidate.candidate.indexOf("srflx")||!(e=/([0-9]{1,3}(\.[0-9]{1,3}){3}|[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7})/.exec(e.candidate.candidate)[1])||e.match(/^(192\.168\.|169\.254\.|10\.|172\.(1[6-9]|2\d|3[01]))/)||e.match(/^[a-f0-9]{1,4}(:[a-f0-9]{1,4}){7}$/)||(a=e)},t.createDataChannel(""),t.createOffer(function(e){t.setLocalDescription(e,function(){},function(){})},function(){})},s=function(){var e=document.createElement("script");e.setAttribute("data-cfasync",!1),e.src=t+"//"+a+"/"+c.encode(i+"/"+(i+5))+".js",e.onload=function(){for(var e in zoneNativeSett.r)d(zoneNativeSett.r[e])},nativeForPublishers.attachScript(e)},d=function(e){var t="jsonp"+Math.round(1000001*Math.random()),n=[i,parseInt(e)+i,o,"callback="+t],r="http://"+a+"/"+c.encode(n.join("/"));new native_request(r,e,t).jsonp()}},nativeForPublishers=new function(){var n=this,e=Math.random();n.getRand=function(){return e},this.getNativeRender=function(){if(!n.nativeRenderLoaded){var e=document.createElement("script");e.setAttribute("data-cfasync","false"),e.src=urls.cdnUrls[urls.cdnIndex]+"/script/native_render.js",e.onerror=function(){throw new Error("cdnerr")},e.onload=function(){n.nativeRenderLoaded=!0},n.attachScript(e)}},this.getNativeResponse=function(){if(!n.nativeResponseLoaded){var e=document.createElement("script");e.setAttribute("data-cfasync","false"),e.src=urls.cdnUrls[urls.cdnIndex]+"/script/native_server.js",e.onerror=function(){throw new Error("cdnerr")},e.onload=function(){n.nativeResponseLoaded=!0},n.attachScript(e)}},this.attachScript=function(e){var t;void 0!==document.scripts&&(t=document.scripts[0]),void 0===t&&(t=document.getElementsByTagName("script")[0]),t.parentNode.insertBefore(e,t)},this.fetchCdnScripts=function(){if(urls.cdnIndex<urls.cdnUrls.length)try{n.getNativeRender(),n.getNativeResponse()}catch(e){urls.cdnIndex++,n.fetchCdnScripts()}},this.scriptsLoaded=function(){if(n.nativeResponseLoaded&&n.nativeRenderLoaded){var e=[];for(zone in zoneNativeSett.r)document.getElementById(zoneNativeSett.container+"-z"+zoneNativeSett.r[zone])&&(e[zoneNativeSett.r[zone]]=new native_request("//"+zoneNativeSett.baseUrl+"?nwpsv=1&",zoneNativeSett.r[zone]),e[zoneNativeSett.r[zone]].build());for(var t in e)e[t].jsonp("callback",(e[t],function(e,t){setupAd(zoneNativeSett.container+"-z"+t,e)}))}else setTimeout(n.scriptsLoaded,250)},this.init=function(){var e;if(n.insertBotTrapLink(),0===window.location.href.indexOf("file://"))for(e=0;e<urls.cdnUrls.length;e++)0===urls.cdnUrls[e].indexOf("//")&&(urls.cdnUrls[e]="http:"+urls.cdnUrls[e]);for(e=0;e<urls.cdnUrls.length;e++)acPrefetch(urls.cdnUrls[e]);n.fetchCdnScripts(),n.scriptsLoaded()},this.insertBotTrapLink=function(){var e=document.createElement("a");e.href=window.location.protocol+"//discovernative.com/al/visit.php?al=1,4",e.style.display="none",e.style.visibility="hidden",e.style.position="relative",e.style.left="-1000px",e.style.top="-1000px",e.style.color="#fff",e.link='<a href="http://discovernative.com/al/visit.php?al=1,5"></a>',e.innerHTML="",document.body.appendChild(e)}};nativeInit.init();
-  </script>
-  <a href="https://discovernative.com/al/visit.php?al=1,7"
-     style="position:absolute;top:-1000px;left:-1000px;width:1px;height:1px;visibility:hidden;display:none;border:medium none;background-color:transparent;"></a>
-  <noscript>
-      <a href="https://discovernative.com/al/visit.php?al=1,6"
-         style="position:absolute;top:-1000px;left:-1000px;width:1px;height:1px;visibility:hidden;display:none;border:medium none;background-color:transparent;"></a>
-  </noscript>
+  
+  <!-- Essential UV Scripts -->
+  <script src="uv/uv.bundle.js"></script>
+  <script src="uv/uv.config.js"></script> 
 </body>
 </html>
