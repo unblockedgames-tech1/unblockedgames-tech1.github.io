@@ -134,6 +134,48 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/YyUUZFVuXnOCbOxrH9HcMVm12qQd5I1vdw66Bx4Rpiq894Dn8AhQhdQbsKtO7NKs6LZ-R0NmU__tOxKAeC-S_ECuli0_HHesKMlv4CwEx-NLukuRkj5Q2_gVR8VwQsgyQd32kSZfwx_Ia14mhV87hyQ8rZ71qA",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://files.twoplayergames.org/files/games/other/Basket_Random/index.html")
 },
+{
+    title: "Hook", 
+    imgSrc: "https://lh7-us.googleusercontent.com/KZ4Q7Oi3Y1nmHVl4C5RRutadqJuboLJqSrxuENpUxyOo7wjp_rA_42diemPg9qyCmABkxrDePmi6-n38K_I-YXxSHrRc_BUeB7Jf-e9tWORf0bhOAWW5vz_2nqlUE7qz2X_pbSRM11g_C0xS3hsaQjRMYcVstA",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://media.abcya.com/games/hook/html/index.html")
+},
+{
+    title: "Blue Box", 
+    imgSrc: "https://lh7-us.googleusercontent.com/yJm0N-6jwF0rI7UaSpB7A6uJbEpU2M75nXxsBFzFCuaP1ZZe33sPjWaEON8ZEQG7aSs8e9wBAU6WWJ4O4L3jWXCoQdwEcwrsb2rTGCdqnJBANHDDcNmyxSxX2VaSaeKoFSQnRre0izmJAcpVLjQx9t8XEP4gmg",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://media.abcya.com/games/blue_box/html/index.html")
+},
+{
+    title: "Taming.io", 
+    imgSrc: "https://lh7-us.googleusercontent.com/FdvN87WTIIj7zggusKau6JplAWDM8rypnSZB6xLP2CrJLOBqkXmqm57zY1X4a7oqdRjDaNoyGFgY2K7rH7EfUXQXNmtXggPvRJEpyhnw-nJY9RQ3mmxkSK7DZONv9c8Q31q5PviveteeRA7snbZlPLdvS2ryfQ",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://taming.io/crazygames.html?ref=crazygames&skipPrerollExp25=true")
+},
+{
+    title: "DreadHead Parkour", 
+    imgSrc: "https://lh7-us.googleusercontent.com/jf5vvm3zg5py2cwdn3r_YTxSd-d-UdDXKbL2XwWpmT7g-hxF3iXd4nNcTrEOjPJhELf8rCnjDVAk0Vo4-VCDJuBA_XzvYBZ9hZhiK1diVev6goyQMAw96ECCpQlBUHVbi7kPweQArljg6AoWdWwXbXaTP5201w",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://scrap-metal.github.io/s7/dreadhead-parkour/")
+},
+{
+    title: "Chill Guy Clicker", 
+    imgSrc: "https://lh7-us.googleusercontent.com/9qU9sQfQsrHqJURF_6sd_s4dAD4bufF_99XrG9foWFXRpbt5DcZRJO7Yww3rMwCRUAWfS61ox8R3f4SwWFq5XbaX0mZ3y4xBsD0vZEc9cntKsV6h4Hl95ZTGCyrMWffSYJZnjrptEurtRfHu43X_1HxM3iGoEg",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://game.azgame.io/chill-guy-clicker/")
+},
+{
+    title: "Escape Road", 
+    imgSrc: "https://lh7-us.googleusercontent.com/Y3EDkAbOMuuxKBDbhwn5BNPGSpc9N4ByEu5VGxAtqAWn6E_xjav4jkow9deRgRocBRI5WDu53yeRj_xPLml76vCwtNE_tLELixoTiPBG39spoVt2ozvh57qbnboMHB9ybuQ9aqMP-HTy-dOxDW1MA8yFzTGHGg",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://slopeonline.online/escape-road.embed")
+},
+{
+    title: "Tunnel Ball", 
+    imgSrc: "https://lh7-us.googleusercontent.com/8VsFSfk6pNSNYpf0bh40n1OhzPaSUDH_7lvcYR-FtDxDvI7BEw3pYjsbCeD5S-KYNCM3kAZXVgqc1Ws0iwdjDn6tVvE4mah41JWTYEOhfeZFZCrKjygjdV6VWma9bXMwoGhs5ANBPzptpH8PWKGcX4W5mcKnZQ",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://game.azgame.io/tunnel-ball/")
+},
+{
+    title: "Mountain Road", 
+    imgSrc: "https://lh7-us.googleusercontent.com/r1btoCmdzs-rIVwLRBnXQVaqwhYuAB-Mn5DFvsw9gPTw9EVKL_lU1DpUkhXEj9miZLwoxJtoZaNmy5-jPJVJe6dPh0a1RlqFl25LKlI1jkvxNBtuqpwHgU12cDe_ZSwJ_bHbWeQLuH0UrJ6Pb4pLgWIXxbmnVA",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://azgames.io/game/mountain-road/")
+},
+
+
 
 
    ];
