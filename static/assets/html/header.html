@@ -1,12 +1,13 @@
 <style>
     .header {
         position: fixed;
-        width: 100%;
-        background: linear-gradient(90deg, rgba(20,20,20,0.95) 0%, rgba(30,30,30,0.95) 50%, rgba(20,20,20,0.95) 100%);
+        width: calc(100% - 2rem);
+        max-width: 400px; /* Adjust as needed to mimic Dynamic Island width */
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(0,0,0,0.95);
         color: white;
-        left: 0;
-        padding: 1rem;
-        top: 0;
+        top: 0.5rem;
         z-index: 1000;
         font-size: 0.8rem;
         font-family: "Be Vietnam Pro", sans-serif;
@@ -14,12 +15,14 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(20px);
         box-shadow: 0 5px 20px rgba(0,0,0,0.4);
         transition: all 0.3s ease;
+        border-radius: 2rem; /* Large rounded corners to mimic Dynamic Island */
+        padding: 0.75rem 1rem;
     }
     .header:hover {
-        background: linear-gradient(90deg, rgba(15,15,15,0.98) 0%, rgba(25,25,25,0.98) 50%, rgba(15,15,15,0.98) 100%);
+        background: rgba(10,10,10,0.98);
     }
     .home_bttn {
         background-color: transparent;
@@ -40,7 +43,6 @@
         100% { transform: scale(1); }
     }
 </style>
-
 <header class="header">
     <a href="/">
         <img src="/nav/home.png" class="home_bttn" alt="Home">
@@ -52,7 +54,6 @@
         <img src="/nav/apps.png" class="home_bttn" alt="Apps">
     </a>
 </header>
-
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
     const buttons = document.querySelectorAll('.home_bttn');
