@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Google</title>
+  <title>Dynamic Web Search</title>
+  <script src="/config.js"></script>
+  <script src="/global.js"></script>
+  <script src="/assets/js/adblock.js"></script>
+  <link href="assets/css/styles.css" rel="stylesheet">
   <style>
     body {
       background-color: black;
       display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      flex-direction: column;
+      min-height: 100vh;
       margin: 0;
       font-family: 'Arial', sans-serif;
+    }
+    .main-content {
+      flex-grow: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
     .search-container {
       text-align: center;
@@ -72,20 +81,30 @@
   </style>
 </head>
 <body>
-  <div class="search-container">
-    <h1 class="search-title">Search the Web</h1>
-    <div class="search-wrapper">
-      <input 
-        class="uvsearch" 
-        id="uvsearch" 
-        onkeypress="handleSearch(event)" 
-        placeholder="Enter your search..."
-      >
-      <div class="search-glow"></div>
+  <div id="header"></div>
+  
+  <div class="main-content">
+    <div class="search-container">
+      <h1 class="search-title">Search the Web</h1>
+      <div class="search-wrapper">
+        <input 
+          class="uvsearch" 
+          id="uvsearch" 
+          onkeypress="handleSearch(event)" 
+          placeholder="Enter your search..."
+        >
+        <div class="search-glow"></div>
+      </div>
     </div>
   </div>
 
+  <div id="footer"></div>
+
   <script>
+    // Load header and footer
+    loadHTML("/assets/html/header.html", "header")
+    loadHTML("/assets/html/footer.html", "footer")
+
     function parseSearch(str) {
       if (str.includes("http") && str.includes(":")) {
         return str;
@@ -105,10 +124,6 @@
         e.preventDefault();
       }
     }
-            // Load header and footer
-        loadHTML("/assets/html/header.html", "header");
-        loadHTML("/assets/html/footer.html", "footer");
-
   </script>
   
   <!-- Essential UV Scripts -->
