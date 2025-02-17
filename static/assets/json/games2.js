@@ -184,7 +184,11 @@ const games2Data = [
     imgSrc: "https://lh7-us.googleusercontent.com/OMakWYL9St2zUuDiTMElSSQ8ITV5G__WNM1gBSr46giGXr7gvy-40EvjzGVLLYSXdXVP0AA5Hxi7JlBJ0-vBfPQxMbUHBTdjij7250xaCt2sjYoGOSUytO_9CelwVqUW0iaNDbcSI_QnMHXJf6ZyWrVfF0w6tA",
     link: __uv$config.prefix + __uv$config.encodeUrl("https://9umaon4c5oaashs72jfpbo1v8722plpm-a-sites-opensocial.googleusercontent.com/gadgets/ifr?container=enterprise&country=ALL&lang=en&libs=core&mid=83&parent=https://sites.google.com/site/unblockedgame76/sausage-flip&sanitize=0&url=https://276004251-163805371142805694.preview.editmysite.com/uploads/b/139890129-630426005846085079/files/sf.xml&v=bf8396c3a7efff&view=default")
 },
-
+{
+    title: "ESCAPE ROAD 2", 
+    imgSrc: "https://lh7-us.googleusercontent.com/aQayYMGrPJ5bSXljew1lev_iMzaZpPR6qsI3vhUiyBMqmurV-CiBpC7KHzWXSHvRfdfNZ8P7arurrlvTIAbiFTEECRviS5DcoFWFlpdn7Lf2WiHiX-1GvoL6MeACRzSSpekd8O_HBEFQlv_VFRzOVJZhL7SS2w",
+    link: __uv$config.prefix + __uv$config.encodeUrl("https://escaperoad2.io/escape-road-2.embed")
+},
 
 
 
